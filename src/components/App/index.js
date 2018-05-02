@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./App.css";
 import update from 'immutability-helper';
 // import {actions} from "./actions/caseActions.js";
-// import { connect } from "react-redux";
+import { connect } from "react-redux";
 
 class List extends Component {
 
@@ -35,6 +35,7 @@ class Checkbox extends Component {
 class Manager extends Component {
 
   render() {
+    console.dir(this.props); 
     const filteredCheckboxList = this.props.psystatus.map((item, i)=>{
       return <div key={item.name}>
         <Checkbox onChange={this.props.onChange} checked={item.isChecked}  label={item.label} psindex={i}  /> 
@@ -44,29 +45,9 @@ class Manager extends Component {
   }
 }
 
-export default class App extends Component {
+class App extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-        psystatus: [
-          { name: "wellcome",
-            label: "Приветствие",
-            isChecked: true,
-            phrase: "Добро пожаловать на сайт!"
-          },
-          { name: "option1",
-            label: "Свойство 1",
-            isChecked: true,
-            phrase: "Описание свойства 1"
-          },
-          { name: "option2",
-            label: "Свойство 2",
-            isChecked: true,
-            phrase: "Описание свойства 2"
-          }        
-        ]
-
-      };
+    super(props);
   }
 
   toggleChange = (e) => {
@@ -77,15 +58,16 @@ export default class App extends Component {
   }
 
   render() {
+    console.dir(this.props); 
     return <div>
       <table width="100%">
         <tbody>
         <tr>
           <td className="options"  width="50%">
-            <Manager onChange={this.toggleChange} psystatus={this.state.psystatus} />            
+            <Manager onChange={this.toggleChange} psystatus={this.props.psystatus} />            
           </td>
           <td className="status"  width="50%">
-            <List psystatus={this.state.psystatus} />
+            <List psystatus={this.props.psystatus} />
           </td>
         </tr>
         </tbody>
@@ -93,4 +75,12 @@ export default class App extends Component {
     </div>;
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    psystatus: state.psystatus
+  }
+}
+
+export default connect(mapStateToProps)(App)
 
