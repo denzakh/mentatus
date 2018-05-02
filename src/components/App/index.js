@@ -46,9 +46,6 @@ class Manager extends Component {
 }
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   toggleChange = (e) => {
     console.log(e.target.dataset.id); 
@@ -77,7 +74,8 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    psystatus: state.psystatus
+    psystatus: state.psystatus,
+    user: state.user
   }
 }
 
