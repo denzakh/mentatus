@@ -7,7 +7,7 @@ import { connect } from "react-redux";
 class List extends Component {
 
   render() {
-    const filteredList = this.props.psystatus.map((item)=>{
+    const filteredList = this.props.psystatus.psystatus.map((item)=>{
       if(item.isChecked) {
         return <div key={item.name} >{item.phrase}</div>;
       }
@@ -35,8 +35,8 @@ class Checkbox extends Component {
 class Manager extends Component {
 
   render() {
-    console.dir(this.props); 
-    const filteredCheckboxList = this.props.psystatus.map((item, i)=>{
+    console.dir(this.props.psystatus); 
+    const filteredCheckboxList = this.props.psystatus.psystatus.map((item, i)=>{
       return <div key={item.name}>
         <Checkbox onChange={this.props.onChange} checked={item.isChecked}  label={item.label} psindex={i}  /> 
       </div>;
@@ -58,7 +58,6 @@ class App extends Component {
   }
 
   render() {
-    console.dir(this.props); 
     return <div>
       <table width="100%">
         <tbody>
