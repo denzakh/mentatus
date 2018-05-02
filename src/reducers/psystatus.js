@@ -1,3 +1,5 @@
+import update from 'immutability-helper';
+
 const initialState = {
   psystatus: [
     { name: "wellcome",
@@ -18,6 +20,14 @@ const initialState = {
   ]
 }
 
-export default function psystatus(state = initialState) {
-  return state
+export default function psystatus(state = initialState, action) {
+  console.dir(action); 
+  switch (action.type) {
+    case 'SET_SYMPTOM':
+    const newState = update(state, {psystatus: {[action.index]: {isChecked: {$set: !state.psystatus[action.index].isChecked}}}});   
+    return newState;
+
+    default:
+  return state;
+  }
 }
