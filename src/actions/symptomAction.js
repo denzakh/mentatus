@@ -1,8 +1,9 @@
-export function setSymptom(symptomIndex) {
+export function setSymptom(symptomIndex, departmentArray) {
 
   return {
     type: 'SET_SYMPTOM',
-    index: symptomIndex
+    index: symptomIndex,
+    department: departmentArray
   }
 
 }

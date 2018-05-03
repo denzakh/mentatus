@@ -1,4 +1,4 @@
-let jaloby = {
+const jaloby = {
   jalobyArray: [
     {
       name: "trevoga",
@@ -47,6 +47,7 @@ let jaloby = {
       label: "плохое физическое самочувствие",
       phrase: "плохое физическое самочувствие",
       isChecked: false
+    },
     {
       name: "golovokrujenie",
       label: "головокружения",
@@ -100,4 +101,6 @@ let jaloby = {
     label: "описание жалоб",
     text: ""
   }
-}
+};
+
+export default jaloby;

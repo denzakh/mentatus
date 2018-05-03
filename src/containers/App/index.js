@@ -13,7 +13,8 @@ class App extends Component {
   toggleChange = (e) => {
     console.log(e.target.dataset.id); 
     const index = e.target.dataset.id;
-    this.props.setSymptom(index);
+    const departmentArray = e.target.dataset.department;
+    this.props.setSymptom(index, departmentArray);
   }
 
   render() {
@@ -22,10 +23,13 @@ class App extends Component {
         <tbody>
         <tr>
           <td className="options"  width="50%">
-            <Manager onChange={this.toggleChange} psystatus={this.props.psystatus} />            
+            <Manager onChange={this.toggleChange} department={this.props.psystatus.psystatus} />
+            <Manager onChange={this.toggleChange} department={this.props.psystatus.jaloby.jalobyArray} />              
           </td>
           <td className="status"  width="50%">
-            <List psystatus={this.props.psystatus} />
+            <List department={this.props.psystatus.psystatus} />
+            <hr /> Жалобы на 
+            <List department={this.props.psystatus.jaloby.jalobyArray} />
           </td>
         </tr>
         </tbody>
