@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   toggleTab = (e) => {
-    const name = e.currentTarget.title;
+    const name = e.currentTarget.getAttribute("data-id");
     console.log(name); 
     this.setState({activeTab: name});
   }
@@ -40,14 +40,54 @@ class App extends Component {
     const psystatus = this.props.psystatus;
 
     let tabsMenu = [
+      { name: "anamnez",
+        symbol: "АH",
+        label: "Анамнез"
+      },
       { name: "zhaloby",
-        symbol: "Ж",
+        symbol: "ЖЛ",
         label: "Жалобы"
       },
-      { name: "anamnez",
-        symbol: "А",
-        label: "Анамнез"
+      { name: "sostoyanie1",
+        symbol: "C1",
+        label: "Состояние 1"
+      },
+      { name: "sostoyanie2",
+        symbol: "С2",
+        label: "Состояние 2"
+      },
+      { name: "affekt",
+        symbol: "АФ",
+        label: "Аффективная сфера"
+      },
+      { name: "rech",
+        symbol: "РМ",
+        label: "Речь и мышление"
+      },
+      { name: "kognit",
+        symbol: "ИП",
+        label: "Интеллект и память"
+      },
+      { name: "pp",
+        symbol: "ПП",
+        label: "Психопродукция"
+      },
+      { name: "diagnoz",
+        symbol: "ДЗ",
+        label: "Диагноз"
+      },
+      { name: "rekomendacii",
+        symbol: "РК",
+        label: "Рекомендации"
+      },
+      { name: "lechenie",
+        symbol: "ЛЧ",
+        label: "Лечение"
       }
+
+
+
+      
     ];
     
     let tabMenuRender = tabsMenu.map((item)=>{
@@ -55,10 +95,13 @@ class App extends Component {
         'app__tab-menu-item': true,
         'is-active': item.name === this.state.activeTab
       });
+
+      
       return <div 
         onClick={this.toggleTab} 
-        title={item.name} 
+        title={item.label} 
         key={item.name} 
+        data-id={item.name}
         className={tabClass} 
       >
         <div className="app__tab-symbol">
@@ -97,9 +140,10 @@ class App extends Component {
             {tabRender}
           </td>
           <td className="app__td app__td--status"  width="60%">
-            <div className="app__status-box">              
-              <ZhalobyList psystatus={psystatus} /> 
-              <AnamnezList psystatus={psystatus} /> 
+            <div className="app__status-box"> 
+              <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />            
+              <ZhalobyList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+              
             </div>
           </td>
         </tr>

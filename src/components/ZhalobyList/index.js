@@ -16,7 +16,7 @@ export default class ZhalobyList extends Component {
       zhalobyData[item].cicle === "zhalobyCicle"
     ));
 
-    return <span>
+    return <span className="list__section" data-id="zhaloby" onClick={this.props.toggleTab} >
       <List 
         nameArr={zhalobyNameArr} 
         dataObj={zhalobyData} 

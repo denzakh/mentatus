@@ -16,7 +16,7 @@ export default class ZhalobyManager extends Component {
     return <div>
       Жалобы на: <br />
       {zhalobyNameArr.map(item => (
-        <div key={item}>
+        <div key={item} className="list_item">
           <Checkbox 
           checked = {this.props.psystatus[item].isChecked}
           onChange = {this.props.toggleSymptom}
@@ -29,6 +29,7 @@ export default class ZhalobyManager extends Component {
       <Textarea
         onChange={this.props.toggleText}
         name="zhalobyText"
+        label="Описание жалоб"
         value={this.props.psystatus.zhalobyText.text}
       />  
     </div>;

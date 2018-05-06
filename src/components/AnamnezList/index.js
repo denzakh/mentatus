@@ -16,7 +16,7 @@ export default class anamnezList extends Component {
       anamnezData[item].cicle === "anamnezCicle"
     ));
 
-    return <span>
+    return <span data-id="anamnez" onClick={this.props.toggleTab} >
       <List 
         nameArr={anamnezNameArr} 
         dataObj={anamnezData} 

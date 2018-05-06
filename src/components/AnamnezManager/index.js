@@ -14,7 +14,7 @@ export default class anamnezManager extends Component {
     return <div>
       В анамнезе: <br />
       {anamnezNameArr.map(item => (
-        <div key={item}>
+        <div key={item} className="list_item">
           <Checkbox 
           checked = {this.props.psystatus[item].isChecked}
           onChange = {this.props.toggleSymptom}
@@ -27,6 +27,7 @@ export default class anamnezManager extends Component {
       <Textarea
         onChange={this.props.toggleText}
         name="anamnezText"
+        label="Описание анамнеза"
         value={this.props.psystatus.anamnezText.text}
       />  
     </div>;
