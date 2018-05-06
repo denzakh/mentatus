@@ -8,8 +8,8 @@ export default class Textarea extends Component {
       <textarea 
         className="textarea__input"
         onChange={this.props.onChange}
-        field={this.props.field}
-      >{this.props.text}</textarea>   
+        name={this.props.name}        
+      ></textarea>   
     );
   }
 }

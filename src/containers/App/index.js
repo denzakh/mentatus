@@ -16,9 +16,9 @@ class App extends Component {
   }
 
   toggleText = (e) => {
-    console.log(e.target.name); 
     const name = e.target.name;
-    this.props.setText(name);
+    const value = e.target.value;
+    this.props.setText(name, value);
   }
 
   render() {
@@ -29,7 +29,7 @@ class App extends Component {
         <tbody>
         <tr>
           <td className="options"  width="50%">
-            <ZhalobyManager toggleSymptom={this.toggleSymptom} psystatus={psystatus} />              
+            <ZhalobyManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />              
           </td>
           <td className="status"  width="50%">
             <hr /> 

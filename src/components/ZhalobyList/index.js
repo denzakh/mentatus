@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import zhalobyData from "../../store/zhalobyData.js";
 import List from "../List";
+import Text from "../Text";
 
 export default class ZhalobyList extends Component {
 
@@ -15,13 +16,21 @@ export default class ZhalobyList extends Component {
       zhalobyData[item].cicle === "zhalobyCicle"
     ));
 
-    return <List 
-      nameArr={zhalobyNameArr} 
-      dataObj={zhalobyData} 
-      psystatus={this.props.psystatus} 
-      before={zhalobyBefore} 
-      after={zhalobyAfter} 
-      noList={zhalobyNet} 
-    />; 
+    return <span>
+      <List 
+        nameArr={zhalobyNameArr} 
+        dataObj={zhalobyData} 
+        psystatus={this.props.psystatus} 
+        before={zhalobyBefore} 
+        after={zhalobyAfter} 
+        noList={zhalobyNet} 
+      />
+
+      <Text 
+        text={this.props.psystatus.zhalobyText} 
+      />
+    </span>
+
+
   }
 }

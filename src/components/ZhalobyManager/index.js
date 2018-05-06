@@ -28,7 +28,8 @@ export default class ZhalobyManager extends Component {
 
       <Textarea
         onChange={this.props.toggleText}
-        field="zhalobyText"
+        name="zhalobyText"
+        value={this.props.psystatus.zhalobyText.text}
       />  
     </div>;
   }

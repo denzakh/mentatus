@@ -22,7 +22,6 @@ const initialState = {
   ...zhalobyStore
 }
 
-// редъюсер надо сделать более универсальным, заменив пути 
 export default function psystatus(state = initialState, action) {
   switch (action.type) {
     case 'SET_SYMPTOM':
