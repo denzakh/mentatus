@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import "./App.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
-import ZhalobyManager from "../../components/ZhalobyManager";
-import ZhalobyList from "../../components/ZhalobyList";
 import {setSymptom} from '../../actions/symptomAction.js';
 import {setText} from '../../actions/textAction.js';
+
+import ZhalobyManager from "../../components/ZhalobyManager";
+import ZhalobyList from "../../components/ZhalobyList";
+import AnamnezManager from "../../components/AnamnezManager";
+import AnamnezList from "../../components/AnamnezList";
 
 
 class App extends Component {
@@ -29,11 +32,13 @@ class App extends Component {
         <tbody>
         <tr>
           <td className="options"  width="50%">
-            <ZhalobyManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />              
+            <ZhalobyManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />  
+            <AnamnezManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />              
           </td>
           <td className="status"  width="50%">
             <hr /> 
             <ZhalobyList psystatus={psystatus} /> 
+            <AnamnezList psystatus={psystatus} /> 
           </td>
         </tr>
         </tbody>
