@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import zhalobyData from "../../store/zhalobyData.js";
 import Checkbox from "../Checkbox";
-
+import Textarea from "../Textarea";
 
 export default class ZhalobyManager extends Component {
-
-
 
   render() {    
 
     let zhalobyNameArr = Object.keys(zhalobyData).filter(item => (
       zhalobyData[item].cicle === "zhalobyCicle"
-    ));    
+    ));   
+
+
 
     return <div>
       Жалобы на: <br />
@@ -25,6 +25,11 @@ export default class ZhalobyManager extends Component {
           />
         </div>
       ))}
+
+      <Textarea
+        onChange={this.props.toggleText}
+        field="zhalobyText"
+      />  
     </div>;
   }
 }

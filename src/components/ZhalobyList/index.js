@@ -6,9 +6,9 @@ export default class ZhalobyList extends Component {
 
   render() {
 
-    let zhalobyBefore = zhalobyData.zhalobyBefore.phrase;
-    let zhalobyAfter = zhalobyData.zhalobyAfter.phrase;
-    let zhalobyNet = zhalobyData.zhalobyNet.phrase;
+    let zhalobyBefore = "zhalobyBefore";
+    let zhalobyAfter = "zhalobyAfter";
+    let zhalobyNet = "zhalobyNet";
 
 
     let zhalobyNameArr = Object.keys(zhalobyData).filter(item => (

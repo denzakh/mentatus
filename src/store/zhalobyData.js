@@ -126,7 +126,7 @@ const zhalobyData = {
     type: "string"
   },
   "zhalobyNet": {
-    phrase: "Жалоб не предъявляет",
+    phrase: "Жалоб не предъявляет. ",
     section: "zhaloby",
     type: "string"
   }

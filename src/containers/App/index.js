@@ -5,13 +5,20 @@ import { bindActionCreators } from 'redux'
 import ZhalobyManager from "../../components/ZhalobyManager";
 import ZhalobyList from "../../components/ZhalobyList";
 import {setSymptom} from '../../actions/symptomAction.js';
+import {setText} from '../../actions/textAction.js';
+
 
 class App extends Component {
 
   toggleSymptom = (e) => {
-    console.log(e.target.name); 
     const name = e.target.name;
     this.props.setSymptom(name);
+  }
+
+  toggleText = (e) => {
+    console.log(e.target.name); 
+    const name = e.target.name;
+    this.props.setText(name);
   }
 
   render() {
@@ -44,7 +51,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    setSymptom: bindActionCreators(setSymptom, dispatch)
+    setSymptom: bindActionCreators(setSymptom, dispatch),
+    setText: bindActionCreators(setText, dispatch)
   }
 }
 

@@ -48,7 +48,7 @@ const zhalobyStore = {
     isChecked: false
   },
   "zhalobyText": {
-    content: ""
+    text: ""
   }
 };
 
