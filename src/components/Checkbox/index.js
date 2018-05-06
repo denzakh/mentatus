@@ -8,7 +8,7 @@ export default class Checkbox extends Component {
         <input type="checkbox"
           checked={this.props.checked}
           onChange={this.props.onChange}
-          data-id={this.props.psindex}
+          name={this.props.name}
         />
         {this.props.label}
        </label>

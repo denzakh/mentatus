@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import jaloby from "../store/jaloby.js"
+import zhalobyStore from "../store/zhalobyStore.js"
 
 const initialState = {
   psystatus: [
@@ -19,14 +19,14 @@ const initialState = {
       phrase: "Описание свойства 2"
     }        
   ],
-  jaloby
+  ...zhalobyStore
 }
 
 // редъюсер надо сделать более универсальным, заменив пути 
 export default function psystatus(state = initialState, action) {
   switch (action.type) {
     case 'SET_SYMPTOM':
-    const newState = update(state, {jaloby: { jalobyArray: {[action.index]: {isChecked: {$set: !state.jaloby.jalobyArray[action.index].isChecked}}}}});   
+    const newState = update(state, {[action.name]: {isChecked: {$set: !state[action.name].isChecked}}});   
     return newState;
 
     default:

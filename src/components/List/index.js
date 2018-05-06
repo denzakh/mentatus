@@ -3,16 +3,25 @@ import React, { Component } from 'react';
 export default class List extends Component {
 
   render() {
-    const department = this.props.department;
-    console.log(department); 
-    const filteredList1 = this.props.department.filter((item)=>item.isChecked);
-    console.log(filteredList1); 
-    const filteredList2 = filteredList1.map((item, i)=>{
-      if(i < filteredList1.length - 1) {
-        return <span key={item.name} >{item.phrase}, </span>
+    const {nameArr, dataObj, psystatus, before, after, noList} = this.props;
+    const filteredNameArr = nameArr.filter((item)=>psystatus[item].isChecked);
+
+    let filteredList = filteredNameArr.map((item, i)=>{
+      if(i < filteredNameArr.length - 1) {
+        return <span key={dataObj[item].name} >{dataObj[item].phrase}, </span>
       } 
-        return <span key={item.name} >{item.phrase}</span>
+        return <span key={dataObj[item].name} >{dataObj[item].phrase}</span>
     });
-      return <span> {filteredList2}</span>; 
+
+    console.dir(filteredList); 
+
+    if (filteredList.length) {
+      filteredList.unshift(before); 
+      filteredList.push(after); 
+    } else {
+      filteredList = noList
+    } 
+
+    return <span>{filteredList}</span>; 
   }
 }

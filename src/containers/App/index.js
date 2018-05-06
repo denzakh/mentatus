@@ -2,34 +2,31 @@ import React, { Component } from "react";
 import "./App.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux'
-import List from "../../components/List";
-import Checkbox from "../../components/Checkbox";
-import Manager from "../../components/Manager";
-import {setSymptom} from '../../actions/symptomAction.js'
-
+import ZhalobyManager from "../../components/ZhalobyManager";
+import ZhalobyList from "../../components/ZhalobyList";
+import {setSymptom} from '../../actions/symptomAction.js';
 
 class App extends Component {
 
-  toggleChange = (e) => {
-    console.log(e.target.dataset.id); 
-    const index = e.target.dataset.id;
-    const departmentArray = e.target.dataset.department;
-    this.props.setSymptom(index, departmentArray);
+  toggleSymptom = (e) => {
+    console.log(e.target.name); 
+    const name = e.target.name;
+    this.props.setSymptom(name);
   }
 
   render() {
+    const psystatus = this.props.psystatus;
+
     return <div>
       <table width="100%">
         <tbody>
         <tr>
           <td className="options"  width="50%">
-            <Manager onChange={this.toggleChange} department={this.props.psystatus.psystatus} />
-            <Manager onChange={this.toggleChange} department={this.props.psystatus.jaloby.jalobyArray} />              
+            <ZhalobyManager toggleSymptom={this.toggleSymptom} psystatus={psystatus} />              
           </td>
           <td className="status"  width="50%">
-            <List department={this.props.psystatus.psystatus} />
-            <hr /> Жалобы на 
-            <List department={this.props.psystatus.jaloby.jalobyArray} />
+            <hr /> 
+            <ZhalobyList psystatus={psystatus} /> 
           </td>
         </tr>
         </tbody>
