@@ -1,4 +1,4 @@
-let anamnezStore = {
+let store = {
   "anamnezChmt": { 
     isChecked: false
   },
@@ -46,4 +46,4 @@ let anamnezStore = {
   }
 }
 
-export default anamnezStore;
+export default store;

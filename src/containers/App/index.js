@@ -10,13 +10,18 @@ import ZhalobyManager from "../../components/ZhalobyManager";
 import ZhalobyList from "../../components/ZhalobyList";
 import AnamnezManager from "../../components/AnamnezManager";
 import AnamnezList from "../../components/AnamnezList";
-
+// import Sostoyanie1Manager from "../../components/Sostoyanie1Manager";
+// import Sostoyanie1List from "../../components/Sostoyanie1List";
+// import Sostoyanie2Manager from "../../components/Sostoyanie2Manager";
+// import Sostoyanie2List from "../../components/Sostoyanie2List";
+import AffektManager from "../../components/AffektManager";
+import AffektList from "../../components/AffektList";
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeTab: "zhaloby"};
+    this.state = {activeTab: "affekt"};
   }
 
   toggleSymptom = (e) => {
@@ -84,10 +89,6 @@ class App extends Component {
         symbol: "ЛЧ",
         label: "Лечение"
       }
-
-
-
-      
     ];
     
     let tabMenuRender = tabsMenu.map((item)=>{
@@ -113,20 +114,21 @@ class App extends Component {
       </div>
     })
 
-    let tabs = [
+    let tabs = [    
       <div key="zhaloby" name="zhaloby">
         <ZhalobyManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />
       </div>,
       <div key="anamnez" name="anamnez">
-        <AnamnezManager key="anamnez" toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />
+        <AnamnezManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />
+      </div>,
+      <div key="affekt" name="affekt">
+        <AffektManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />
       </div>
     ]
 
     let tabRender = tabs.filter((item)=>{
       return item.key === this.state.activeTab      
     })
-
-    console.log(tabRender); 
   
     return <div className="app">
       <table width="100%" className="app__table">

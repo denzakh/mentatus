@@ -1,4 +1,4 @@
-let anamnezData = {
+let data = {
   "anamnezChmt": { 
     label: "ЧМТ",
     phrase: "ЧМТ",
@@ -114,4 +114,4 @@ let anamnezData = {
   }
 }
 
-export default anamnezData;
+export default data;

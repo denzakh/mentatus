@@ -1,4 +1,4 @@
-const zhalobyStore = {
+const store = {
   "zhalobyTrevoga": {
     isChecked: false
   },
@@ -52,4 +52,4 @@ const zhalobyStore = {
   }
 };
 
-export default zhalobyStore;
+export default store;

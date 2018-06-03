@@ -1,4 +1,4 @@
-const zhalobyData = {
+const data = {
   "zhalobyTrevoga": {
     label: "тревогу",
     phrase: "тревогу",
@@ -132,4 +132,4 @@ const zhalobyData = {
   }
 };
 
-export default zhalobyData;
+export default data;
