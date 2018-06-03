@@ -59,7 +59,7 @@ const store = {
     isChecked: false
   },
   "nastroyeniyeKolebaniaPodrobno": {
-    number: 0
+    number: 1
   },
   "nastroyeniyeOtricaet": {
     isChecked: false

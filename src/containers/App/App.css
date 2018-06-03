@@ -112,3 +112,7 @@ body {
 .list__item--no-group:nth-child(4n+1) {
   margin-bottom: 0;
 }
+
+.list__second {
+  padding-left: 15px;
+}

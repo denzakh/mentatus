@@ -31,6 +31,9 @@ export default function psystatus(state = initialState, action) {
     case 'SET_TEXT':
     return update(state, {[action.name]: {text: {$set: action.text}}});   
 
+    case 'SET_RADIO':
+    return update(state, {[action.name]: {number: {$set: action.number}}});  
+
     default:
   return state;
   }

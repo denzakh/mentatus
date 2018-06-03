@@ -203,17 +203,17 @@ const data = {
     data: [
       { 
         id: 1,
-        label: "с ухудшением в утренние часы",
+        label: "хуже утром",
         phrase: "с ухудшением в утренние часы"
       },
       { 
         id: 2,
-        label: "с ухудшением к вечеру",
+        label: "хуже вечером",
         phrase: "с ухудшением к вечеру"
       },
       { 
         id: 3,
-        label: "без определенной суточной динамики",
+        label: "другое",
         phrase: "без определенной суточной динамики"
       }
     ],
@@ -222,37 +222,39 @@ const data = {
     section: "affekt"
   },
   "nastroyeniyeOtricaet": {
-    label: "Снижение настроения отрицает",
+    label: "снижение отрицает",
     phrase: "Снижение настроения отрицает",
     section: "affekt",
     type: "boolean",
     cicle: "",
-    hint: ""
+    hint: "nastroyenieSeparate"
   },
   "nastroyeniyeOdinochestvo": {
-    label: "Отмечает чувство одиночества",
+    label: "одиночество",
     phrase: "Отмечает чувство одиночества",
     section: "affekt",
     type: "boolean",
     cicle: "",
-    hint: ""
+    hint: "nastroyenieSeparate"
   },
   "nastroyeniyeLabilnost": {
-    label: "Отмечает чувство одиночества",
+    label: "эмоц. лабильность",
+    phrase: "Эмоционально лабильна",
     phraseW: "Эмоционально лабильна",
     phraseM: "Эмоционально лабилен",
     section: "affekt",
     type: "boolean",
-    cicle: "",
+    cicle: "nastroyenieSeparate",
     hint: "связь с неустойчивым настроением"
   },
   "nastroyeniyePlaksivost": {
-    label: "Отмечает чувство одиночества",
+    label: "плаксивость",
+    phrase: "Плаксива",
     phraseW: "Плаксива",
     phraseM: "Плаксив",
     section: "affekt",
     type: "boolean",
-    cicle: "",
+    cicle: "nastroyenieSeparate",
     hint: "связь с неустойчивым настроением"
   }
 };

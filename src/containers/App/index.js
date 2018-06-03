@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux'
 import classNames from 'classnames';
 import {setSymptom} from '../../actions/symptomAction.js';
 import {setText} from '../../actions/textAction.js';
+import {setRadio} from '../../actions/radioAction.js';
 
 import ZhalobyManager from "../../components/ZhalobyManager";
 import ZhalobyList from "../../components/ZhalobyList";
@@ -33,6 +34,12 @@ class App extends Component {
     const name = e.target.name;
     const value = e.target.value;
     this.props.setText(name, value);
+  }
+
+  toggleRadio = (e) => {
+    const name = e.target.name;
+    const value = e.target.value;
+    this.props.setRadio(name, +value);
   }
 
   toggleTab = (e) => {
@@ -96,7 +103,6 @@ class App extends Component {
         'app__tab-menu-item': true,
         'is-active': item.name === this.state.activeTab
       });
-
       
       return <div 
         onClick={this.toggleTab} 
@@ -116,13 +122,13 @@ class App extends Component {
 
     let tabs = [    
       <div key="zhaloby" name="zhaloby">
-        <ZhalobyManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />
+        <ZhalobyManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>,
       <div key="anamnez" name="anamnez">
-        <AnamnezManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />
+        <AnamnezManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>,
       <div key="affekt" name="affekt">
-        <AffektManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText} psystatus={psystatus} />
+        <AffektManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>
     ]
 
@@ -165,7 +171,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     setSymptom: bindActionCreators(setSymptom, dispatch),
-    setText: bindActionCreators(setText, dispatch)
+    setText: bindActionCreators(setText, dispatch),
+    setRadio: bindActionCreators(setRadio, dispatch)
   }
 }
 
