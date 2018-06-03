@@ -105,6 +105,10 @@ body {
   line-height: 1.3;
 }
 
-.list_item:nth-child(4n+1) {
+.list__item:nth-child(4n+1) {
   margin-bottom: 10px;
+}
+
+.list__item--no-group:nth-child(4n+1) {
+  margin-bottom: 0;
 }
