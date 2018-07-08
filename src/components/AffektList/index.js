@@ -1,36 +1,45 @@
 import React, { Component } from 'react';
-import anamnezData from "../../store/anamnezData.js";
+import dataBase from "../../store/affektData.js";
 import List from "../List";
 import Text from "../Text";
+import OnePraseFromRadio from "../OnePraseFromRadio";
 
-export default class anamnezList extends Component {
+export default class AffektList extends Component {
 
   render() {
 
-    let anamnezBefore = "anamnezBefore";
-    let anamnezAfter = "anamnezAfter";
-    let anamnezNet = "anamnezNet";
-
-
-    let anamnezNameArr = Object.keys(anamnezData).filter(item => (
-      anamnezData[item].cicle === "anamnezCicle"
-    ));
-
-    return <span data-id="anamnez" onClick={this.props.toggleTab} >
-      <List 
-        nameArr={anamnezNameArr} 
-        dataObj={anamnezData} 
+    return <span data-id="affekt" onClick={this.props.toggleTab} >
+      
+      <OnePraseFromRadio 
+        name="nastroyeniye" 
+        dataObj={dataBase} 
         psystatus={this.props.psystatus} 
-        before={anamnezBefore} 
-        after={anamnezAfter} 
-        noList={anamnezNet} 
+      /> 
+
+      <List 
+        name="vSvyazi" 
+        dataObj={dataBase} 
+        psystatus={this.props.psystatus} 
       />
 
-      <Text 
-        text={this.props.psystatus.anamnezText} 
-      />
+      <List 
+        name="s" 
+        dataObj={dataBase} 
+        psystatus={this.props.psystatus} 
+      />.
+
+      
+
+
     </span>
 
 
   }
 }
+
+
+{/*<List 
+  name="nastroyenieSeparate" 
+  dataObj={dataBase} 
+  psystatus={this.props.psystatus} 
+/>*/}

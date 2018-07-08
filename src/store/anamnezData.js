@@ -97,18 +97,18 @@ let data = {
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezNet": {
-    phrase: "Объективный анамнез неизвестен.",
-    section: "anamnez",
-    type: "string"
-  },
-  "anamnezBefore": {
+  "anamnezCicleBefore": {
     phrase: "В анамнезе ",
     section: "anamnez",
     type: "string"
   },
-  "anamnezAfter": {
+  "anamnezCicleAfter": {
     phrase: ".",
+    section: "anamnez",
+    type: "string"
+  },
+  "anamnezCicleNot": {
+    phrase: "Объективный анамнез неизвестен.",
     section: "anamnez",
     type: "string"
   }

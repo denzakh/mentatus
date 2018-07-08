@@ -2,43 +2,43 @@ const data = {
   "nastroyeniye": {
     data: [
       { 
-        id: 1,
+        id: 0,
         label: "ровное",
         phrase: "ровное"
       },
       { 
-        id: 2,
+        id: 1,
         label: "ближе к ровному",
         phrase: "ближе к ровному"
       },
       { 
-        id: 3,
+        id: 2,
         label: "несколько снижено",
         phrase: "несколько снижено"
       },
       { 
-        id: 4,
+        id: 3,
         label: "снижено",
         phrase: "снижено"
       },
       { 
-        id: 5,
+        id: 4,
         label: "несколько повышено",
         phrase: "несколько повышено"
       },
       { 
-        id: 6,
+        id: 5,
         label: "повышено",
         phrase: "повышено"
       },      
       { 
-        id: 7,
+        id: 6,
         label: "неустойчивое",
         phrase: "неустойчивое",
         hint: "жалобы на неустойчивое настроение"
       },
       { 
-        id: 8,
+        id: 7,
         label: "не определить",
         phrase: "не определить"       
       }
@@ -47,6 +47,7 @@ const data = {
     type: "radio",
     section: "affekt"
   },
+
   "nastroyeniyePsikhotravma": {
     label: "психотравмой",
     phrase: "психотравмирующей ситуацией",
@@ -71,6 +72,22 @@ const data = {
     cicle: "vSvyazi",
     hint: "жалобы на соматику"
   },
+  "vSvyaziBefore": {
+    phrase: ", в связи с ",
+    section: "affekt",
+    type: "string"
+  },
+  "vSvyaziAfter": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+  "vSvyaziNot": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+
   "nastroyeniyeToska": {
     label: "преобладанием тоски",
     phrase: "преобладанием тоски",
@@ -80,8 +97,8 @@ const data = {
     hint: ""
   },
   "nastroyeniyeUgnetenie": {
-    label: "угнетенностью ",
-    phrase: "угнетенностью ",
+    label: "угнетенностью",
+    phrase: "угнетенностью",
     section: "affekt",
     type: "boolean",
     cicle: "s",
@@ -199,6 +216,22 @@ const data = {
     cicle: "s",
     hint: ""
   },
+  "sBefore": {
+    phrase: ", с ",
+    section: "affekt",
+    type: "string"
+  },
+  "sAfter": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+  "sNot": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+
   "nastroyeniyeKolebaniaPodrobno": {
     data: [
       { 
@@ -226,16 +259,16 @@ const data = {
     phrase: "Снижение настроения отрицает",
     section: "affekt",
     type: "boolean",
-    cicle: "",
-    hint: "nastroyenieSeparate"
+    cicle: "nastroyenieSeparate",
+    hint: ""
   },
   "nastroyeniyeOdinochestvo": {
     label: "одиночество",
     phrase: "Отмечает чувство одиночества",
     section: "affekt",
     type: "boolean",
-    cicle: "",
-    hint: "nastroyenieSeparate"
+    cicle: "nastroyenieSeparate",
+    hint: ""
   },
   "nastroyeniyeLabilnost": {
     label: "эмоц. лабильность",

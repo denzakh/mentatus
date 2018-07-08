@@ -151,7 +151,7 @@ class App extends Component {
             <div className="app__status-box"> 
               <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />            
               <ZhalobyList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-              
+              <AffektList psystatus={psystatus} toggleTab={this.toggleTab} /> 
             </div>
           </td>
         </tr>

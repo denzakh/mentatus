@@ -115,18 +115,18 @@ const data = {
     section: "zhaloby",
     type: "string"
   },
-  "zhalobyBefore": {
+  "zhalobyCicleBefore": {
     phrase: "Жалобы на ",
     section: "zhaloby",
     type: "string"
   },
-  "zhalobyAfter": {
+  "zhalobyCicleAfter": {
     phrase: ".",
     section: "zhaloby",
     type: "string"
   },
-  "zhalobyNet": {
-    phrase: "Жалоб не предъявляет. ",
+  "zhalobyCicleNot": {
+    phrase: "Жалоб активно не предъявляет.",
     section: "zhaloby",
     type: "string"
   }
