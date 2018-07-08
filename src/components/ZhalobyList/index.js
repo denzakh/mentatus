@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
 import dataBase from "../../store/zhalobyData.js";
-import List from "../List";
-import Text from "../Text";
+import ListOfWords from "../ListOfWords";
+import FreeText from "../FreeText";
 
 export default class ZhalobyList extends Component {
 
   render() {
 
     return <span className="list__section" data-id="zhaloby" onClick={this.props.toggleTab} >
-      <List 
+      <ListOfWords 
         name="zhalobyCicle"
         dataObj={dataBase} 
         psystatus={this.props.psystatus} 
       />
 
-      <Text 
+      <FreeText 
         text={this.props.psystatus.zhalobyText} 
       />
     </span>

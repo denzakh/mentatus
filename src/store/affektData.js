@@ -256,7 +256,7 @@ const data = {
   },
   "nastroyeniyeOtricaet": {
     label: "снижение отрицает",
-    phrase: "Снижение настроения отрицает",
+    phrase: "Субъективно снижение настроения отрицает",
     section: "affekt",
     type: "boolean",
     cicle: "nastroyenieSeparate",
@@ -289,7 +289,61 @@ const data = {
     type: "boolean",
     cicle: "nastroyenieSeparate",
     hint: "связь с неустойчивым настроением"
+  },
+  "nastroyeniyeText": {
+    section: "affekt",
+    type: "string"
+  },
+
+  "trevoga": {
+    data: [
+      { 
+        id: 0,
+        label: "нет",
+        phrase: "Тревоги не наблюдается"
+      },
+      { 
+        id: 1,
+        label: "небольшая",
+        phrase: "Наблюдается небольшая тревожность"
+      },
+      { 
+        id: 2,
+        label: "умеренная",
+        phrase: "Наблюдается умеренная тревожность"
+      },
+      { 
+        id: 3,
+        label: "ажитация",
+        phrase: "Наблюдается выраженная тревога с ажитацией"
+      }
+    ],
+    label: "Тревога",    
+    type: "radio",
+    section: "affekt"
+  },
+
+  "trevogaMysli": {
+    label: "тревожные мысли",
+    phrase: "Сообщает про навязчивые мысли тревожного содержания",
+    section: "affekt",
+    type: "boolean",
+    cicle: "trevogaSeparate",
+    hint: ""
+  },
+  "trevogaAtaki": {
+    label: "панические атаки",
+    phrase: "Отмечает периодические приступы тревоги по типу панических атак",
+    section: "affekt",
+    type: "boolean",
+    cicle: "trevogaSeparate",
+    hint: ""
+  },
+  "trevogaText": {
+    section: "affekt",
+    type: "string"
   }
+
 };
 
 export default data;

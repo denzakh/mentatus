@@ -12,8 +12,25 @@ export default class affektManager extends Component {
     let nastroyeniyeNumber = +this.props.psystatus.nastroyeniye.number;
     let vSvyaziNameArr = cicleFn(dataBase, "vSvyazi");   
     let sNameArr = cicleFn(dataBase, "s");   
-    let nastroyenieSeparateNameArr = cicleFn(dataBase, "nastroyenieSeparate");   
+    let nastroyenieSeparateNameArr = cicleFn(dataBase, "nastroyenieSeparate");  
 
+    let trevogaNumber = +this.props.psystatus.trevoga.number; 
+    let trevogaSeparateNameArr = cicleFn(dataBase, "trevogaSeparate");   
+
+    // 
+    let nastroyeniyeKolebaniaPodrobno = () => {
+      if(this.props.psystatus.nastroyeniyeKolebania.isChecked) {
+        return <div className="list__second">
+          <RadioList 
+            name="nastroyeniyeKolebaniaPodrobno" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
+          />
+          <br />
+        </div>
+      }
+    }
 
     let nastroyeniyeOptions = () => {
       if(!(nastroyeniyeNumber === 0 || nastroyeniyeNumber === 7)) {
@@ -42,22 +59,42 @@ export default class affektManager extends Component {
             </div>
           ))}
 
-          {nastroyeniyeKolebaniaPodrobno()}          
+          {nastroyeniyeKolebaniaPodrobno()}  
+
+          <div className="list__title">Дополнительно: </div>
+          {nastroyenieSeparateNameArr.map(item => (
+            <div key={item} className="list__item">
+              <Checkbox 
+              checked = {this.props.psystatus[item].isChecked}
+              onChange = {this.props.toggleSymptom}
+              name = {item}
+              label = {dataBase[item].label}
+              />
+            </div>
+          ))}                
           
         </div>
       }
     }
 
-    let nastroyeniyeKolebaniaPodrobno = () => {
-      if(this.props.psystatus.nastroyeniyeKolebania.isChecked) {
-        return <div className="list__second">
-          <RadioList 
-            name="nastroyeniyeKolebaniaPodrobno" 
-            dataBase={dataBase} 
-            onChange={this.props.toggleRadio} 
-            psystatus={this.props.psystatus}
-          />
+    let trevogaOptions = () => {
+      if(!(trevogaNumber === 0)) {
+        return <div>
           <br />
+          <div className="list__options">
+            {trevogaSeparateNameArr.map(item => (
+            <div key={item} className="list__item">
+              <Checkbox 
+              checked = {this.props.psystatus[item].isChecked}
+              onChange = {this.props.toggleSymptom}
+              name = {item}
+              label = {dataBase[item].label}
+              />
+            </div>
+            ))}
+          </div>
+
+            
         </div>
       }
     }
@@ -71,19 +108,32 @@ export default class affektManager extends Component {
         psystatus={this.props.psystatus}
       />
       
-      {nastroyeniyeOptions()}
+      {nastroyeniyeOptions()}  
 
-      <div className="list__title">Дополнительно: </div>
-      {nastroyenieSeparateNameArr.map(item => (
-        <div key={item} className="list__item">
-          <Checkbox 
-          checked = {this.props.psystatus[item].isChecked}
-          onChange = {this.props.toggleSymptom}
-          name = {item}
-          label = {dataBase[item].label}
-          />
-        </div>
-      ))}
+      <Textarea
+        onChange={this.props.toggleText}
+        name="nastroyeniyeText"
+        label="Описание настроения"
+        value={this.props.psystatus.nastroyeniyeText}
+      />      
+
+      <div className="list__title">Тревога: </div>
+      <RadioList 
+        name="trevoga" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
+      {trevogaOptions()}  
+
+      <Textarea
+        onChange={this.props.toggleText}
+        name="trevogaText"
+        label="Описание тревоги"
+        value={this.props.psystatus.trevogaText}
+      />
+  
             
     </div>;
   }

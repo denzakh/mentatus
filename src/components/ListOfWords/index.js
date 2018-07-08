@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import cicleFn from "../../fn/cicleFn";
 
-export default class List extends Component {
+export default class ListOfWords extends Component {
 
   render() {
     const {name, dataObj, psystatus} = this.props;
@@ -29,20 +29,14 @@ export default class List extends Component {
     if (filteredList.length) {
       if (dataObj[before].phrase) {
         filteredList.unshift(<span key={before} >{dataObj[before].phrase}</span>); 
-      } else {
-        console.warn("Нет фразы перед циклом " + name);
       }
       if (dataObj[after].phrase) {
         filteredList.push(<span key={after} >{dataObj[after].phrase}</span>); 
-      } else {
-        console.warn("Нет фразы после цикла " + name);
-      }    
+      } 
     } else {
       if(dataObj[noList].phrase) {
         filteredList = <span key={noList} >{dataObj[noList].phrase}</span>;
-      } else {
-        console.warn("Нет фразы отсутствия в цикле " + name);
-      }      
+      } 
     } 
 
     return <span>{filteredList}</span>; 

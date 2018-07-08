@@ -22,7 +22,7 @@ export default class OnePraseFromRadio extends Component {
     let index = psystatus[name].number;
     let phrase = dataObj[name].data[index].phrase;
 
-    let оnePrase = label + " " + phrase;
+    let оnePrase = " " + phrase;
 
     return <span>{оnePrase}</span>; 
   }

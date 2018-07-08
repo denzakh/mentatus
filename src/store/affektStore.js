@@ -1,6 +1,6 @@
 const store = {
   "nastroyeniye": {
-    number: 1
+    number: 0
   },
   "nastroyeniyePsikhotravma": {
     isChecked: false
@@ -72,7 +72,22 @@ const store = {
   },
   "nastroyeniyePlaksivost": {
     isChecked: false
-  }
+  },
+  "nastroyeniyeText": { 
+    text: ""
+  },
+  "trevoga": {
+    number: 0
+  },
+  "trevogaMysli": {
+    isChecked: false
+  },
+  "trevogaAtaki": {
+    isChecked: false
+  },
+  "trevogaText": {
+    text: ""
+  },
 };
 
 export default store;
