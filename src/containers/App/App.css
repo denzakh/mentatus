@@ -122,3 +122,7 @@ body {
 .list__second {
   padding-left: 15px;
 }
+
+.list__box {
+  margin-top: 10px;
+}

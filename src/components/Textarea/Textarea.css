@@ -1,6 +1,6 @@
 .textarea {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .textarea__input {
@@ -11,4 +11,8 @@
   outline: none;
   overflow: hidden;
   font-size: 14px;
+}
+
+.textarea__label {
+  /*padding-left: 15px;*/
 }

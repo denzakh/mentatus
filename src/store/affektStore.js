@@ -88,6 +88,51 @@ const store = {
   "trevogaText": {
     text: ""
   },
+
+  "sonPoverh": {
+    isChecked: false
+  },
+  "sonZasypanie": {
+    isChecked: false
+  },
+  "sonProbNoch": {
+    isChecked: false
+  },
+  "sonProbUtro": {
+    isChecked: false
+  },
+  "sonKoshmar": {
+    isChecked: false
+  },
+  "sonKrik": {
+    isChecked: false
+  },
+  "sonSonliv": {
+    isChecked: false
+  },
+  "sonInversia": {
+    isChecked: false
+  },
+  "sonSnotvor": {
+    isChecked: false
+  },
+  "sonDizorientir": {
+    isChecked: false
+  },
+  "sonText": {
+    isChecked: false
+  },
+
+  "appetit": {
+    number: 0
+  },
+  "appetitPohudel": {
+    text: false
+  },
+  "appetitText": {
+    text: false
+  }
+
 };
 
 export default store;

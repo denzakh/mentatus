@@ -342,6 +342,127 @@ const data = {
   "trevogaText": {
     section: "affekt",
     type: "string"
+  },
+
+  "sonPoverh": {
+    label: "поверхностный",
+    phrase: "поверхностный",
+    section: "affekt",
+    type: "boolean",
+    cicle: "son",
+    hint: ""
+  },
+  "sonZasypanie": {
+    label: "с затрудненным засыпанием",
+    phrase: "с затрудненным засыпанием",
+    section: "affekt",
+    type: "boolean",
+    cicle: "son",
+    hint: ""
+  },
+  "sonProbNoch": {
+    label: "с пробуждениями ночью",
+    phrase: "с пробуждениями ночью",
+    section: "affekt",
+    type: "boolean",
+    cicle: "son",
+    hint: ""
+  },
+  "sonProbUtro": {
+    label: "с ранним пробуждением",
+    phrase: "с ранним пробуждением",
+    section: "affekt",
+    type: "boolean",
+    cicle: "son",
+    hint: ""
+  },
+  "sonKoshmar": {
+    label: "с кошмарными сновидениями",
+    phrase: "с кошмарными сновидениями",
+    section: "affekt",
+    type: "boolean",
+    cicle: "son",
+    hint: ""
+  },
+  "sonKrik": {
+    label: "с разговорами (криками) во сне",
+    phrase: "с разговорами (криками) во сне",
+    section: "affekt",
+    type: "boolean",
+    cicle: "son",
+    hint: ""
+  },
+  "sonSonliv": {
+    label: "с сонливостью в течение дня",
+    phrase: "с сонливостью в течение дня",
+    section: "affekt",
+    type: "boolean",
+    cicle: "son",
+    hint: ""
+  },
+  "sonInversia": {
+    label: "Cмещен режим сна и бодрствования.",
+    phrase: "Cмещен режим сна и бодрствования.",
+    section: "affekt",
+    type: "boolean",
+    cicle: "sonSeparate",
+    hint: ""
+  },
+  "sonSnotvor": {
+    label: "Принимает снотворные препараты.",
+    phrase: "Принимает снотворные препараты.",
+    section: "affekt",
+    type: "boolean",
+    cicle: "sonSeparate",
+    hint: ""
+  },
+  "sonDizorientir": {
+    label: "Отмечались эпизоды дезориентировки в ночное время.",
+    phrase: "Отмечались эпизоды дезориентировки в ночное время.",
+    section: "affekt",
+    type: "boolean",
+    cicle: "sonSeparate",
+    hint: ""
+  },
+  "sonText": {
+    section: "affekt",
+    type: "string"
+  },
+
+  "appetit": {
+    data: [
+      { 
+        id: 0,
+        label: "достаточный",
+        phrase: "достаточный"
+      },
+      { 
+        id: 1,
+        label: "снижен",
+        phrase: "несколько снижен"
+      },
+      { 
+        id: 2,
+        label: "отсутствует",
+        phrase: "практически отсутствует"
+      },
+      { 
+        id: 3,
+        label: "повышен",
+        phrase: "повышен"
+      }
+    ],
+    label: "Аппетит",    
+    type: "radio",
+    section: "affekt"
+  },
+  "appetitPohudel": {
+    section: "affekt",
+    type: "string"
+  },
+  "appetitText": {
+    section: "affekt",
+    type: "string"
   }
 
 };

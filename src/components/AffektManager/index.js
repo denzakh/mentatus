@@ -3,19 +3,30 @@ import dataBase from "../../store/affektData.js";
 import Checkbox from "../Checkbox";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
+import TextareaInline from "../TextareaInline";
 import cicleFn from "../../fn/cicleFn";
 
 export default class affektManager extends Component {
 
+  constructor(props) {
+    super(props);
+    this.setState({sonOption: false});
+  }
+  
   render() {   
 
     let nastroyeniyeNumber = +this.props.psystatus.nastroyeniye.number;
     let vSvyaziNameArr = cicleFn(dataBase, "vSvyazi");   
-    let sNameArr = cicleFn(dataBase, "s");   
-    let nastroyenieSeparateNameArr = cicleFn(dataBase, "nastroyenieSeparate");  
+    let sNameArr = cicleFn(dataBase, "s"); 
+    let nastroyenieSeparateNameArr = cicleFn(dataBase, "nastroyenieSeparate"); 
 
     let trevogaNumber = +this.props.psystatus.trevoga.number; 
-    let trevogaSeparateNameArr = cicleFn(dataBase, "trevogaSeparate");   
+    let trevogaSeparateNameArr = cicleFn(dataBase, "trevogaSeparate");
+
+    let sonArr = cicleFn(dataBase, "son"); 
+    let sonSeparateArr = cicleFn(dataBase, "sonSeparate"); 
+
+    let appetitNumber = +this.props.psystatus.appetit.number;  
 
     // 
     let nastroyeniyeKolebaniaPodrobno = () => {
@@ -93,14 +104,38 @@ export default class affektManager extends Component {
             </div>
             ))}
           </div>
+          <Textarea
+            onChange={this.props.toggleText}
+            name="trevogaText"
+            label="Описание тревоги"
+            value={this.props.psystatus.trevogaText}
+          />
+                
+        </div>
+      }
+    }
 
-            
+    let appetitOptions = () => {
+      if(!(appetitNumber === 0)) {
+        return <div className="list__options">
+          <TextareaInline
+            onChange={this.props.toggleText}
+            name="pohudelText"
+            label="Похудел на (кг)"
+            value={this.props.psystatus.pohudelText}
+          />
+          <Textarea
+            onChange={this.props.toggleText}
+            name="appetitText"
+            label="Описание аппетита"
+            value={this.props.psystatus.appetitText}
+          />
         </div>
       }
     }
 
     return <div>
-      <div className="list__title">Настроение: </div>
+      <div className="list__title">Настроение:</div>
       <RadioList 
         name="nastroyeniye" 
         dataBase={dataBase} 
@@ -127,14 +162,48 @@ export default class affektManager extends Component {
 
       {trevogaOptions()}  
 
+      <div className="list__title">Сон: </div>
+      {sonArr.map(item => (
+        <div key={item} className="list__item">
+          <Checkbox 
+            checked = {this.props.psystatus[item].isChecked}
+            onChange = {this.props.toggleSymptom}
+            name = {item}
+            label = {dataBase[item].label}
+          />
+        </div>
+      ))} 
+
+      <div className="list__box">
+        {sonSeparateArr.map(item => (
+          <div key={item} className="list__item">
+            <Checkbox 
+              checked = {this.props.psystatus[item].isChecked}
+              onChange = {this.props.toggleSymptom}
+              name = {item}
+              label = {dataBase[item].label}
+            />
+          </div>
+        ))} 
+      </div>
+
       <Textarea
         onChange={this.props.toggleText}
-        name="trevogaText"
-        label="Описание тревоги"
-        value={this.props.psystatus.trevogaText}
+        name="sonText"
+        label="Описание сна"
+        value={this.props.psystatus.sonText}
       />
-  
-            
+
+      <div className="list__title">Аппетит:</div>
+      <RadioList 
+        name="appetit" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
+      {appetitOptions()}  
+    
     </div>;
   }
 }
