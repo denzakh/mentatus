@@ -59,7 +59,7 @@ const store = {
     isChecked: false
   },
   "nastroyeniyeKolebaniaPodrobno": {
-    number: 1
+    number: 0
   },
   "nastroyeniyeOtricaet": {
     isChecked: false
@@ -127,10 +127,10 @@ const store = {
     number: 0
   },
   "appetitPohudel": {
-    text: false
+    text: ""
   },
   "appetitText": {
-    text: false
+    text: ""
   }
 
 };

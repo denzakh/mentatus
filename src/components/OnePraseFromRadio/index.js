@@ -18,12 +18,25 @@ export default class OnePraseFromRadio extends Component {
   render() {
     const {name, dataObj, psystatus} = this.props;
 
-    let label = dataObj[name].label;
     let index = psystatus[name].number;
     let phrase = dataObj[name].data[index].phrase;
 
-    let оnePrase = " " + phrase;
+    let before;
+    if(dataObj[name].before === undefined) {
+      before = "";
+    } else {
+      before = dataObj[name].before;
+    }
 
-    return <span>{оnePrase}</span>; 
+    let after;
+    if(dataObj[name].after === undefined) {
+      after = "";
+    } else {
+      after = dataObj[name].after;
+    }
+
+    let оnePrase = before + phrase + after;
+
+    return<span>{оnePrase}</span>; 
   }
 }

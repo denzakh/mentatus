@@ -7,8 +7,7 @@ export default class RadioList extends Component {
 
     let dataBase = this.props.dataBase;
     let name = this.props.name; 
-    let arr = this.props.dataBase[name].data;
-    let number = this.props.dataBase[name];
+    let arr = dataBase[name].data;
     let psystatus = this.props.psystatus;
     
     return (
@@ -22,7 +21,7 @@ export default class RadioList extends Component {
               value={item.id} 
               className="radio__input" 
               onChange={this.props.onChange} 
-              checked={+item.id == +psystatus[name].number}
+              checked={+item.id === +psystatus[name].number}
             />
             <label className="radio__label" htmlFor={name + item.id}>
               {item.label}

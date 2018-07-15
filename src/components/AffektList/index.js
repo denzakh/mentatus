@@ -3,15 +3,43 @@ import dataBase from "../../store/affektData.js";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
+import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
+
 import OnePraseFromRadio from "../OnePraseFromRadio";
 
 export default class AffektList extends Component {
 
   render() {
 
+    let nastroyeniyeKolebania = () => {
+      if(this.props.psystatus.nastroyeniyeKolebania.isChecked) {
+          return <span> 
+            (<OnePraseFromRadio 
+              name="nastroyeniyeKolebaniaPodrobno" 
+              dataObj={dataBase} 
+              psystatus={this.props.psystatus} 
+              before=""
+            />)   
+          </span>      
+        }
+      }
+
+    let appetitPohudel = () => {
+      if(this.props.psystatus.appetitPohudel.text) {
+        return <span>
+          <FreeTextBeforeAndAfter 
+            name="appetitPohudel" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          />        
+        </span>
+      }
+    };
+
+
     return <span data-id="affekt" onClick={this.props.toggleTab} >
       
-      Настроение
+      {/*Настроение*/}
       <OnePraseFromRadio 
         name="nastroyeniye" 
         dataObj={dataBase} 
@@ -29,6 +57,7 @@ export default class AffektList extends Component {
         dataObj={dataBase} 
         psystatus={this.props.psystatus} 
       />
+      {nastroyeniyeKolebania()}
       <span>. </span> 
 
       <ListOfSentences 
@@ -41,6 +70,7 @@ export default class AffektList extends Component {
         text={this.props.psystatus.nastroyeniyeText} 
       />
 
+      {/*Тревога*/}
       <OnePraseFromRadio 
         name="trevoga" 
         dataObj={dataBase} 
@@ -57,6 +87,35 @@ export default class AffektList extends Component {
       <FreeText 
         text={this.props.psystatus.trevogaText} 
       />
+
+      {/*Сон*/}
+      <ListOfWords 
+        name="son" 
+        dataObj={dataBase} 
+        psystatus={this.props.psystatus} 
+      />
+      <span>. </span>
+
+      <ListOfSentences 
+        name="sonSeparate" 
+        dataObj={dataBase} 
+        psystatus={this.props.psystatus} 
+      />
+
+      {/*Аппетит*/}
+      <OnePraseFromRadio 
+        name="appetit" 
+        dataObj={dataBase} 
+        psystatus={this.props.psystatus} 
+      /> 
+      {appetitPohudel()}
+      <span>. </span> 
+
+      <FreeText 
+        text={this.props.psystatus.appetitText} 
+      />
+
+
 
 
 

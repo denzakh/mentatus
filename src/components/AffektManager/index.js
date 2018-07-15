@@ -10,7 +10,7 @@ export default class affektManager extends Component {
 
   constructor(props) {
     super(props);
-    this.setState({sonOption: false});
+    this.state = {sonOption: false};
   }
   
   render() {   
@@ -120,7 +120,7 @@ export default class affektManager extends Component {
         return <div className="list__options">
           <TextareaInline
             onChange={this.props.toggleText}
-            name="pohudelText"
+            name="appetitPohudel"
             label="Похудел на (кг)"
             value={this.props.psystatus.pohudelText}
           />

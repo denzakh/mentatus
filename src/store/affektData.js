@@ -45,7 +45,9 @@ const data = {
     ],
     label: "Настроение",    
     type: "radio",
-    section: "affekt"
+    section: "affekt",
+    before: "Настроение ",
+    after: ""
   },
 
   "nastroyeniyePsikhotravma": {
@@ -122,7 +124,7 @@ const data = {
   },
   "nastroyeniyeUtomlenie": {
     label: "утомляемостью",
-    phrase: "утомляемостью",
+    phrase: "быстрой утомляемостью",
     section: "affekt",
     type: "boolean",
     cicle: "s",
@@ -235,24 +237,26 @@ const data = {
   "nastroyeniyeKolebaniaPodrobno": {
     data: [
       { 
-        id: 1,
+        id: 0,
         label: "хуже утром",
         phrase: "с ухудшением в утренние часы"
       },
       { 
-        id: 2,
+        id: 1,
         label: "хуже вечером",
         phrase: "с ухудшением к вечеру"
       },
       { 
-        id: 3,
+        id: 2,
         label: "другое",
         phrase: "без определенной суточной динамики"
       }
     ],
     label: "суточная динамика",    
     type: "radio",
-    section: "affekt"
+    section: "affekt",
+    before: " (",
+    after: ")"
   },
   "nastroyeniyeOtricaet": {
     label: "снижение отрицает",
@@ -400,25 +404,40 @@ const data = {
     cicle: "son",
     hint: ""
   },
+  "sonBefore": {
+    phrase: "Сон ",
+    section: "affekt",
+    type: "string"
+  },
+  "sonAfter": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+  "sonNot": {
+    phrase: "Сон достаточный",
+    section: "affekt",
+    type: "string"
+  },
   "sonInversia": {
-    label: "Cмещен режим сна и бодрствования.",
-    phrase: "Cмещен режим сна и бодрствования.",
+    label: "Cмещен режим сна и бодрствования",
+    phrase: "Cмещен режим сна и бодрствования",
     section: "affekt",
     type: "boolean",
     cicle: "sonSeparate",
     hint: ""
   },
   "sonSnotvor": {
-    label: "Принимает снотворные препараты.",
-    phrase: "Принимает снотворные препараты.",
+    label: "Принимает снотворные препараты",
+    phrase: "Принимает снотворные препараты",
     section: "affekt",
     type: "boolean",
     cicle: "sonSeparate",
     hint: ""
   },
   "sonDizorientir": {
-    label: "Отмечались эпизоды дезориентировки в ночное время.",
-    phrase: "Отмечались эпизоды дезориентировки в ночное время.",
+    label: "Дезориентировка в ночное время",
+    phrase: "Отмечались эпизоды дезориентировки в ночное время",
     section: "affekt",
     type: "boolean",
     cicle: "sonSeparate",
@@ -454,11 +473,15 @@ const data = {
     ],
     label: "Аппетит",    
     type: "radio",
-    section: "affekt"
+    section: "affekt",
+    before: "Аппетит ",
+    after: ""
   },
   "appetitPohudel": {
     section: "affekt",
-    type: "string"
+    type: "string",
+    before: " (потеря веса около ",
+    after: " кг)"
   },
   "appetitText": {
     section: "affekt",
