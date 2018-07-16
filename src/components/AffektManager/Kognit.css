@@ -1,0 +1,19 @@
+.orientir__table {
+  display: flex;
+}
+
+.orientir__col {
+  width: 160px;
+}
+
+.orientir__top {
+  text-align: center;
+  font-weight: 700;
+}
+
+.orientir__content {
+/*  label {
+    max-width: 40px;
+    overflow: hidden;
+  }*/
+}

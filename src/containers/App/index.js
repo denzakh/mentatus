@@ -17,12 +17,15 @@ import AnamnezList from "../../components/AnamnezList";
 // import Sostoyanie2List from "../../components/Sostoyanie2List";
 import AffektManager from "../../components/AffektManager";
 import AffektList from "../../components/AffektList";
+// rech
+import KognitManager from "../../components/KognitManager";
+import KognitList from "../../components/KognitList";
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeTab: "affekt"};
+    this.state = {activeTab: "kognit"};
   }
 
   toggleSymptom = (e) => {
@@ -129,6 +132,9 @@ class App extends Component {
       </div>,
       <div key="affekt" name="affekt">
         <AffektManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
+      </div>,
+      <div key="kognit" name="kognit">
+        <KognitManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>
     ]
 
@@ -152,6 +158,7 @@ class App extends Component {
               <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />            
               <ZhalobyList psystatus={psystatus} toggleTab={this.toggleTab} /> 
               <AffektList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+              <KognitList psystatus={psystatus} toggleTab={this.toggleTab} /> 
             </div>
           </td>
         </tr>
