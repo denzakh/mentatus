@@ -21,6 +21,7 @@ export default class affektManager extends Component {
     let otdelNameArr = cicleFn(dataBase, "otdel");  
     let kognitFinger = this.props.psystatus.kognitFinger.isChecked;
 
+    // если отмечена фингерагнозия, показываем поле для пальцев
     let kognitFingerOptions = () => {
       if(kognitFinger) {
         return <div className="list__options">
@@ -35,6 +36,7 @@ export default class affektManager extends Component {
     }
     
     return <div>
+      {/*компонент ориентировки*/}
       <OrientirovkaManager
         dataBase={dataBase} 
         toggleRadio={this.props.toggleRadio} 
@@ -43,6 +45,7 @@ export default class affektManager extends Component {
         psystatus={this.props.psystatus}
       />
 
+      {/*цикл "отмечается"*/}
       <div className="list__title">отмечается: </div>
       {otmechNameArr.map(item => (
         <div key={item} className="list__item list__item--no-group">
@@ -55,8 +58,10 @@ export default class affektManager extends Component {
         </div>
       ))}
 
+      {/*поле для пальцев*/}
       {kognitFingerOptions()}
 
+      {/*цикл отдельных нарушений*/}
       {otdelNameArr.map(item => (
         <div key={item} className="list__item list__item--no-group">
           <Checkbox 
