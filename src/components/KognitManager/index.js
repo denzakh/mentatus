@@ -3,6 +3,8 @@ import dataBase from "../../store/kognitData.js";
 import Checkbox from "../Checkbox";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
+import TextareaInline from "../TextareaInline";
+import OrientirovkaManager from "../OrientirovkaManager";
 import cicleFn from "../../fn/cicleFn";
 import "./Kognit.css";
 
@@ -10,74 +12,61 @@ export default class affektManager extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {sonOption: false};
   }
   
   render() {   
 
-    let orientirVremiaNumber = +this.props.psystatus.orientirVremia.number;
-    let orientirMestoNumber = +this.props.psystatus.orientirMesto.number;
-    let orientirLichnostNumber = +this.props.psystatus.orientirLichnost.number;
+    let kognitNumber = +this.props.psystatus.kognitOsnivnoi.number;
+    let otmechNameArr = cicleFn(dataBase, "otmech"); 
+    let otdelNameArr = cicleFn(dataBase, "otdel");  
+    let kognitFinger = this.props.psystatus.kognitFinger.isChecked;
 
-
-
-
- 
-
+    let kognitFingerOptions = () => {
+      if(kognitFinger) {
+        return <div className="list__options">
+          <TextareaInline
+            onChange={this.props.toggleText}
+            name="kognitFingerN"
+            label="Правильно названо пальцев "
+            value={this.props.psystatus.kognitFingerN}
+          />
+        </div>
+      }
+    }
+    
     return <div>
-      <div className="orientir">
-        <h3>Ориентировка</h3>  
-        <div className="orientir__table"> 
-          <div className="orientir__col"> 
-            <div className="orientir__top"> 
-              В месте
-            </div>  
-            <div className="orientir__content"> 
-              <RadioList 
-                name="orientirVremia" 
-                dataBase={dataBase} 
-                onChange={this.props.toggleRadio} 
-                psystatus={this.props.psystatus}
-              />
-            </div>
-          </div>       
-          <div className="orientir__col"> 
-            <div className="orientir__top"> 
-              Времени
-            </div>  
-            <div className="orientir__content"> 
-              <RadioList 
-                name="orientirMesto" 
-                dataBase={dataBase} 
-                onChange={this.props.toggleRadio} 
-                psystatus={this.props.psystatus}
-              />
-            </div>
-          </div>
-          <div className="orientir__col"> 
-            <div className="orientir__top"> 
-              Личности
-            </div>  
-            <div className="orientir__content"> 
-              <RadioList 
-                name="orientirLichnost" 
-                dataBase={dataBase} 
-                onChange={this.props.toggleRadio} 
-                psystatus={this.props.psystatus}
-              />
-            </div>
-          </div>  
-        </div>
-        <div className="orientir__bottom">
+      <OrientirovkaManager
+        dataBase={dataBase} 
+        toggleRadio={this.props.toggleRadio} 
+        toggleSymptom={this.props.toggleSymptom}
+        toggleText={this.props.toggleText} 
+        psystatus={this.props.psystatus}
+      />
+
+      <div className="list__title">отмечается: </div>
+      {otmechNameArr.map(item => (
+        <div key={item} className="list__item list__item--no-group">
           <Checkbox 
-            name="orientirNot"
-            checked={this.props.psystatus.orientirNot.isChecked}
-            onChange={this.props.toggleSymptom}
-            label="ориентировку не определить" 
-          />           
+          checked = {this.props.psystatus[item].isChecked}
+          onChange = {this.props.toggleSymptom}
+          name = {item}
+          label = {dataBase[item].label}
+        />
         </div>
-      </div>
-  
+      ))}
+
+      {kognitFingerOptions()}
+
+      {otdelNameArr.map(item => (
+        <div key={item} className="list__item list__item--no-group">
+          <Checkbox 
+          checked = {this.props.psystatus[item].isChecked}
+          onChange = {this.props.toggleSymptom}
+          name = {item}
+          label = {dataBase[item].label}
+        />
+        </div>
+      ))}
 
     </div>;
   }

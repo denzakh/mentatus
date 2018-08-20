@@ -13,7 +13,61 @@ const store = {
   },
   "orientirText": {
     text: ""
+  },
+  "kognitTekusch": {
+    isChecked: false
+  },
+  "kognitProshl": {
+    isChecked: false
+  },
+  "kognitDismnes": {
+    isChecked: false
+  },
+  "kognitAbstrag": {
+    isChecked: false
+  },
+  "kognitOgrub": {
+    isChecked: false
+  },
+  "kognitDazadapt": {
+    isChecked: false
+  },
+  "kognitScet": {
+    isChecked: false
+  },
+  "kognitPismo": {
+    isChecked: false
+  },
+  "kognitAprak": {
+    isChecked: false
+  },
+  "kognitAgnoz ": {
+    isChecked: false
+  },
+  "kognitAfazia": {
+    isChecked: false
+  },
+  "kognitFinger": {
+    isChecked: false
+  },
+  
+  "kognitOsnivnoi": {
+    number: 1
+  },
+  "kognitDissim": {
+    isChecked: false
+  },  
+  "kognitKonfab": {
+    isChecked: false
+  },
+  "kognitFingerN": {
+    number: 1
+  },
+  "kognitText": {
+      text: ""
   }
+
+
 
 };
 

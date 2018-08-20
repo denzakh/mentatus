@@ -447,7 +447,7 @@ const data = {
     section: "affekt",
     type: "string"
   },
-
+  
   "appetit": {
     data: [
       { 
