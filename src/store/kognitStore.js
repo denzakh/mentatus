@@ -61,7 +61,7 @@ const store = {
     isChecked: false
   },
   "kognitFingerN": {
-    number: 1
+    number: 0
   },
   "kognitText": {
       text: ""

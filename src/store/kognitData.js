@@ -191,13 +191,20 @@ const data = {
     cicle: "otmech",
     hint: ""
   },
-  "kognitFinger": {
-    label: "фингерагнозия",
-    phrase: "фингерагнозия",
-    section: "kognit",
-    type: "boolean",
-    cicle: "otmech",
-    hint: ""
+  "otmechBefore": {
+    phrase: "Отмечается ",
+    section: "affekt",
+    type: "string"
+  },
+  "otmechAfter": {
+    phrase: ". ",
+    section: "affekt",
+    type: "string"
+  },
+  "otmechNot": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
   },
   "kognitOsnivnoi": {
     data: [
@@ -231,7 +238,7 @@ const data = {
     type: "radio",
     section: "kognit",
     before: "Интеллектуально-мнестически функции ",
-    after: ""
+    after: ". "
   },
   "kognitKonfab": {
     label: "конфабуляции",
@@ -249,9 +256,59 @@ const data = {
     type: "boolean",
     hint: ""
   }, 
-  "kognitFingerN": {
-    section: "kognit",
+  "otdelBefore": {
+    phrase: "",
+    section: "affekt",
     type: "string"
+  },
+  "otdelAfter": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+  "otdelNot": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+  "kognitFingerN": {
+    data: [
+      { 
+        id: 1,
+        label: "1",
+        phrase: ""       
+      },
+      { 
+        id: 2,
+        label: "2",
+        phrase: ""       
+      },
+      { 
+        id: 3,
+        label: "3",
+        phrase: ""       
+      },
+      { 
+        id: 4,
+        label: "4",
+        phrase: ""       
+      },
+      { 
+        id: 5,
+        label: "5",
+        phrase: ""       
+      },
+      { 
+        id: 0,
+        label: "не показывать",
+        phrase: ""       
+      },
+    ],
+    label: "Назвает правильно пальцев ",    
+    type: "radio",
+    section: "kognit",
+    before: "",
+    after: ""
   },
   "kognitText": {
     section: "kognit",

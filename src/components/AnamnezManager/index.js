@@ -12,7 +12,7 @@ export default class anamnezManager extends Component {
     ));   
 
     return <div>
-      В анамнезе: <br />
+      <div className="list__title">В анамнезе: </div>
       {anamnezNameArr.map(item => (
         <div key={item} className="list_item">
           <Checkbox 

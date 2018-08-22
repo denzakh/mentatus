@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import dataBase from "../../store/kognitData.js";
 import Checkbox from "../Checkbox";
 import RadioList from "../RadioList";
+import RadioListInline from "../RadioListInline";
 import Textarea from "../Textarea";
 import TextareaInline from "../TextareaInline";
 import OrientirovkaManager from "../OrientirovkaManager";
@@ -20,20 +21,6 @@ export default class affektManager extends Component {
     let otmechNameArr = cicleFn(dataBase, "otmech"); 
     let otdelNameArr = cicleFn(dataBase, "otdel");  
     let kognitFinger = this.props.psystatus.kognitFinger.isChecked;
-
-    // если отмечена фингерагнозия, показываем поле для пальцев
-    let kognitFingerOptions = () => {
-      if(kognitFinger) {
-        return <div className="list__options">
-          <TextareaInline
-            onChange={this.props.toggleText}
-            name="kognitFingerN"
-            label="Правильно названо пальцев "
-            value={this.props.psystatus.kognitFingerN}
-          />
-        </div>
-      }
-    }
     
     return <div>
       {/*компонент ориентировки*/}
@@ -48,7 +35,7 @@ export default class affektManager extends Component {
       {/*цикл "отмечается"*/}
       <div className="list__title">отмечается: </div>
       {otmechNameArr.map(item => (
-        <div key={item} className="list__item list__item--no-group">
+        <div key={item} className="list__item">
           <Checkbox 
           checked = {this.props.psystatus[item].isChecked}
           onChange = {this.props.toggleSymptom}
@@ -58,8 +45,7 @@ export default class affektManager extends Component {
         </div>
       ))}
 
-      {/*поле для пальцев*/}
-      {kognitFingerOptions()}
+
 
       {/*цикл отдельных нарушений*/}
       {otdelNameArr.map(item => (
@@ -72,6 +58,16 @@ export default class affektManager extends Component {
         />
         </div>
       ))}
+
+      {/*поле для пальцев*/}
+      <div className="list__box">
+        <RadioListInline
+          name="kognitFingerN" 
+          dataBase={dataBase} 
+          onChange={this.props.toggleRadio} 
+          psystatus={this.props.psystatus}
+        />
+      </div>      
 
     </div>;
   }

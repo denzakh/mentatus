@@ -20,12 +20,16 @@ import AffektList from "../../components/AffektList";
 // rech
 import KognitManager from "../../components/KognitManager";
 import KognitList from "../../components/KognitList";
-
+import OrientirovkaList from "../../components/OrientirovkaList";
+import PpManager from "../../components/PpManager";
+import PpList from "../../components/PpList";
+// 
+// 
 class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeTab: "kognit"};
+    this.state = {activeTab: "pp"};
   }
 
   toggleSymptom = (e) => {
@@ -135,6 +139,9 @@ class App extends Component {
       </div>,
       <div key="kognit" name="kognit">
         <KognitManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
+      </div>,
+      <div key="pp" name="pp">
+        <PpManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>
     ]
 
@@ -157,8 +164,10 @@ class App extends Component {
             <div className="app__status-box"> 
               <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />            
               <ZhalobyList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+               <OrientirovkaList psystatus={psystatus} toggleTab={this.toggleTab} /> 
               <AffektList psystatus={psystatus} toggleTab={this.toggleTab} /> 
               <KognitList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+              <PpList psystatus={psystatus} toggleTab={this.toggleTab} /> 
             </div>
           </td>
         </tr>
