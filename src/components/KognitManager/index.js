@@ -32,6 +32,14 @@ export default class affektManager extends Component {
         psystatus={this.props.psystatus}
       />
 
+      <div className="list__title">Интеллектуально-мнестические функции:</div>
+      <RadioList 
+        name="kognitOsnivnoi" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
       {/*цикл "отмечается"*/}
       <div className="list__title">отмечается: </div>
       {otmechNameArr.map(item => (

@@ -9,7 +9,7 @@ import TextareaInline from "../TextareaInline";
 import cicleFn from "../../fn/cicleFn";
 import "./Pp.css";
 
-export default class affektManager extends Component {
+export default class PpManager extends Component {
 
   constructor(props) {
     super(props);

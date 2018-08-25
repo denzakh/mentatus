@@ -3,7 +3,7 @@ import dataBase from "../../store/anamnezData.js";
 import ListOfWords from "../ListOfWords";
 import FreeText from "../FreeText";
 
-export default class anamnezList extends Component {
+export default class AnamnezList extends Component {
 
   render() {
 

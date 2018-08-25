@@ -6,7 +6,7 @@ import Textarea from "../Textarea";
 import TextareaInline from "../TextareaInline";
 import cicleFn from "../../fn/cicleFn";
 
-export default class affektManager extends Component {
+export default class AffektManager extends Component {
 
   constructor(props) {
     super(props);

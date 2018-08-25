@@ -52,7 +52,7 @@ const store = {
   },
   
   "kognitOsnivnoi": {
-    number: 1
+    number: 0
   },
   "kognitDissim": {
     isChecked: false

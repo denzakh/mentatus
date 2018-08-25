@@ -7,7 +7,7 @@ import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import OnePraseFromRadio from "../OnePraseFromRadio";
 import OrientirovkaList from "../OrientirovkaList";
 
-export default class AffektList extends Component {
+export default class PpList extends Component {
 
   render() {
 
@@ -39,7 +39,7 @@ export default class AffektList extends Component {
       }
     };
 
-    return <span data-id="kognit" onClick={this.props.toggleTab} >
+    return <span data-id="pp" onClick={this.props.toggleTab} >
 
       {bredShow()}
       <FreeText 
