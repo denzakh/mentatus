@@ -5,6 +5,7 @@ export default class ListOfWords extends Component {
 
   render() {
     const {name, dataObj, psystatus} = this.props;
+    const isAnd = this.props.isAnd || true;
 
     // получаем список элементов, относящихся к этому циклу
     let arrayFromName = cicleFn(dataObj, name);
@@ -14,8 +15,15 @@ export default class ListOfWords extends Component {
 
     // перебираем пункты, расставляем запятые
     let filteredList = filteredNameArr.map((item, i)=>{
-      if(i < filteredNameArr.length - 1) {
+      if(i < filteredNameArr.length - 2) {
         return <span key={item} >{dataObj[item].phrase}, </span>
+      } 
+      if(isAnd && (i == filteredNameArr.length - 1)) {
+        let ifAnd = "";
+        if (filteredNameArr.length > 1) {
+          ifAnd = " и "
+        }
+        return <span key={item} > {ifAnd} {dataObj[item].phrase}</span>
       } 
         return <span key={item} >{dataObj[item].phrase}</span>
     });

@@ -11,14 +11,46 @@ export default class AffektList extends Component {
 
   render() {
 
+    let bredShow = () => {
+      if(this.props.psystatus.bredOtkl.isChecked) {
+        return 
+      } else {
+        return <span>
+          <ListOfWords 
+            name="bred" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          />      
+        </span>
+      }
+    };
+
+    let gallShow = () => {
+      if(this.props.psystatus.gallOtkl.isChecked) {
+        return 
+      } else {
+        return <span>
+          <ListOfWords 
+            name="gall" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          />      
+        </span>
+      }
+    };
+
     return <span data-id="kognit" onClick={this.props.toggleTab} >
 
-      {/*Бред*/}
-      <ListOfWords 
-        name="bred" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
+      {bredShow()}
+      <FreeText 
+        text={this.props.psystatus.bredText} 
       />
+
+      {gallShow()}
+      <FreeText 
+        text={this.props.psystatus.gallText} 
+      />
+
     </span>
 
 

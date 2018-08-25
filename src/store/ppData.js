@@ -7,8 +7,8 @@ const data = {
     cicle: "bred"
   },
   "bredSam": {
-    label: "самообвинения и уничижения",
-    phrase: "самообвинения и самоуничижения",
+    label: "самообвинения",
+    phrase: "самообвинения",
     section: "pp",
     type: "boolean",
     cicle: "bred"
@@ -57,7 +57,7 @@ const data = {
   },
   "bredBefore": {
     phrase: "Выявляются бредовые идеи ",
-    section: "affekt",
+    section: "pp",
     type: "string"
   },
   "bredAfter": {
@@ -66,41 +66,58 @@ const data = {
     type: "string"
   },
   "bredNot": {
-    phrase: "",
-    section: "affekt",
+    phrase: "Бредовых идей не высказывает. ",
+    section: "pp",
+    type: "string"
+  },
+  "bredOtkl": {
+    phrase: "не показывать",
+    section: "pp",
     type: "string"
   },
   "bredText": {
     text: ""
   },
-  "gall": {
-    data: [
-      { 
-        id: 1,
-        label: "слуховых",
-        phrase: "слуховых"
-      },
-      { 
-        id: 2,
-        label: "зрительных ",
-        phrase: "зрительных "
-      },
-      { 
-        id: 3,
-        label: "слуховых и зрительных",
-        phrase: "слуховых и зрительных"
-      },
-      { 
-        id: 0,
-        label: "Признаков обманов восприятия не обнаруживает",
-        phrase: "Признаков обманов восприятия не обнаруживает"
-      }
-    ],
-    label: "Галлюцинации",    
-    type: "radio",
-    section: "kognit",
-    before: "Обнаруживает признаки ",
-    after: "обманов восприятия. "
+  "gallSluh": {
+    label: "слуховых",
+    phrase: "слуховых",
+    section: "pp",
+    type: "boolean",
+    cicle: "gall"
+  },
+  "gallZrit": {
+    label: "зрительных",
+    phrase: "зрительных",
+    section: "pp",
+    type: "boolean",
+    cicle: "gall"
+  },
+  "gallTak": {
+    label: "тактильных",
+    phrase: "тактильных",
+    section: "pp",
+    type: "boolean",
+    cicle: "gall"
+  },
+  "gallBefore": {
+    phrase: "Обнаруживает признаки ",
+    section: "pp",
+    type: "string"
+  },
+  "gallAfter": {
+    phrase: " обманов восприятия. ",
+    section: "pp",
+    type: "string"
+  },
+  "gallNot": {
+    phrase: "Признаков обманов восприятия не обнаруживает. ",
+    section: "pp",
+    type: "string"
+  },
+  "gallOtkl": {
+    phrase: "не показывать",
+    section: "pp",
+    type: "string"
   },
   "gallText": {
     text: false

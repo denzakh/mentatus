@@ -23,12 +23,24 @@ const store = {
   "bredLubov": {
     isChecked: false
   },
+  "bredOtkl": {
+    isChecked: false
+  },
   "bredText": {
     text: ""
   },
-  "gall": {
-    number: 0
+  "gallSluh": {
+    isChecked: false
   },
+  "gallZrit": {
+    isChecked: false
+  },
+  "gallTak": {
+    isChecked: false
+  },
+  "gallOtkl": {
+    isChecked: false
+  },  
   "gallText": {
     text: ""
   }

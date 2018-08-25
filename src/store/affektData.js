@@ -415,7 +415,7 @@ const data = {
     type: "string"
   },
   "sonNot": {
-    phrase: "Сон достаточный",
+    phrase: "Сон спокойный",
     section: "affekt",
     type: "string"
   },
