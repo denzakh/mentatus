@@ -15,7 +15,6 @@ export default class AffektList extends Component {
     let finger = () => {
 
       let fingerNumber = +this.props.psystatus.kognitFingerN.number;
-      console.log(fingerNumber); 
       let fingerText = "";
       switch (fingerNumber) {
         case 1: 

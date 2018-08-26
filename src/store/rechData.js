@@ -143,12 +143,12 @@ const data = {
       { 
         id: 1,
         label: "ускоренная",
-        phrase: "ускоренная по темпу"
+        phrase: "ускоренная"
       },
       { 
         id: 2,
         label: "замедленная",
-        phrase: "замедленная по темпу"
+        phrase: "замедленная"
       },
     ],
     label: "Темп речи",    
@@ -170,6 +170,21 @@ const data = {
     section: "rech",
     type: "boolean",
     cicle: "rechOsob"
+  },
+  "rechOsobBefore": {
+    phrase: ", ",
+    section: "affekt",
+    type: "string"
+  },
+  "rechOsobAfter": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
+  },
+  "rechOsobNot": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
   },
   "rechOdnosloj": {
     label: "односложные",
@@ -204,7 +219,7 @@ const data = {
     label: "ответы:",    
     type: "radio",
     section: "rech",
-    before: "",
+    before: "ответы ",
     after: ""
   },
   "rechPodbor": {
@@ -227,6 +242,21 @@ const data = {
     section: "rech",
     type: "boolean",
     cicle: "rechOtmech"
+  },
+  "rechOtmechBefore": {
+    phrase: "Отмечаются ",
+    section: "affekt",
+    type: "string"
+  },
+  "rechOtmechAfter": {
+    phrase: ". ",
+    section: "affekt",
+    type: "string"
+  },
+  "rechOtmechNot": {
+    phrase: "",
+    section: "affekt",
+    type: "string"
   },
   "rechText": {
     text: ""

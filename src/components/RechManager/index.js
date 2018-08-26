@@ -21,8 +21,7 @@ export default class RechManager extends Component {
     let myshlenieArr = cicleFn(dataBase, "myshlenie"); 
 
     let myshlenieList = () => {
-      return <div className="list__options">
-        <div className="list__title"></div>
+      return <div className="list__box">
         {myshlenieArr.map(item => (
           <div key={item} className="list__item">
             <Checkbox 
@@ -38,8 +37,7 @@ export default class RechManager extends Component {
 
     let rechOsobArr = cicleFn(dataBase, "rechOsob"); 
     let rechOsobList = () => {
-      return <div className="list__options">
-        <div className="list__title"></div>
+      return <div className="list__box">
         {rechOsobArr.map(item => (
           <div key={item} className="list__item">
             <Checkbox 
@@ -55,8 +53,7 @@ export default class RechManager extends Component {
 
     let rechOtmechArr = cicleFn(dataBase, "rechOtmech"); 
     let rechOtmechList = () => {
-      return <div className="list__options">
-        <div className="list__title"></div>
+      return <div className="list__box">
         {rechOtmechArr.map(item => (
           <div key={item} className="list__item">
             <Checkbox 
@@ -115,16 +112,23 @@ export default class RechManager extends Component {
         psystatus={this.props.psystatus}
       />
 
-      + <Checkbox 
-        checked = {this.props.psystatus["rechOdnosloj"].isChecked}
-        onChange = {this.props.toggleSymptom}
-        name = {"rechOdnosloj"}
-        label = {dataBase["rechOdnosloj"].label}
-      />  
+      <div className="list__add">
+        <Checkbox 
+          checked = {this.props.psystatus["rechOdnosloj"].isChecked}
+          onChange = {this.props.toggleSymptom}
+          name = {"rechOdnosloj"}
+          label = {dataBase["rechOdnosloj"].label}
+        />  
+      </div>
 
-      {rechOtmechList()}       
+      {rechOtmechList()}    
 
-
+      <Textarea
+        onChange={this.props.toggleText}
+        name="rechText"
+        label="Описание речи"
+        value={this.props.psystatus.appetitText}
+      />   
 
     </div>;
   }

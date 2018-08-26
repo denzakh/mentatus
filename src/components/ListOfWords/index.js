@@ -5,27 +5,31 @@ export default class ListOfWords extends Component {
 
   render() {
     const {name, dataObj, psystatus} = this.props;
-    const isAnd = this.props.isAnd || true;
+    const isAnd = !!this.props.isAnd;
 
     // получаем список элементов, относящихся к этому циклу
     let arrayFromName = cicleFn(dataObj, name);
 
     // получаем список активных элементов
     const filteredNameArr = arrayFromName.filter((item)=>psystatus[item].isChecked);
-
+    
     // перебираем пункты, расставляем запятые
     let filteredList = filteredNameArr.map((item, i)=>{
-      if(i < filteredNameArr.length - 2) {
-        return <span key={item} >{dataObj[item].phrase}, </span>
-      } 
-      if(isAnd && (i == filteredNameArr.length - 1)) {
-        let ifAnd = "";
-        if (filteredNameArr.length > 1) {
-          ifAnd = " и "
+      let ifAnd = "";
+      if(i == filteredNameArr.length - 1) {
+        // последняя фраза
+        ifAnd = "";
+      } else {
+        // если включен "и" 
+        // и фраза предпоследняя 
+        // и массив более 1
+        if(isAnd && (i == filteredNameArr.length - 2) && (filteredNameArr.length > 1)) {
+          ifAnd = " и "; 
+        } else {
+          ifAnd = ", ";          
         }
-        return <span key={item} > {ifAnd} {dataObj[item].phrase}</span>
-      } 
-        return <span key={item} >{dataObj[item].phrase}</span>
+      }
+        return <span key={item} >{dataObj[item].phrase}{ifAnd}</span>
     });
 
     // получаем фразы для начала и конца цикла, фразу для отсутствия данных
