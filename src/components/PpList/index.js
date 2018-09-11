@@ -6,6 +6,7 @@ import FreeText from "../FreeText";
 import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import OnePraseFromRadio from "../OnePraseFromRadio";
 import OrientirovkaList from "../OrientirovkaList";
+import KritikaList from "../KritikaList";
 
 export default class PpList extends Component {
 
@@ -49,6 +50,11 @@ export default class PpList extends Component {
       {gallShow()}
       <FreeText 
         text={this.props.psystatus.gallText} 
+      />
+
+      <KritikaList 
+        dataObj={dataBase} 
+        psystatus={this.props.psystatus} 
       />
 
     </span>

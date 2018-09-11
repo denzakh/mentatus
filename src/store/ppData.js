@@ -71,6 +71,7 @@ const data = {
     type: "string"
   },
   "bredOtkl": {
+    label: "не показывать",
     phrase: "не показывать",
     section: "pp",
     type: "string"
@@ -115,6 +116,7 @@ const data = {
     type: "string"
   },
   "gallOtkl": {
+    label: "не показывать",
     phrase: "не показывать",
     section: "pp",
     type: "string"

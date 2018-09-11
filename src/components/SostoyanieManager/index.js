@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import dataBase from "../../store/sostoyanieData.js";
+import dataBaseRech from "../../store/rechData.js";
 import Checkbox from "../Checkbox";
 import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
@@ -17,55 +18,116 @@ export default class SostoyanieManager extends Component {
   
   render() {   
 
-    // показ списка бред
-    // let bredNameArr = cicleFn(dataBase, "bred"); 
+    // показ списка
+    let zatrudNameArr = cicleFn(dataBase, "zatrud"); 
+    let contact = this.props.psystatus.kontakt.number;
+    let zatrudList = () => {
+      return <div>
+        <div className="list__title">затруднен из-за: </div>
+        {zatrudNameArr.map(item => (
+          <div key={item} className="list__item">
+            <Checkbox 
+              checked = {this.props.psystatus[item].isChecked}
+              onChange = {this.props.toggleSymptom}
+              name = {item}
+              label = {dataBase[item].label}
+            />
+          </div>
+        ))}
+      </div>        
+    }
 
-    // let bredList = bredNameArr.map(item => (
-    //   <div key={item} className="list__item">
-    //     <Checkbox 
-    //     checked = {this.props.psystatus[item].isChecked}
-    //     onChange = {this.props.toggleSymptom}
-    //     name = {item}
-    //     label = {dataBase[item].label}
-    //   />
-    //   </div>
-    // ));
+    // показ списка
+    let vpechNameArr = cicleFn(dataBase, "vpech"); 
+    let vpechList = () => {
+      return <div>
+        <div className="list__title">Впечатление: </div>
+        {vpechNameArr.map(item => (
+          <div key={item} className="list__item">
+            <Checkbox 
+              checked = {this.props.psystatus[item].isChecked}
+              onChange = {this.props.toggleSymptom}
+              name = {item}
+              label = {dataBase[item].label}
+            />
+          </div>
+        ))}
+      </div>        
+    }
 
-    // let bredListShow = () => {
-    //   if(this.props.psystatus["bredOtkl"].isChecked) {
-    //     return "";
-    //   } else {
-    //     return bredList;
-    //   }
-    // }
-
-    // // показ списка галлюцинации
-    // let gallNameArr = cicleFn(dataBase, "gall"); 
-
-    // let gallList = gallNameArr.map(item => (
-    //   <div key={item} className="list__item">
-    //     <Checkbox 
-    //     checked = {this.props.psystatus[item].isChecked}
-    //     onChange = {this.props.toggleSymptom}
-    //     name = {item}
-    //     label = {dataBase[item].label}
-    //   />
-    //   </div>
-    // ));
-
-    // let gallListShow = () => {
-    //   if(this.props.psystatus["gallOtkl"].isChecked) {
-    //     return "";
-    //   } else {
-    //     return gallList;
-    //   }
-    // }
+    // речь
+    let rechGrubArr = cicleFn(dataBaseRech, "rechGrub"); 
+    let rechGrubList = () => {
+      return <div className="list__wrap">
+        <div className="list__title">
+          <span className="list__title-lable">Речь:</span>
+          <CheckboxOtkl 
+            name = "rechOtkl"
+            onChange = {this.props.toggleSymptom}
+            psystatus = {this.props.psystatus}
+            dataBase = {dataBaseRech}
+          />
+          <CheckboxOtkl 
+            name = "rechNeotvechaet"
+            onChange = {this.props.toggleSymptom}
+            psystatus = {this.props.psystatus}
+            dataBase = {dataBaseRech}
+          />
+        </div>
+        {rechGrubArr.map(item => (
+          <div key={item} className="list__item">
+            <Checkbox 
+            checked = {this.props.psystatus[item].isChecked}
+            onChange = {this.props.toggleSymptom}
+            name = {item}
+            label = {dataBaseRech[item].label}
+            />
+          </div>
+        ))}
+      </div>
+    } 
     
     return <div>
+       
+      <div className="list__title">Состояние сознания:</div>
+      <RadioList 
+        name="soznanie" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
+      {rechGrubList()}      
+
+      <div className="list__title">Контакт:</div>
+      <RadioList 
+        name="kontakt" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
+      {zatrudList()}
 
 
-     1
-      
+      {vpechList()}
+
+      <div className="list__title">Критика:</div>
+      <RadioList 
+        name="kritika" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
+      <Textarea
+        onChange={this.props.toggleText}
+        name="kritikaText"
+        label="Описание критики"
+        value={this.props.psystatus.kritikaText}
+      />
+
+           
     </div>;
   }
 }

@@ -30,7 +30,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeTab: "sostoyanie1"};
+    this.state = {activeTab: "sostoyanie"};
   }
 
   toggleSymptom = (e) => {
@@ -167,10 +167,10 @@ class App extends Component {
               <div className="app__tab-menu-title">Разделы</div>
               {tabMenuRender}
             </td>
-            <td className="app__td app__td--options"  width="30%">
+            <td className="app__td app__td--options"  width="50%">
               {tabRender}
             </td>
-            <td className="app__td app__td--status"  width="60%">
+            <td className="app__td app__td--status"  width="50%">
               <div className="app__status-box"> 
                 <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />  
                 <SostoyanieList psystatus={psystatus} toggleTab={this.toggleTab} />            

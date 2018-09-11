@@ -140,6 +140,13 @@ const data = {
     type: "boolean",
     cicle: ""
   },
+  "rechNeotvechaet": {
+    label: "не отвечает",
+    phrase: "На вопросы не отвечает",
+    section: "rech",
+    type: "boolean",
+    cicle: ""
+  },  
   "rechTemp": {
     data: [
       { 
@@ -205,28 +212,28 @@ const data = {
       { 
         id: 0,
         label: "по существу",
-        phrase: "по существу"
+        phrase: "ответы по существу"
       },
       { 
         id: 1,
         label: "в плане спрашиваемого",
-        phrase: "в плане спрашиваемого"
+        phrase: "ответы в плане спрашиваемого"
       },
       { 
         id: 2,
         label: "иногда не по существу",
-        phrase: "иногда не по существу"
+        phrase: "ответы иногда не по существу"
       },
       { 
         id: 3,
         label: "чаще не по существу",
-        phrase: "чаще не по существу"
+        phrase: "ответы чаще не по существу"
       }
     ],
     label: "ответы:",    
     type: "radio",
     section: "rech",
-    before: "ответы ",
+    before: "",
     after: ""
   },
   "rechPodbor": {
@@ -271,13 +278,6 @@ const data = {
   "rechNedoponimaet": {
     label: "речь недопонимает",
     phrase: "Обращенную речь недопонимает",
-    section: "rech",
-    type: "boolean",
-    cicle: "rechGrub"
-  },
-  "rechNeotvechaet": {
-    label: "не отвечает",
-    phrase: "На вопросы не отвечает",
     section: "rech",
     type: "boolean",
     cicle: "rechGrub"

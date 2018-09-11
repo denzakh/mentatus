@@ -2,19 +2,19 @@ const store = {
   "soznanie": {
     number: 0
   },
-  "kontat": {
+  "kontakt": {
     number: 0
   },
-  "kontatSluh": {
+  "kontaktSluh": {
     number: 0
   },
-  "kontatKognit": {
+  "kontaktKognit": {
     number: 0
   },
-  "kontatSostoyanie": {
+  "kontaktSostoyanie": {
     number: 0
   },
-  "kontatSoznanie": {
+  "kontaktSoznanie": {
     number: 0
   },
   "vpechatleniePodozrit": {
@@ -24,6 +24,9 @@ const store = {
     isChecked: false
   },
   "vpechatlenieNavyazchiv": {
+    isChecked: false
+  },
+  "vpechatlenieDurash": {
     isChecked: false
   },
   "vpechatlenieProtivorechia": {

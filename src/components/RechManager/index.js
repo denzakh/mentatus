@@ -118,7 +118,7 @@ export default class RechManager extends Component {
 
 
     let rechShow = () => {
-      if(this.props.psystatus["rechOtkl"].isChecked) {
+      if(this.props.psystatus["rechOtkl"].isChecked || this.props.psystatus["rechNeotvechaet"].isChecked) {
         return "";
       } else {
         return rechMain();
@@ -156,6 +156,12 @@ export default class RechManager extends Component {
         <span className="list__title-lable">Речь:</span>
         <CheckboxOtkl 
           name = "rechOtkl"
+          onChange = {this.props.toggleSymptom}
+          psystatus = {this.props.psystatus}
+          dataBase = {dataBase}
+        />
+        <CheckboxOtkl 
+          name = "rechNeotvechaet"
           onChange = {this.props.toggleSymptom}
           psystatus = {this.props.psystatus}
           dataBase = {dataBase}
