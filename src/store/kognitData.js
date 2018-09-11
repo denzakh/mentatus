@@ -242,7 +242,7 @@ const data = {
   },
   "kognitKonfab": {
     label: "конфабуляции",
-    phrase: "Выявляются конфабуляторные переживания.",
+    phrase: "Выявляются конфабуляторные переживания",
     section: "kognit",
     cicle: "otdel",
     type: "boolean",
@@ -250,12 +250,36 @@ const data = {
   },  
   "kognitDissim": {
     label: "скрывает нарушения памяти",
-    phrase: "Диссимулирует имеющиеся нарушения памяти.",
+    phrase: "Диссимулирует имеющиеся нарушения памяти",
     section: "kognit",
     cicle: "otdel",
     type: "boolean",
     hint: ""
   }, 
+  "kognitZadania": {
+    label: "задания не выполняет",
+    phrase: "Предложенные задания не выполняет",
+    section: "kognit",
+    cicle: "otdel",
+    type: "boolean",
+    hint: ""
+  }, 
+  "kognitNedoosmysl": {
+    label: "недоосмысляет ситуацию",
+    phrase: "Недоосмысляет ситуацию",
+    section: "kognit",
+    cicle: "otdel",
+    type: "boolean",
+    hint: ""
+  }, 
+  "kognitLogik": {
+    label: "логические операции недоступны",
+    phrase: "Логические операции недоступны",
+    section: "kognit",
+    cicle: "otdel",
+    type: "boolean",
+    hint: ""
+  },
   "otdelBefore": {
     phrase: "",
     section: "affekt",
@@ -314,7 +338,6 @@ const data = {
     section: "kognit",
     type: "string"
   }
-
 
 };
 

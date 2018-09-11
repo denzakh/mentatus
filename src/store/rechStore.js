@@ -33,6 +33,9 @@ const store = {
     text: ""
   },
 
+  "rechOtkl": {
+    isChecked: false
+  },
   "rechTemp": {
     number: 0
   },
@@ -60,6 +63,15 @@ const store = {
   "rechText": {
     text: ""
   },
+  "rechNedoponimaet": {
+    isChecked: false
+  },
+  "rechNeotvechaet": {
+    isChecked: false
+  },
+  "rechBormochet": {
+    isChecked: false
+  }
 };
 
 export default store;

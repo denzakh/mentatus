@@ -50,6 +50,16 @@ const store = {
   "kognitFinger": {
     isChecked: false
   },
+
+  "kognitZadania": {
+    isChecked: false
+  },
+  "kognitNedoosmysl": {
+    isChecked: false
+  },
+  "kognitLogik": {
+    isChecked: false
+  },
   
   "kognitOsnivnoi": {
     number: 0

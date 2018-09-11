@@ -53,9 +53,8 @@ export default class affektManager extends Component {
         </div>
       ))}
 
-
-
       {/*цикл отдельных нарушений*/}
+      <div className="list__title">отдельно: </div>
       {otdelNameArr.map(item => (
         <div key={item} className="list__item list__item--no-group">
           <Checkbox 

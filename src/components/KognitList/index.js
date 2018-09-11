@@ -56,15 +56,11 @@ export default class AffektList extends Component {
       {finger()}      
 
       {/*Отдельно*/}
-      <ListOfWords 
+      <ListOfSentences
         name="otdel" 
         dataObj={dataBase} 
         psystatus={this.props.psystatus} 
       />      
-
-
-
-
 
 
     </span>

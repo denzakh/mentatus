@@ -11,16 +11,16 @@ import ZhalobyManager from "../../components/ZhalobyManager";
 import ZhalobyList from "../../components/ZhalobyList";
 import AnamnezManager from "../../components/AnamnezManager";
 import AnamnezList from "../../components/AnamnezList";
-// import Sostoyanie1Manager from "../../components/Sostoyanie1Manager";
-// import Sostoyanie1List from "../../components/Sostoyanie1List";
-// import Sostoyanie2Manager from "../../components/Sostoyanie2Manager";
-// import Sostoyanie2List from "../../components/Sostoyanie2List";
+import SostoyanieManager from "../../components/SostoyanieManager";
+import SostoyanieList from "../../components/SostoyanieList";
 import AffektManager from "../../components/AffektManager";
 import AffektList from "../../components/AffektList";
 import RechManager from "../../components/RechManager";
 import RechList from "../../components/RechList";
 import KognitManager from "../../components/KognitManager";
 import KognitList from "../../components/KognitList";
+import KogtestManager from "../../components/KogtestManager";
+import KogtestList from "../../components/KogtestList";
 import OrientirovkaList from "../../components/OrientirovkaList";
 import PpManager from "../../components/PpManager";
 import PpList from "../../components/PpList";
@@ -30,7 +30,7 @@ class App extends Component {
 
   constructor(props) {
     super(props);
-    this.state = {activeTab: "rech"};
+    this.state = {activeTab: "sostoyanie1"};
   }
 
   toggleSymptom = (e) => {
@@ -68,13 +68,9 @@ class App extends Component {
         symbol: "ЖЛ",
         label: "Жалобы"
       },
-      { name: "sostoyanie1",
-        symbol: "C1",
-        label: "Состояние 1"
-      },
-      { name: "sostoyanie2",
-        symbol: "С2",
-        label: "Состояние 2"
+      { name: "sostoyanie",
+        symbol: "ОC",
+        label: "Общее состояние"
       },
       { name: "affekt",
         symbol: "АФ",
@@ -87,6 +83,10 @@ class App extends Component {
       { name: "kognit",
         symbol: "ИП",
         label: "Интеллект и память"
+      },
+      { name: "kogtest",
+        symbol: "КТ",
+        label: "Когнитивные тесты"
       },
       { name: "pp",
         symbol: "ПП",
@@ -135,6 +135,9 @@ class App extends Component {
       <div key="anamnez" name="anamnez">
         <AnamnezManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>,
+      <div key="sostoyanie" name="sostoyanie">
+        <SostoyanieManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
+      </div>,
       <div key="affekt" name="affekt">
         <AffektManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>,
@@ -143,6 +146,9 @@ class App extends Component {
       </div>,
       <div key="kognit" name="kognit">
         <KognitManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
+      </div>,
+      <div key="kogtest" name="kogtest">
+        <KogtestManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
       </div>,
       <div key="pp" name="pp">
         <PpManager toggleSymptom={this.toggleSymptom} toggleText={this.toggleText}  toggleRadio={this.toggleRadio} psystatus={psystatus} />
@@ -156,26 +162,28 @@ class App extends Component {
     return <div className="app">
       <table width="100%" className="app__table">
         <tbody>
-        <tr>
-          <td className="app__td app__td--tab-menu"  width="60">
-            <div className="app__tab-menu-title">Разделы</div>
-            {tabMenuRender}
-          </td>
-          <td className="app__td app__td--options"  width="30%">
-            {tabRender}
-          </td>
-          <td className="app__td app__td--status"  width="60%">
-            <div className="app__status-box"> 
-              <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />            
-              <ZhalobyList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-               <OrientirovkaList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-              <AffektList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-              <RechList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-              <KognitList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-              <PpList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-            </div>
-          </td>
-        </tr>
+          <tr>
+            <td className="app__td app__td--tab-menu"  width="60">
+              <div className="app__tab-menu-title">Разделы</div>
+              {tabMenuRender}
+            </td>
+            <td className="app__td app__td--options"  width="30%">
+              {tabRender}
+            </td>
+            <td className="app__td app__td--status"  width="60%">
+              <div className="app__status-box"> 
+                <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />  
+                <SostoyanieList psystatus={psystatus} toggleTab={this.toggleTab} />            
+                <ZhalobyList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+                <OrientirovkaList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+                <AffektList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+                <RechList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+                <KognitList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+                <KogtestList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+                <PpList psystatus={psystatus} toggleTab={this.toggleTab} /> 
+              </div>
+            </td>
+          </tr>
         </tbody>
       </table> 
     </div>;

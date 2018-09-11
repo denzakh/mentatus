@@ -133,6 +133,13 @@ const data = {
     text: ""
   },
 
+  "rechOtkl": {
+    label: "отсутствует",
+    phrase: "Речь отсутствует",
+    section: "rech",
+    type: "boolean",
+    cicle: ""
+  },
   "rechTemp": {
     data: [
       { 
@@ -260,6 +267,27 @@ const data = {
   },
   "rechText": {
     text: ""
+  },
+  "rechNedoponimaet": {
+    label: "речь недопонимает",
+    phrase: "Обращенную речь недопонимает",
+    section: "rech",
+    type: "boolean",
+    cicle: "rechGrub"
+  },
+  "rechNeotvechaet": {
+    label: "не отвечает",
+    phrase: "На вопросы не отвечает",
+    section: "rech",
+    type: "boolean",
+    cicle: "rechGrub"
+  },
+  "rechBormochet": {
+    label: "невнятно бормочет",
+    phrase: "Что-то невнятно бормочет",
+    section: "rech",
+    type: "boolean",
+    cicle: "rechGrub"
   }
 };
 

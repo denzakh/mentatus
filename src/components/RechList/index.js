@@ -19,6 +19,42 @@ export default class RechList extends Component {
       }
     }
 
+    let rechShow = () => {
+      if(this.props.psystatus.rechOtkl.isChecked) {
+        return 
+      } else {
+        return <span>
+         <OnePraseFromRadio 
+            name="rechTemp" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          /> 
+
+          <ListOfWords 
+            name="rechOsob" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+            isAnd = {false}
+          />
+          <span>, </span>
+
+          <OnePraseFromRadio 
+            name="rechSuschestvo" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          /> 
+          {odnosloj()}
+          <span>. </span>
+
+          <ListOfWords 
+            name="rechOtmech" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+            isAnd = {false}
+          />    
+        </span>
+      }
+    };
 
     return <span data-id="rech" onClick={this.props.toggleTab} >
 
@@ -46,34 +82,15 @@ export default class RechList extends Component {
         text={this.props.psystatus.myshlenieText} 
       />
 
-      <OnePraseFromRadio 
-        name="rechTemp" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-      /> 
+      {rechShow()}
 
-      <ListOfWords 
-        name="rechOsob" 
+      <ListOfSentences 
+        name="rechGrub" 
         dataObj={dataBase} 
         psystatus={this.props.psystatus} 
-        isAnd = {false}
       />
-      <span>, </span>
 
-      <OnePraseFromRadio 
-        name="rechSuschestvo" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-      /> 
-      {odnosloj()}
-      <span>. </span>
-
-      <ListOfWords 
-        name="rechOtmech" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-        isAnd = {false}
-      />
+ 
 
 
     </span>

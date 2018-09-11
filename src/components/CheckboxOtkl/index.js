@@ -13,7 +13,7 @@ export default class Checkbox extends Component {
           name={this.props.name}
           id={this.props.name}
         />
-        <label className="checkbox-otkl__label" htmlFor={this.props.name}>{dataBase[name].phrase}</label>
+        <label className="checkbox-otkl__label" htmlFor={this.props.name}>{dataBase[name].label}</label>
       </span>
     );
   }
