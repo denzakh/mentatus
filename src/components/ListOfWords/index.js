@@ -37,6 +37,8 @@ export default class ListOfWords extends Component {
     let after = this.props.after || (name + "After");
     let noList = this.props.before || (name + "Not");
 
+    console.log(after, noList); 
+
     // добавляем начало и конец фразы, фразу для отсутствия данных 
     if (filteredList.length) {
       if (dataObj[before].phrase) {

@@ -43,7 +43,10 @@ let store = {
   },
   "anamnezText": { 
     text: ""
-  }
+  },
+  "anamnezOtkl": { 
+    isChecked: true
+  },
 }
 
 export default store;

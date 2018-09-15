@@ -35,7 +35,7 @@ const data = {
         id: 6,
         label: "мед. загруженность",
         phrase: "Наблюдается состояние медицинской загруженности"
-      },
+      }
     ],
     label: "Сознание",    
     type: "radio",
@@ -102,18 +102,18 @@ const data = {
     hint: ""
   }, 
   "zatrudBefore": {
-    phrase: "",
-    section: "affekt",
+    phrase: "затруднен из-за",
+    section: "sostoyanie",
     type: "string"
   },
   "zatrudAfter": {
     phrase: "",
-    section: "affekt",
+    section: "sostoyanie",
     type: "string"
   },
   "zatrudNot": {
     phrase: "",
-    section: "affekt",
+    section: "sostoyanie",
     type: "string"
   },
   "vpechatleniePodozrit": {

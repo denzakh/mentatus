@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
 import dataBase from "../../store/sostoyanieData.js";
-import ListOfWords from "../ListOfWords";
-import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
-import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import OnePraseFromRadio from "../OnePraseFromRadio";
-import OrientirovkaList from "../OrientirovkaList";
 
 export default class KritikaList extends Component {
 

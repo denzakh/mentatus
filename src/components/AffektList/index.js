@@ -88,38 +88,6 @@ export default class AffektList extends Component {
         text={this.props.psystatus.trevogaText} 
       />
 
-      {/*Сон*/}
-      <ListOfWords 
-        name="son" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-      />
-      <span>. </span>
-
-      <ListOfSentences 
-        name="sonSeparate" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-      />
-
-      {/*Аппетит*/}
-      <OnePraseFromRadio 
-        name="appetit" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-      /> 
-      {appetitPohudel()}
-      <span>. </span> 
-
-      <FreeText 
-        text={this.props.psystatus.appetitText} 
-      />
-
-
-
-
-
-
     </span>
 
 

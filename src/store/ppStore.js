@@ -43,6 +43,19 @@ const store = {
   },  
   "gallText": {
     text: ""
+  },
+
+  "opasnye": {
+    number: 0
+  },
+  "opasnyeAgressia": {
+    number: 0
+  },
+  "opasnyeText": {
+    text: ""
+  },
+  "opasnyeOtkl": {
+    isChecked: false
   }
 };
 

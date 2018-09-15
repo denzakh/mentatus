@@ -28,13 +28,19 @@ export default class SostoyanieList extends Component {
         psystatus={this.props.psystatus} 
       /> 
 
-      <OnePraseFromRadio 
-        name="kritika" 
+      {/*Отмечается*/}
+      <ListOfWords 
+        name="zatrud" 
+        dataObj={dataBase} 
+        psystatus={this.props.psystatus} 
+      />
+
+      {/*Отдельно*/}
+      <ListOfSentences
+        name="vpech" 
         dataObj={dataBase} 
         psystatus={this.props.psystatus} 
       /> 
-
-
 
     </span>
 

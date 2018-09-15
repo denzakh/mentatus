@@ -109,23 +109,7 @@ export default class SostoyanieManager extends Component {
 
       {zatrudList()}
 
-
-      {vpechList()}
-
-      <div className="list__title">Критика:</div>
-      <RadioList 
-        name="kritika" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
-
-      <Textarea
-        onChange={this.props.toggleText}
-        name="kritikaText"
-        label="Описание критики"
-        value={this.props.psystatus.kritikaText}
-      />
+      {vpechList()}    
 
            
     </div>;

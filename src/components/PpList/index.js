@@ -5,7 +5,7 @@ import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
 import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import OnePraseFromRadio from "../OnePraseFromRadio";
-import OrientirovkaList from "../OrientirovkaList";
+import SonAppetitList from "../SonAppetitList";
 import KritikaList from "../KritikaList";
 
 export default class PpList extends Component {
@@ -40,22 +40,59 @@ export default class PpList extends Component {
       }
     };
 
-    return <span data-id="pp" onClick={this.props.toggleTab} >
+    let opasnyeShow = () => {
+      if(this.props.psystatus.opasnyeOtkl.isChecked) {
+        return 
+      } else {
+        return <span>
+          <OnePraseFromRadio 
+            name="opasnye" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          /> 
 
-      {bredShow()}
-      <FreeText 
-        text={this.props.psystatus.bredText} 
-      />
+          <OnePraseFromRadio 
+            name="opasnyeAgressia" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          />     
+        </span>
+      }
+    };
 
-      {gallShow()}
-      <FreeText 
-        text={this.props.psystatus.gallText} 
-      />
 
-      <KritikaList 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-      />
+    return <span>
+      <span data-id="pp" onClick={this.props.toggleTab} >
+        {bredShow()}
+        <FreeText 
+          text={this.props.psystatus.bredText} 
+        />
+
+        {gallShow()}
+        <FreeText 
+          text={this.props.psystatus.gallText} 
+        />
+
+        {/*Опасные*/}
+        {opasnyeShow()}
+
+        <FreeText 
+          text={this.props.psystatus.opasnyeText} 
+        />
+      </span>
+
+      <span data-id="affekt" onClick={this.props.toggleTab} >
+
+        <SonAppetitList 
+          psystatus={this.props.psystatus} 
+        />
+      </span>
+
+      <span data-id="pp" onClick={this.props.toggleTab} >
+        <KritikaList 
+          psystatus={this.props.psystatus} 
+        />
+      </span>
 
     </span>
 

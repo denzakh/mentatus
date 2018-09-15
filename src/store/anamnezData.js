@@ -111,6 +111,13 @@ let data = {
     phrase: "Объективный анамнез неизвестен.",
     section: "anamnez",
     type: "string"
+  },
+  "anamnezOtkl": { 
+    label: "не показывать",
+    phrase: "не показывать",
+    section: "anamnez",
+    type: "boolean",
+    cicle: ""
   }
 }
 

@@ -7,13 +7,24 @@ export default class AnamnezList extends Component {
 
   render() {
 
-    return <span data-id="anamnez" onClick={this.props.toggleTab} >
-      <ListOfWords 
-        name="anamnezCicle" 
-        dataObj={dataBase} 
-        psystatus={this.props.psystatus} 
-      />
+    let anamnezShow = () => {
+      if(this.props.psystatus.anamnezOtkl.isChecked) {
+        return 
+      } else {
+        return <span>
+          <ListOfWords 
+            name="anamnezCicle" 
+            dataObj={dataBase} 
+            psystatus={this.props.psystatus} 
+          />    
+        </span>
+      }
+    };
 
+    return <span data-id="anamnez" onClick={this.props.toggleTab} >
+
+      {anamnezShow()}
+      
       <FreeText 
         text={this.props.psystatus.anamnezText} 
       />

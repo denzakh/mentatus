@@ -8,6 +8,7 @@ import Textarea from "../Textarea";
 import TextareaInline from "../TextareaInline";
 import cicleFn from "../../fn/cicleFn";
 import "./Pp.css";
+import KritikaManager from "../KritikaManager";
 
 export default class PpManager extends Component {
 
@@ -100,6 +101,44 @@ export default class PpManager extends Component {
         label="Описание галлюцинаций"
         value={this.props.psystatus.gallText}
       />
+
+      <KritikaManager
+        toggleRadio={this.props.toggleRadio} 
+        toggleText={this.props.toggleText}
+        psystatus={this.props.psystatus}
+      />  
+
+      <div className="list__title">
+        <span className="list__title-lable">Опасные тенденции:</span>
+        <CheckboxOtkl 
+          name = "opasnyeOtkl"
+          onChange = {this.props.toggleSymptom}
+          psystatus = {this.props.psystatus}
+          dataBase = {dataBase}
+        />
+      </div>
+      <RadioList 
+        name="opasnye" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
+      <div className="list__title">Агрессия:</div>
+      <RadioList 
+        name="opasnyeAgressia" 
+        dataBase={dataBase} 
+        onChange={this.props.toggleRadio} 
+        psystatus={this.props.psystatus}
+      />
+
+      <Textarea
+        onChange={this.props.toggleText}
+        name="opasnyeText"
+        label="Описание опасных тенденций"
+        value={this.props.psystatus.gallText}
+      />
+
     </div>;
   }
 }
