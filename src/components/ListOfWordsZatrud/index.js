@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import cicleFn from "../../fn/cicleFn";
-
+import dataObj from "../../store/sostoyanieData.js";
 export default class ListOfWords extends Component {
 
   render() {
-    const {name, dataObj, psystatus} = this.props;
-    const isAnd = !!this.props.isAnd;
+    const psystatus = this.props.psystatus;
+    const isAnd = true;
+    const name="zatrud";
 
     // получаем список элементов, относящихся к этому циклу
     let arrayFromName = cicleFn(dataObj, name);
@@ -37,10 +38,19 @@ export default class ListOfWords extends Component {
     let after = this.props.after || (name + "After");
     let noList = this.props.before || (name + "Not");
 
+    let beforeText = () => {
+      console.log(psystatus.kontakt.number); 
+      if (true) {
+        return ", но он затруднен из-за ";
+      } else {
+        return dataObj[before].phrase;
+      }
+    }
+
     // добавляем начало и конец фразы, фразу для отсутствия данных 
     if (filteredList.length) {
       if (dataObj[before].phrase) {
-        filteredList.unshift(<span key={before} >{dataObj[before].phrase}</span>); 
+        filteredList.unshift(<span key={before} >{beforeText()}</span>); 
       }
       if (dataObj[after].phrase) {
         filteredList.push(<span key={after} >{dataObj[after].phrase}</span>); 

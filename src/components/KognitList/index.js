@@ -2,10 +2,7 @@ import React, { Component } from 'react';
 import dataBase from "../../store/kognitData.js";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
-import FreeText from "../FreeText";
-import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import OnePraseFromRadio from "../OnePraseFromRadio";
-import OrientirovkaList from "../OrientirovkaList";
 
 export default class AffektList extends Component {
 

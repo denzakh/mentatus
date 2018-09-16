@@ -2,14 +2,8 @@ import React, { Component } from 'react';
 import dataBase from "../../store/sostoyanieData.js";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
-import cicleFn from "../../fn/cicleFn";
-// import "./Pp.css";
 
 export default class KritikaManager extends Component {
-
-  constructor(props) {
-    super(props);
-  }
   
   render() {   
     

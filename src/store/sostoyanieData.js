@@ -67,7 +67,7 @@ const data = {
     type: "radio",
     section: "sostoyanie",
     before: "",
-    after: ". "
+    after: ""
   },
   "kontaktSluh": {
     label: "снижения слуха",
@@ -102,17 +102,17 @@ const data = {
     hint: ""
   }, 
   "zatrudBefore": {
-    phrase: "затруднен из-за",
+    phrase: ", затруднен из-за ",
     section: "sostoyanie",
     type: "string"
   },
   "zatrudAfter": {
-    phrase: "",
+    phrase: ". ",
     section: "sostoyanie",
     type: "string"
   },
   "zatrudNot": {
-    phrase: "",
+    phrase: ". ",
     section: "sostoyanie",
     type: "string"
   },

@@ -8,10 +8,10 @@ export default class Checkbox extends Component {
     return (
       <span className="checkbox-otkl">
         <input type="checkbox" className="checkbox-otkl__input"
-          checked={this.props.psystatus[name].isChecked}
-          onChange={this.props.onChange}
-          name={this.props.name}
-          id={this.props.name}
+          checked={psystatus[name].isChecked}
+          onChange={onChange}
+          name={name}
+          id={name}
         />
         <label className="checkbox-otkl__label" htmlFor={this.props.name}>{dataBase[name].label}</label>
       </span>

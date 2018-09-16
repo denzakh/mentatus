@@ -160,17 +160,17 @@ class App extends Component {
     })
   
     return <div className="app">
-      <table width="100%" className="app__table">
-        <tbody>
-          <tr>
-            <td className="app__td app__td--tab-menu"  width="60">
-              <div className="app__tab-menu-title">Разделы</div>
-              {tabMenuRender}
-            </td>
-            <td className="app__td app__td--options"  width="50%">
+      <div className="app__row">
+        <div className="app__menu">
+          <div className="app__menu-title">Разделы</div>
+          {tabMenuRender}
+        </div>
+        <div className="app__content">
+          <div className="app__content-row">
+            <div className="app__manager">
               {tabRender}
-            </td>
-            <td className="app__td app__td--status"  width="50%">
+            </div>
+            <div className="app__conclusion">
               <div className="app__status-box"> 
                 <AnamnezList psystatus={psystatus} toggleTab={this.toggleTab} />  
                 <SostoyanieList psystatus={psystatus} toggleTab={this.toggleTab} />            
@@ -181,11 +181,11 @@ class App extends Component {
                 <KognitList psystatus={psystatus} toggleTab={this.toggleTab} /> 
                 <KogtestList psystatus={psystatus} toggleTab={this.toggleTab} /> 
                 <PpList psystatus={psystatus} toggleTab={this.toggleTab} /> 
-              </div>
-            </td>
-          </tr>
-        </tbody>
-      </table> 
+              </div>              
+            </div>
+          </div> 
+        </div>
+      </div> 
     </div>;
   }
 }

@@ -3,7 +3,6 @@ import dataBase from "../../store/affektData.js";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
-import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 
 import OnePraseFromRadio from "../OnePraseFromRadio";
 
@@ -23,18 +22,6 @@ export default class AffektList extends Component {
           </span>      
         }
       }
-
-    let appetitPohudel = () => {
-      if(this.props.psystatus.appetitPohudel.text) {
-        return <span>
-          <FreeTextBeforeAndAfter 
-            name="appetitPohudel" 
-            dataObj={dataBase} 
-            psystatus={this.props.psystatus} 
-          />        
-        </span>
-      }
-    };
 
 
     return <span data-id="affekt" onClick={this.props.toggleTab} >

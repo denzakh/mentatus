@@ -4,23 +4,15 @@ import dataBaseRech from "../../store/rechData.js";
 import Checkbox from "../Checkbox";
 import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
-import RadioListInline from "../RadioListInline";
-import Textarea from "../Textarea";
-import TextareaInline from "../TextareaInline";
 import cicleFn from "../../fn/cicleFn";
 // import "./Pp.css";
 
 export default class SostoyanieManager extends Component {
-
-  constructor(props) {
-    super(props);
-  }
   
   render() {   
 
     // показ списка
     let zatrudNameArr = cicleFn(dataBase, "zatrud"); 
-    let contact = this.props.psystatus.kontakt.number;
     let zatrudList = () => {
       return <div>
         <div className="list__title">затруднен из-за: </div>
@@ -88,30 +80,37 @@ export default class SostoyanieManager extends Component {
     } 
     
     return <div>
-       
-      <div className="list__title">Состояние сознания:</div>
-      <RadioList 
-        name="soznanie" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
+      <div className="manager">
+        <div className="manager__col manager__col--1">
+          
+          <div className="list__title">Состояние сознания:</div>
+          <RadioList 
+            name="soznanie" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
+          />
 
-      {rechGrubList()}      
+          {rechGrubList()}      
 
-      <div className="list__title">Контакт:</div>
-      <RadioList 
-        name="kontakt" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
+          <div className="list__title">Контакт:</div>
+          <RadioList 
+            name="kontakt" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
+          />
 
-      {zatrudList()}
+          {zatrudList()}
 
-      {vpechList()}    
+        </div>
+        <div className="manager__col manager__col--2">
 
-           
+          {vpechList()}   
+
+        </div>
+      </div>
+ 
     </div>;
   }
 }

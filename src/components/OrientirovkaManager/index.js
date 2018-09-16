@@ -6,15 +6,11 @@ import "./Orientirovka.css";
 
 export default class OrientirovkaManager extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-  
   render() {   
     let dataBase = this.props.dataBase;
-    let orientirVremiaNumber = +this.props.psystatus.orientirVremia.number;
-    let orientirMestoNumber = +this.props.psystatus.orientirMesto.number;
-    let orientirLichnostNumber = +this.props.psystatus.orientirLichnost.number;
+    // let orientirVremiaNumber = +this.props.psystatus.orientirVremia.number;
+    // let orientirMestoNumber = +this.props.psystatus.orientirMesto.number;
+    // let orientirLichnostNumber = +this.props.psystatus.orientirLichnost.number;
 
     return <div>
       <div className="orientir">

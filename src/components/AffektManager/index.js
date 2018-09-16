@@ -135,74 +135,88 @@ export default class AffektManager extends Component {
     }
 
     return <div>
-      <div className="list__title">Настроение:</div>
-      <RadioList 
-        name="nastroyeniye" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
-      
-      {nastroyeniyeOptions()}  
+      <div className="manager">
+        <div className="manager__col manager__col--1">
 
-      <Textarea
-        onChange={this.props.toggleText}
-        name="nastroyeniyeText"
-        label="Описание настроения"
-        value={this.props.psystatus.nastroyeniyeText}
-      />      
-
-      <div className="list__title">Тревога: </div>
-      <RadioList 
-        name="trevoga" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
-
-      {trevogaOptions()}  
-
-      <div className="list__title">Сон: </div>
-      {sonArr.map(item => (
-        <div key={item} className="list__item">
-          <Checkbox 
-            checked = {this.props.psystatus[item].isChecked}
-            onChange = {this.props.toggleSymptom}
-            name = {item}
-            label = {dataBase[item].label}
+          <div className="list__title">Настроение:</div>
+          <RadioList 
+            name="nastroyeniye" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
           />
-        </div>
-      ))} 
+          
+          {nastroyeniyeOptions()}  
 
-      <div className="list__box">
-        {sonSeparateArr.map(item => (
-          <div key={item} className="list__item">
-            <Checkbox 
-              checked = {this.props.psystatus[item].isChecked}
-              onChange = {this.props.toggleSymptom}
-              name = {item}
-              label = {dataBase[item].label}
-            />
+          <Textarea
+            onChange={this.props.toggleText}
+            name="nastroyeniyeText"
+            label="Описание настроения"
+            value={this.props.psystatus.nastroyeniyeText}
+          />      
+
+          <div className="list__title">Тревога: </div>
+          <RadioList 
+            name="trevoga" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
+          />
+
+          {trevogaOptions()}  
+
+        </div>
+        <div className="manager__col manager__col--1">
+
+          <div className="list__title">Сон: </div>
+          {sonArr.map(item => (
+            <div key={item} className="list__item">
+              <Checkbox 
+                checked = {this.props.psystatus[item].isChecked}
+                onChange = {this.props.toggleSymptom}
+                name = {item}
+                label = {dataBase[item].label}
+              />
+            </div>
+          ))} 
+
+          <div className="list__box">
+            {sonSeparateArr.map(item => (
+              <div key={item} className="list__item">
+                <Checkbox 
+                  checked = {this.props.psystatus[item].isChecked}
+                  onChange = {this.props.toggleSymptom}
+                  name = {item}
+                  label = {dataBase[item].label}
+                />
+              </div>
+            ))} 
           </div>
-        ))} 
+
+          <Textarea
+            onChange={this.props.toggleText}
+            name="sonText"
+            label="Описание сна"
+            value={this.props.psystatus.sonText}
+          />
+
+          <div className="list__title">Аппетит:</div>
+          <RadioList 
+            name="appetit" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
+          />
+
+          {appetitOptions()}  
+
+        </div>
       </div>
 
-      <Textarea
-        onChange={this.props.toggleText}
-        name="sonText"
-        label="Описание сна"
-        value={this.props.psystatus.sonText}
-      />
 
-      <div className="list__title">Аппетит:</div>
-      <RadioList 
-        name="appetit" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
+    
 
-      {appetitOptions()}  
+    
     
     </div>;
   }

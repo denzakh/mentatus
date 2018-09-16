@@ -3,9 +3,7 @@ import dataBase from "../../store/rechData.js";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
-import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import OnePraseFromRadio from "../OnePraseFromRadio";
-import OrientirovkaList from "../OrientirovkaList";
 
 export default class RechList extends Component {
 

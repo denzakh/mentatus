@@ -3,17 +3,11 @@ import dataBase from "../../store/rechData.js";
 import Checkbox from "../Checkbox";
 import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
-import RadioListInline from "../RadioListInline";
 import Textarea from "../Textarea";
-import TextareaInline from "../TextareaInline";
 import cicleFn from "../../fn/cicleFn";
 import "./Rech.css";
 
 export default class RechManager extends Component {
-
-  constructor(props) {
-    super(props);
-  }
   
   render() {   
 
@@ -127,59 +121,67 @@ export default class RechManager extends Component {
 
     
     return <div>
+      <div class="manager">
+        <div class="manager__col manager__col--1">
 
-      <div className="list__title">Мышление:</div>
-      <RadioList 
-        name="myshleniePosled" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
-      <div className="list__title">по темпу:</div>
-      <RadioList 
-        name="myshlenieTemp" 
-        dataBase={dataBase} 
-        onChange={this.props.toggleRadio} 
-        psystatus={this.props.psystatus}
-      />
+          <div className="list__title">Мышление:</div>
+          <RadioList 
+            name="myshleniePosled" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
+          />
+          <div className="list__title">по темпу:</div>
+          <RadioList 
+            name="myshlenieTemp" 
+            dataBase={dataBase} 
+            onChange={this.props.toggleRadio} 
+            psystatus={this.props.psystatus}
+          />
 
-      {myshlenieList()}  
+          {myshlenieList()}  
 
-      <Textarea
-        onChange={this.props.toggleText}
-        name="myshlenieText"
-        label="Описание мышления"
-        value={this.props.psystatus.myshlenieText}
-      />  
+          <Textarea
+            onChange={this.props.toggleText}
+            name="myshlenieText"
+            label="Описание мышления"
+            value={this.props.psystatus.myshlenieText}
+          />  
 
-      <div className="list__title">
-        <span className="list__title-lable">Речь:</span>
-        <CheckboxOtkl 
-          name = "rechOtkl"
-          onChange = {this.props.toggleSymptom}
-          psystatus = {this.props.psystatus}
-          dataBase = {dataBase}
-        />
-        <CheckboxOtkl 
-          name = "rechNeotvechaet"
-          onChange = {this.props.toggleSymptom}
-          psystatus = {this.props.psystatus}
-          dataBase = {dataBase}
-        />
-      </div>
+        </div>
+        <div class="manager__col manager__col--1">
 
-      {rechShow()}  
+          <div className="list__title">
+            <span className="list__title-lable">Речь:</span>
+            <CheckboxOtkl 
+              name = "rechOtkl"
+              onChange = {this.props.toggleSymptom}
+              psystatus = {this.props.psystatus}
+              dataBase = {dataBase}
+            />
+            <CheckboxOtkl 
+              name = "rechNeotvechaet"
+              onChange = {this.props.toggleSymptom}
+              psystatus = {this.props.psystatus}
+              dataBase = {dataBase}
+            />
+          </div>
 
-      <div className="list__title">грубые нарушения:</div>   
+          {rechShow()}  
 
-      {rechGrubList()}   
+          <div className="list__title">грубые нарушения:</div>   
 
-      <Textarea
-        onChange={this.props.toggleText}
-        name="rechText"
-        label="Описание речи"
-        value={this.props.psystatus.appetitText}
-      />   
+          {rechGrubList()}   
+
+          <Textarea
+            onChange={this.props.toggleText}
+            name="rechText"
+            label="Описание речи"
+            value={this.props.psystatus.appetitText}
+          />   
+        
+        </div>
+      </div>    
 
     </div>;
   }
