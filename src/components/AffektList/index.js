@@ -37,6 +37,7 @@ export default class AffektList extends Component {
         name="vSvyazi" 
         dataObj={dataBase} 
         psystatus={this.props.psystatus} 
+        isAnd="true"
       />
 
       <ListOfWords 

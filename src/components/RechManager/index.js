@@ -121,8 +121,8 @@ export default class RechManager extends Component {
 
     
     return <div>
-      <div class="manager">
-        <div class="manager__col manager__col--1">
+      <div className="manager">
+        <div className="manager__col manager__col--1">
 
           <div className="list__title">Мышление:</div>
           <RadioList 
@@ -149,7 +149,7 @@ export default class RechManager extends Component {
           />  
 
         </div>
-        <div class="manager__col manager__col--1">
+        <div className="manager__col manager__col--1">
 
           <div className="list__title">
             <span className="list__title-lable">Речь:</span>
