@@ -1,6 +1,12 @@
 const store = {
-  "zhalobyTrevoga": {
-    isChecked: false
+  diagnozMkb10: {
+    text: ""
+  },
+  diagnozKlin: {
+    text: ""
+  },
+  diagnozDopolnenie: {
+    text: ""
   }
 };
 

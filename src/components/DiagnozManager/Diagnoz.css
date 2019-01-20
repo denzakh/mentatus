@@ -1,0 +1,42 @@
+.diagnoz {
+}
+
+.diagnoz__row {
+  margin: 5px 0;
+}
+
+.diagnoz__row--mkb {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.diagnoz__mkb-label {
+  display: inline-block;
+  vertical-align: top;
+  margin: 5px 0;
+  margin-right: 15px;
+}
+
+.diagnoz__mkb-input {
+  margin: 5px 0;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  outline: none;
+  overflow: hidden;
+  font-size: 14px;
+  width: 100px;
+}
+
+.diagnoz__textarea {
+  box-sizing: border-box;
+  margin: 5px 0;
+  padding: 10px;
+  border: 1px solid #cccccc;
+  border-radius: 10px;
+  outline: none;
+  overflow: hidden;
+  font-size: 14px;
+  width: 90%;
+}

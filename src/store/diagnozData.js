@@ -1,10 +1,24 @@
 const data = {
-  "zhalobyTrevoga": {
-    label: "тревогу",
-    phrase: "тревогу",
-    section: "zhaloby",
-    type: "boolean",
-    cicle: "zhalobyCicle"
+  diagnozMkb10: {
+    label: "МКБ-10",
+    phrase: "",
+    section: "diagnoz",
+    type: "text",
+    cicle: ""
+  },
+  diagnozKlin: {
+    label: "Диагноз",
+    phrase: "",
+    section: "diagnoz",
+    type: "text",
+    cicle: ""
+  },
+  diagnozDopolnenie: {
+    label: "Дополнительный",
+    phrase: "",
+    section: "diagnoz",
+    type: "text",
+    cicle: ""
   }
 };
 
