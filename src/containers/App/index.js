@@ -31,7 +31,7 @@ import DiagnozList from "../../components/DiagnozList";
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeTab: "diagnoz" };
+    this.state = { activeTab: "sostoyanie" };
   }
 
   toggleSymptom = e => {
@@ -61,13 +61,13 @@ class App extends Component {
     const psystatus = this.props.psystatus;
 
     let tabsMenu = [
+      { name: "sostoyanie", symbol: "ОC", label: "Общее состояние" },
       { name: "anamnez", symbol: "АH", label: "Анамнез" },
       { name: "zhaloby", symbol: "ЖЛ", label: "Жалобы" },
-      { name: "sostoyanie", symbol: "ОC", label: "Общее состояние" },
       { name: "affekt", symbol: "АФ", label: "Аффективная сфера" },
       { name: "rech", symbol: "РМ", label: "Речь и мышление" },
       { name: "kognit", symbol: "ИП", label: "Интеллект и память" },
-      { name: "kogtest", symbol: "КТ", label: "Когнитивные тесты" },
+      //{ name: "kogtest", symbol: "КТ", label: "Когнитивные тесты" },
       { name: "pp", symbol: "ПП", label: "Психопродукция" },
       { name: "diagnoz", symbol: "ДЗ", label: "Диагноз" },
       { name: "rekomendacii", symbol: "РК", label: "Рекомендации" },

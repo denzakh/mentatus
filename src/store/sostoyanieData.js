@@ -1,122 +1,214 @@
 const data = {
-  "soznanie": {
+  mestoOsmotra: {
     data: [
-      { 
+      {
         id: 0,
-        label: "ясное",
-        phrase: "Сознание ясное"
+        label: "на дому",
+        phrase: "на дому"
       },
-      { 
+      {
         id: 1,
-        label: "оглушение",
-        phrase: "Сознание помрачно по типу оглушения"
+        label: "в ПНД",
+        phrase: "в ПНД"
       },
-      { 
+      {
         id: 2,
-        label: "делирий",
-        phrase: "Сознание помрачно по типу делирия"
+        label: "на отделении",
+        phrase: "на отделении"
       },
-      { 
+      {
         id: 3,
-        label: "психическая спутанность",
-        phrase: "Наблюдается состояние психической спутанности"
-      },
-      { 
-        id: 4,
-        label: "заторможенность",
-        phrase: "Наблюдается состояние психомоторной заторможенности"
-      },
-      { 
-        id: 5,
-        label: "возбуждение",
-        phrase: "Наблюдается состояние психомоторного возбуждения"
-      },
-      { 
-        id: 6,
-        label: "мед. загруженность",
-        phrase: "Наблюдается состояние медицинской загруженности"
+        label: "другое",
+        phrase: ""
       }
     ],
-    label: "Сознание",    
+    label: "Осмотр",
     type: "radio",
     section: "sostoyanie",
     before: "",
     after: ". "
   },
-  "kontakt": {
+  nedobrovolno: {
+    label: "недобровольно"
+  },
+  nedobrovolnoPrichiny: {
     data: [
-      { 
+      {
+        id: 0,
+        label: "отказ",
+        phrase: "От беседы с психиатром отказывается."
+      },
+      {
+        id: 1,
+        label: "когнитивные нарушения",
+        phrase:
+          "Осознанного письменного согласия на беседу с психиатром дать не может в силу грубых нарушений памяти и интеллекта."
+      },
+      {
+        id: 2,
+        label: "нарушения сознания",
+        phrase:
+          "Осознанного письменного согласия на беседу с психиатром дать не может из-за нарушенного сознания."
+      },
+      {
+        id: 3,
+        label: "другое",
+        phrase: ""
+      }
+    ],
+    label: "Причины отказа",
+    type: "radio",
+    section: "sostoyanie",
+    before: "",
+    after: ". "
+  },
+  nedobrovolnoPunkt: {
+    data: [
+      {
+        id: 0,
+        label: "а (опасность)",
+        phrase: "его непосредственную опасность для себя или окружающих"
+      },
+      {
+        id: 1,
+        label: "б (беспомощность)",
+        phrase:
+          "его беспомощность, то есть неспособность самостоятельно удовлетворять основные жизненные потребности"
+      },
+      {
+        id: 2,
+        label: "в (ухудшение состояния)",
+        phrase:
+          "существенный вред его здоровью вследствие ухудшения психического состояния, если лицо будет оставлено без психиатрической помощи"
+      }
+    ],
+    label: "Осмотр",
+    type: "radio",
+    section: "sostoyanie",
+    before: "",
+    after: ". "
+  },
+  soznanie: {
+    data: [
+      {
+        id: 0,
+        label: "ясное",
+        phrase: "Сознание ясное"
+      },
+      {
+        id: 1,
+        label: "оглушение",
+        phrase: "Сознание помрачно по типу оглушения"
+      },
+      {
+        id: 2,
+        label: "делирий",
+        phrase: "Сознание помрачно по типу делирия"
+      },
+      {
+        id: 3,
+        label: "психическая спутанность",
+        phrase: "Наблюдается состояние психической спутанности"
+      },
+      {
+        id: 4,
+        label: "заторможенность",
+        phrase: "Наблюдается состояние психомоторной заторможенности"
+      },
+      {
+        id: 5,
+        label: "возбуждение",
+        phrase: "Наблюдается состояние психомоторного возбуждения"
+      },
+      {
+        id: 6,
+        label: "мед. загруженность",
+        phrase: "Наблюдается состояние медицинской загруженности"
+      }
+    ],
+    label: "Сознание",
+    type: "radio",
+    section: "sostoyanie",
+    before: "",
+    after: ". "
+  },
+  kontakt: {
+    data: [
+      {
         id: 0,
         label: "сохранен",
         phrase: "Контакту доступна",
         phraseM: "Контакту доступен"
       },
-      { 
+      {
         id: 1,
         label: "формальный",
         phrase: "Контакт формальный"
       },
-      { 
+      {
         id: 2,
         label: "недоступен",
         phrase: "Контакту недоступна",
         phraseM: "Контакту недоступен"
       }
     ],
-    label: "Контакт",    
+    label: "Контакт",
     type: "radio",
     section: "sostoyanie",
     before: "",
     after: ""
   },
-  "kontaktSluh": {
+  kontaktZatrudnen: {
+    label: "затруднен"
+  },
+  kontaktSluh: {
     label: "снижения слуха",
     phrase: "снижения слуха",
     section: "sostoyanie",
     cicle: "zatrud",
     type: "boolean",
     hint: ""
-  },  
-  "kontaktKognit": {
+  },
+  kontaktKognit: {
     label: "когнитивных нарушений",
     phrase: "когнитивных нарушений",
     section: "sostoyanie",
     cicle: "zatrud",
     type: "boolean",
     hint: ""
-  }, 
-  "kontaktSostoyanie": {
+  },
+  kontaktSostoyanie: {
     label: "тяжести общего состояния",
     phrase: "тяжести общего состояния",
     section: "sostoyanie",
     cicle: "zatrud",
     type: "boolean",
     hint: ""
-  }, 
-  "kontaktSoznanie": {
+  },
+  kontaktSoznanie: {
     label: "не вполне ясного сознания",
     phrase: "не вполне ясного сознания",
     section: "sostoyanie",
     cicle: "zatrud",
     type: "boolean",
     hint: ""
-  }, 
-  "zatrudBefore": {
+  },
+  zatrudBefore: {
     phrase: ", затруднен из-за ",
     section: "sostoyanie",
     type: "string"
   },
-  "zatrudAfter": {
+  zatrudAfter: {
     phrase: ". ",
     section: "sostoyanie",
     type: "string"
   },
-  "zatrudNot": {
+  zatrudNot: {
     phrase: ". ",
     section: "sostoyanie",
     type: "string"
   },
-  "vpechatleniePodozrit": {
+  vpechatleniePodozrit: {
     label: "подозрительность",
     phrase: "Подозрительна, насторожена",
     phraseM: "Подозрителен, насторожен",
@@ -125,7 +217,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieDistancia": {
+  vpechatlenieDistancia: {
     label: "бездистантность",
     phrase: "Не соблюдает дистанцию",
     section: "sostoyanie",
@@ -133,7 +225,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieNavyazchiv": {
+  vpechatlenieNavyazchiv: {
     label: "навязчивость",
     phrase: "Навязчива",
     phraseM: "Навязчив",
@@ -142,7 +234,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieDurash": {
+  vpechatlenieDurash: {
     label: "дурашливость",
     phrase: "Дурашлива",
     phraseM: "Дурашлив",
@@ -151,7 +243,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieProtivorechia": {
+  vpechatlenieProtivorechia: {
     label: "противоречивые высказывания",
     phrase: "Много противоречивых высказываний",
     section: "sostoyanie",
@@ -159,7 +251,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieNeraskryvaet": {
+  vpechatlenieNeraskryvaet: {
     label: "не раскрывает",
     phrase: "Переживания раскрывает неохотно",
     section: "sostoyanie",
@@ -167,7 +259,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieLucshe": {
+  vpechatlenieLucshe: {
     label: "истерия",
     phrase: "Старается представить себя в лучшем свете",
     section: "sostoyanie",
@@ -175,7 +267,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieGordost": {
+  vpechatlenieGordost: {
     label: "гордость",
     phrase: "Поведение с подчеркнутым чувством собственного достоинства",
     section: "sostoyanie",
@@ -183,7 +275,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieKoketstvo": {
+  vpechatlenieKoketstvo: {
     label: "кокетливость",
     phrase: "Кокетлива",
     phraseM: "Кокетлив",
@@ -192,7 +284,7 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "vpechatlenieDissimulacia": {
+  vpechatlenieDissimulacia: {
     label: "диссимуляция",
     phrase: "Создается впечатление о диссимуляции психических нарушений",
     section: "sostoyanie",
@@ -200,35 +292,35 @@ const data = {
     type: "boolean",
     hint: ""
   },
-  "kritika": {
+  kritika: {
     data: [
-      { 
+      {
         id: 0,
         label: "сохранена",
-        phrase: "сохранена",
+        phrase: "сохранена"
       },
-      { 
+      {
         id: 1,
         label: "формальная",
-        phrase: "формальная",
+        phrase: "формальная"
       },
-      { 
+      {
         id: 2,
         label: "несколько снижена",
-        phrase: "несколько снижена",
+        phrase: "несколько снижена"
       },
-      { 
+      {
         id: 3,
         label: "снижена",
-        phrase: "снижена",
+        phrase: "снижена"
       },
-      { 
+      {
         id: 4,
         label: "отсутствует",
-        phrase: "отсутствует",
+        phrase: "отсутствует"
       }
     ],
-    label: "Критика ",    
+    label: "Критика ",
     type: "radio",
     section: "sostoyanie",
     before: "Критика ",
