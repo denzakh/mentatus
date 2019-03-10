@@ -1,0 +1,12 @@
+.checkbox__input {
+  display: none;
+}
+
+.checkbox__pol {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+  margin: 2px 0;
+  color: #555555;
+}

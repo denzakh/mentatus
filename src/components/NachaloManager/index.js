@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Checkbox from "../Checkbox";
+import CheckboxPol from "../CheckboxPol";
 import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
@@ -24,17 +25,14 @@ export default class NachaloManager extends Component {
       );
     }
 
-    let nedobrovolnoText = "";
-    if (this.props.psystatus["nedobrovolnoPrichiny"].number === 3) {
-      nedobrovolnoText = (
-        <Textarea
-          onChange={this.props.toggleText}
-          name="mestoText"
-          label=""
-          value={this.props.psystatus.nedobrovolnoPrichiny.text}
-        />
-      );
-    }
+    let nedobrovolnoText = (
+      <Textarea
+        onChange={this.props.toggleText}
+        name="nedobrovolnoText"
+        label=""
+        value=""
+      />
+    );
 
     let nedobrovolno = "";
     if (this.props.psystatus["nedobrovolno"].isChecked) {
@@ -62,7 +60,7 @@ export default class NachaloManager extends Component {
     return (
       <div>
         <div className="list__title">Oбщее:</div>
-        <Checkbox
+        <CheckboxPol
           checked={this.props.psystatus["pol"].isChecked}
           onChange={this.props.toggleSymptom}
           name="pol"
