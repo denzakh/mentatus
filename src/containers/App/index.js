@@ -26,6 +26,7 @@ import PpManager from "../../components/PpManager";
 import PpList from "../../components/PpList";
 import DiagnozManager from "../../components/DiagnozManager";
 import DiagnozList from "../../components/DiagnozList";
+import NachaloList from "../../components/NachaloList";
 //
 //
 class App extends Component {
@@ -53,7 +54,7 @@ class App extends Component {
 
   toggleTab = e => {
     const name = e.currentTarget.getAttribute("data-id");
-    console.log(name);
+    // console.log(name);
     this.setState({ activeTab: name });
   };
 
@@ -69,9 +70,9 @@ class App extends Component {
       { name: "kognit", symbol: "ИП", label: "Интеллект и память" },
       //{ name: "kogtest", symbol: "КТ", label: "Когнитивные тесты" },
       { name: "pp", symbol: "ПП", label: "Психопродукция" },
-      { name: "diagnoz", symbol: "ДЗ", label: "Диагноз" },
-      { name: "rekomendacii", symbol: "РК", label: "Рекомендации" },
-      { name: "lechenie", symbol: "ЛЧ", label: "Лечение" }
+      { name: "diagnoz", symbol: "ДЗ", label: "Диагноз" }
+      // { name: "rekomendacii", symbol: "РК", label: "Рекомендации" },
+      // { name: "lechenie", symbol: "ЛЧ", label: "Лечение" }
     ];
 
     let tabMenuRender = tabsMenu.map(item => {
@@ -103,16 +104,16 @@ class App extends Component {
           psystatus={psystatus}
         />
       </div>,
-      <div key="anamnez" name="anamnez">
-        <AnamnezManager
+      <div key="sostoyanie" name="sostoyanie">
+        <SostoyanieManager
           toggleSymptom={this.toggleSymptom}
           toggleText={this.toggleText}
           toggleRadio={this.toggleRadio}
           psystatus={psystatus}
         />
       </div>,
-      <div key="sostoyanie" name="sostoyanie">
-        <SostoyanieManager
+      <div key="anamnez" name="anamnez">
+        <AnamnezManager
           toggleSymptom={this.toggleSymptom}
           toggleText={this.toggleText}
           toggleRadio={this.toggleRadio}
@@ -185,6 +186,10 @@ class App extends Component {
               <div className="app__manager">{tabRender}</div>
               <div className="app__conclusion">
                 <div className="app__status-box">
+                  <NachaloList
+                    psystatus={psystatus}
+                    toggleTab={this.toggleTab}
+                  />
                   <AnamnezList
                     psystatus={psystatus}
                     toggleTab={this.toggleTab}

@@ -15,7 +15,7 @@ const store = {
     isChecked: false
   },
   nedobrovolno: {
-    isChecked: true
+    isChecked: false
   },
   nedobrovolnoPrichiny: {
     number: 1

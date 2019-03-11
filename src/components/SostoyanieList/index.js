@@ -3,20 +3,11 @@ import dataBase from "../../store/sostoyanieData.js";
 import ListOfWordsZatrud from "../ListOfWordsZatrud";
 import ListOfSentences from "../ListOfSentences";
 import OnePraseFromRadio from "../OnePraseFromRadio";
-import NachaloList from "../NachaloList";
 
 export default class SostoyanieList extends Component {
   render() {
     return (
       <span data-id="sostoyanie" onClick={this.props.toggleTab}>
-        <NachaloList
-          dataBase={dataBase}
-          toggleRadio={this.props.toggleRadio}
-          toggleSymptom={this.props.toggleSymptom}
-          toggleText={this.props.toggleText}
-          psystatus={this.props.psystatus}
-        />
-
         <OnePraseFromRadio
           name="soznanie"
           dataObj={dataBase}

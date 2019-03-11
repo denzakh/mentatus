@@ -1,12 +1,12 @@
 import React, { Component } from "react";
+import dataBase from "../../store/sostoyanieData.js";
 
 export default class NachaloList extends Component {
   render() {
     let osmotr =
       (this.props.psystatus["pol"].isChecked ? "Осмотрен " : "Осмотрена ") +
-      this.props.dataBase.mestoOsmotra.data[
-        this.props.psystatus.mestoOsmotra.number
-      ].phrase +
+      dataBase.mestoOsmotra.data[this.props.psystatus.mestoOsmotra.number]
+        .phrase +
       (this.props.psystatus["poNapravleniu"].isChecked
         ? " по направлению врача соматического профиля"
         : "") +
@@ -14,10 +14,10 @@ export default class NachaloList extends Component {
 
     let soglasie = "";
     if (this.props.psystatus["nedobrovolno"].isChecked) {
-      console.log(this.props.dataBase.nedobrovolnoPrichiny.data);
-      soglasie = this.props.dataBase.nedobrovolnoPrichiny.data[
-        this.props.psystatus.nedobrovolnoPrichiny.number
-      ].phrase;
+      soglasie =
+        dataBase.nedobrovolnoPrichiny.data[
+          this.props.psystatus.nedobrovolnoPrichiny.number
+        ].phrase;
     } else {
       soglasie =
         "На беседу с врачом-психиатром " +
@@ -32,7 +32,7 @@ export default class NachaloList extends Component {
           ? "Освидетельствован"
           : "Освидетельствована") +
         " недобровольно на основании  ст. 23 ч.4 п «" +
-        this.props.dataBase.nedobrovolnoPunkt.data[
+        dataBase.nedobrovolnoPunkt.data[
           this.props.psystatus.nedobrovolnoPunkt.number
         ].punkt +
         "» закона РФ «О психиатрической помощи и гарантиях прав граждан при ее оказании», т.к. совершает действия, дающие основания предполагать наличие у " +
@@ -43,7 +43,7 @@ export default class NachaloList extends Component {
           : this.props.psystatus["pol"].isChecked
           ? "его "
           : "ее ") +
-        this.props.dataBase.nedobrovolnoPunkt.data[
+        dataBase.nedobrovolnoPunkt.data[
           this.props.psystatus.nedobrovolnoPunkt.number
         ].phrase +
         ".";
