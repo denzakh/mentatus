@@ -99,38 +99,38 @@ export default class SostoyanieManager extends Component {
               toggleText={this.props.toggleText}
               psystatus={this.props.psystatus}
             />
-
-            <div className="list__title">Состояние сознания:</div>
-            <RadioList
-              name="soznanie"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
-          </div>
-          <div className="manager__col manager__col--2">
-            {rechGrubList()}
-
-            <div className="list__title">Контакт:</div>
-            <RadioList
-              name="kontakt"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
-
-            <div className="list__add">
-              <Checkbox
-                checked={this.props.psystatus["kontaktZatrudnen"].isChecked}
-                onChange={this.props.toggleSymptom}
-                name={"kontaktZatrudnen"}
-                label={dataBase["kontaktZatrudnen"].label}
+            <div className="no-break">
+              <div className="list__title">Состояние сознания:</div>
+              <RadioList
+                name="soznanie"
+                dataBase={dataBase}
+                onChange={this.props.toggleRadio}
+                psystatus={this.props.psystatus}
               />
             </div>
+          </div>
+          <div className="manager__col manager__col--2">
+            <div className="no-break">{rechGrubList()}</div>
+            <div className="no-break">
+              <div className="list__title">Контакт:</div>
+              <RadioList
+                name="kontakt"
+                dataBase={dataBase}
+                onChange={this.props.toggleRadio}
+                psystatus={this.props.psystatus}
+              />
+              <div className="list__add">
+                <Checkbox
+                  checked={this.props.psystatus["kontaktZatrudnen"].isChecked}
+                  onChange={this.props.toggleSymptom}
+                  name={"kontaktZatrudnen"}
+                  label={dataBase["kontaktZatrudnen"].label}
+                />
+              </div>
+            </div>
 
-            {zatrudList()}
-
-            {vpechList()}
+            <div className="no-break">{zatrudList()}</div>
+            <div className="no-break">{vpechList()}</div>
           </div>
         </div>
       </div>

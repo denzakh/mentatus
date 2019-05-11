@@ -47,43 +47,47 @@ export default class AffektManager extends Component {
       if (!(nastroyeniyeNumber === 0 || nastroyeniyeNumber === 7)) {
         return (
           <div className="list__options">
-            <div className="list__title">в связи с: </div>
-            {vSvyaziNameArr.map(item => (
-              <div key={item} className="list__item list__item--no-group">
-                <Checkbox
-                  checked={this.props.psystatus[item].isChecked}
-                  onChange={this.props.toggleSymptom}
-                  name={item}
-                  label={dataBase[item].label}
-                />
-              </div>
-            ))}
+            <div className="no-break">
+              <div className="list__title">в связи с: </div>
+              {vSvyaziNameArr.map(item => (
+                <div key={item} className="list__item list__item--no-group">
+                  <Checkbox
+                    checked={this.props.psystatus[item].isChecked}
+                    onChange={this.props.toggleSymptom}
+                    name={item}
+                    label={dataBase[item].label}
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="break">
+              <div className="list__title">с проявлениями: </div>
+              {sNameArr.map(item => (
+                <div key={item} className="list__item">
+                  <Checkbox
+                    checked={this.props.psystatus[item].isChecked}
+                    onChange={this.props.toggleSymptom}
+                    name={item}
+                    label={dataBase[item].label}
+                  />
+                </div>
+              ))}
 
-            <div className="list__title">С проявлениями: </div>
-            {sNameArr.map(item => (
-              <div key={item} className="list__item">
-                <Checkbox
-                  checked={this.props.psystatus[item].isChecked}
-                  onChange={this.props.toggleSymptom}
-                  name={item}
-                  label={dataBase[item].label}
-                />
-              </div>
-            ))}
-
-            {nastroyeniyeKolebaniaPodrobno()}
-
-            <div className="list__title">Дополнительно: </div>
-            {nastroyenieSeparateNameArr.map(item => (
-              <div key={item} className="list__item">
-                <Checkbox
-                  checked={this.props.psystatus[item].isChecked}
-                  onChange={this.props.toggleSymptom}
-                  name={item}
-                  label={dataBase[item].label}
-                />
-              </div>
-            ))}
+              {nastroyeniyeKolebaniaPodrobno()}
+            </div>
+            <div className="no-break">
+              <div className="list__title">дополнительно: </div>
+              {nastroyenieSeparateNameArr.map(item => (
+                <div key={item} className="list__item">
+                  <Checkbox
+                    checked={this.props.psystatus[item].isChecked}
+                    onChange={this.props.toggleSymptom}
+                    name={item}
+                    label={dataBase[item].label}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         );
       }
@@ -142,7 +146,9 @@ export default class AffektManager extends Component {
       <div>
         <div className="manager">
           <div className="manager__col manager__col--1">
-            <div className="list__title">Настроение:</div>
+            <div className="list__title list__title--no-top-margin">
+              Настроение:
+            </div>
             <RadioList
               name="nastroyeniye"
               dataBase={dataBase}
@@ -152,35 +158,39 @@ export default class AffektManager extends Component {
 
             {nastroyeniyeOptions()}
 
-            <Textarea
-              onChange={this.props.toggleText}
-              name="nastroyeniyeText"
-              label="Описание настроения"
-              value={this.props.psystatus.nastroyeniyeText}
-            />
-
-            <div className="list__title">Тревога: </div>
-            <RadioList
-              name="trevoga"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
-
-            {trevogaOptions()}
+            <div className="no-break">
+              <Textarea
+                onChange={this.props.toggleText}
+                name="nastroyeniyeText"
+                label="Описание настроения"
+                value={this.props.psystatus.nastroyeniyeText}
+              />
+            </div>
+            <div className="no-break">
+              <div className="list__title">Тревога: </div>
+              <RadioList
+                name="trevoga"
+                dataBase={dataBase}
+                onChange={this.props.toggleRadio}
+                psystatus={this.props.psystatus}
+              />
+            </div>
+            <div className="no-break">{trevogaOptions()}</div>
           </div>
           <div className="manager__col manager__col--1">
-            <div className="list__title">Сон: </div>
-            {sonArr.map(item => (
-              <div key={item} className="list__item">
-                <Checkbox
-                  checked={this.props.psystatus[item].isChecked}
-                  onChange={this.props.toggleSymptom}
-                  name={item}
-                  label={dataBase[item].label}
-                />
-              </div>
-            ))}
+            <div className="no-break">
+              <div className="list__title">Сон: </div>
+              {sonArr.map(item => (
+                <div key={item} className="list__item">
+                  <Checkbox
+                    checked={this.props.psystatus[item].isChecked}
+                    onChange={this.props.toggleSymptom}
+                    name={item}
+                    label={dataBase[item].label}
+                  />
+                </div>
+              ))}
+            </div>
 
             <div className="list__box">
               {sonSeparateArr.map(item => (
@@ -195,22 +205,26 @@ export default class AffektManager extends Component {
               ))}
             </div>
 
-            <Textarea
-              onChange={this.props.toggleText}
-              name="sonText"
-              label="Описание сна"
-              value={this.props.psystatus.sonText}
-            />
+            <div className="no-break">
+              <Textarea
+                onChange={this.props.toggleText}
+                name="sonText"
+                label="Описание сна"
+                value={this.props.psystatus.sonText}
+              />
+            </div>
 
-            <div className="list__title">Аппетит:</div>
-            <RadioList
-              name="appetit"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
+            <div className="no-break">
+              <div className="list__title">Аппетит:</div>
+              <RadioList
+                name="appetit"
+                dataBase={dataBase}
+                onChange={this.props.toggleRadio}
+                psystatus={this.props.psystatus}
+              />
+            </div>
 
-            {appetitOptions()}
+            <div className="no-break">{appetitOptions()}</div>
           </div>
         </div>
       </div>

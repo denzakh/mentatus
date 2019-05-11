@@ -1,52 +1,52 @@
 let store = {
-  "anamnezChmt": { 
+  anamnezChmt: {
     isChecked: false
   },
-  "anamnezOnmk": { 
+  anamnezOnmk: {
     isChecked: false
   },
-  "anamnezEpi": { 
+  anamnezEpi: {
     isChecked: false
   },
-  "anamnezRitm": { 
+  anamnezRitm: {
     isChecked: false
   },
-  "anamnezPsikhiatr": { 
+  anamnezPsikhiatr: {
     isChecked: false
   },
-  "anamnezDepress": { 
+  anamnezDepress: {
     isChecked: false
   },
-  "anamnezAlko": { 
+  anamnezAlko: {
     isChecked: false
   },
-  "anamnezSnotvorn": { 
+  anamnezSnotvorn: {
     isChecked: false
   },
-  "anamnezAmnezia": { 
+  anamnezAmnezia: {
     isChecked: false
   },
-  "anamnezSputDoma": { 
+  anamnezSputDoma: {
     isChecked: false
   },
-  "anamnezSputOtdel": { 
+  anamnezSputOtdel: {
     isChecked: false
   },
-  "anamnezPadenia": { 
+  anamnezPadenia: {
     isChecked: false
   },
-  "anamnezPsikhotravma": { 
+  anamnezPsikhotravma: {
     isChecked: false
   },
-  "anamnezObyektivniy": { 
-    isChecked: false
-  },
-  "anamnezText": { 
+  // "anamnezObyektivniy": {
+  //   isChecked: false
+  // },
+  anamnezText: {
     text: ""
   },
-  "anamnezOtkl": { 
+  anamnezOtkl: {
     isChecked: true
-  },
-}
+  }
+};
 
 export default store;

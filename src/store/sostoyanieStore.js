@@ -5,6 +5,9 @@ const store = {
   pol: {
     isChecked: false
   },
+  dataOsmotra: {
+    text: ""
+  },
   mestoOsmotra: {
     number: 1
   },

@@ -1,124 +1,124 @@
 let data = {
-  "anamnezChmt": { 
+  anamnezChmt: {
     label: "ЧМТ",
     phrase: "ЧМТ",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezOnmk": { 
+  anamnezOnmk: {
     label: "ОНМК",
     phrase: "ОНМК",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezEpi": { 
+  anamnezEpi: {
     label: "эпи",
     phrase: "эпи-активность",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezRitm": { 
+  anamnezRitm: {
     label: "аритмия",
     phrase: "нарушение ритма",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezPsikhiatr": { 
+  anamnezPsikhiatr: {
     label: "наблюдение психиатра",
     phrase: "наблюдение у психиатра",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezDepress": { 
+  anamnezDepress: {
     label: "депрессии",
     phrase: "гипотимные состояния",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezAlko": { 
+  anamnezAlko: {
     label: "алкоголизация",
     phrase: "алкоголизация",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezSnotvorn": { 
+  anamnezSnotvorn: {
     label: "злоупотребление снотворными",
     phrase: "злоупотребление снотворными",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezAmnezia": { 
+  anamnezAmnezia: {
     label: "нарушения памяти",
     phrase: "нарушения памяти",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezSputDoma": { 
+  anamnezSputDoma: {
     label: "спутанность дома",
     phrase: "спутанность дома",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezSputOtdel": { 
+  anamnezSputOtdel: {
     label: "спутанность на отделении",
     phrase: "спутанность на отделении",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezPadenia": { 
+  anamnezPadenia: {
     label: "падения",
     phrase: "падения",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezPsikhotravma": { 
+  anamnezPsikhotravma: {
     label: "психотравма",
     phrase: "психотравма",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
   },
-  "anamnezObyektivniy": { 
-    label: "объективный анамнез неизвестен",
-    phrase: "объективный анамнез неизвестен",
-    section: "anamnez",
-    type: "boolean",
-    cicle: "anamnezCicle"
-  },
-  "anamnezCicleBefore": {
+  // "anamnezObyektivniy": {
+  //   label: "объективный анамнез неизвестен",
+  //   phrase: "объективный анамнез неизвестен",
+  //   section: "anamnez",
+  //   type: "boolean",
+  //   cicle: "anamnezCicle"
+  // },
+  anamnezCicleBefore: {
     phrase: "В анамнезе ",
     section: "anamnez",
     type: "string"
   },
-  "anamnezCicleAfter": {
+  anamnezCicleAfter: {
     phrase: ".",
     section: "anamnez",
     type: "string"
   },
-  "anamnezCicleNot": {
+  anamnezCicleNot: {
     phrase: "Объективный анамнез неизвестен.",
     section: "anamnez",
     type: "string"
   },
-  "anamnezOtkl": { 
+  anamnezOtkl: {
     label: "не показывать",
     phrase: "не показывать",
     section: "anamnez",
     type: "boolean",
     cicle: ""
   }
-}
+};
 
 export default data;

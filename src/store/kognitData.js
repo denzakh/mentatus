@@ -107,12 +107,12 @@ const data = {
     data: [
       {
         id: 1,
-        label: "полностью",
+        label: "полн.",
         phrase: ""
       },
       {
         id: 2,
-        label: "частично",
+        label: "част.",
         phrase: ""
       },
       {
@@ -131,12 +131,12 @@ const data = {
     data: [
       {
         id: 1,
-        label: "полностью",
+        label: "полн.",
         phrase: ""
       },
       {
         id: 2,
-        label: "частично",
+        label: "част.",
         phrase: ""
       },
       {
@@ -155,12 +155,12 @@ const data = {
     data: [
       {
         id: 1,
-        label: "полностью",
+        label: "полн.",
         phrase: ""
       },
       {
         id: 2,
-        label: "частично",
+        label: "част.",
         phrase: ""
       },
       {

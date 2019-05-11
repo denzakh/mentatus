@@ -1,56 +1,56 @@
 const data = {
-  "nastroyeniye": {
+  nastroyeniye: {
     data: [
-      { 
+      {
         id: 0,
         label: "ровное",
         phrase: "ровное"
       },
-      { 
+      {
         id: 1,
         label: "ближе к ровному",
         phrase: "ближе к ровному"
       },
-      { 
+      {
         id: 2,
         label: "несколько снижено",
         phrase: "несколько снижено"
       },
-      { 
+      {
         id: 3,
         label: "снижено",
         phrase: "снижено"
       },
-      { 
+      {
         id: 4,
         label: "несколько повышено",
         phrase: "несколько повышено"
       },
-      { 
+      {
         id: 5,
         label: "повышено",
         phrase: "повышено"
-      },      
-      { 
+      },
+      {
         id: 6,
         label: "неустойчивое",
         phrase: "неустойчивое",
         hint: "жалобы на неустойчивое настроение"
       },
-      { 
+      {
         id: 7,
         label: "не определить",
-        phrase: "не определить"       
+        phrase: "не определить"
       }
     ],
-    label: "Настроение",    
+    label: "Настроение",
     type: "radio",
     section: "affekt",
     before: "Настроение ",
     after: ""
   },
 
-  "nastroyeniyePsikhotravma": {
+  nastroyeniyePsikhotravma: {
     label: "психотравмой",
     phrase: "психотравмирующей ситуацией",
     section: "affekt",
@@ -58,7 +58,7 @@ const data = {
     cicle: "vSvyazi",
     hint: "жалобы на трудности в жизни"
   },
-  "nastroyeniyeBoli": {
+  nastroyeniyeBoli: {
     label: "болью",
     phrase: "болевым синдромом",
     section: "affekt",
@@ -66,7 +66,7 @@ const data = {
     cicle: "vSvyazi",
     hint: "жалобы на боли"
   },
-  "nastroyeniyeSomatika": {
+  nastroyeniyeSomatika: {
     label: "соматикой",
     phrase: "c общим соматическим состоянием",
     section: "affekt",
@@ -74,31 +74,31 @@ const data = {
     cicle: "vSvyazi",
     hint: "жалобы на соматику"
   },
-  "vSvyaziBefore": {
+  vSvyaziBefore: {
     phrase: ", в связи с ",
     section: "affekt",
     type: "string"
   },
-  "vSvyaziAfter": {
+  vSvyaziAfter: {
     phrase: "",
     section: "affekt",
     type: "string"
   },
-  "vSvyaziNot": {
+  vSvyaziNot: {
     phrase: "",
     section: "affekt",
     type: "string"
   },
 
-  "nastroyeniyeToska": {
-    label: "преобладанием тоски",
+  nastroyeniyeToska: {
+    label: "с преобладанием тоски",
     phrase: "преобладанием тоски",
     section: "affekt",
     type: "boolean",
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeUgnetenie": {
+  nastroyeniyeUgnetenie: {
     label: "угнетенностью",
     phrase: "угнетенностью",
     section: "affekt",
@@ -106,7 +106,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeNejelanie": {
+  nastroyeniyeNejelanie: {
     label: "нежеланием ничего делать",
     phrase: "нежеланием ничего делать",
     section: "affekt",
@@ -114,7 +114,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeSlabost": {
+  nastroyeniyeSlabost: {
     label: "слабостью",
     phrase: "слабостью",
     section: "affekt",
@@ -122,7 +122,7 @@ const data = {
     cicle: "s",
     hint: "жалобы на слабость"
   },
-  "nastroyeniyeUtomlenie": {
+  nastroyeniyeUtomlenie: {
     label: "утомляемостью",
     phrase: "быстрой утомляемостью",
     section: "affekt",
@@ -130,7 +130,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeAngedonia": {
+  nastroyeniyeAngedonia: {
     label: "явлениями ангедонии",
     phrase: "явлениями ангедонии",
     section: "affekt",
@@ -138,7 +138,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeRazdrajit": {
+  nastroyeniyeRazdrajit: {
     label: "раздражительностью",
     phrase: "раздражительностью",
     section: "affekt",
@@ -146,7 +146,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeNaprajenie": {
+  nastroyeniyeNaprajenie: {
     label: "напряженностью",
     phrase: "напряженностью",
     section: "affekt",
@@ -154,7 +154,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeObidchivost": {
+  nastroyeniyeObidchivost: {
     label: "обидчивостью",
     phrase: "повышенной обидчивостью",
     section: "affekt",
@@ -162,7 +162,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeIpohondria": {
+  nastroyeniyeIpohondria: {
     label: "ипохондрией",
     phrase: "ипохондрической фиксацией",
     section: "affekt",
@@ -170,7 +170,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeSenestopatia": {
+  nastroyeniyeSenestopatia: {
     label: "сенестопатиями",
     phrase: "сенестопатическими ощущениями",
     section: "affekt",
@@ -178,7 +178,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeVozbujdenie": {
+  nastroyeniyeVozbujdenie: {
     label: "возбуждением",
     phrase: "признаками возбуждения",
     section: "affekt",
@@ -186,7 +186,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyBlagodushie": {
+  nastroyeniyBlagodushie: {
     label: "благодушием",
     phrase: "оттенком благодушия",
     section: "affekt",
@@ -194,7 +194,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeDurashlivost": {
+  nastroyeniyeDurashlivost: {
     label: "дурашливостью",
     phrase: "дурашливостью",
     section: "affekt",
@@ -202,7 +202,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeRasteryannost": {
+  nastroyeniyeRasteryannost: {
     label: "растерянностью",
     phrase: "аффектом растерянности",
     section: "affekt",
@@ -210,7 +210,7 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "nastroyeniyeKolebania": {
+  nastroyeniyeKolebania: {
     label: "суточными колебаниями",
     phrase: "суточными колебаниями настроения",
     section: "affekt",
@@ -218,47 +218,47 @@ const data = {
     cicle: "s",
     hint: ""
   },
-  "sBefore": {
+  sBefore: {
     phrase: ", с ",
     section: "affekt",
     type: "string"
   },
-  "sAfter": {
+  sAfter: {
     phrase: "",
     section: "affekt",
     type: "string"
   },
-  "sNot": {
+  sNot: {
     phrase: "",
     section: "affekt",
     type: "string"
   },
 
-  "nastroyeniyeKolebaniaPodrobno": {
+  nastroyeniyeKolebaniaPodrobno: {
     data: [
-      { 
+      {
         id: 0,
         label: "хуже утром",
         phrase: "с ухудшением в утренние часы"
       },
-      { 
+      {
         id: 1,
         label: "хуже вечером",
         phrase: "с ухудшением к вечеру"
       },
-      { 
+      {
         id: 2,
         label: "другое",
         phrase: "без определенной суточной динамики"
       }
     ],
-    label: "суточная динамика",    
+    label: "суточная динамика",
     type: "radio",
     section: "affekt",
     before: " (",
     after: ")"
   },
-  "nastroyeniyeOtricaet": {
+  nastroyeniyeOtricaet: {
     label: "снижение отрицает",
     phrase: "Субъективно снижение настроения отрицает",
     section: "affekt",
@@ -266,7 +266,7 @@ const data = {
     cicle: "nastroyenieSeparate",
     hint: ""
   },
-  "nastroyeniyeOdinochestvo": {
+  nastroyeniyeOdinochestvo: {
     label: "одиночество",
     phrase: "Отмечает чувство одиночества",
     section: "affekt",
@@ -274,7 +274,7 @@ const data = {
     cicle: "nastroyenieSeparate",
     hint: ""
   },
-  "nastroyeniyeLabilnost": {
+  nastroyeniyeLabilnost: {
     label: "эмоц. лабильность",
     phrase: "Эмоционально лабильна",
     phraseW: "Эмоционально лабильна",
@@ -284,7 +284,7 @@ const data = {
     cicle: "nastroyenieSeparate",
     hint: "связь с неустойчивым настроением"
   },
-  "nastroyeniyePlaksivost": {
+  nastroyeniyePlaksivost: {
     label: "плаксивость",
     phrase: "Плаксива",
     phraseW: "Плаксива",
@@ -294,40 +294,40 @@ const data = {
     cicle: "nastroyenieSeparate",
     hint: "связь с неустойчивым настроением"
   },
-  "nastroyeniyeText": {
+  nastroyeniyeText: {
     section: "affekt",
     type: "string"
   },
 
-  "trevoga": {
+  trevoga: {
     data: [
-      { 
+      {
         id: 0,
         label: "нет",
         phrase: "Тревоги не наблюдается"
       },
-      { 
+      {
         id: 1,
         label: "небольшая",
         phrase: "Наблюдается небольшая тревожность"
       },
-      { 
+      {
         id: 2,
         label: "умеренная",
         phrase: "Наблюдается умеренная тревожность"
       },
-      { 
+      {
         id: 3,
         label: "ажитация",
         phrase: "Наблюдается выраженная тревога с ажитацией"
       }
     ],
-    label: "Тревога",    
+    label: "Тревога",
     type: "radio",
     section: "affekt"
   },
 
-  "trevogaMysli": {
+  trevogaMysli: {
     label: "тревожные мысли",
     phrase: "Сообщает про навязчивые мысли тревожного содержания",
     section: "affekt",
@@ -335,7 +335,7 @@ const data = {
     cicle: "trevogaSeparate",
     hint: ""
   },
-  "trevogaAtaki": {
+  trevogaAtaki: {
     label: "панические атаки",
     phrase: "Отмечает периодические приступы тревоги по типу панических атак",
     section: "affekt",
@@ -343,12 +343,12 @@ const data = {
     cicle: "trevogaSeparate",
     hint: ""
   },
-  "trevogaText": {
+  trevogaText: {
     section: "affekt",
     type: "string"
   },
 
-  "sonPoverh": {
+  sonPoverh: {
     label: "поверхностный",
     phrase: "поверхностный",
     section: "affekt",
@@ -356,7 +356,7 @@ const data = {
     cicle: "son",
     hint: ""
   },
-  "sonZasypanie": {
+  sonZasypanie: {
     label: "с затрудненным засыпанием",
     phrase: "с затрудненным засыпанием",
     section: "affekt",
@@ -364,7 +364,7 @@ const data = {
     cicle: "son",
     hint: ""
   },
-  "sonProbNoch": {
+  sonProbNoch: {
     label: "с пробуждениями ночью",
     phrase: "с пробуждениями ночью",
     section: "affekt",
@@ -372,7 +372,7 @@ const data = {
     cicle: "son",
     hint: ""
   },
-  "sonProbUtro": {
+  sonProbUtro: {
     label: "с ранним пробуждением",
     phrase: "с ранним пробуждением",
     section: "affekt",
@@ -380,7 +380,7 @@ const data = {
     cicle: "son",
     hint: ""
   },
-  "sonKoshmar": {
+  sonKoshmar: {
     label: "с кошмарными сновидениями",
     phrase: "с кошмарными сновидениями",
     section: "affekt",
@@ -388,7 +388,7 @@ const data = {
     cicle: "son",
     hint: ""
   },
-  "sonKrik": {
+  sonKrik: {
     label: "с разговорами (криками) во сне",
     phrase: "с разговорами (криками) во сне",
     section: "affekt",
@@ -396,7 +396,7 @@ const data = {
     cicle: "son",
     hint: ""
   },
-  "sonSonliv": {
+  sonSonliv: {
     label: "с сонливостью в течение дня",
     phrase: "с сонливостью в течение дня",
     section: "affekt",
@@ -404,22 +404,22 @@ const data = {
     cicle: "son",
     hint: ""
   },
-  "sonBefore": {
+  sonBefore: {
     phrase: "Сон ",
     section: "affekt",
     type: "string"
   },
-  "sonAfter": {
+  sonAfter: {
     phrase: "",
     section: "affekt",
     type: "string"
   },
-  "sonNot": {
+  sonNot: {
     phrase: "Сон спокойный",
     section: "affekt",
     type: "string"
   },
-  "sonInversia": {
+  sonInversia: {
     label: "Cмещен режим сна и бодрствования",
     phrase: "Cмещен режим сна и бодрствования",
     section: "affekt",
@@ -427,7 +427,7 @@ const data = {
     cicle: "sonSeparate",
     hint: ""
   },
-  "sonSnotvor": {
+  sonSnotvor: {
     label: "Принимает снотворные препараты",
     phrase: "Принимает снотворные препараты",
     section: "affekt",
@@ -435,7 +435,7 @@ const data = {
     cicle: "sonSeparate",
     hint: ""
   },
-  "sonDizorientir": {
+  sonDizorientir: {
     label: "Дезориентировка в ночное время",
     phrase: "Отмечались эпизоды дезориентировки в ночное время",
     section: "affekt",
@@ -443,52 +443,50 @@ const data = {
     cicle: "sonSeparate",
     hint: ""
   },
-  "sonText": {
+  sonText: {
     section: "affekt",
     type: "string"
   },
-  
-  "appetit": {
+
+  appetit: {
     data: [
-      { 
+      {
         id: 0,
         label: "достаточный",
         phrase: "достаточный"
       },
-      { 
+      {
         id: 1,
         label: "снижен",
         phrase: "несколько снижен"
       },
-      { 
+      {
         id: 2,
         label: "отсутствует",
         phrase: "практически отсутствует"
       },
-      { 
+      {
         id: 3,
         label: "повышен",
         phrase: "повышен"
       }
     ],
-    label: "Аппетит",    
+    label: "Аппетит",
     type: "radio",
     section: "affekt",
     before: "Аппетит ",
     after: ""
   },
-  "appetitPohudel": {
+  appetitPohudel: {
     section: "affekt",
     type: "string",
     before: " (потеря веса около ",
     after: " кг)"
   },
-  "appetitText": {
+  appetitText: {
     section: "affekt",
     type: "string"
   }
-
 };
 
 export default data;
-

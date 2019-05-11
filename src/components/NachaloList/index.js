@@ -3,6 +3,23 @@ import dataBase from "../../store/sostoyanieData.js";
 
 export default class NachaloList extends Component {
   render() {
+    let dataOsmotra = () => {
+      let currentDate = this.props.psystatus["dataOsmotra"].text;
+      if (!currentDate) {
+        let now = new Date();
+        currentDate =
+          ("0" + now.getDate()).slice(-2) +
+          "." +
+          ("0" + (now.getMonth() + 1)).slice(-2) +
+          "." +
+          now.getFullYear();
+      } else {
+        let arr = currentDate.split("-");
+        currentDate = arr[2] + "." + arr[1] + "." + arr[0];
+      }
+      return currentDate;
+    };
+
     let osmotr =
       (this.props.psystatus["pol"].isChecked ? "Осмотрен " : "Осмотрена ") +
       dataBase.mestoOsmotra.data[this.props.psystatus.mestoOsmotra.number]
@@ -51,7 +68,9 @@ export default class NachaloList extends Component {
 
     return (
       <p>
-        <span>{osmotr} </span>
+        <span>
+          {dataOsmotra()}. {osmotr}{" "}
+        </span>
         <span>
           {soglasie} {this.props.psystatus.nedobrovolnoText.text} {zakon}
         </span>
