@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./Conclusion.css";
+import "./Print.css";
 import ZhalobyList from "../ZhalobyList";
 import AnamnezList from "../AnamnezList";
 import SostoyanieList from "../SostoyanieList";
@@ -18,49 +19,54 @@ export default class Conclusion extends Component {
     return (
       <div className="conclusion__box">
         <div className="conclusion__panel">
+          <div className="conclusion__title">Заключение</div>
           <ConclusionPanel />
         </div>
         <div className="conclusion__text app__status-box" id="conclusion">
-          <NachaloList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <AnamnezList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <SostoyanieList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <ZhalobyList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <OrientirovkaList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <AffektList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <RechList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <KognitList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <KogtestList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
-          <PpList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
+          <p>
+            <NachaloList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+          </p>
+          <p>
+            <AnamnezList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <SostoyanieList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <ZhalobyList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <OrientirovkaList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <AffektList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <RechList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <KognitList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <KogtestList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <PpList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+          </p>
           <DiagnozList
             psystatus={this.props.psystatus}
             toggleTab={this.props.toggleTab}

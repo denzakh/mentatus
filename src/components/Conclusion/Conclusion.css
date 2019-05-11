@@ -1,18 +1,38 @@
 .conclusion__box {
   position: relative;
+  border: 1px solid #cccccc;
 }
 
 .conclusion__text {
-  border: 1px solid #cccccc;
   border-radius: 0;
   padding: 15px 30px;
-  line-height: 1.4;
+  padding-top: 0;
+  line-height: 1.5;
   font-family: Calibri, Arial, serif;
   font-size: 12pt;
 }
 
 .conclusion__panel {
-  position: absolute;
-  top: 0;
-  right: 0;
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  -moz-flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  -o-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-align-items: center;
+  align-items: center;
+  margin-top: -1px;
+  margin-right: -1px;
+}
+
+.conclusion__title {
+  font-weight: 700;
+  color: #cccccc;
+  flex-grow: 2;
+  padding-left: 30px;
+  padding-top: 15px;
 }

@@ -7,6 +7,9 @@ const store = {
   },
   diagnozDopolnenie: {
     text: ""
+  },
+  reqilech: {
+    text: ""
   }
 };
 

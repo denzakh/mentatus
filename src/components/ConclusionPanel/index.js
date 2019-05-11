@@ -17,19 +17,7 @@ export default class ConclusionPanel extends Component {
   };
 
   printText = e => {
-    console.log("print");
-
-    var ta = document.getElementById("conclusion");
-    var range = document.createRange();
-    range.selectNode(ta);
-    window.getSelection().addRange(range);
-
-    try {
-      document.execCommand("copy");
-    } catch (err) {
-      console.log("Can`t copy, boss");
-    }
-    window.getSelection().removeAllRanges();
+    window.print();
   };
 
   render() {
@@ -43,6 +31,13 @@ export default class ConclusionPanel extends Component {
               onClick={this.copyText}
             >
               Копировать
+            </button>
+            <button
+              type="button"
+              className="conclusion-panel__btn"
+              onClick={this.printText}
+            >
+              Печать
             </button>
           </div>
         </div>

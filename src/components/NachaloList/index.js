@@ -67,14 +67,14 @@ export default class NachaloList extends Component {
     }
 
     return (
-      <p>
+      <span>
         <span>
           {dataOsmotra()}. {osmotr}{" "}
         </span>
         <span>
           {soglasie} {this.props.psystatus.nedobrovolnoText.text} {zakon}
         </span>
-      </p>
+      </span>
     );
   }
 }

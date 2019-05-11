@@ -11,6 +11,10 @@
   align-items: center;
 }
 
+.diagnoz__title {
+  font-weight: 700;
+}
+
 .diagnoz__mkb-label {
   display: inline-block;
   vertical-align: top;
@@ -39,4 +43,8 @@
   overflow: hidden;
   font-size: 14px;
   width: 90%;
+}
+
+.diagnoz__textarea--req {
+  min-height: 140px;
 }

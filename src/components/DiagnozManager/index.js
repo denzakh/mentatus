@@ -7,8 +7,8 @@ export default class OrientirovkaManager extends Component {
   render() {
     return (
       <div className="diagnoz">
-        <h3>Диагноз</h3>
         <div className="diagnoz__row diagnoz__row--mkb">
+          <span className="diagnoz__title">Диагноз</span>&nbsp;
           <span className="diagnoz__mkb-label">МКБ-10:</span>
           F&nbsp;
           <input
@@ -38,6 +38,19 @@ export default class OrientirovkaManager extends Component {
             onChange={this.props.toggleText}
           >
             {this.props.psystatus.diagnozDopolnenie.text}
+          </textarea>
+        </div>
+        <br />
+
+        <div className="diagnoz__row">
+          <span className="diagnoz__title">Рекомендации и лечение:</span>
+          <br />
+          <textarea
+            className="diagnoz__textarea diagnoz__textarea--req"
+            name="reqilech"
+            onChange={this.props.toggleText}
+          >
+            {this.props.psystatus.reqilech.text}
           </textarea>
         </div>
       </div>
