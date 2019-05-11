@@ -39,16 +39,16 @@ const store = {
     isChecked: false
   },
   kontaktSluh: {
-    number: 0
+    isChecked: false
   },
   kontaktKognit: {
-    number: 0
+    isChecked: false
   },
   kontaktSostoyanie: {
-    number: 0
+    isChecked: false
   },
   kontaktSoznanie: {
-    number: 0
+    isChecked: false
   },
   vpechatleniePodozrit: {
     isChecked: false

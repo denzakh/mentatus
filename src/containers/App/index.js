@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./App.css";
+import "./Print.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import classNames from "classnames";
@@ -8,27 +9,16 @@ import { setText } from "../../actions/textAction.js";
 import { setRadio } from "../../actions/radioAction.js";
 
 import ZhalobyManager from "../../components/ZhalobyManager";
-import ZhalobyList from "../../components/ZhalobyList";
 import AnamnezManager from "../../components/AnamnezManager";
-import AnamnezList from "../../components/AnamnezList";
 import SostoyanieManager from "../../components/SostoyanieManager";
-import SostoyanieList from "../../components/SostoyanieList";
 import AffektManager from "../../components/AffektManager";
-import AffektList from "../../components/AffektList";
 import RechManager from "../../components/RechManager";
-import RechList from "../../components/RechList";
 import KognitManager from "../../components/KognitManager";
-import KognitList from "../../components/KognitList";
 import KogtestManager from "../../components/KogtestManager";
-import KogtestList from "../../components/KogtestList";
-import OrientirovkaList from "../../components/OrientirovkaList";
 import PpManager from "../../components/PpManager";
-import PpList from "../../components/PpList";
 import DiagnozManager from "../../components/DiagnozManager";
-import DiagnozList from "../../components/DiagnozList";
-import NachaloList from "../../components/NachaloList";
-//
-//
+import Conclusion from "../../components/Conclusion";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -185,46 +175,7 @@ class App extends Component {
             <div className="app__content-row">
               <div className="app__manager">{tabRender}</div>
               <div className="app__conclusion">
-                <div className="app__status-box">
-                  <NachaloList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <AnamnezList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <SostoyanieList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <ZhalobyList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <OrientirovkaList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <AffektList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <RechList psystatus={psystatus} toggleTab={this.toggleTab} />
-                  <KognitList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <KogtestList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                  <PpList psystatus={psystatus} toggleTab={this.toggleTab} />
-                  <DiagnozList
-                    psystatus={psystatus}
-                    toggleTab={this.toggleTab}
-                  />
-                </div>
+                <Conclusion psystatus={psystatus} toggleTab={this.toggleTab} />
               </div>
             </div>
           </div>

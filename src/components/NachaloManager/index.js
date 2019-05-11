@@ -76,8 +76,8 @@ export default class NachaloManager extends Component {
             name="pol"
             label={
               this.props.psystatus["pol"].isChecked
-                ? "пол мужской ⇄"
-                : "пол женский ⇄"
+                ? "Пол: мужской  ⇄"
+                : "Пол: женский  ⇄"
             }
           />
 

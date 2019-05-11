@@ -1,0 +1,18 @@
+.conclusion__box {
+  position: relative;
+}
+
+.conclusion__text {
+  border: 1px solid #cccccc;
+  border-radius: 0;
+  padding: 15px 30px;
+  line-height: 1.4;
+  font-family: Calibri, Arial, serif;
+  font-size: 12pt;
+}
+
+.conclusion__panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+}

@@ -1,5 +1,14 @@
+.orientir__title {
+  font-weight: 700;
+}
+
 .orientir__table {
+  display: -webkit-flex;
+  display: -moz-flex;
+  display: -ms-flex;
+  display: -o-flex;
   display: flex;
+  margin-top: 15px;
 }
 
 .orientir__col {

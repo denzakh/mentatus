@@ -7,13 +7,14 @@
   display: inline-block;
   vertical-align: middle;
   width: 40px;
-  height: 20px;
+  height: 23px;
   padding: 5px 10px;
   border: 1px solid #cccccc;
   border-radius: 4px;
   outline: none;
   overflow: hidden;
   font-size: 14px;
+  line-height: 1;
 }
 
 .textarea-inline__label {
