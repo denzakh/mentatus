@@ -30,6 +30,10 @@
     display: none;
   }
 
+  .app__footer {
+    display: none;
+  }
+
   .app__conclusion {
     min-width: 200px;
     max-width: 100%;

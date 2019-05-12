@@ -178,6 +178,11 @@ class App extends Component {
                 <Conclusion psystatus={psystatus} toggleTab={this.toggleTab} />
               </div>
             </div>
+            <div className="app__footer">
+              Copyright 2019 Denis Zakharchenko
+              <br />
+              Licensed under the Apache License, Version 2.0
+            </div>
           </div>
         </div>
       </div>
