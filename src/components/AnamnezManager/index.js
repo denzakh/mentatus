@@ -38,6 +38,7 @@ export default class anamnezManager extends Component {
           name="anamnezText"
           label="Описание анамнеза"
           value={this.props.psystatus.anamnezText.text}
+          style={{ minHeight: "250px" }}
         />
       </div>
     );

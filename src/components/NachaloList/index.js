@@ -55,7 +55,7 @@ export default class NachaloList extends Component {
         "» закона РФ «О психиатрической помощи и гарантиях прав граждан при ее оказании», т.к. совершает действия, дающие основания предполагать наличие у " +
         (this.props.psystatus["pol"].isChecked ? "него " : "нее ") +
         "тяжелого психического расстройства, которое обусловливает " +
-        (this.props.psystatus.nedobrovolnoPunkt.number == 2
+        (this.props.psystatus.nedobrovolnoPunkt.number === 2
           ? ""
           : this.props.psystatus["pol"].isChecked
           ? "его "

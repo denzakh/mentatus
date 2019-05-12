@@ -1,16 +1,44 @@
 import React, { Component } from "react";
-import dataBase from "../../store/diagnozData.js";
 
 export default class DiagnozList extends Component {
   render() {
     let diagnozText = () => {
-      if (this.props.psystatus.diagnozMkb10.text) {
+      if (
+        this.props.psystatus.diagnozMkb10.text ||
+        this.props.psystatus.diagnozKlin.text ||
+        this.props.psystatus.diagnozDopolnenie.text
+      ) {
+        let diagnozMkb10 = () => {
+          if (this.props.psystatus.diagnozMkb10.text) {
+            return (
+              <span>F {this.props.psystatus.diagnozMkb10.text} &nbsp;</span>
+            );
+          } else {
+            return "";
+          }
+        };
+
+        let diagnozDopolnenie = () => {
+          if (this.props.psystatus.diagnozDopolnenie.text) {
+            return (
+              <span>
+                <br />
+                {this.props.psystatus.diagnozDopolnenie.text} &nbsp;
+              </span>
+            );
+          } else {
+            return "";
+          }
+        };
+
+        console.log(diagnozDopolnenie);
+
         return (
           <p>
             <span> Диагноз: </span>
-            <span>{this.props.psystatus.diagnozMkb10.text} &nbsp;</span>
+            {diagnozMkb10()}
             <span>{this.props.psystatus.diagnozKlin.text} &nbsp;</span>
-            <span>{this.props.psystatus.diagnozDopolnenie.text} &nbsp;</span>
+            {diagnozDopolnenie()}
           </p>
         );
       } else {

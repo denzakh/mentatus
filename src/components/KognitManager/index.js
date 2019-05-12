@@ -26,42 +26,48 @@ export default class affektManager extends Component {
             />
           </div>
           <div className="manager__col manager__col--1">
-            <div className="list__title">
-              Интеллектуально-мнестические функции:
+            <div className="no-break">
+              <div className="list__title">
+                Интеллектуально-мнестические функции:
+              </div>
+              <RadioList
+                name="kognitOsnivnoi"
+                dataBase={dataBase}
+                onChange={this.props.toggleRadio}
+                psystatus={this.props.psystatus}
+              />
             </div>
-            <RadioList
-              name="kognitOsnivnoi"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
           </div>
           <div className="manager__col manager__col--1">
             {/*цикл "отмечается"*/}
-            <div className="list__title">отмечается: </div>
-            {otmechNameArr.map(item => (
-              <div key={item} className="list__item">
-                <Checkbox
-                  checked={this.props.psystatus[item].isChecked}
-                  onChange={this.props.toggleSymptom}
-                  name={item}
-                  label={dataBase[item].label}
-                />
-              </div>
-            ))}
+            <div className="no-break">
+              <div className="list__title">отмечается: </div>
+              {otmechNameArr.map(item => (
+                <div key={item} className="list__item">
+                  <Checkbox
+                    checked={this.props.psystatus[item].isChecked}
+                    onChange={this.props.toggleSymptom}
+                    name={item}
+                    label={dataBase[item].label}
+                  />
+                </div>
+              ))}
+            </div>
 
             {/*цикл отдельных нарушений*/}
-            <div className="list__title">отдельно: </div>
-            {otdelNameArr.map(item => (
-              <div key={item} className="list__item list__item--no-group">
-                <Checkbox
-                  checked={this.props.psystatus[item].isChecked}
-                  onChange={this.props.toggleSymptom}
-                  name={item}
-                  label={dataBase[item].label}
-                />
-              </div>
-            ))}
+            <div className="no-break">
+              <div className="list__title">отдельно: </div>
+              {otdelNameArr.map(item => (
+                <div key={item} className="list__item list__item--no-group">
+                  <Checkbox
+                    checked={this.props.psystatus[item].isChecked}
+                    onChange={this.props.toggleSymptom}
+                    name={item}
+                    label={dataBase[item].label}
+                  />
+                </div>
+              ))}
+            </div>
 
             {/*поле для пальцев*/}
             <div className="list__box">

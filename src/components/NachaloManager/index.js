@@ -6,13 +6,8 @@ import RadioList from "../RadioList";
 import Textarea from "../Textarea";
 import TextareaInline from "../TextareaInline";
 import InputDate from "../InputDate";
-import cicleFn from "../../fn/cicleFn";
 
 export default class NachaloManager extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     let mestoText = "";
     if (this.props.psystatus["mestoOsmotra"].number === 3) {
