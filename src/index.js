@@ -5,10 +5,11 @@ import App from "./containers/App";
 import { Provider } from "react-redux";
 import configureStore from "./store/configureStore";
 import * as serviceWorker from "./serviceWorker";
+import { HashRouter as Router, Route } from "react-router-dom";
 
 const store = configureStore();
 
-localStorage.clear();
+// localStorage.clear();
 
 store.subscribe(() => {
   localStorage["mentatus"] = JSON.stringify(store.getState());
@@ -18,7 +19,9 @@ console.log(store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <Router>
+      <Route path="/" component={App} />
+    </Router>
   </Provider>,
   document.getElementById("root")
 );
