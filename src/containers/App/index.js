@@ -167,22 +167,22 @@ class App extends Component {
     return (
       <div className="app">
         <div className="app__row">
-          <div className="app__menu">
+          <nav className="app__menu">
             <div className="app__menu-title">Разделы</div>
             {tabMenuRender}
-          </div>
+          </nav>
           <div className="app__content">
-            <div className="app__content-row">
+            <main className="app__content-row">
               <div className="app__manager">{tabRender}</div>
               <div className="app__conclusion">
                 <Conclusion psystatus={psystatus} toggleTab={this.toggleTab} />
               </div>
-            </div>
-            <div className="app__footer">
+            </main>
+            <footer className="app__footer">
               Copyright 2019 Denis Zakharchenko
               <br />
               Licensed under the Apache License, Version 2.0
-            </div>
+            </footer>
           </div>
         </div>
       </div>

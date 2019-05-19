@@ -48,7 +48,7 @@ body {
 .app__menu-title {
   text-align: center;
   padding: 5px;
-  color: #aaaaaa;
+  color: #444444;
   border-right: 1px solid #cccccc;
   margin-right: 0px;
 }
@@ -189,7 +189,7 @@ body {
 .app__footer {
   font-size: 12px;
   line-height: 1.2;
-  color: #aaaaaa;
+  color: #555555;
   text-align: right;
 }
 
