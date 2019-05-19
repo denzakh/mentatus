@@ -14,7 +14,7 @@ store.subscribe(() => {
   localStorage["mentatus"] = JSON.stringify(store.getState());
 });
 
-console.log(localStorage);
+console.log(store.getState());
 
 ReactDOM.render(
   <Provider store={store}>
