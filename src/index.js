@@ -50,7 +50,7 @@ ReactDOM.render(
         <div class="wrapper__main">
           <Switch>
             <Route exact path="/" component={App} />
-            <Route path="#/repository" component={Repository} />
+            <Route path="repository" component={Repository} />
             <Route path="/option" component={Option} />
           </Switch>
         </div>

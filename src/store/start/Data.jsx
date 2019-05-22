@@ -1,5 +1,5 @@
 const data = {
-  "zhalobyTrevoga": {
+  zhalobyTrevoga: {
     label: "тревогу",
     phrase: "тревогу",
     section: "zhaloby",

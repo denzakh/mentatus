@@ -1,5 +1,5 @@
 const store = {
-  "zhalobyTrevoga": {
+  zhalobyTrevoga: {
     isChecked: false
   }
 };
