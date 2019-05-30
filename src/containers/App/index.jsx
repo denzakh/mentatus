@@ -82,8 +82,7 @@ class App extends Component {
 
 function mapStateToProps(state) {
   return {
-    psystatus: state.psystatus,
-    user: state.user
+    psystatus: state.psystatus
   };
 }
 

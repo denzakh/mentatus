@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
+// import { bindActionCreators } from "redux";
 
 class Repository extends Component {
   render() {
@@ -10,8 +10,7 @@ class Repository extends Component {
 
 function mapStateToProps(state) {
   return {
-    psystatus: state.psystatus,
-    user: state.user
+    psystatus: state.repository
   };
 }
 
