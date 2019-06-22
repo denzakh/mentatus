@@ -2,21 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import { Provider } from "react-redux";
-import configureStore from "./store/configureStore";
+import configureStore from "./configureStore";
 import * as serviceWorker from "./serviceWorker";
 
 import ActivePage from "./components/ActivePage";
 import Header from "./components/Header";
 
-const store = configureStore();
-
-// localStorage.clear();
-
-// store.subscribe(() => {
-//   localStorage["mentatus"] = JSON.stringify(store.getState());
-// });
-
-// console.log(store.getState())
+const store = configureStore(false); //использовать ли localStorage
 
 ReactDOM.render(
   <Provider store={store}>
@@ -32,4 +24,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-// serviceWorker.register();
+serviceWorker.register();
