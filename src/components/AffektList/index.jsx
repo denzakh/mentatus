@@ -12,14 +12,17 @@ export default class AffektList extends Component {
       if (this.props.psystatus.nastroyeniyeKolebania.isChecked) {
         return (
           <span>
-            (
-            <OnePraseFromRadio
-              name="nastroyeniyeKolebaniaPodrobno"
-              dataObj={dataBase}
-              psystatus={this.props.psystatus}
-              before=""
-            />
-            )
+            <span>
+              {" "}
+              (
+              <OnePraseFromRadio
+                name="nastroyeniyeKolebaniaPodrobno"
+                dataObj={dataBase}
+                psystatus={this.props.psystatus}
+                before=""
+              />
+              )
+            </span>
           </span>
         );
       }

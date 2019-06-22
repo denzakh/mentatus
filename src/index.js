@@ -12,9 +12,9 @@ const store = configureStore();
 
 // localStorage.clear();
 
-store.subscribe(() => {
-  localStorage["mentatus"] = JSON.stringify(store.getState());
-});
+// store.subscribe(() => {
+//   localStorage["mentatus"] = JSON.stringify(store.getState());
+// });
 
 // console.log(store.getState())
 
@@ -32,4 +32,4 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
-serviceWorker.register();
+// serviceWorker.register();

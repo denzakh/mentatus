@@ -10,9 +10,14 @@ export default class ListOfWords extends Component {
     let arrayFromName = cicleFn(dataObj, name);
 
     // получаем список активных элементов
-    const filteredNameArr = arrayFromName.filter(
-      item => psystatus[item].isChecked
-    );
+    const filteredNameArr = arrayFromName.filter(item => {
+      try {
+        return psystatus[item].isChecked;
+      } catch (err) {
+        console.error(err.message + " in " + item);
+      }
+      return psystatus[item].isChecked;
+    });
 
     // перебираем пункты, расставляем запятые
     let filteredList = filteredNameArr.map((item, i) => {

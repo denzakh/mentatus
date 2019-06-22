@@ -251,7 +251,7 @@ const data = {
     cicle: "otmech",
     hint: ""
   },
-  "kognitAgnoz ": {
+  kognitAgnoz: {
     label: "агнозия",
     phrase: "зрительно-пространственная агнозия",
     section: "kognit",

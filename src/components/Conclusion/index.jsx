@@ -16,6 +16,19 @@ import ConclusionPanel from "../ConclusionPanel";
 
 export default class Conclusion extends Component {
   render() {
+    // if(
+    //     this.props.psystatus.rechOtkl.isChecked ||
+    //     this.props.psystatus.rechNeotvechaet.isChecked ||
+    //     this.props.psystatus.kontakt.number === 2 ||
+    //     this.props.psystatus.soznanie.number === 7
+    //   ) {
+    //   console.log("part status disable");
+    //   this.props.psystatus.globalDisable.isChecked = true;
+    // } else {
+    //   this.props.psystatus.globalDisable.isChecked = true;
+    // }
+    console.dir(this.props.psystatus);
+
     return (
       <div className="conclusion__box">
         <div className="conclusion__panel">

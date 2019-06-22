@@ -255,8 +255,8 @@ const data = {
     label: "суточная динамика",
     type: "radio",
     section: "affekt",
-    before: " (",
-    after: ")"
+    before: "",
+    after: ""
   },
   nastroyeniyeOtricaet: {
     label: "снижение отрицает",

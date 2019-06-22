@@ -4,11 +4,11 @@ import rootReducer from "../reducers";
 export default function configureStore(initialState) {
   let store;
 
-  if (localStorage["mentatus"]) {
-    store = createStore(rootReducer, JSON.parse(localStorage["mentatus"]));
-  } else {
-    store = createStore(rootReducer, initialState);
-  }
+  // if (localStorage["mentatus"]) {
+  //   store = createStore(rootReducer, JSON.parse(localStorage["mentatus"]));
+  // } else {
+  store = createStore(rootReducer, initialState);
+  // }
 
   if (module.hot) {
     module.hot.accept("../reducers", () => {

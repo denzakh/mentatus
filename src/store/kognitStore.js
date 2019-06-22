@@ -1,84 +1,81 @@
 const store = {
-  "orientirVremia": {
+  orientirVremia: {
     number: 1
   },
-  "orientirMesto": {
+  orientirMesto: {
     number: 1
   },
-  "orientirLichnost": {
+  orientirLichnost: {
     number: 1
   },
-  "orientirNot": {
+  orientirNot: {
     isChecked: false
   },
-  "orientirText": {
+  orientirText: {
     text: ""
   },
-  "kognitTekusch": {
+  kognitTekusch: {
     isChecked: false
   },
-  "kognitProshl": {
+  kognitProshl: {
     isChecked: false
   },
-  "kognitDismnes": {
+  kognitDismnes: {
     isChecked: false
   },
-  "kognitAbstrag": {
+  kognitAbstrag: {
     isChecked: false
   },
-  "kognitOgrub": {
+  kognitOgrub: {
     isChecked: false
   },
-  "kognitDazadapt": {
+  kognitDazadapt: {
     isChecked: false
   },
-  "kognitScet": {
+  kognitScet: {
     isChecked: false
   },
-  "kognitPismo": {
+  kognitPismo: {
     isChecked: false
   },
-  "kognitAprak": {
+  kognitAprak: {
     isChecked: false
   },
-  "kognitAgnoz ": {
+  kognitAgnoz: {
     isChecked: false
   },
-  "kognitAfazia": {
+  kognitAfazia: {
     isChecked: false
   },
-  "kognitFinger": {
+  kognitFinger: {
     isChecked: false
   },
 
-  "kognitZadania": {
+  kognitZadania: {
     isChecked: false
   },
-  "kognitNedoosmysl": {
+  kognitNedoosmysl: {
     isChecked: false
   },
-  "kognitLogik": {
+  kognitLogik: {
     isChecked: false
   },
-  
-  "kognitOsnivnoi": {
+
+  kognitOsnivnoi: {
     number: 0
   },
-  "kognitDissim": {
-    isChecked: false
-  },  
-  "kognitKonfab": {
+  kognitDissim: {
     isChecked: false
   },
-  "kognitFingerN": {
+  kognitKonfab: {
+    isChecked: false
+  },
+  kognitFingerN: {
     number: 0
   },
-  "kognitText": {
-      text: ""
+  kognitText: {
+    text: ""
   }
-
-
-
 };
 
 export default store;
