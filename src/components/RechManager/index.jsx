@@ -83,6 +83,29 @@ export default class RechManager extends Component {
       );
     };
 
+    let otvety = () => {
+      if (!this.props.psystatus.rechNeotvechaet.isChecked) {
+        return (
+          <div>
+            <RadioList
+              name="rechSuschestvo"
+              dataBase={dataBase}
+              onChange={this.props.toggleRadio}
+              psystatus={this.props.psystatus}
+            />
+            <div className="list__add">
+              <Checkbox
+                checked={this.props.psystatus["rechOdnosloj"].isChecked}
+                onChange={this.props.toggleSymptom}
+                name={"rechOdnosloj"}
+                label={dataBase["rechOdnosloj"].label}
+              />
+            </div>
+          </div>
+        );
+      }
+    };
+
     let rechMain = () => {
       return (
         <div className="list__box">
@@ -96,22 +119,16 @@ export default class RechManager extends Component {
 
           {rechOsobList()}
 
-          <div className="list__title">ответы:</div>
-          <RadioList
-            name="rechSuschestvo"
-            dataBase={dataBase}
-            onChange={this.props.toggleRadio}
-            psystatus={this.props.psystatus}
-          />
-
-          <div className="list__add">
-            <Checkbox
-              checked={this.props.psystatus["rechOdnosloj"].isChecked}
+          <div className="list__title">
+            ответы:
+            <CheckboxOtkl
+              name="rechNeotvechaet"
               onChange={this.props.toggleSymptom}
-              name={"rechOdnosloj"}
-              label={dataBase["rechOdnosloj"].label}
+              psystatus={this.props.psystatus}
+              dataBase={dataBase}
             />
           </div>
+          {otvety()}
 
           {rechOtmechList()}
         </div>
@@ -119,10 +136,7 @@ export default class RechManager extends Component {
     };
 
     let rechShow = () => {
-      if (
-        this.props.psystatus["rechOtkl"].isChecked ||
-        this.props.psystatus["rechNeotvechaet"].isChecked
-      ) {
+      if (this.props.psystatus["rechOtkl"].isChecked) {
         return "";
       } else {
         return rechMain();
@@ -167,12 +181,6 @@ export default class RechManager extends Component {
                 <span className="list__title-lable">Речь:</span>
                 <CheckboxOtkl
                   name="rechOtkl"
-                  onChange={this.props.toggleSymptom}
-                  psystatus={this.props.psystatus}
-                  dataBase={dataBase}
-                />
-                <CheckboxOtkl
-                  name="rechNeotvechaet"
                   onChange={this.props.toggleSymptom}
                   psystatus={this.props.psystatus}
                   dataBase={dataBase}

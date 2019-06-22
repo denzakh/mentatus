@@ -27,7 +27,6 @@ export default class Conclusion extends Component {
     // } else {
     //   this.props.psystatus.globalDisable.isChecked = true;
     // }
-    console.dir(this.props.psystatus);
 
     return (
       <div className="conclusion__box">

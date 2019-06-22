@@ -5,18 +5,24 @@ import FreeText from "../FreeText";
 
 export default class ZhalobyList extends Component {
   render() {
-    // let showZhaloby = () => {
-    //   if(!(this.props.psystatus.rechOtkl.isChecked ||
-    //     this.props.psystatus.rechNeotvechaet.isChecked ||
-    //     this.props.psystatus.kontakt.number === 2 ||
-    //     this.props.psystatus.soznanie.number === 7)) {
-    //       return <ListOfWords
-    //         name="zhalobyCicle"
-    //         dataObj={dataBase}
-    //         psystatus={this.props.psystatus}
-    //       />
-    //   }
-    // }
+    let showZhaloby = () => {
+      if (
+        !(
+          this.props.psystatus.rechOtkl.isChecked ||
+          this.props.psystatus.rechNeotvechaet.isChecked ||
+          this.props.psystatus.kontakt.number === 2 ||
+          this.props.psystatus.soznanie.number === 7
+        )
+      ) {
+        return (
+          <ListOfWords
+            name="zhalobyCicle"
+            dataObj={dataBase}
+            psystatus={this.props.psystatus}
+          />
+        );
+      }
+    };
 
     return (
       <span
@@ -24,11 +30,7 @@ export default class ZhalobyList extends Component {
         data-id="zhaloby"
         onClick={this.props.toggleTab}
       >
-        <ListOfWords
-          name="zhalobyCicle"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
+        {showZhaloby()}
 
         <FreeText text={this.props.psystatus.zhalobyText} />
       </span>

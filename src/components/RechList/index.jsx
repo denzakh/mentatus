@@ -13,10 +13,39 @@ export default class RechList extends Component {
       }
     };
 
-    let mainShow = () => {
-      if (this.props.psystatus.rechOtkl.isChecked) {
-        return;
+    let otvet = () => {
+      if (this.props.psystatus.rechNeotvechaet.isChecked) {
+        return (
+          <span>
+            <span>. </span>
+            <span>
+              {dataBase["rechNeotvechaet"].phrase}
+              <span>. </span>
+            </span>
+          </span>
+        );
       } else {
+        return (
+          <span>
+            <span>, </span>
+            <OnePraseFromRadio
+              name="rechSuschestvo"
+              dataObj={dataBase}
+              psystatus={this.props.psystatus}
+            />
+            {odnosloj()}
+            <span>. </span>
+          </span>
+        );
+      }
+    };
+
+    let mainShow = () => {
+      if (
+        this.props.psystatus.rechOtkl.isChecked ||
+        this.props.psystatus.kontakt.number === 2 ||
+        this.props.psystatus.soznanie.number === 7
+      ) {
         if (this.props.psystatus.rechNeotvechaet.isChecked) {
           return (
             <span>
@@ -24,63 +53,56 @@ export default class RechList extends Component {
               <span>. </span>
             </span>
           );
-        } else {
-          return (
-            <span>
-              <OnePraseFromRadio
-                name="myshleniePosled"
-                dataObj={dataBase}
-                psystatus={this.props.psystatus}
-              />
-
-              <OnePraseFromRadio
-                name="myshlenieTemp"
-                dataObj={dataBase}
-                psystatus={this.props.psystatus}
-              />
-
-              <ListOfWords
-                name="myshlenie"
-                dataObj={dataBase}
-                psystatus={this.props.psystatus}
-                isAnd={true}
-              />
-              <span>.</span>
-
-              <FreeText text={this.props.psystatus.myshlenieText} />
-
-              {/*речь*/}
-              <OnePraseFromRadio
-                name="rechTemp"
-                dataObj={dataBase}
-                psystatus={this.props.psystatus}
-              />
-
-              <ListOfWords
-                name="rechOsob"
-                dataObj={dataBase}
-                psystatus={this.props.psystatus}
-                isAnd={false}
-              />
-              <span>, </span>
-
-              <OnePraseFromRadio
-                name="rechSuschestvo"
-                dataObj={dataBase}
-                psystatus={this.props.psystatus}
-              />
-              {odnosloj()}
-              <span>. </span>
-
-              <ListOfWords
-                name="rechOtmech"
-                dataObj={dataBase}
-                psystatus={this.props.psystatus}
-                isAnd={false}
-              />
-            </span>
-          );
         }
+      } else {
+        return (
+          <span>
+            <OnePraseFromRadio
+              name="myshleniePosled"
+              dataObj={dataBase}
+              psystatus={this.props.psystatus}
+            />
+
+            <OnePraseFromRadio
+              name="myshlenieTemp"
+              dataObj={dataBase}
+              psystatus={this.props.psystatus}
+            />
+
+            <ListOfWords
+              name="myshlenie"
+              dataObj={dataBase}
+              psystatus={this.props.psystatus}
+              isAnd={true}
+            />
+            <span>.</span>
+
+            <FreeText text={this.props.psystatus.myshlenieText} />
+
+            {/*речь*/}
+            <OnePraseFromRadio
+              name="rechTemp"
+              dataObj={dataBase}
+              psystatus={this.props.psystatus}
+            />
+
+            <ListOfWords
+              name="rechOsob"
+              dataObj={dataBase}
+              psystatus={this.props.psystatus}
+              isAnd={false}
+            />
+
+            {otvet()}
+
+            <ListOfWords
+              name="rechOtmech"
+              dataObj={dataBase}
+              psystatus={this.props.psystatus}
+              isAnd={false}
+            />
+          </span>
+        );
       }
     };
 
