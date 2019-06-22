@@ -5,11 +5,20 @@ import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
 import cicleFn from "../../fn/cicleFn";
+import getToggleKritika from "../../fn/getToggleKritika";
 import "./Pp.css";
 import KritikaManager from "../KritikaManager";
 
 export default class PpManager extends Component {
   render() {
+    // функция снижения критики
+    let toggleKritika = getToggleKritika(
+      this.props.psystatus,
+      this.props.toggleRadio,
+      this.props.toggleSymptom,
+      "3"
+    );
+
     // показ списка бред
     let bredNameArr = cicleFn(dataBase, "bred");
 
@@ -17,7 +26,7 @@ export default class PpManager extends Component {
       <div key={item} className="list__item">
         <Checkbox
           checked={this.props.psystatus[item].isChecked}
-          onChange={this.props.toggleSymptom}
+          onChange={toggleKritika}
           name={item}
           label={dataBase[item].label}
         />
@@ -39,7 +48,7 @@ export default class PpManager extends Component {
       <div key={item} className="list__item">
         <Checkbox
           checked={this.props.psystatus[item].isChecked}
-          onChange={this.props.toggleSymptom}
+          onChange={toggleKritika}
           name={item}
           label={dataBase[item].label}
         />

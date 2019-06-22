@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import dataBase from "../../store/kognitData.js";
 import Checkbox from "../Checkbox";
 import RadioList from "../RadioList";
+import RadioListKogn from "../RadioListKogn";
 import RadioListInline from "../RadioListInline";
 import OrientirovkaManager from "../OrientirovkaManager";
 import cicleFn from "../../fn/cicleFn";
@@ -30,10 +31,11 @@ export default class affektManager extends Component {
               <div className="list__title">
                 Интеллектуально-мнестические функции:
               </div>
-              <RadioList
+              <RadioListKogn
                 name="kognitOsnivnoi"
                 dataBase={dataBase}
-                onChange={this.props.toggleRadio}
+                toggleRadio={this.props.toggleRadio}
+                toggleSymptom={this.props.toggleSymptom}
                 psystatus={this.props.psystatus}
               />
             </div>
