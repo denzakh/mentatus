@@ -5,7 +5,7 @@ export default function configureStore(islocalStorage) {
   let store;
 
   // подключение сохранения в localStorage
-  if (localStorage) {
+  if (islocalStorage) {
     if (localStorage["mentatus"]) {
       store = createStore(
         rootReducer,

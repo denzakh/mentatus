@@ -16,40 +16,17 @@ import ConclusionPanel from "../ConclusionPanel";
 
 export default class Conclusion extends Component {
   render() {
-    // if(
-    //     this.props.psystatus.rechOtkl.isChecked ||
-    //     this.props.psystatus.rechNeotvechaet.isChecked ||
-    //     this.props.psystatus.kontakt.number === 2 ||
-    //     this.props.psystatus.soznanie.number === 7
-    //   ) {
-    //   console.log("part status disable");
-    //   this.props.psystatus.globalDisable.isChecked = true;
-    // } else {
-    //   this.props.psystatus.globalDisable.isChecked = true;
-    // }
-
-    return (
-      <div className="conclusion__box">
-        <div className="conclusion__panel">
-          <div className="conclusion__title">Заключение</div>
-          <ConclusionPanel />
-        </div>
-        <div className="conclusion__text app__status-box" id="conclusion">
-          <p>
-            <NachaloList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-          </p>
-          <p>
-            <AnamnezList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <SostoyanieList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
+    let conclusionText = () => {
+      // если кома или контакту недоступен
+      if (
+        // this.props.psystatus.rechOtkl.isChecked ||
+        // this.props.psystatus.rechNeotvechaet.isChecked ||
+        this.props.psystatus.kontakt.number === 2 ||
+        this.props.psystatus.soznanie.number === 7
+      ) {
+      } else {
+        return (
+          <span>
             <ZhalobyList
               psystatus={this.props.psystatus}
               toggleTab={this.props.toggleTab}
@@ -78,6 +55,34 @@ export default class Conclusion extends Component {
               psystatus={this.props.psystatus}
               toggleTab={this.props.toggleTab}
             />
+          </span>
+        );
+      }
+    };
+
+    return (
+      <div className="conclusion__box">
+        <div className="conclusion__panel">
+          <div className="conclusion__title">Заключение</div>
+          <ConclusionPanel />
+        </div>
+        <div className="conclusion__text app__status-box" id="conclusion">
+          <p>
+            <NachaloList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+          </p>
+          <p>
+            <AnamnezList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            <SostoyanieList
+              psystatus={this.props.psystatus}
+              toggleTab={this.props.toggleTab}
+            />
+            {conclusionText()}
           </p>
           <DiagnozList
             psystatus={this.props.psystatus}

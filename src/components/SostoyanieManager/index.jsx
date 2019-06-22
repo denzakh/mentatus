@@ -6,6 +6,7 @@ import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
 import cicleFn from "../../fn/cicleFn";
 import NachaloManager from "../NachaloManager";
+import Textarea from "../Textarea";
 // import "./Pp.css";
 
 export default class SostoyanieManager extends Component {
@@ -131,6 +132,14 @@ export default class SostoyanieManager extends Component {
 
             <div className="no-break">{zatrudList()}</div>
             <div className="no-break">{vpechList()}</div>
+
+            <div className="list__title">Дополнение: </div>
+            <Textarea
+              onChange={this.props.toggleText}
+              name="sostoyanieText"
+              label=""
+              value={this.props.psystatus.sostoyanieText.text}
+            />
           </div>
         </div>
       </div>

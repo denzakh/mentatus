@@ -22,13 +22,17 @@ export default class AffektList extends Component {
         orientirLichnostNumber;
     }
     // по полученному коду выбираем фразу из файла с данными
-    let orientirPhrase = dataBase.orientir[pol][orientirNumber];
+    let orientirPhrase = () => {
+      if (!this.props.psystatus.rechOtkl.isChecked) {
+        return dataBase.orientir[pol][orientirNumber];
+      }
+    };
 
     let orientirText = this.props.psystatus.orientirText.text;
 
     return (
       <span data-id="kognit" onClick={this.props.toggleTab}>
-        {orientirPhrase}
+        {orientirPhrase()}
         <span> {orientirText} </span>
       </span>
     );

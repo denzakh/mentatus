@@ -3,6 +3,7 @@ import dataBase from "../../store/sostoyanieData.js";
 import ListOfWordsZatrud from "../ListOfWordsZatrud";
 import ListOfSentences from "../ListOfSentences";
 import OnePraseFromRadio from "../OnePraseFromRadio";
+import FreeText from "../FreeText";
 
 export default class SostoyanieList extends Component {
   render() {
@@ -34,6 +35,8 @@ export default class SostoyanieList extends Component {
           dataObj={dataBase}
           psystatus={this.props.psystatus}
         />
+
+        <FreeText text={this.props.psystatus.sostoyanieText} />
       </span>
     );
   }

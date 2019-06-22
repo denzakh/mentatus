@@ -31,8 +31,6 @@ export default class DiagnozList extends Component {
           }
         };
 
-        console.log(diagnozDopolnenie);
-
         return (
           <p>
             <span> Диагноз: </span>

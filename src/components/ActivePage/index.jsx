@@ -13,6 +13,6 @@ export default class ActivePage extends Component {
 
     let activeComponent = getActiveObj(this.props.store);
 
-    return <div>{activeComponent}</div>;
+    return <div className="wrapper__active-page">{activeComponent}</div>;
   }
 }
