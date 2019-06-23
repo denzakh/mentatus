@@ -6,7 +6,6 @@ import { bindActionCreators } from "redux";
 // Рендерит открытую страницу
 class ActivePage extends Component {
   render() {
-    console.log(this.props.general);
     let getActivePage = general => {
       let page = pages.filter(item => {
         return item.name === general.activePageName;
