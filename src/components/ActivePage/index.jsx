@@ -1,19 +1,38 @@
 import React, { Component } from "react";
 import pages from "../../containers/pages";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
-export default class ActivePage extends Component {
+// Рендерит открытую страницу
+class ActivePage extends Component {
   render() {
-    let getActiveObj = store => {
+    console.log(this.props.general);
+    let getActivePage = general => {
       let page = pages.filter(item => {
-        let general = store.general;
         return item.name === general.activePageName;
       });
-      console.dir(page[0]);
       return page[0].component;
     };
 
-    let activeComponent = getActiveObj(this.props.store);
-
-    return <div className="wrapper__active-page">{activeComponent}</div>;
+    return (
+      <div className="wrapper__active-page">
+        {getActivePage(this.props.general)}
+      </div>
+    );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    general: state.general
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {};
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(ActivePage);

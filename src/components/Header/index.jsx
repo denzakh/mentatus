@@ -15,21 +15,22 @@ class Header extends Component {
     let getMenu = store => {
       return pages.map(item => {
         return (
-          <span
+          <li
+            className="header__menu-item"
             key={item.name}
             name={item.name}
             data-id={item.name}
             onClick={this.togglePage}
           >
             {item.title}
-          </span>
+          </li>
         );
       });
     };
 
     return (
       <header className="header">
-        <div className="header__menu">{getMenu(this.props.store)}</div>
+        <ul className="header__menu">{getMenu(this.props.store)}</ul>
       </header>
     );
   }
