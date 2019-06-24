@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Header.css";
 import pages from "../../containers/pages";
-import { setPage } from "../../actions/pageAction";
+import { setPage } from "../../actions/general";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 

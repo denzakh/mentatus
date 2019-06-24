@@ -12,13 +12,26 @@ function getInitialState() {
 
 function getOpenStatusIndex(state) {
   let openStatusIndex;
-  console.dir(state);
   state.forEach((item, i) => {
     if (item.isOpen === true) {
       openStatusIndex = i;
     }
   });
   return openStatusIndex;
+}
+
+function getStateAfterDeliteStatus(state, action) {
+  let ArrWithDeliteStatus = state.filter(item => +item.id !== +action.id);
+  let isOpenStatus = false;
+  ArrWithDeliteStatus.forEach(item => {
+    if (item.isOpen === true) {
+      isOpenStatus = true;
+    }
+  });
+  if (!isOpenStatus) {
+    ArrWithDeliteStatus[0].isOpen = true;
+  }
+  return ArrWithDeliteStatus;
 }
 
 export default function repository(state = getInitialState(), action) {
@@ -34,9 +47,10 @@ export default function repository(state = getInitialState(), action) {
       });
 
     case "DELETE_STATUS":
-      let stateWithSeliteStatus = state.filter(item => +item.id !== +action.id);
+      let stateWithDeliteStatus = getStateAfterDeliteStatus(state, action);
+
       return update(state, {
-        $set: stateWithSeliteStatus
+        $set: stateWithDeliteStatus
       });
 
     case "OPEN_STATUS":
