@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import "./App.css";
+import "./CurrentStatus.css";
 import "./Print.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { setSymptom } from "../../actions/symptomAction";
-import { setText } from "../../actions/textAction";
-import { setRadio } from "../../actions/radioAction";
+import { setSymptom, setText, setRadio } from "../../actions/status";
 import TabMenu from "../../components/TabMenu";
 import TabRender from "../../components/TabRender";
 import Conclusion from "../../components/Conclusion";
 
-class App extends Component {
+class CurrentStatus extends Component {
   constructor(props) {
     super(props);
     this.state = { activeTab: "sostoyanie" };
@@ -81,8 +79,16 @@ class App extends Component {
 }
 
 function mapStateToProps(state) {
+  let openStatus = () => {
+    console.dir(state.repository);
+    let openStatusArr = state.repository.filter(
+      status => status.isOpen === true
+    )[0];
+    return openStatusArr;
+  };
   return {
-    psystatus: state.psystatus
+    // psystatus: state.psystatus
+    psystatus: openStatus()
   };
 }
 
@@ -97,4 +103,4 @@ function mapDispatchToProps(dispatch) {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(App);
+)(CurrentStatus);

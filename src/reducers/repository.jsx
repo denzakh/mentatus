@@ -1,8 +1,30 @@
 import update from "immutability-helper";
 import psystatusInitialState from "./psystatusInitialState";
-const initialState = [];
 
-export default function repository(state = initialState, action) {
+function getInitialState() {
+  let firstStatus = { ...psystatusInitialState };
+  let date = new Date();
+  firstStatus.id = date.getTime();
+  firstStatus.isOpen = true;
+  let initialState = [firstStatus];
+  return initialState;
+}
+
+function getOpenStatusIndex(state) {
+  let openStatusIndex;
+  console.dir(state);
+  state.forEach((item, i) => {
+    if (item.isOpen === true) {
+      openStatusIndex = i;
+    }
+  });
+  return openStatusIndex;
+}
+
+export default function repository(state = getInitialState(), action) {
+  let openStatusIndex = getOpenStatusIndex(state);
+
+  // управление списком статусов
   switch (action.type) {
     case "CREATE_NEW_STATUS":
       let psystatusBlank = { ...psystatusInitialState };
@@ -38,9 +60,27 @@ export default function repository(state = initialState, action) {
         $set: stateWithCloseStatus
       });
 
+    // управление внутри одного статуса
+    case "SET_SYMPTOM":
+      return update(state, {
+        [openStatusIndex]: {
+          [action.name]: { isChecked: { $apply: boolean => !boolean } }
+        }
+      });
+
+    case "SET_TEXT":
+      return update(state, {
+        [openStatusIndex]: { [action.name]: { text: { $set: action.text } } }
+      });
+
+    case "SET_RADIO":
+      return update(state, {
+        [openStatusIndex]: {
+          [action.name]: { number: { $set: action.number } }
+        }
+      });
+
     default:
       return state;
   }
 }
-
-// {$add: array of objects}
