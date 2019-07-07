@@ -30,6 +30,7 @@
 
 .app__content {
   padding: 30px;
+  padding-top: 20px;
   display: -webkit-flex;
   display: -moz-flex;
   display: -ms-flex;
