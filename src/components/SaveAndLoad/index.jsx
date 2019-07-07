@@ -2,22 +2,35 @@ import React, { Component } from "react";
 import "./style.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
-import { saveStoreOnServer, loadStoreFromServer } from "../../actions/general";
+import {
+  saveStoreOnServer,
+  loadStoreFromServer,
+  getStore
+} from "../../actions/general";
 import Button from "../Button";
 
 class SaveAndLoad extends Component {
+  save = () => {
+    this.props.bindHandleSave();
+  };
+
+  load = () => {
+    this.props.bindHandleLoad();
+    this.props.bindHandleGetStore();
+  };
+
   render() {
     return (
       <div className="save-and-load">
         <div className="save-and-load__row">
           <Button
-            onClick={this.props.handleSave}
+            onClick={this.save}
             disabled={this.props.general.dataIsLoadingOrSaving}
           >
             Сохранить
           </Button>
           <Button
-            onClick={this.props.handleLoad}
+            onClick={this.load}
             disabled={this.props.general.dataIsLoadingOrSaving}
           >
             Загрузить
@@ -36,8 +49,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    handleSave: bindActionCreators(saveStoreOnServer, dispatch),
-    handleLoad: bindActionCreators(loadStoreFromServer, dispatch)
+    bindHandleSave: bindActionCreators(saveStoreOnServer, dispatch),
+    bindHandleLoad: bindActionCreators(loadStoreFromServer, dispatch),
+    bindHandleGetStore: bindActionCreators(getStore, dispatch)
   };
 }
 

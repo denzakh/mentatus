@@ -4,6 +4,7 @@ import pages from "../../containers/pages";
 import { setPage } from "../../actions/general";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
+import Preloader from "../Preloader";
 
 class Header extends Component {
   togglePage = e => {
@@ -43,6 +44,9 @@ class Header extends Component {
           </div>
           <div className="header__col-menu">
             <ul className="header__menu">{getMenu(this.props.store)}</ul>
+          </div>
+          <div className="header__col-preloader">
+            <Preloader />
           </div>
         </div>
       </header>
