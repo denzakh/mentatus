@@ -67,6 +67,7 @@ class Option extends Component {
             type="button"
             className="button"
             onClick={handlerSaveAllOption}
+            disabled={propsOption.isOptionUpdating ? true : false}
           >
             Сохранить
           </button>
