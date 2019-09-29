@@ -1,7 +1,7 @@
 import update from "immutability-helper";
 
 const initialState = {
-  activePageName: "Repository"
+  activePageName: "Option"
 };
 
 export default function option(state = initialState, action) {

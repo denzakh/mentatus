@@ -6,8 +6,9 @@ import thunk from "redux-thunk";
 export default function configureStore(islocalStorage) {
   let store;
 
-  // подключение сохранения в localStorage
+  // islocalStorage - если true, подключается подключение сохранения в localStorage
   if (islocalStorage) {
+    // подключение сохранения в localStorage
     if (localStorage["mentatus"]) {
       store = createStore(
         rootReducer,
