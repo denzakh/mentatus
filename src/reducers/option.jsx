@@ -2,7 +2,6 @@ import update from "immutability-helper";
 import optionInitialState from "../store/optionStore.js";
 
 export default function option(state = optionInitialState, action) {
-  console.log(action.type);
   switch (action.type) {
     case "UPDATE_ONE_TEXT_OPTION":
       return update(state, {

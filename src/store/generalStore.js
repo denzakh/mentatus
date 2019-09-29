@@ -1,5 +1,7 @@
 const store = {
-  doctorId: 0,
+  userId: "",
+  userCreated: "",
+  userUpdated: "",
   timeOfLastSave: "",
   timeOfLastLoad: "",
   dataIsLoadingOrSaving: false,

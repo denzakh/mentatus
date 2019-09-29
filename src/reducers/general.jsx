@@ -4,7 +4,7 @@ const initialState = {
   activePageName: "Option"
 };
 
-export default function option(state = initialState, action) {
+export default function general(state = initialState, action) {
   switch (action.type) {
     case "SET_PAGE":
       return update(state, {
@@ -33,6 +33,14 @@ export default function option(state = initialState, action) {
     case "LOAD_STORE_FROM_SERVER_ERROR":
       console.log(action.type);
       return state;
+
+    case "SAVE_USER_SUCCESS":
+      return update(state, {
+        dataIsLoadingOrSaving: { $set: false },
+        userId: { $set: action.payload.objectId },
+        userCreated: { $set: action.payload.created },
+        userUpdated: { $set: action.payload.updated }
+      });
 
     default:
       return state;

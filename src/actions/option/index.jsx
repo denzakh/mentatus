@@ -13,20 +13,32 @@ export function updateOneTextOption(name, value) {
   };
 }
 
-export const saveAllOption = option => {
+export const saveAllOption = (option, userId) => {
   return dispatch => {
     dispatch({
       type: "SAVE_ALL_OPTION_START"
     });
 
+    console.log(userId);
+
     let optionJson = JSON.stringify(option);
 
+    let sendObj = { option: optionJson };
+    // если User только что создан, у него не должно быть objectId
+    if (userId) {
+      sendObj.objectId = userId;
+    }
+
     Backendless.Data.of("User")
-      .save({ option: optionJson })
+      .save(sendObj)
       .then(obj => {
-        console.log("option save: " + obj.objectId);
         dispatch({
-          type: "SAVE_ALL_OPTION_SUCCESS"
+          type: "SAVE_ALL_OPTION_SUCCESS",
+          payload: obj
+        });
+        dispatch({
+          type: "SAVE_USER_SUCCESS",
+          payload: obj
         });
       })
       .catch(error =>

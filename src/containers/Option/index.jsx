@@ -8,12 +8,13 @@ import "./Option.css";
 
 class Option extends Component {
   render() {
+    console.dir(this.props);
     let propsOption = this.props.option;
     let handlerUpdateOneTextOption = e => {
       this.props.updateOneTextOption(e.target.id, e.target.value);
     };
     let handlerSaveAllOption = () => {
-      this.props.saveAllOption(this.props.option);
+      this.props.saveAllOption(this.props.option, this.props.general.userId);
     };
 
     // получаем список элементов, относящихся к этому циклу
@@ -60,18 +61,25 @@ class Option extends Component {
 
     return (
       <div className="repository">
-        <h1>Настройки</h1>
+        <h1>
+          Настройки{" "}
+          <span className="option__user-id">{this.props.general.userId}</span>
+        </h1>
         <div className="option__list">{buildOptionList()}</div>
         <div className="option__save-row">
           <button
             type="button"
             className="button"
             onClick={handlerSaveAllOption}
-            disabled={propsOption.isOptionUpdating ? true : false}
+            disabled={
+              propsOption.isOptionUpdating || propsOption.isOptionUpdateSuccess
+                ? true
+                : false
+            }
           >
             Сохранить
           </button>
-          {showUpdateIndicator()}
+          <div className="option__status">{showUpdateIndicator()}</div>
         </div>
       </div>
     );
@@ -80,7 +88,8 @@ class Option extends Component {
 
 function mapStateToProps(state) {
   return {
-    option: state.option
+    option: state.option,
+    general: state.general
   };
 }
 
