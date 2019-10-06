@@ -45,7 +45,25 @@ export default function repository(state = getInitialState(), action) {
       let psystatusBlank = { ...psystatusInitialState };
       psystatusBlank.id = +action.id;
       return update(state, {
-        $push: [psystatusBlank]
+        $push: [psystatusBlank],
+        isStatusUpdating: { $set: true },
+        isStatusUpdateSuccess: { $set: false },
+        isStatusUpdateError: { $set: false }
+      });
+
+    case "SAVE_STATUS_SUCCESS":
+      return update(state, {
+        isStatusUpdating: { $set: false },
+        isStatusUpdateSuccess: { $set: true },
+        isStatusUpdateError: { $set: false },
+        isStatusSave: { $set: true }
+      });
+
+    case "SAVE_STATUS_ERROR":
+      return update(state, {
+        isStatusUpdating: { $set: false },
+        isStatusUpdateSuccess: { $set: false },
+        isStatusUpdateError: { $set: true }
       });
 
     case "DELETE_STATUS":
@@ -76,7 +94,7 @@ export default function repository(state = getInitialState(), action) {
         $set: stateWithCloseStatus
       });
 
-    // управление внутри одного статуса
+    // Управление внутри одного статуса
 
     // обновление булева симптома
     case "SET_SYMPTOM":
