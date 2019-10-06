@@ -1,8 +1,7 @@
 import { composeWithDevTools } from "redux-devtools-extension";
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import { connectRoutes } from "redux-first-router";
-import { routesMap } from "./containers/Router/";
-import history from "./fn/history";
+import { routesMap } from "./router";
 
 import page from "./reducers/page";
 import general from "./reducers/general";
@@ -13,7 +12,7 @@ export default function configureStore(islocalStorage) {
   let store;
 
   // router
-  const { reducer, middleware, enhancer } = connectRoutes(history, routesMap);
+  const { reducer, middleware, enhancer } = connectRoutes(routesMap);
 
   const rootReducer = combineReducers({
     location: reducer,
@@ -22,6 +21,7 @@ export default function configureStore(islocalStorage) {
     option,
     repository
   });
+
   const middlewares = applyMiddleware(middleware);
 
   const composeEnhancers = (...args) =>
@@ -64,6 +64,6 @@ export default function configureStore(islocalStorage) {
       store.replaceReducer(nextRootReducer);
     });
   }
-  // console.log(store.getState())
+
   return store;
 }
