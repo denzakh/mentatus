@@ -4,11 +4,13 @@ import { NOT_FOUND } from "redux-first-router";
 export const components = {
   HOME: "Home",
   USER: "User",
+  SINGUP: "Singup",
   [NOT_FOUND]: "NotFound"
 };
 
 // for configureStore
 export const routesMap = {
   HOME: "/",
-  USER: "/user/:id"
+  USER: "/user/:id",
+  SINGUP: "/singup"
 };
