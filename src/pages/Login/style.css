@@ -1,0 +1,68 @@
+.login {
+	min-height: 100%;
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	justify-content: center;
+	-ms-align-items: center;
+	align-items: center;
+	background-color: #000;
+}
+.login__box {
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 10px;
+}
+.login__row {
+	margin-bottom: 20px;
+}
+.login__row--btn {
+	text-align: center;
+}
+.login__label {
+	min-width: 56px;
+	display: inline-block;
+	margin-right: 10px;
+}
+.login__label-checkbox {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-ms-align-items: center;
+	align-items: center;
+	justify-content: center;
+}
+.login__input {
+	display: inline-block;
+	vertical-align: middle;
+	width: 185px;
+	/*height: 26px;*/
+	padding: 5px 10px;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+	outline: none;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 1;
+	margin-right: 10px;
+}
+.login__btn {
+	border-radius: 5px;
+}
+.login__title-row {
+	display: -webkit-flex;
+	display: -moz-flex;
+	display: -ms-flex;
+	display: -o-flex;
+	display: flex;
+	-ms-align-items: center;
+	align-items: center;
+	justify-content: center;
+}
+.login__title-row img {
+	margin-right: 15px;
+}
