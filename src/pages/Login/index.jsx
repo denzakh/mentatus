@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import Backendless from "../../BDConfig";
 import "./style.css";
 import Button from "../../components/Button";
 
@@ -25,15 +24,6 @@ export default class Login extends Component {
 	handleSubmit = event => {
 		event.preventDefault();
 		console.log("start login");
-		Backendless.UserService.login(
-			this.state.login,
-			this.state.password,
-			this.state.stayLoggedIn
-		)
-			.then(function(loggedInUser) {
-				console.dir(loggedInUser);
-			})
-			.catch(function(error) {});
 	};
 
 	render() {

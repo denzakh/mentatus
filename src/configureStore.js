@@ -3,67 +3,67 @@ import { combineReducers, createStore, applyMiddleware, compose } from "redux";
 import { connectRoutes } from "redux-first-router";
 import { routesMap } from "./router";
 
+import user from "./reducers/user";
 import page from "./reducers/page";
-import general from "./reducers/general";
 import option from "./reducers/option";
 import repository from "./reducers/repository";
 
 export default function configureStore(islocalStorage) {
-  let store;
+	let store;
 
-  // router
-  const { reducer, middleware, enhancer } = connectRoutes(routesMap);
+	// router
+	const { reducer, middleware, enhancer } = connectRoutes(routesMap);
 
-  const rootReducer = combineReducers({
-    location: reducer,
-    page,
-    general,
-    option,
-    repository
-  });
+	const rootReducer = combineReducers({
+		location: reducer,
+		user,
+		page,
+		option,
+		repository
+	});
 
-  const middlewares = applyMiddleware(middleware);
+	const middlewares = applyMiddleware(middleware);
 
-  const composeEnhancers = (...args) =>
-    typeof window !== "undefined"
-      ? composeWithDevTools({})(...args)
-      : compose(...args);
+	const composeEnhancers = (...args) =>
+		typeof window !== "undefined"
+			? composeWithDevTools({})(...args)
+			: compose(...args);
 
-  const enhancers = composeEnhancers(enhancer, middlewares);
+	const enhancers = composeEnhancers(enhancer, middlewares);
 
-  // UNCOMMENT TO SEE ROUTING WORK CORRECTLY WITHOUT EXTRA @@INIT DISPATCH
-  // const enhancers = compose(enhancer, middlewares);
+	// UNCOMMENT TO SEE ROUTING WORK CORRECTLY WITHOUT EXTRA @@INIT DISPATCH
+	// const enhancers = compose(enhancer, middlewares);
 
-  // islocalStorage - если true, подключается подключение сохранения в localStorage
-  if (islocalStorage) {
-    // подключение сохранения в localStorage
-    if (localStorage["mentatus"]) {
-      store = createStore(
-        rootReducer,
-        JSON.parse(localStorage["mentatus"]),
-        enhancers
-      );
-    } else {
-      store = createStore(rootReducer, enhancers);
-    }
+	// islocalStorage - если true, подключается подключение сохранения в localStorage
+	if (islocalStorage) {
+		// подключение сохранения в localStorage
+		if (localStorage["mentatus"]) {
+			store = createStore(
+				rootReducer,
+				JSON.parse(localStorage["mentatus"]),
+				enhancers
+			);
+		} else {
+			store = createStore(rootReducer, enhancers);
+		}
 
-    localStorage.clear();
-    store.subscribe(() => {
-      localStorage["mentatus"] = JSON.stringify(store.getState());
-    });
+		localStorage.clear();
+		store.subscribe(() => {
+			localStorage["mentatus"] = JSON.stringify(store.getState());
+		});
 
-    // без localStorage
-  } else {
-    store = createStore(rootReducer, enhancers);
-  }
+		// без localStorage
+	} else {
+		store = createStore(rootReducer, enhancers);
+	}
 
-  // hot reload
-  if (module.hot) {
-    module.hot.accept("./reducers", () => {
-      const nextRootReducer = require("./reducers");
-      store.replaceReducer(nextRootReducer);
-    });
-  }
+	// hot reload
+	if (module.hot) {
+		module.hot.accept("./reducers", () => {
+			const nextRootReducer = require("./reducers");
+			store.replaceReducer(nextRootReducer);
+		});
+	}
 
-  return store;
+	return store;
 }
