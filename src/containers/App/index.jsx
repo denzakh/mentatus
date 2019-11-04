@@ -8,18 +8,16 @@ import { setUserLogIn, setUserLogOut } from "../../actions/login/";
 // нужно пропросить функцию входа в логин как пропс
 class App extends Component {
 	render() {
-		console.dir(this.props);
 		if (this.props.user) {
 			let Component = components[this.props.page];
 			return <Component />;
 		} else {
-			return <Login submit={this.props.setUserLogIn} />;
+			return <Login handleSubmit={this.props.setUserLogIn} />;
 		}
 	}
 }
 
 function mapStateToProps(state) {
-	console.log(state);
 	return {
 		page: state.page,
 		user: state.user
@@ -29,8 +27,8 @@ function mapStateToProps(state) {
 //bindActionCreators оборачивает каждый экшн в dispatch, поэтому когда мы вызываем this.props.actions.myFunc() происходит dispatch экшена myFunc, только он скрыт под капотом
 function mapDispatchToProps(dispatch) {
 	return {
-		setUserLogIn: bindActionCreators(setUserLogIn, dispatch),
-		setUserLogOut: bindActionCreators(setUserLogOut, dispatch)
+		setUserLogIn: setUserLogIn,
+		setUserLogOut: setUserLogOut
 	};
 }
 

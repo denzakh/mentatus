@@ -1,5 +1,6 @@
 import { composeWithDevTools } from "redux-devtools-extension";
 import { combineReducers, createStore, applyMiddleware, compose } from "redux";
+import thunk from "redux-thunk";
 import { connectRoutes } from "redux-first-router";
 import { routesMap } from "./router";
 
@@ -13,6 +14,7 @@ export default function configureStore(islocalStorage) {
 
 	// router
 	const { reducer, middleware, enhancer } = connectRoutes(routesMap);
+	const routerMiddleware = middleware;
 
 	const rootReducer = combineReducers({
 		location: reducer,
@@ -22,7 +24,7 @@ export default function configureStore(islocalStorage) {
 		repository
 	});
 
-	const middlewares = applyMiddleware(middleware);
+	const middlewares = applyMiddleware(thunk, routerMiddleware);
 
 	const composeEnhancers = (...args) =>
 		typeof window !== "undefined"

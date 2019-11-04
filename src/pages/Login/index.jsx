@@ -23,7 +23,11 @@ export default class Login extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
-		console.log("start login");
+		this.props.handleSubmit(
+			this.state.login,
+			this.state.password,
+			this.state.stayLoggedIn
+		);
 	};
 
 	render() {

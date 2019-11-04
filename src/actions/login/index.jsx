@@ -1,24 +1,32 @@
 import Backendless from "../../BDConfig";
 
-export const setUserLogIn = user => {
-	return Backendless.UserService.login(user)
+export const setUserLogIn = (login, password, stayLoggedIn) => {
+	return Backendless.UserService.login(login, password, stayLoggedIn)
 		.then(function(loggedInUser) {
-			console.log("login");
+			console.log(loggedInUser);
 			return {
 				type: "USER_LOGIN",
 				payload: loggedInUser
 			};
 		})
-		.catch(function(error) {});
+		.catch(function(error) {
+			return {
+				type: "USER_LOGIN_ERROR",
+				payload: null,
+				error: error
+			};
+		});
 };
 
 export const setUserLogOut = () => {
-	return Backendless.UserService.logout()
+	Backendless.UserService.logout()
 		.then(function() {
 			console.log("logout");
 			return {
 				type: "USER_LOGOUT"
 			};
 		})
-		.catch(function(error) {});
+		.catch(function(error) {
+			console.dir(error);
+		});
 };
