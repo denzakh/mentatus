@@ -6,7 +6,7 @@ import React, { Component } from "react";
 // import "./Option.css";
 
 export default class Login extends Component {
-  render() {
-    return <div className="login">Login</div>;
-  }
+	render() {
+		return <div className="login">Login</div>;
+	}
 }

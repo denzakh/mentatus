@@ -73,7 +73,4 @@ const mapDispatchToProps = dispatch => ({
 	userPostFetch: userInfo => dispatch(userPostFetch(userInfo))
 });
 
-export default connect(
-	null,
-	mapDispatchToProps
-)(Signup);
+export default connect(null, mapDispatchToProps)(Signup);

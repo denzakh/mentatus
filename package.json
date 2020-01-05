@@ -1,68 +1,71 @@
 {
-  "name": "mentatus",
-  "version": "0.1.0",
-  "private": true,
-  "homepage": ".",
-  "author": "Denis Zakharchenko",
-  "license": "Apache 2.0",
-  "dependencies": {
-    "3.0.0": "^3.0.0",
-    "backendless": "^5.4.3",
-    "classnames": "^2.2.6",
-    "gh-pages": "^2.0.1",
-    "immutability-helper": "^3.0.1",
-    "react": "^16.8.6",
-    "react-classnames": "^0.1.2",
-    "react-dom": "^16.8.6",
-    "react-redux": "^7.1.0",
-    "react-router-dom": "^5.0.1",
-    "react-scripts": "3.0.1",
-    "redux": "^4.0.4",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-first-router": "^2.1.5",
-    "redux-first-router-link": "^2.1.1",
-    "redux-thunk": "^2.3.0",
-    "semantic-ui-react": "^0.88.1"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
-  "devDependencies": {
-    "husky": "^3.0.0",
-    "lint-staged": "^9.2.0",
-    "prettier": "^1.18.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "lint-staged": {
-    "src/**/*.{js,jsx,json,css}": [
-      "prettier --write",
-      "git add"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  },
-  "bit": {
-    "env": {},
-    "componentsDefaultDirectory": "components/{name}",
-    "packageManager": "npm"
-  }
+	"name": "mentatus",
+	"version": "0.1.0",
+	"private": true,
+	"homepage": ".",
+	"author": "Denis Zakharchenko",
+	"license": "Apache 2.0",
+	"dependencies": {
+		"3.0.0": "^3.0.0",
+		"backendless": "^5.4.3",
+		"classnames": "^2.2.6",
+		"gh-pages": "^2.0.1",
+		"immutability-helper": "^3.0.1",
+		"react": "^16.8.6",
+		"react-classnames": "^0.1.2",
+		"react-dom": "^16.8.6",
+		"react-redux": "^7.1.0",
+		"react-router-dom": "^5.0.1",
+		"react-scripts": "^3.0.1",
+		"redux": "^4.0.4",
+		"redux-devtools-extension": "^2.13.8",
+		"redux-first-router": "^2.1.5",
+		"redux-first-router-link": "^2.1.1",
+		"redux-thunk": "^2.3.0",
+		"semantic-ui-react": "^0.88.1"
+	},
+	"scripts": {
+		"start": "react-scripts start",
+		"build": "react-scripts build",
+		"test": "react-scripts test --env=jsdom",
+		"eject": "react-scripts eject",
+		"predeploy": "npm run build",
+		"deploy": "gh-pages -d build"
+	},
+	"devDependencies": {
+		"husky": "^3.0.0",
+		"lint-staged": "^9.2.0",
+		"prettier": "^1.18.2"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"src/**/*.{js,jsx,json,css}": [
+			"prettier --write",
+			"git add"
+		]
+	},
+	"browserslist": {
+		"production": [
+			">0.2%",
+			"not dead",
+			"not op_mini all"
+		],
+		"development": [
+			"last 1 chrome version",
+			"last 1 firefox version",
+			"last 1 safari version"
+		]
+	},
+	"bit": {
+		"env": {},
+		"componentsDefaultDirectory": "components/{name}",
+		"packageManager": "npm"
+	},
+	"resolutions": {
+		"ansi-styles": "^3.2.0"
+	}
 }

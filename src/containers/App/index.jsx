@@ -3,16 +3,28 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Login from "../../pages/Login/";
 import * as components from "../test";
-import { setUserLogIn, setUserLogOut } from "../../actions/login/";
+import {
+	setUserLogIn,
+	userLoginStart,
+	userLoginSuccess,
+	userLoginError
+} from "../../actions/login/";
 
-// нужно пропросить функцию входа в логин как пропс
+// нужно пробросить функцию входа в логин как пропс
 class App extends Component {
 	render() {
 		if (this.props.user) {
 			let Component = components[this.props.page];
 			return <Component />;
 		} else {
-			return <Login handleSubmit={this.props.setUserLogIn} />;
+			return (
+				<Login
+					handleSubmit={setUserLogIn}
+					userLoginStart={this.props.userLoginStart}
+					userLoginSuccess={this.props.userLoginSuccess}
+					userLoginError={this.props.userLoginError}
+				/>
+			);
 		}
 	}
 }
@@ -24,15 +36,16 @@ function mapStateToProps(state) {
 	};
 }
 
-//bindActionCreators оборачивает каждый экшн в dispatch, поэтому когда мы вызываем this.props.actions.myFunc() происходит dispatch экшена myFunc, только он скрыт под капотом
-function mapDispatchToProps(dispatch) {
-	return {
-		setUserLogIn: setUserLogIn,
-		setUserLogOut: setUserLogOut
-	};
-}
+/* В mapDispatchToProps
+можно оорачивать функции-экшены в dispatch самостоятельно
+или использовать bindActionCreators оборачивает каждый экшн в dispatch, поэтому когда мы вызываем this.props.actions.myFunc() происходит dispatch экшена myFunc, только он скрыт под капотом
 
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(App);
+*/
+
+const mapDispatchToProps = (dispatch, ownProps) => ({
+	userLoginStart: () => dispatch(userLoginStart()),
+	userLoginSuccess: payload => dispatch(userLoginSuccess(payload)),
+	userLoginError: error => dispatch(userLoginError(error))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

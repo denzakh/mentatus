@@ -23,10 +23,16 @@ export default class Login extends Component {
 
 	handleSubmit = event => {
 		event.preventDefault();
+		let formData = {
+			login: this.state.login,
+			password: this.state.password,
+			stayLoggedIn: this.state.stayLoggedIn
+		};
 		this.props.handleSubmit(
-			this.state.login,
-			this.state.password,
-			this.state.stayLoggedIn
+			this.props.userLoginStart,
+			this.props.userLoginSuccess,
+			this.props.userLoginError,
+			formData
 		);
 	};
 
