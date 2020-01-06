@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from "redux";
 import Login from "../../pages/Login/";
 import * as components from "../test";
 import {
@@ -10,10 +9,10 @@ import {
 	userLoginError
 } from "../../actions/login/";
 
-// нужно пробросить функцию входа в логин как пропс
+// проверка авторизации
 class App extends Component {
 	render() {
-		if (this.props.user) {
+		if (this.props.user.email) {
 			let Component = components[this.props.page];
 			return <Component />;
 		} else {
@@ -23,6 +22,7 @@ class App extends Component {
 					userLoginStart={this.props.userLoginStart}
 					userLoginSuccess={this.props.userLoginSuccess}
 					userLoginError={this.props.userLoginError}
+					user={this.props.user}
 				/>
 			);
 		}

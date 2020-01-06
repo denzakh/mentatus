@@ -10,8 +10,7 @@ export const setUserLogIn = (
 	userLoginStart();
 	Backendless.UserService.login(login, password, stayLoggedIn)
 		.then(function(loggedInUser) {
-			console.dir(formData);
-			userLoginSuccess(formData);
+			userLoginSuccess(loggedInUser);
 		})
 		.catch(function(error) {
 			userLoginError(error);
@@ -24,11 +23,11 @@ export const userLoginStart = () => {
 	};
 };
 
-export const userLoginSuccess = formData => {
-	console.dir(formData);
+export const userLoginSuccess = loggedInUser => {
+	loggedInUser["user-token"] = null;
 	return {
 		type: "USER_LOGIN_SUCCESS",
-		payload: formData
+		payload: loggedInUser
 	};
 };
 
@@ -40,22 +39,15 @@ export const userLoginError = error => {
 	};
 };
 
-// else {
-// 	return {
-// 		type: "USER_LOGIN_ERROR",
-// 		payload: null,
-// 		error: error
-// 	};
-// }
-// export const setUserLogOut = () => {
-// 	Backendless.UserService.logout()
-// 		.then(function() {
-// 			console.log("logout");
-// 			return {
-// 				type: "USER_LOGOUT"
-// 			};
-// 		})
-// 		.catch(function(error) {
-// 			console.dir(error);
-// 		});
-// };
+export const setUserLogOut = () => {
+	Backendless.UserService.logout()
+		.then(function() {
+			console.log("logout");
+		})
+		.catch(function(error) {
+			console.dir(error);
+		});
+	return {
+		type: "USER_LOGOUT"
+	};
+};

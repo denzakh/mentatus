@@ -20,6 +20,7 @@
 }
 .login__row--btn {
 	text-align: center;
+	margin-bottom: 0;
 }
 .login__label {
 	min-width: 56px;
@@ -65,4 +66,10 @@
 }
 .login__title-row img {
 	margin-right: 15px;
+}
+.login__update {
+	color: #cccccc;
+}
+.login__errorr {
+	color: red;
 }

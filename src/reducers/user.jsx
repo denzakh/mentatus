@@ -1,25 +1,30 @@
-import update from "immutability-helper";
-let userInitialState = null;
+let userInitialState = { email: null, isUpdate: false, isError: false };
 
 export default function user(state = userInitialState, action) {
+	let newUserState;
+
 	switch (action.type) {
 		case "USER_LOGIN_START":
-			console.log("login action start");
+			newUserState = { ...state };
+			newUserState.isUpdate = true;
+			newUserState.isError = false;
 			return state;
 
 		case "USER_LOGIN_SUCCESS":
-			console.log("user login success");
-			console.log(action.payload);
-			let newUserState = action.payload;
+			newUserState = { ...state, ...action.payload };
+			newUserState.isUpdate = false;
+			newUserState.isError = false;
 			return newUserState;
 
 		case "USER_LOGIN_ERROR":
-			console.log("login error");
+			newUserState = { ...state };
+			newUserState.isUpdate = false;
+			newUserState.isError = true;
 			console.error(action.error);
-			return state;
+			return newUserState;
 
 		case "USER_LOGOUT":
-			return null;
+			return userInitialState;
 
 		default:
 			return state;

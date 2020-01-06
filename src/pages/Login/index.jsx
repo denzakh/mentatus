@@ -37,6 +37,15 @@ export default class Login extends Component {
 	};
 
 	render() {
+		let showIndicator = () => {
+			if (this.props.user.isUpdate) {
+				return <span className="login__update">...обновление</span>;
+			}
+			if (this.props.user.isError) {
+				return <span className="login__errorr">произошла ошибка</span>;
+			}
+		};
+
 		return (
 			<div className="login">
 				<div className="login__box">
@@ -86,6 +95,7 @@ export default class Login extends Component {
 						<div className="login__row login__row--btn">
 							<Button type="submit">Вход</Button>
 						</div>
+						<div className="login__indicator">{showIndicator()}</div>
 					</form>
 				</div>
 			</div>
