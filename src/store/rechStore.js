@@ -1,75 +1,75 @@
 const store = {
-  "myshleniePosled": {
+  myshleniePosled: {
     number: 0
   },
-  "myshlenieTemp": {
+  myshlenieTemp: {
     number: 0
   },
-  "myshlenieObstoyat": {
+  myshlenieObstoyat: {
     isChecked: false
   },
-  "myshlenieRigidnoe": {
+  myshlenieRigidnoe: {
     isChecked: false
   },
-  "myshlenieKonkretnoe": {
+  myshlenieKonkretnoe: {
     isChecked: false
   },
-  "myshleniePoverh": {
+  myshleniePoverh: {
     isChecked: false
   },
-  "myshlenieAmorf": {
+  myshlenieAmorf: {
     isChecked: false
   },
-  "myshlenieRezoner": {
+  myshlenieRezoner: {
     isChecked: false
   },
-  "myshlenieSoskalzov": {
+  myshlenieSoskalzov: {
     isChecked: false
   },
-  "myshleniePersever": {
+  myshleniePersever: {
     isChecked: false
   },
-  "myshlenieText": {
+  myshlenieText: {
     text: ""
   },
 
-  "rechOtkl": {
+  rechOtkl: {
     isChecked: false
   },
-  "rechTemp": {
+  // "rechTemp": {
+  //   number: 0
+  // },
+  rechSmaz: {
+    isChecked: false
+  },
+  rechMonolog: {
+    isChecked: false
+  },
+  rechOdnosloj: {
+    isChecked: false
+  },
+  rechSuschestvo: {
     number: 0
   },
-  "rechSmaz": {
+  rechPodbor: {
     isChecked: false
   },
-  "rechMonolog": {
+  rechKategor: {
     isChecked: false
   },
-  "rechOdnosloj": {
+  rechParafazii: {
     isChecked: false
   },
-  "rechSuschestvo": {
-    number: 0
-  },
-  "rechPodbor": {
-    isChecked: false
-  },
-  "rechKategor": {
-    isChecked: false
-  },
-  "rechParafazii": {
-    isChecked: false
-  },
-  "rechText": {
+  rechText: {
     text: ""
   },
-  "rechNedoponimaet": {
+  rechNedoponimaet: {
     isChecked: false
   },
-  "rechNeotvechaet": {
+  rechNeotvechaet: {
     isChecked: false
   },
-  "rechBormochet": {
+  rechBormochet: {
     isChecked: false
   }
 };

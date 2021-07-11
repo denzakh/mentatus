@@ -29,6 +29,11 @@ export default class NachaloList extends Component {
         : "") +
       ".";
 
+    let sIstorieiOznakomlen = this.props.psystatus["sIstorieiOznakomlen"]
+      .isChecked
+      ? " С историей болезни врач ознакомлен. "
+      : "";
+
     let soglasie = "";
     if (this.props.psystatus["nedobrovolno"].isChecked) {
       soglasie =
@@ -69,7 +74,7 @@ export default class NachaloList extends Component {
     return (
       <span>
         <span>
-          {dataOsmotra()}. {osmotr}{" "}
+          {dataOsmotra()}. {osmotr} {sIstorieiOznakomlen}
         </span>
         <span>
           {soglasie} {this.props.psystatus.nedobrovolnoText.text} {zakon}

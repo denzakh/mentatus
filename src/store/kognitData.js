@@ -213,7 +213,7 @@ const data = {
   },
   kognitOgrub: {
     label: "общее огрубление личности",
-    phrase: "общее огрубление личности",
+    phrase: "изменение личности по экзогенно-органическому типу",
     section: "kognit",
     type: "boolean",
     cicle: "otmech",
@@ -313,7 +313,7 @@ const data = {
     label: "Интелл-мнест. функции",
     type: "radio",
     section: "kognit",
-    before: "Интеллектуально-мнестически функции ",
+    before: "Интеллектуально-мнестические функции ",
     after: ". "
   },
   kognitKonfab: {

@@ -80,11 +80,6 @@ export default class RechList extends Component {
             <FreeText text={this.props.psystatus.myshlenieText} />
 
             {/*речь*/}
-            <OnePraseFromRadio
-              name="rechTemp"
-              dataObj={dataBase}
-              psystatus={this.props.psystatus}
-            />
 
             <ListOfWords
               name="rechOsob"

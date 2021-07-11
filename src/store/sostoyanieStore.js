@@ -20,6 +20,9 @@ const store = {
   poNapravleniu: {
     isChecked: false
   },
+  sIstorieiOznakomlen: {
+    isChecked: false
+  },
   nedobrovolno: {
     isChecked: false
   },

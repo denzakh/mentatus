@@ -96,7 +96,15 @@ export default class NachaloManager extends Component {
               checked={this.props.psystatus["poNapravleniu"].isChecked}
               onChange={this.props.toggleSymptom}
               name="poNapravleniu"
-              label="по направлению"
+              label={this.props.dataBase["poNapravleniu"].label}
+            />
+          </div>
+          <div className="list__add">
+            <Checkbox
+              checked={this.props.psystatus["sIstorieiOznakomlen"].isChecked}
+              onChange={this.props.toggleSymptom}
+              name="sIstorieiOznakomlen"
+              label={this.props.dataBase["sIstorieiOznakomlen"].label}
             />
           </div>
         </div>

@@ -17,7 +17,7 @@ export default class OrientirovkaManager extends Component {
           <div className="orientir__title">Ориентировка</div>
           <div className="orientir__table">
             <div className="orientir__col">
-              <div className="orientir__top">В месте</div>
+              <div className="orientir__top">Во времени</div>
               <div className="orientir__content">
                 <RadioList
                   name="orientirVremia"
@@ -28,7 +28,7 @@ export default class OrientirovkaManager extends Component {
               </div>
             </div>
             <div className="orientir__col">
-              <div className="orientir__top">Времени</div>
+              <div className="orientir__top">Месте</div>
               <div className="orientir__content">
                 <RadioList
                   name="orientirMesto"

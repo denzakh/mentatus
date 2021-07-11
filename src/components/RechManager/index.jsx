@@ -109,14 +109,6 @@ export default class RechManager extends Component {
     let rechMain = () => {
       return (
         <div className="list__box">
-          <div className="list__title">по темпу:</div>
-          <RadioList
-            name="rechTemp"
-            dataBase={dataBase}
-            onChange={this.props.toggleRadio}
-            psystatus={this.props.psystatus}
-          />
-
           {rechOsobList()}
 
           <div className="list__title">

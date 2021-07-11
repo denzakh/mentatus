@@ -22,7 +22,7 @@ let data = {
   },
   anamnezRitm: {
     label: "аритмия",
-    phrase: "нарушение ритма",
+    phrase: "нарушения ритма сердца",
     section: "anamnez",
     type: "boolean",
     cicle: "anamnezCicle"
