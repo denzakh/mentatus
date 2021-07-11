@@ -17,19 +17,6 @@ class Repository extends Component {
     this.props.openStatus(id);
   };
 
-  showDelite = psystatusRow => {
-    if (this.props.repository.length > 1) {
-      return (
-        <button
-          type="button"
-          onClick={e => this.handlerDeleteStatus(psystatusRow.id, e)}
-        >
-          Удалить
-        </button>
-      );
-    }
-  };
-
   render() {
     return (
       <div className="repository">
@@ -64,7 +51,16 @@ class Repository extends Component {
                   <td>{psystatusRow.dataOsmotra.text}</td>
                   <td>{psystatusRow.pol.isChecked ? "мужской" : "женский"}</td>
                   <td>{psystatusRow.vozrast.text}</td>
-                  <td>{this.showDelite(psystatusRow)}</td>
+                  <td>
+                    <button
+                      type="button"
+                      onClick={e =>
+                        this.handlerDeleteStatus(psystatusRow.id, e)
+                      }
+                    >
+                      Удалить
+                    </button>
+                  </td>
                 </tr>
               );
             })}
