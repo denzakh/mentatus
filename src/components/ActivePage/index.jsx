@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import pages from "../../containers/pages";
 import { connect } from "react-redux";
-// import { bindActionCreators } from "redux";
+import { bindActionCreators } from "redux";
 
 // Рендерит открытую страницу
 class ActivePage extends Component {

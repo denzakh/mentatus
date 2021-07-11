@@ -1,5 +1,5 @@
 import React from "react";
-import CurrentStatus from "../CurrentStatus";
+import App from "../App";
 import Option from "../Option";
 import Repository from "../Repository";
 
@@ -7,17 +7,17 @@ let pages = [
   {
     name: "Status",
     title: "Текущий статус",
-    component: <CurrentStatus />
-  },
-  {
-    name: "Repository",
-    title: "Заключения",
-    component: <Repository />
+    component: <App />
   },
   {
     name: "Option",
     title: "Настройки",
     component: <Option />
+  },
+  {
+    name: "Repository",
+    title: "Заключения",
+    component: <Repository />
   }
 ];
 
