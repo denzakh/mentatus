@@ -1,5 +1,5 @@
-import { components } from "../router";
+import { components } from "../containers/Router/";
 
-export default (state = "HOME", action = {}) => {
+export default (state = null, action = {}) => {
   return components[action.type] || state;
 };

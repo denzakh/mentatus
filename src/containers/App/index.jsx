@@ -1,13 +1,31 @@
-import React from "react";
+import React, { Component } from "react";
 import { connect } from "react-redux";
+import Header from "../../components/Header";
+import CurrentStatus from "../CurrentStatus";
+import Login from "../Login";
+import Option from "../Option";
+import Repository from "../Repository";
 
-import * as components from "../test";
+class App extends Component {
+  render() {
+    return <div>{this.renderPage()}</div>;
+  }
 
-const App = ({ page }) => {
-  const Component = components[page];
-  return <Component />;
-};
+  renderPage() {
+    console.dir(this.props);
+    switch (this.props.page) {
+      case "Home":
+        return <Option {...this.props} />;
+      case "signIn":
+        return <Login {...this.props} />;
+      default:
+        return <div>whoops</div>;
+    }
+  }
+}
 
-const mapStateToProps = ({ page }) => ({ page });
+const mapState = ({ page, direction, ...state }) => ({
+  page
+});
 
-export default connect(mapStateToProps)(App);
+export default connect(mapState)(App);
