@@ -9,12 +9,12 @@ import {
 } from "../../actions/repository";
 
 class Repository extends Component {
-  handlerDeleteStatus = (id, e) => {
-    this.props.deleteStatus(id);
+  handlerDeleteStatus = e => {
+    this.props.deleteStatus(e.target.id);
   };
 
-  handlerOpenStatus = (id, e) => {
-    this.props.openStatus(id);
+  handlerOpenStatus = e => {
+    this.props.openStatus(e.target.id);
   };
 
   render() {
@@ -42,11 +42,11 @@ class Repository extends Component {
                   <td>
                     <button
                       type="button"
-                      onClick={e => this.handlerOpenStatus(psystatusRow.id, e)}
+                      id={psystatusRow.id}
+                      onClick={this.handlerOpenStatus}
                     >
                       <b>{psystatusRow.id}</b>
                     </button>
-                    {psystatusRow.isOpen ? " открыт" : ""}
                   </td>
                   <td>{psystatusRow.dataOsmotra.text}</td>
                   <td>{psystatusRow.pol.isChecked ? "мужской" : "женский"}</td>
@@ -54,9 +54,8 @@ class Repository extends Component {
                   <td>
                     <button
                       type="button"
-                      onClick={e =>
-                        this.handlerDeleteStatus(psystatusRow.id, e)
-                      }
+                      id={psystatusRow.id}
+                      onClick={this.handlerDeleteStatus}
                     >
                       Удалить
                     </button>

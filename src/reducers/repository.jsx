@@ -19,9 +19,9 @@ export default function repository(state = initialState, action) {
 
     case "OPEN_STATUS":
       let stateWithOpenStatus = state.map(item => {
-        item.isOpen = false;
+        item.isOpen === false;
         if (+item.id === +action.id) {
-          item.isOpen = true;
+          item.isOpen === true;
         }
         return item;
       });
@@ -31,7 +31,7 @@ export default function repository(state = initialState, action) {
 
     case "CLOSE_STATUS":
       let stateWithCloseStatus = state.map(item => {
-        item.isOpen = false;
+        item.isOpen === false;
         return item;
       });
       return update(state, {
