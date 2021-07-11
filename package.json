@@ -2,7 +2,7 @@
   "name": "mentatus",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "http://denzakh.github.io/mentatus",
   "author": "Denis Zakharchenko",
   "license": "Apache 2.0",
   "dependencies": {
@@ -15,9 +15,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^5.0.0",
     "react-scripts": "1.1.4",
-    "redux": "^4.0.0",
-    "redux-devtools-extension": "^2.13.8",
-    "redux-thunk": "^2.3.0"
+    "redux": "^4.0.0"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -7,23 +7,14 @@ import {
   openStatus,
   closeStatus
 } from "../../actions/repository";
-import { setPage } from "../../actions/general";
-import SaveAndLoad from "../../components/SaveAndLoad";
-import Button from "../../components/Button";
 
 class Repository extends Component {
-  handlerCreateNewStatus = () => {
-    this.props.createNewStatus();
-    this.props.setPage("Status");
+  handlerDeleteStatus = (id, e) => {
+    this.props.deleteStatus(id);
   };
 
   handlerOpenStatus = (id, e) => {
     this.props.openStatus(id);
-    this.props.setPage("Status");
-  };
-
-  handlerDeleteStatus = (id, e) => {
-    this.props.deleteStatus(id);
   };
 
   showDelite = psystatusRow => {
@@ -44,8 +35,9 @@ class Repository extends Component {
       <div className="repository">
         <h1>Заключения</h1>
         <div className="repository__panel">
-          <Button onClick={this.handlerCreateNewStatus}>Новый осмотр</Button>
-          <SaveAndLoad />
+          <button type="button" onClick={this.props.createNewStatus}>
+            Новый осмотр
+          </button>
         </div>
         <hr />
         <table className="repository__table" width="500px" border="1px">
@@ -94,8 +86,7 @@ function mapDispatchToProps(dispatch) {
     createNewStatus: bindActionCreators(createNewStatus, dispatch),
     deleteStatus: bindActionCreators(deleteStatus, dispatch),
     openStatus: bindActionCreators(openStatus, dispatch),
-    closeStatus: bindActionCreators(closeStatus, dispatch),
-    setPage: bindActionCreators(setPage, dispatch)
+    closeStatus: bindActionCreators(closeStatus, dispatch)
   };
 }
 

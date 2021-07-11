@@ -15,5 +15,3 @@ export default function option(state = initialState, action) {
       return state;
   }
 }
-
-// dataIsLoadingOrSaving

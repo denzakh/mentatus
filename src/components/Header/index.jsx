@@ -30,21 +30,7 @@ class Header extends Component {
 
     return (
       <header className="header">
-        <div className="header__row">
-          <div className="header__col-logo">
-            <div className="header__logo-box">
-              <img
-                src="/static/img/logo.png"
-                className="header__logo"
-                alt="header-logo"
-              />
-            </div>
-            <div className="header__title">MentaStatus</div>
-          </div>
-          <div className="header__col-menu">
-            <ul className="header__menu">{getMenu(this.props.store)}</ul>
-          </div>
-        </div>
+        <ul className="header__menu">{getMenu(this.props.store)}</ul>
       </header>
     );
   }

@@ -1,8 +1,5 @@
 const store = {
-  doctorId: 0,
-  timeOfLastSave: "",
-  timeOfLastLoad: "",
-  dataIsLoadingOrSaving: false,
+  id: 0,
   isOpen: false
 };
 
