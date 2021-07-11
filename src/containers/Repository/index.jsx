@@ -10,7 +10,6 @@ import {
 import { setPage } from "../../actions/general";
 import SaveAndLoad from "../../components/SaveAndLoad";
 import Button from "../../components/Button";
-import "./style.css";
 
 class Repository extends Component {
   handlerCreateNewStatus = () => {
