@@ -5,10 +5,9 @@ export default class ActivePage extends Component {
   render() {
     let getActiveObj = store => {
       let page = pages.filter(item => {
-        let general = store.general;
-        return item.name === general.activePageName;
+        let option = store.option;
+        return item.name === option.activePageName;
       });
-      console.dir(page[0]);
       return page[0].component;
     };
 

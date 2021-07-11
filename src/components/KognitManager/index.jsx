@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import dataBase from "../../store/kognitData.js";
 import Checkbox from "../Checkbox";
+import RadioList from "../RadioList";
 import RadioListKogn from "../RadioListKogn";
 import RadioListInline from "../RadioListInline";
 import OrientirovkaManager from "../OrientirovkaManager";
