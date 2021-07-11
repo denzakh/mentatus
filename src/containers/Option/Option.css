@@ -19,25 +19,20 @@
   line-height: 1;
   margin-right: 10px;
 }
-.option__status {
-  display: inline-block;
-  font-size: 13px;
-  padding-left: 10px;
-}
+
 .option__update {
+  display: inline-block;
   color: orange;
 }
 .option__error {
+  display: inline-block;
   color: red;
 }
 .option__success {
+  display: inline-block;
   color: green;
 }
 .option__not-save {
+  display: inline-block;
   color: gray;
-}
-.option__user-id {
-  color: gray;
-  font-size: 10px;
-  font-weight: 400;
 }
