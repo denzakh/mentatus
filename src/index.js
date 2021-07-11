@@ -18,7 +18,7 @@ ReactDOM.render(
         <Header />
       </div>
       <div className="wrapper__main">
-        <ActivePage />
+        <ActivePage store1={store} />
       </div>
     </div>
   </Provider>,

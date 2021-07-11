@@ -1,4 +1,3 @@
-import generalStore from "../store/generalStore.js";
 import zhalobyStore from "../store/zhalobyStore.js";
 import anamnezStore from "../store/anamnezStore.js";
 import sostoyanieStore from "../store/sostoyanieStore.js";
@@ -11,7 +10,6 @@ import rekomendaciiStore from "../store/rekomendaciiStore.js";
 import lechenieStore from "../store/lechenieStore.js";
 
 const initialState = {
-  ...generalStore,
   ...zhalobyStore,
   ...anamnezStore,
   ...sostoyanieStore,

@@ -1,4 +1,7 @@
 const store = {
+  patientId: {
+    number: 0
+  },
   vozrast: {
     text: ""
   },
