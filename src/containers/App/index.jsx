@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import Login from "../../pages/Login/";
-import * as components from "../test";
+import * as pages from "../../pages/pages";
 import {
 	setUserLogIn,
 	userLoginStart,
@@ -13,8 +13,8 @@ import {
 class App extends Component {
 	render() {
 		if (this.props.user.email) {
-			let Component = components[this.props.page];
-			return <Component />;
+			let Page = pages[this.props.page];
+			return <Page />;
 		} else {
 			return (
 				<Login

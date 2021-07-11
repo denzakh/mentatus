@@ -45,7 +45,8 @@ export const setUserLogOut = () => {
 			console.log("logout");
 		})
 		.catch(function(error) {
-			console.dir(error);
+			console.log("error message - " + error.message);
+			console.log("error code - " + error.statusCode);
 		});
 	return {
 		type: "USER_LOGOUT"

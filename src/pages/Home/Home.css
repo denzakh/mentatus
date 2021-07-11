@@ -1,0 +1,43 @@
+.home__item {
+	margin: 10px 0;
+}
+.home__label {
+	display: inline-block;
+	margin-right: 10px;
+}
+.home__input {
+	display: inline-block;
+	vertical-align: middle;
+	width: 260px;
+	height: 26px;
+	padding: 5px 10px;
+	border: 1px solid #cccccc;
+	border-radius: 4px;
+	outline: none;
+	overflow: hidden;
+	font-size: 14px;
+	line-height: 1;
+	margin-right: 10px;
+}
+.home__status {
+	display: inline-block;
+	font-size: 13px;
+	padding-left: 10px;
+}
+.home__update {
+	color: orange;
+}
+.home__error {
+	color: red;
+}
+.home__success {
+	color: green;
+}
+.home__not-save {
+	color: gray;
+}
+.home__user-id {
+	color: gray;
+	font-size: 10px;
+	font-weight: 400;
+}
