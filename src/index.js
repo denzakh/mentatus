@@ -1,22 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
 import "./index.css";
+import { Provider } from "react-redux";
 import configureStore from "./configureStore";
 import * as serviceWorker from "./serviceWorker";
-import App from "./containers/App";
+
+import ActivePage from "./components/ActivePage";
+import Header from "./components/Header";
+import "./index.css";
 
 //если передать аргумент true, подключается сохранения в localStorage
 const store = configureStore(false);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById("root")
-);
-
-/*
 ReactDOM.render(
   <Provider store={store}>
     <div className="wrapper">
@@ -30,6 +25,5 @@ ReactDOM.render(
   </Provider>,
   document.getElementById("root")
 );
-*/
 
 serviceWorker.register();

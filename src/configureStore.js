@@ -1,38 +1,10 @@
+import rootReducer from "./reducers";
 import { composeWithDevTools } from "redux-devtools-extension";
-import { combineReducers, createStore, applyMiddleware, compose } from "redux";
-import { connectRoutes } from "redux-first-router";
-import { routesMap } from "./containers/Router/";
-import history from "./fn/history";
-
-import page from "./reducers/page";
-import general from "./reducers/general";
-import option from "./reducers/option";
-import repository from "./reducers/repository";
+import { createStore, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
 
 export default function configureStore(islocalStorage) {
   let store;
-
-  // router
-  const { reducer, middleware, enhancer } = connectRoutes(history, routesMap);
-
-  const rootReducer = combineReducers({
-    location: reducer,
-    page,
-    general,
-    option,
-    repository
-  });
-  const middlewares = applyMiddleware(middleware);
-
-  const composeEnhancers = (...args) =>
-    typeof window !== "undefined"
-      ? composeWithDevTools({})(...args)
-      : compose(...args);
-
-  const enhancers = composeEnhancers(enhancer, middlewares);
-
-  // UNCOMMENT TO SEE ROUTING WORK CORRECTLY WITHOUT EXTRA @@INIT DISPATCH
-  // const enhancers = compose(enhancer, middlewares);
 
   // islocalStorage - если true, подключается подключение сохранения в localStorage
   if (islocalStorage) {
@@ -41,20 +13,27 @@ export default function configureStore(islocalStorage) {
       store = createStore(
         rootReducer,
         JSON.parse(localStorage["mentatus"]),
-        enhancers
+        composeWithDevTools(applyMiddleware(thunk))
       );
     } else {
-      store = createStore(rootReducer, enhancers);
+      store = createStore(
+        rootReducer,
+        composeWithDevTools(applyMiddleware(thunk))
+      );
     }
 
     localStorage.clear();
+
     store.subscribe(() => {
       localStorage["mentatus"] = JSON.stringify(store.getState());
     });
 
     // без localStorage
   } else {
-    store = createStore(rootReducer, enhancers);
+    store = createStore(
+      rootReducer,
+      composeWithDevTools(applyMiddleware(thunk))
+    );
   }
 
   // hot reload
