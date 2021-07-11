@@ -6,7 +6,7 @@ import Repository from "../Repository";
 let pages = [
   {
     name: "Status",
-    title: "Текущий статус",
+    title: "Статус",
     component: <App />
   },
   {
