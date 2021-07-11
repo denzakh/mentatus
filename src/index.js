@@ -9,8 +9,7 @@ import ActivePage from "./components/ActivePage";
 import Header from "./components/Header";
 import "./index.css";
 
-//если передать аргумент true, подключается сохранения в localStorage
-const store = configureStore(false);
+const store = configureStore(false); //использовать ли localStorage
 
 ReactDOM.render(
   <Provider store={store}>

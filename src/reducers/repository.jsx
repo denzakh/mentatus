@@ -20,22 +20,20 @@ function getOpenStatusIndex(state) {
   return openStatusIndex;
 }
 
-// собирает новый список  после удаления одного из статусов
 function getStateAfterDeliteStatus(state, action) {
   let ArrWithDeliteStatus = state.filter(item => +item.id !== +action.id);
-  let isAnyOpenStatus = false;
+  let isOpenStatus = false;
   ArrWithDeliteStatus.forEach(item => {
     if (item.isOpen === true) {
-      isAnyOpenStatus = true;
+      isOpenStatus = true;
     }
   });
-  if (!isAnyOpenStatus) {
+  if (!isOpenStatus) {
     ArrWithDeliteStatus[0].isOpen = true;
   }
   return ArrWithDeliteStatus;
 }
 
-// основной редьюсер, управляет действиями со списком статусов и внутри одного статуса
 export default function repository(state = getInitialState(), action) {
   let openStatusIndex = getOpenStatusIndex(state);
 
@@ -77,8 +75,6 @@ export default function repository(state = getInitialState(), action) {
       });
 
     // управление внутри одного статуса
-
-    // обновление булева симптома
     case "SET_SYMPTOM":
       return update(state, {
         [openStatusIndex]: {
@@ -86,13 +82,11 @@ export default function repository(state = getInitialState(), action) {
         }
       });
 
-    // обновление текстового симптома
     case "SET_TEXT":
       return update(state, {
         [openStatusIndex]: { [action.name]: { text: { $set: action.text } } }
       });
 
-    // обновление симптома, выборанного из списка (установка его номера в БД)
     case "SET_RADIO":
       return update(state, {
         [openStatusIndex]: {
