@@ -22,17 +22,19 @@
 
 .option__update {
   display: inline-block;
-  color: orange;
 }
 .option__error {
   display: inline-block;
+  font-weight: 700;
   color: red;
 }
 .option__success {
   display: inline-block;
+  font-weight: 700;
   color: green;
 }
 .option__not-save {
   display: inline-block;
+  font-weight: 400;
   color: gray;
 }

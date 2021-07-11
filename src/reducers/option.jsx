@@ -8,7 +8,6 @@ export default function option(state = optionInitialState, action) {
       return update(state, {
         [action.name]: { $set: action.value },
         isOptionUpdateSuccess: { $set: false },
-        isOptionUpdateError: { $set: false },
         isOptionSave: { $set: false }
       });
 
