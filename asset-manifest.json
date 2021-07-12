@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/mentatus/static/css/main.85d7efac.chunk.css",
-    "main.js": "/mentatus/static/js/main.ddb04bf2.chunk.js",
-    "main.js.map": "/mentatus/static/js/main.ddb04bf2.chunk.js.map",
-    "runtime~main.js": "/mentatus/static/js/runtime~main.f07f597a.js",
-    "runtime~main.js.map": "/mentatus/static/js/runtime~main.f07f597a.js.map",
-    "static/js/2.07319da3.chunk.js": "/mentatus/static/js/2.07319da3.chunk.js",
-    "static/js/2.07319da3.chunk.js.map": "/mentatus/static/js/2.07319da3.chunk.js.map",
-    "index.html": "/mentatus/index.html",
-    "precache-manifest.a87cfeaf3743a3c3ff20f8c39c782cc9.js": "/mentatus/precache-manifest.a87cfeaf3743a3c3ff20f8c39c782cc9.js",
-    "service-worker.js": "/mentatus/service-worker.js",
-    "static/css/main.85d7efac.chunk.css.map": "/mentatus/static/css/main.85d7efac.chunk.css.map"
+    "main.css": "/mentatus.ru/static/css/main.85d7efac.chunk.css",
+    "main.js": "/mentatus.ru/static/js/main.6516c7f3.chunk.js",
+    "main.js.map": "/mentatus.ru/static/js/main.6516c7f3.chunk.js.map",
+    "runtime~main.js": "/mentatus.ru/static/js/runtime~main.51eda208.js",
+    "runtime~main.js.map": "/mentatus.ru/static/js/runtime~main.51eda208.js.map",
+    "static/js/2.07319da3.chunk.js": "/mentatus.ru/static/js/2.07319da3.chunk.js",
+    "static/js/2.07319da3.chunk.js.map": "/mentatus.ru/static/js/2.07319da3.chunk.js.map",
+    "index.html": "/mentatus.ru/index.html",
+    "precache-manifest.8ae5f2cd289642bdb6b2e899b566fbf3.js": "/mentatus.ru/precache-manifest.8ae5f2cd289642bdb6b2e899b566fbf3.js",
+    "service-worker.js": "/mentatus.ru/service-worker.js",
+    "static/css/main.85d7efac.chunk.css.map": "/mentatus.ru/static/css/main.85d7efac.chunk.css.map"
   }
 }
