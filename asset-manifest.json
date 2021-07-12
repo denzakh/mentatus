@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "./static/css/main.011fba78.chunk.css",
-    "main.js": "./static/js/main.6250f3cf.chunk.js",
-    "main.js.map": "./static/js/main.6250f3cf.chunk.js.map",
-    "runtime~main.js": "./static/js/runtime~main.d653cc00.js",
-    "runtime~main.js.map": "./static/js/runtime~main.d653cc00.js.map",
-    "static/js/2.21e6777b.chunk.js": "./static/js/2.21e6777b.chunk.js",
-    "static/js/2.21e6777b.chunk.js.map": "./static/js/2.21e6777b.chunk.js.map",
-    "index.html": "./index.html",
-    "precache-manifest.9f0d566e8b1feeab3e59e602853c85a2.js": "./precache-manifest.9f0d566e8b1feeab3e59e602853c85a2.js",
-    "service-worker.js": "./service-worker.js",
-    "static/css/main.011fba78.chunk.css.map": "./static/css/main.011fba78.chunk.css.map"
+    "main.css": "/mentatus/static/css/main.85d7efac.chunk.css",
+    "main.js": "/mentatus/static/js/main.ddb04bf2.chunk.js",
+    "main.js.map": "/mentatus/static/js/main.ddb04bf2.chunk.js.map",
+    "runtime~main.js": "/mentatus/static/js/runtime~main.f07f597a.js",
+    "runtime~main.js.map": "/mentatus/static/js/runtime~main.f07f597a.js.map",
+    "static/js/2.07319da3.chunk.js": "/mentatus/static/js/2.07319da3.chunk.js",
+    "static/js/2.07319da3.chunk.js.map": "/mentatus/static/js/2.07319da3.chunk.js.map",
+    "index.html": "/mentatus/index.html",
+    "precache-manifest.a87cfeaf3743a3c3ff20f8c39c782cc9.js": "/mentatus/precache-manifest.a87cfeaf3743a3c3ff20f8c39c782cc9.js",
+    "service-worker.js": "/mentatus/service-worker.js",
+    "static/css/main.85d7efac.chunk.css.map": "/mentatus/static/css/main.85d7efac.chunk.css.map"
   }
 }
