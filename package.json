@@ -1,0 +1,44 @@
+{
+  "name": "mentatus",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "http://denzakh.github.io/mentatus",
+  "author": "Denis Zakharchenko",
+  "license": "Apache 2.0",
+  "dependencies": {
+    "classnames": "^2.2.5",
+    "gh-pages": "^2.0.0",
+    "immutability-helper": "^2.6.6",
+    "react": "^16.3.2",
+    "react-classnames": "^0.1.2",
+    "react-dom": "^16.3.2",
+    "react-redux": "^5.0.7",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
+  },
+  "devDependencies": {
+    "husky": "^1.3.1",
+    "lint-staged": "^8.1.0",
+    "prettier": "^1.16.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,json,css}": [
+      "prettier --write",
+      "git add"
+    ]
+  }
+}

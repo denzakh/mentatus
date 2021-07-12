@@ -1,0 +1,24 @@
+.conclusion-panel {
+}
+
+.conclusion-panel__row {
+}
+
+.conclusion-panel__btn {
+  display: inline-block;
+  vertical-align: top;
+  padding: 10px 15px;
+  border: 1px solid #cccccc;
+  background: #fff;
+  cursor: pointer;
+  margin-right: -1px;
+  outline: none;
+}
+
+.conclusion-panel__btn:hover {
+  background-color: #eee;
+}
+
+.conclusion-panel__btn:active {
+  background-color: #cccccc;
+}

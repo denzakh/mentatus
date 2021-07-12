@@ -1,0 +1,44 @@
+.tab-menu__item {
+  position: relative;
+  padding: 5px;
+  min-width: 80px;
+  max-width: 105px;
+  border-radius: 10px 0 0 10px;
+  border: 1px solid #cccccc;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  margin-bottom: -1px;
+  background-image: linear-gradient(to top, #f2f2f2 0, #fefefe 50%);
+}
+
+.tab-menu__item:hover {
+  background-image: linear-gradient(to top, #f8f8f8 0, #ffffff 50%);
+}
+
+.tab-menu__item.is-active {
+  border-right: 1px solid #ffffff;
+  background: #ffffff;
+  z-index: 1;
+}
+
+.app__tab-symbol {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  text-shadow: -1px -1px 0 #ffffff;
+  opacity: 0.6;
+  line-height: 1;
+}
+
+.tab-menu__item.is-active .app__tab-symbol {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 700;
+  opacity: 1;
+}
+
+.app__tab-label {
+  font-size: 12px;
+  line-height: 1;
+  text-align: center;
+}
