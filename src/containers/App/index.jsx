@@ -69,7 +69,7 @@ class App extends Component {
               </div>
             </main>
             <footer className="app__footer">
-              Copyright 2019 Denis Zakharchenko
+              Copyright 2021 Denis Zakharchenko
               <br />
               Licensed under the Apache License, Version 2.0
             </footer>
@@ -94,7 +94,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);
