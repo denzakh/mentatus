@@ -17,7 +17,7 @@ export default class RechList extends Component {
       if (this.props.psystatus.rechNeotvechaet.isChecked) {
         return (
           <span>
-            <span>. </span>
+            <span> </span>
             <span>
               {dataBase["rechNeotvechaet"].phrase}
               <span>. </span>
@@ -27,7 +27,7 @@ export default class RechList extends Component {
       } else {
         return (
           <span>
-            <span>, </span>
+            <span> </span>
             <OnePraseFromRadio
               name="rechSuschestvo"
               dataObj={dataBase}
