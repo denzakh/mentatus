@@ -1,60 +1,60 @@
 const store = {
-  "bredDepress": {
+  bredDepress: {
     isChecked: false
   },
-  "bredSam": {
+  bredSam: {
     isChecked: false
   },
-  "bredIpoh": {
+  bredIpoh: {
     isChecked: false
   },
-  "bredPresl": {
+  bredPresl: {
     isChecked: false
   },
-  "bredVozd": {
+  bredVozd: {
     isChecked: false
   },
-  "bredMelk": {
+  bredMelk: {
     isChecked: false
   },
-  "bredEkspan": {
+  bredEkspan: {
     isChecked: false
   },
-  "bredLubov": {
+  bredLubov: {
     isChecked: false
   },
-  "bredOtkl": {
+  bredOtkl: {
     isChecked: false
   },
-  "bredText": {
+  bredText: {
     text: ""
   },
-  "gallSluh": {
+  gallSluh: {
     isChecked: false
   },
-  "gallZrit": {
+  gallZrit: {
     isChecked: false
   },
-  "gallTak": {
+  gallTak: {
     isChecked: false
   },
-  "gallOtkl": {
+  gallOtkl: {
     isChecked: false
-  },  
-  "gallText": {
+  },
+  gallText: {
     text: ""
   },
 
-  "opasnye": {
+  opasnye: {
     number: 0
   },
-  "opasnyeAgressia": {
+  opasnyeAgressia: {
     number: 0
   },
-  "opasnyeText": {
+  opasnyeText: {
     text: ""
   },
-  "opasnyeOtkl": {
+  opasnyeOtkl: {
     isChecked: false
   }
 };

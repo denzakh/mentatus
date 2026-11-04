@@ -1,53 +1,53 @@
 const store = {
-  "zhalobyTrevoga": {
+  zhalobyTrevoga: {
     isChecked: false
   },
-  "zhalobyDepressia": {
+  zhalobyDepressia: {
     isChecked: false
   },
-  "zhalobySon": {
+  zhalobySon: {
     isChecked: false
   },
-  "zhalobyAppetit": {
+  zhalobyAppetit: {
     isChecked: false
   },
-  "zhalobySlabost": {
+  zhalobySlabost: {
     isChecked: false
   },
-  "zhalobyBolVGolove": {
+  zhalobyBolVGolove: {
     isChecked: false
   },
-  "zhalobyBolVTele": {
+  zhalobyBolVTele: {
     isChecked: false
   },
-  "zhalobySomat": {
+  zhalobySomat: {
     isChecked: false
   },
-  "zhalobyGolovokruzheniye": {
+  zhalobyGolovokruzheniye: {
     isChecked: false
   },
-  "zhalobyAmnezia": {
+  zhalobyAmnezia: {
     isChecked: false
   },
-  "zhalobyLabilnost": {
+  zhalobyLabilnost: {
     isChecked: false
   },
-  "zhalobyPoteriSoznania": {
+  zhalobyPoteriSoznania: {
     isChecked: false
   },
-  "zhalobyPadenia": {
+  zhalobyPadenia: {
     isChecked: false
   },
-  "zhalobyGal": {
+  zhalobyGal: {
     isChecked: false
   },
-  "zhalobyKonflikt": {
+  zhalobyKonflikt: {
     isChecked: false
   },
-  "zhalobyTrudnosti": {
+  zhalobyTrudnosti: {
     isChecked: false
   },
-  "zhalobyText": {
+  zhalobyText: {
     text: ""
   }
 };
