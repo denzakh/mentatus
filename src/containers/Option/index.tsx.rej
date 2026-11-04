@@ -1,7 +1,0 @@
-diff a/src/containers/Option/index.tsx b/src/containers/Option/index.tsx	(rejected hunks)
-@@ -21,4 +21 @@ function mapDispatchToProps(dispatch) {
--export default connect(
--  mapStateToProps,
--  mapDispatchToProps
--)(Option);
-+export default connect(mapStateToProps, mapDispatchToProps)(Option);
