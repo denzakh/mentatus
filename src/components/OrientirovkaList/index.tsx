@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/kognitData";
 import { fieldOf } from "../../lib/redux";
+import { orientationPhrase } from "../../lib/text/orientation";
 import type { ListOwnProps } from "../../types/components";
 import type { OrientirSchemaEntry } from "../../types/schema";
 import type { StatusState } from "../../types/status";
@@ -33,24 +34,17 @@ function mapStateToProps(state: StatusState): StateProps {
   const pol = fieldOf(state, "pol");
   const rechOtkl = fieldOf(state, "rechOtkl");
 
-  // код ориентировки: время + место + личность либо 000,
-  // если ориентировку определить не удалось
-  const orientirNumber =
-    orientirNot && orientirNot.isChecked
-      ? "orientir000"
-      : "orientir" +
-        +((orientirVremia && orientirVremia.number) || 0) +
-        +((orientirMesto && orientirMesto.number) || 0) +
-        +((orientirLichnost && orientirLichnost.number) || 0);
-
-  const polCode = pol && pol.isChecked ? "m" : "w";
   const orientir = dataBase.orientir as OrientirSchemaEntry;
 
   return {
-    phrase:
-      rechOtkl && rechOtkl.isChecked
-        ? ""
-        : orientir[polCode][orientirNumber] || "",
+    phrase: orientationPhrase(orientir, {
+      notDefined: !!(orientirNot && orientirNot.isChecked),
+      time: orientirVremia && orientirVremia.number,
+      place: orientirMesto && orientirMesto.number,
+      person: orientirLichnost && orientirLichnost.number,
+      isMale: !!(pol && pol.isChecked),
+      isRechOtkl: !!(rechOtkl && rechOtkl.isChecked)
+    }),
     text: orientirText && orientirText.text
   };
 }

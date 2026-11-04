@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/zhalobyData";
 import { fieldOf } from "../../lib/redux";
+import { isZhalobyHidden } from "../../lib/rules/visibility";
 import FieldView from "../FieldView";
 import type { ListOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
@@ -39,11 +40,12 @@ function mapStateToProps(state: StatusState): StateProps {
   const soznanie = fieldOf(state, "soznanie");
 
   return {
-    isHidden:
-      !!(rechOtkl && rechOtkl.isChecked) ||
-      !!(rechNeotvechaet && rechNeotvechaet.isChecked) ||
-      +((kontakt && kontakt.number) || 0) === 2 ||
-      +((soznanie && soznanie.number) || 0) === 7
+    isHidden: isZhalobyHidden({
+      rechOtkl: !!(rechOtkl && rechOtkl.isChecked),
+      rechNeotvechaet: !!(rechNeotvechaet && rechNeotvechaet.isChecked),
+      kontakt: kontakt && kontakt.number,
+      soznanie: soznanie && soznanie.number
+    })
   };
 }
 

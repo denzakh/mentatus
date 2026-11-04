@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fieldOf } from "../../lib/redux";
+import { isDescriptiveHidden } from "../../lib/rules/visibility";
 import "./Conclusion.css";
 import "./Print.css";
 import ZhalobyList from "../ZhalobyList";
@@ -68,9 +69,10 @@ function mapStateToProps(state: StatusState): StateProps {
   const soznanie = fieldOf(state, "soznanie");
 
   return {
-    isHidden:
-      +((kontakt && kontakt.number) || 0) === 2 ||
-      +((soznanie && soznanie.number) || 0) === 7
+    isHidden: isDescriptiveHidden({
+      kontakt: kontakt && kontakt.number,
+      soznanie: soznanie && soznanie.number
+    })
   };
 }
 

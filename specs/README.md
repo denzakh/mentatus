@@ -14,7 +14,7 @@
 | 4 | Обновление стека (Vite + React 18 + RTK + vitest) | `04-stack-upgrade.md` | ✅ выполнено | 1–3 |
 | 5 | Чистка мёртвых CSS-классов | `05-css-cleanup.md` | ✅ выполнено | 4 |
 | 6 | Перевод на TypeScript | `06-typescript.md` | ✅ выполнено | 4–5 |
-| 7 | B.1 — Бизнес-правила и тексты заключения → `lib` + тесты | `07-render-unification.md` (B.1) | ⏳ | 6 |
+| 7 | B.1 — Бизнес-правила и тексты заключения → `lib` + тесты | `07-render-unification.md` (B.1) | ✅ выполнено | 6 |
 | 8 | B.2 — Единый реестр разделов | `07-render-unification.md` (B.2) | ⏳ | 7 |
 | 9 | B.3 — Унификация полей | `07-render-unification.md` (B.3) | ⏳ | 8 |
 | 10 | B.4 — Функциональные компоненты + hooks | `07-render-unification.md` (B.4) | ⏳ | 9 |
@@ -79,6 +79,27 @@ PR и отдельная сессия, порядок обязателен (B.1 
   `eslint src` — 0 ошибок. Следующий шаг по спеке 6.4 — поэтапное включение
   `strict` (сначала `src/lib` и `src/reducers`).
 
+## Baseline после B.1 (бизнес-правила и тексты в `lib`)
+
+- `src/lib/rules/visibility.ts` — `isContactUnavailable`,
+  `isConsciousnessClouded`, `isDescriptiveHidden`, `isZhalobyHidden`,
+  `isRechMainHidden` и константы `CONTACT_UNAVAILABLE = 2`,
+  `CONSCIOUSNESS_CLOUDED = 7`. В `Conclusion`, `ZhalobyList`, `RechList`
+  условий видимости больше нет — только вызовы `lib`.
+- `src/lib/text/nachalo.ts` — `buildNachaloText`: дословная склейка «Начала
+  осмотра» (двойной пробел в ст. 23 ч.4, «его/ее», «Освидетельствован/а»,
+  пустые радиогруппы не роняют вывод). `NachaloList` только собирает
+  `NachaloInput` и рендерит строки.
+- `src/lib/text/orientation.ts` — `orientationKey` / `orientationPhrase`:
+  `orientir000`, незаполненные группы → 0, фолбэк `""`, нарушенная речь.
+- Характеризационные тесты текстов (сняты до переноса, зелёные после):
+  `src/components/NachaloList/characterization.test.tsx`,
+  `src/components/OrientirovkaList/characterization.test.tsx`; стор без
+  персиста для проверок разметки — `src/testUtils/statusStore.tsx`.
+- Unit-тесты `lib`: `src/lib/rules/visibility.test.ts`,
+  `src/lib/text/nachalo.test.ts`, `src/lib/text/orientation.test.ts`.
+- Проверки B.1: `typecheck` — 0 ошибок, 13 файлов / 142 теста, `lint` — 0,
+  сборка `dist/` (167 модулей). Разметка, классы и порядок вывода не менялись.
 
 ## Обслуживание после этапа 6 (вариант A)
 

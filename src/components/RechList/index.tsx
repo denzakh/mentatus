@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/rechData";
 import { fieldOf } from "../../lib/redux";
+import { isRechMainHidden } from "../../lib/rules/visibility";
 import FieldView from "../FieldView";
 import type { ListOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
@@ -111,10 +112,11 @@ function mapStateToProps(state: StatusState): StateProps {
   return {
     isOdnoslojChecked: !!(odnosloj && odnosloj.isChecked),
     isNeotvechaetChecked: !!(neotvechaet && neotvechaet.isChecked),
-    isMainHidden:
-      !!(rechOtkl && rechOtkl.isChecked) ||
-      +((kontakt && kontakt.number) || 0) === 2 ||
-      +((soznanie && soznanie.number) || 0) === 7
+    isMainHidden: isRechMainHidden({
+      rechOtkl: !!(rechOtkl && rechOtkl.isChecked),
+      kontakt: kontakt && kontakt.number,
+      soznanie: soznanie && soznanie.number
+    })
   };
 }
 
