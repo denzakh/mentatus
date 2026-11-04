@@ -17,11 +17,8 @@ export default class TabMenu extends Component<Props> {
       { name: "affekt", symbol: "АФ", label: "Аффективная сфера" },
       { name: "rech", symbol: "РМ", label: "Речь и мышление" },
       { name: "kognit", symbol: "ИП", label: "Интеллект и память" },
-      //{ name: "kogtest", symbol: "КТ", label: "Когнитивные тесты" },
       { name: "pp", symbol: "ПП", label: "Психопродукция" },
       { name: "diagnoz", symbol: "ДЗ", label: "Диагноз" }
-      // { name: "rekomendacii", symbol: "РК", label: "Рекомендации" },
-      // { name: "lechenie", symbol: "ЛЧ", label: "Лечение" }
     ];
 
     const tabMenuRender = tabsMenu.map(item => {

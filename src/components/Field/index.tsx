@@ -65,6 +65,7 @@ export default function Field(props: Props) {
       dataBase={dataBase}
       label={label || field.label}
       style={style}
+      autoKritika={props.autoKritika}
     />
   );
 }

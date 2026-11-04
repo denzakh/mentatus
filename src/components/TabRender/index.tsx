@@ -5,7 +5,6 @@ import SostoyanieManager from "../../components/SostoyanieManager";
 import AffektManager from "../../components/AffektManager";
 import RechManager from "../../components/RechManager";
 import KognitManager from "../../components/KognitManager";
-import KogtestManager from "../../components/KogtestManager";
 import PpManager from "../../components/PpManager";
 import DiagnozManager from "../../components/DiagnozManager";
 
@@ -44,9 +43,6 @@ export default class TabRender extends Component<Props> {
       </div>,
       <div key="kognit">
         <KognitManager />
-      </div>,
-      <div key="kogtest">
-        <KogtestManager />
       </div>,
       <div key="pp">
         <PpManager />

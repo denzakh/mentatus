@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import dataBase from "../../store/sostoyanieData";
 import { todayIso, formatDate } from "../../lib/text/date";
 import { fieldOf } from "../../lib/redux";
+import { optionById } from "../../lib/schema";
 import type { ListOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
 
@@ -34,9 +35,12 @@ class NachaloList extends Component<Props> {
       nedobrovolnoText
     } = this.props;
 
+    // пункты радиогрупп ищем по id, а не по позиции в массиве схемы
+    const mesto = optionById(dataBase.mestoOsmotra, mestoOsmotraNumber);
+
     const osmotr =
       (isMale ? "Осмотрен " : "Осмотрена ") +
-      dataBase.mestoOsmotra.data[mestoOsmotraNumber].phrase +
+      (mesto ? mesto.phrase : "") +
       (poNapravleniu ? " по направлению врача соматического профиля" : "") +
       ".";
 
@@ -44,23 +48,35 @@ class NachaloList extends Component<Props> {
       ? " С историей болезни врач ознакомлен. "
       : "";
 
+    const prichina = optionById(
+      dataBase.nedobrovolnoPrichiny,
+      nedobrovolnoPrichinyNumber
+    );
+
     const soglasie = nedobrovolno
-      ? dataBase.nedobrovolnoPrichiny.data[nedobrovolnoPrichinyNumber].phrase
+      ? prichina
+        ? prichina.phrase
+        : ""
       : "На беседу с врачом-психиатром " +
         (isMale ? "согласен" : "согласна") +
         ". ";
+
+    const punkt = optionById(
+      dataBase.nedobrovolnoPunkt,
+      nedobrovolnoPunktNumber
+    );
 
     let zakon = "";
     if (nedobrovolno) {
       zakon =
         (isMale ? "Освидетельствован" : "Освидетельствована") +
         " недобровольно на основании  ст. 23 ч.4 п «" +
-        dataBase.nedobrovolnoPunkt.data[nedobrovolnoPunktNumber].punkt +
+        (punkt ? punkt.punkt : "") +
         "» закона РФ «О психиатрической помощи и гарантиях прав граждан при ее оказании», т.к. совершает действия, дающие основания предполагать наличие у " +
         (isMale ? "него " : "нее ") +
         "тяжелого психического расстройства, которое обусловливает " +
         (nedobrovolnoPunktNumber === 2 ? "" : isMale ? "его " : "ее ") +
-        dataBase.nedobrovolnoPunkt.data[nedobrovolnoPunktNumber].phrase +
+        (punkt ? punkt.phrase : "") +
         ".";
     }
 

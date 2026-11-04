@@ -9,7 +9,6 @@ import SostoyanieList from "../SostoyanieList";
 import AffektList from "../AffektList";
 import RechList from "../RechList";
 import KognitList from "../KognitList";
-import KogtestList from "../KogtestList";
 import OrientirovkaList from "../OrientirovkaList";
 import PpList from "../PpList";
 import DiagnozList from "../DiagnozList";
@@ -52,7 +51,6 @@ class Conclusion extends Component<Props> {
                 <AffektList toggleTab={toggleTab} />
                 <RechList toggleTab={toggleTab} />
                 <KognitList toggleTab={toggleTab} />
-                <KogtestList toggleTab={toggleTab} />
                 <PpList toggleTab={toggleTab} />
               </span>
             )}

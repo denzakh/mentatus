@@ -1,5 +1,6 @@
 import sections from "../reducers/sections";
 import schemas from "./schemas";
+import type { OrientirSchemaEntry } from "../types/schema";
 
 /*
 Полнота схем разделов: `*Data.js` — единственный источник правды о полях.
@@ -105,6 +106,26 @@ describe("схемы разделов", () => {
           });
         });
       });
+    });
+  });
+
+  it("описывает все комбинации фраз ориентировки", () => {
+    const orientir = schemas.kognit.orientir as OrientirSchemaEntry;
+
+    ["w", "m"].forEach(gender => {
+      expect(typeof orientir[gender].orientir000).toBe("string");
+
+      for (let time = 1; time <= 3; time += 1) {
+        for (let place = 1; place <= 3; place += 1) {
+          for (let person = 1; person <= 3; person += 1) {
+            const key = `orientir${time}${place}${person}`;
+
+            expect(typeof orientir[gender][key], `${gender}:${key}`).toBe(
+              "string"
+            );
+          }
+        }
+      }
     });
   });
 });

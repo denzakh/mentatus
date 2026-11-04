@@ -12,7 +12,7 @@
 | 2 | Схемный рендеринг разделов из `store/*Data.js` | `02-schema-rendering.md` | ✅ выполнено | 1 |
 | 3 | `redux-persist` вместо самописного localStorage | `03-redux-persist.md` | ✅ выполнено | 1 |
 | 4 | Обновление стека (Vite + React 18 + RTK + vitest) | `04-stack-upgrade.md` | ✅ выполнено | 1–3 |
-| 5 | Чистка мёртвых CSS-классов | `05-css-cleanup.md` | ⏳ | 4 |
+| 5 | Чистка мёртвых CSS-классов | `05-css-cleanup.md` | ✅ выполнено | 4 |
 | 6 | Перевод на TypeScript | `06-typescript.md` | ✅ выполнено | 4–5 |
 
 Правило: этапы выполняются по порядку, каждый — отдельный PR/коммит с зелёными
@@ -71,6 +71,24 @@
   `eslint src` — 0 ошибок. Следующий шаг по спеке 6.4 — поэтапное включение
   `strict` (сначала `src/lib` и `src/reducers`).
 
+
+## Обслуживание после этапа 6 (вариант A)
+
+- Удалены артефакты прошлых рефакторингов: `*.rej`, дубли `reducers/index.tsx`
+  и `reducers/option.tsx`, неиспользуемые `store/{rekomendacii,lechenie,kogtest}*`.
+- Удалён служебный срез `option` и заглушки страниц «Настройки»/«Заключения»
+  (`containers/Option`, `containers/Repository`, `containers/pages`): активная
+  страница никогда не переключалась. `ActivePage` рендерит `App` напрямую.
+- Удалены заглушки `KogtestManager`/`KogtestList` и их упоминания в `TabRender`,
+  `Conclusion`, `TabMenu`.
+- `NachaloList` ищет пункты радиогрупп по `id` (`lib/schema.optionById`), а не по
+  позиции в массиве; добавлены пропущенные фразы ориентировки
+  (`orientir231/331/332`), полнота таблицы проверяется тестом.
+- `Field` пробрасывает `autoKritika`; `RadioListKogn` не зависит от того, что
+  `id` пунктов идут подряд; `persistStore` пишет в localStorage с `throttle: 300`.
+- Обновлены dev-зависимости: `vitest` 5, `jsdom` 30, `prettier` 3, `gh-pages` 6;
+  удалены неиспользуемые `husky` и `lint-staged`.
+- Добавлены `README.md` и CI (`.github/workflows/ci.yml`).
 
 ## Общие соглашения
 

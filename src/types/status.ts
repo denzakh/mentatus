@@ -39,12 +39,9 @@ export type SectionName =
 
 export type StatusSection = Record<string, FieldValue>;
 
-// настройки UI: имя пользователя и активная страница
-export interface OptionState {
-  name: string;
-  activePageName: string;
-}
-
-export type StatusState = Record<SectionName, StatusSection> & {
-  option: OptionState;
-};
+/*
+Состояние стора: только срезы разделов. Служебный срез `option`
+(имя пользователя и активная страница) удалён — навигация по страницам
+не реализована, настройки UI нигде не читались.
+*/
+export type StatusState = Record<SectionName, StatusSection>;

@@ -7,9 +7,9 @@ import type { RootState } from "../reducers";
 /*
 Персист состояния через redux-persist.
 
-Сохраняем только предметные срезы разделов (`zhaloby`…`diagnoz`).
-`option` (настройки UI: имя, активная вкладка) не персистим — при загрузке
-он должен браться из начального состояния.
+Сохраняем только предметные срезы разделов (`zhaloby`…`diagnoz`) — других
+срезов в сторе нет. Запись в localStorage троттлится (`throttle` в конфиге),
+чтобы не сериализовать всё состояние на каждый символ при вводе.
 
 redux-persist кладёт состояние в localStorage под ключом `persist:mentatus`.
 */
@@ -24,8 +24,11 @@ export const persistConfig = {
   key: PERSIST_KEY,
   version: PERSIST_VERSION,
   storage,
-  // сохраняем только предметные срезы; `option` не сохраняем
+  // сохраняем только предметные срезы разделов
   whitelist: Object.keys(sections),
+  // без throttle состояние сериализуется в localStorage на каждый экшен,
+  // то есть на каждый символ при вводе в поле
+  throttle: 300,
   // при несовместимом изменении формы состояния поднять version и добавить migrate
   migrate: undefined
 };

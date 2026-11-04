@@ -37,33 +37,24 @@ type Props = OwnProps & StateProps & DispatchProps;
 
 type ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
 
+// ответы, которые дополнительно снижают критику: id пункта -> номер критики
+const kritikaByOption: Record<number, number> = { 1: 2, 2: 3, 3: 4 };
+
 class RadioListKogn extends Component<Props> {
   handleChange: ChangeHandler = e => {
-    this.props.setRadio(this.props.name, +e.target.value);
+    const optionId = +e.target.value;
+    const kritika = kritikaByOption[optionId];
+
+    // часть ответов автоматически выставляет критику, если она ещё не задана
+    if (this.props.isKritikaEmpty && kritika !== undefined) {
+      this.props.setRadio("kritika", kritika);
+    }
+
+    this.props.setRadio(this.props.name, optionId);
   };
 
   render() {
-    const { name, options, selected, isKritikaEmpty } = this.props;
-
-    // функция снижения критики: часть ответов автоматически
-    // выставляет критику, если она ещё не задана
-    const withKritika = (number: number, onChange: ChangeHandler) => (
-      e: React.ChangeEvent<HTMLInputElement>
-    ) => {
-      if (isKritikaEmpty) {
-        this.props.setRadio("kritika", number);
-      }
-
-      onChange(e);
-    };
-
-    const toggleList: ChangeHandler[] = [
-      this.handleChange, // 0
-      withKritika(2, this.handleChange), // 1
-      withKritika(3, this.handleChange), // 2
-      withKritika(4, this.handleChange), // 3
-      this.handleChange // 4
-    ];
+    const { name, options, selected } = this.props;
 
     return (
       <div className="radio__list">
@@ -75,7 +66,7 @@ class RadioListKogn extends Component<Props> {
               id={name + item.id}
               value={item.id}
               className="radio__input"
-              onChange={toggleList[item.id]}
+              onChange={this.handleChange}
               checked={+item.id === +selected}
             />
             <label className="radio__label" htmlFor={name + item.id}>

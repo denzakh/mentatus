@@ -1,36 +1,18 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import pages from "../../containers/pages";
-import type { StatusState } from "../../types/status";
+import React from "react";
+import App from "../../containers/App";
 
-interface StateProps {
-  activePageName: string;
+/*
+ActivePage
+страница приложения: сейчас она одна — рабочее место «Статус»
+
+Раньше здесь был выбор из `containers/pages`, но страницы «Настройки»
+и «Заключения» были заглушками, а активную страницу никто не переключал
+(срез `option` не менялся). Заглушки и навигация удалены.
+*/
+export default function ActivePage() {
+  return (
+    <div className="wrapper__active-page">
+      <App />
+    </div>
+  );
 }
-
-class ActivePage extends Component<StateProps> {
-  render() {
-    const activePage = pages.filter(
-      item => item.name === this.props.activePageName
-    )[0];
-
-    if (!activePage) {
-      return null;
-    }
-
-    const ActiveComponent = activePage.component;
-
-    return (
-      <div className="wrapper__active-page">
-        <ActiveComponent />
-      </div>
-    );
-  }
-}
-
-function mapStateToProps(state: StatusState): StateProps {
-  return {
-    activePageName: state.option.activePageName
-  };
-}
-
-export default connect(mapStateToProps)(ActivePage);

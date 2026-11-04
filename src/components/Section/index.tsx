@@ -92,6 +92,7 @@ class Section extends Component<Props> {
             component={block.component}
             label={block.label}
             style={block.style}
+            autoKritika={block.autoKritika}
           />
         );
 

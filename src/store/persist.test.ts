@@ -14,14 +14,14 @@ describe("persistConfig", () => {
     expect(persistConfig.whitelist).toEqual(Object.keys(sections));
   });
 
-  it("не персистит настройки UI (`option`)", () => {
-    expect(persistConfig.whitelist).not.toContain("option");
-  });
-
   it("задаёт ключ и версию схемы хранения", () => {
     expect(persistConfig.key).toBe("mentatus");
     expect(persistConfig.version).toBe(2);
     expect(`persist:${persistConfig.key}`).toBe("persist:mentatus");
+  });
+
+  it("троттлит запись, чтобы не сериализовать состояние на каждый экшен", () => {
+    expect(persistConfig.throttle).toBe(300);
   });
 });
 
@@ -33,7 +33,7 @@ describe("withPersist", () => {
     Object.keys(sections).forEach(section => {
       expect(state[section]).toBeDefined();
     });
-    expect(state.option.activePageName).toBe("Status");
+    expect(Object.keys(state).sort()).toEqual(Object.keys(sections).sort());
   });
 
   it("пропускает экшены разделов через обёртку", () => {
@@ -114,8 +114,12 @@ describe("persistStore", () => {
     };
   };
 
+  // throttle из боевого конфига в тестах обнуляем: иначе запись 8 срезов
+  // идёт по одному ключу за тик и тест ждал бы несколько секунд
   const createPersistedStore = (storage: MemoryStorage) =>
-    createStore(persistReducer({ ...persistConfig, storage }, rootReducer));
+    createStore(
+      persistReducer({ ...persistConfig, storage, throttle: 0 }, rootReducer)
+    );
 
   const waitFor = (predicate: () => boolean) => {
     let attempts = 0;
@@ -179,13 +183,17 @@ describe("persistStore", () => {
     const saved = readSavedState(storage);
     expect(saved).not.toBeNull();
     expect(saved!.zhaloby.zhalobyText.text).toBe("тревога");
-    expect(saved!.option).toBeUndefined();
+    // `_persist` — служебные метаданные redux-persist, остальное — срезы разделов
+    expect(
+      Object.keys(saved!)
+        .filter(key => key !== "_persist")
+        .sort()
+    ).toEqual(Object.keys(sections).sort());
 
     // новый стор с тем же хранилищем должен подхватить значения
     const nextStore = createPersistedStore(storage);
     await rehydrate(nextStore);
 
     expect(nextStore.getState().zhaloby.zhalobyText.text).toBe("тревога");
-    expect(nextStore.getState().option.activePageName).toBe("Status");
   });
 });

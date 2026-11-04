@@ -5,12 +5,15 @@ import withPersist, { clearLegacyState } from "./store/persist";
 
 /*
 Стор с персистом: корневой редьюсер обёрнут persistReducer (см.
-`src/store/persist.js`), а persistor синхронизирует whitelisted-срезы
+`src/store/persist.ts`), а persistor синхронизирует whitelisted-срезы
 с localStorage.
 
 Стор собирается `configureStore` из RTK: devtools, thunk и проверка
 сериализуемости включены по умолчанию. Экшены redux-persist несериализуемы
 по своей природе, поэтому исключаем их из проверки.
+
+`throttle` в конфиге персиста: без него состояние сериализуется в localStorage
+на каждый экшен, то есть на каждый символ при вводе в поле.
 */
 export default function configureStore() {
   // старый самописный формат больше не читаем — чистим ключ

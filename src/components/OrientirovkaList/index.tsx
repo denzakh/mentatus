@@ -50,7 +50,7 @@ function mapStateToProps(state: StatusState): StateProps {
     phrase:
       rechOtkl && rechOtkl.isChecked
         ? ""
-        : orientir[polCode][orientirNumber],
+        : orientir[polCode][orientirNumber] || "",
     text: orientirText && orientirText.text
   };
 }
