@@ -4,19 +4,22 @@ import { fieldOf } from "../../lib/redux";
 import { isDescriptiveHidden } from "../../lib/rules/visibility";
 import "./Conclusion.css";
 import "./Print.css";
-import ZhalobyList from "../ZhalobyList";
-import AnamnezList from "../AnamnezList";
-import SostoyanieList from "../SostoyanieList";
-import AffektList from "../AffektList";
-import RechList from "../RechList";
-import KognitList from "../KognitList";
-import OrientirovkaList from "../OrientirovkaList";
-import PpList from "../PpList";
-import DiagnozList from "../DiagnozList";
+import { conclusionOrder } from "../../sections/registry";
+import type { ConclusionItem } from "../../sections/registry";
 import NachaloList from "../NachaloList";
 import ConclusionPanel from "../ConclusionPanel";
 import type { ToggleTabHandler } from "../../types/components";
 import type { StatusState } from "../../types/status";
+
+/*
+Conclusion
+заключение справа: три абзаца, собранные из списков разделов
+
+Списки и их порядок берутся из реестра разделов (`conclusionOrder`):
+второй абзац — описательная часть, третий — диагноз. «Начало осмотра»
+подключается отдельным элементом первого абзаца. Если контакт недоступен
+или помрачено сознание, описательная часть не выводится.
+*/
 
 interface OwnProps {
   toggleTab: ToggleTabHandler;
@@ -32,6 +35,11 @@ class Conclusion extends Component<Props> {
   render() {
     const { isHidden, toggleTab } = this.props;
 
+    const descriptive = conclusionOrder.filter(item => item.paragraph === 2);
+    const visible = descriptive.filter(item => !item.hiddenWhenDescriptive);
+    const hideable = descriptive.filter(item => item.hiddenWhenDescriptive);
+    const after = conclusionOrder.filter(item => item.paragraph === 3);
+
     return (
       <div className="conclusion__box">
         <div className="conclusion__panel">
@@ -43,23 +51,25 @@ class Conclusion extends Component<Props> {
             <NachaloList toggleTab={toggleTab} />
           </p>
           <p>
-            <AnamnezList toggleTab={toggleTab} />
-            <SostoyanieList toggleTab={toggleTab} />
+            {this.renderLists(visible, toggleTab)}
             {isHidden ? null : (
-              <span>
-                <ZhalobyList toggleTab={toggleTab} />
-                <OrientirovkaList toggleTab={toggleTab} />
-                <AffektList toggleTab={toggleTab} />
-                <RechList toggleTab={toggleTab} />
-                <KognitList toggleTab={toggleTab} />
-                <PpList toggleTab={toggleTab} />
-              </span>
+              <span>{this.renderLists(hideable, toggleTab)}</span>
             )}
           </p>
-          <DiagnozList toggleTab={toggleTab} />
+          {this.renderLists(after, toggleTab)}
         </div>
       </div>
     );
+  }
+
+  // списки разделов в заключении; ключ строится по разделу и позиции,
+  // потому что `kognit` в порядке вывода встречается дважды
+  renderLists(items: ConclusionItem[], toggleTab: ToggleTabHandler) {
+    return items.map((item, index) => {
+      const List = item.List;
+
+      return <List key={`${item.section}-${index}`} toggleTab={toggleTab} />;
+    });
   }
 }
 

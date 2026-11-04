@@ -15,7 +15,7 @@
 | 5 | Чистка мёртвых CSS-классов | `05-css-cleanup.md` | ✅ выполнено | 4 |
 | 6 | Перевод на TypeScript | `06-typescript.md` | ✅ выполнено | 4–5 |
 | 7 | B.1 — Бизнес-правила и тексты заключения → `lib` + тесты | `07-render-unification.md` (B.1) | ✅ выполнено | 6 |
-| 8 | B.2 — Единый реестр разделов | `07-render-unification.md` (B.2) | ⏳ | 7 |
+| 8 | B.2 — Единый реестр разделов | `07-render-unification.md` (B.2) | ✅ выполнено | 7 |
 | 9 | B.3 — Унификация полей | `07-render-unification.md` (B.3) | ⏳ | 8 |
 | 10 | B.4 — Функциональные компоненты + hooks | `07-render-unification.md` (B.4) | ⏳ | 9 |
 
@@ -100,6 +100,33 @@ PR и отдельная сессия, порядок обязателен (B.1 
   `src/lib/text/nachalo.test.ts`, `src/lib/text/orientation.test.ts`.
 - Проверки B.1: `typecheck` — 0 ошибок, 13 файлов / 142 теста, `lint` — 0,
   сборка `dist/` (167 модулей). Разметка, классы и порядок вывода не менялись.
+
+## Baseline после B.2 (единый реестр разделов)
+
+- `src/sections/registry.ts` — единственное место, где перечислены разделы:
+  `sectionsRegistry` (schema + layout + custom-блоки + форма),
+  `tabOrder` (порядок вкладок) и `conclusionOrder` (порядок и абзацы
+  заключения, флаг `hiddenWhenDescriptive`).
+- `TabMenu` строит вкладки по `tabOrder`, `TabRender` — форму по
+  `sectionsRegistry[activeTab]` (`form: "section"` → `<Section>`, иначе
+  собственный компонент), `Conclusion` — три абзаца по `conclusionOrder`.
+  Ни один из них не перечисляет разделы и не импортирует `*Manager`/`*List`.
+- Удалены 7 файлов-обёрток: `ZhalobyManager`, `AnamnezManager`,
+  `SostoyanieManager`, `AffektManager`, `RechManager`, `KognitManager`,
+  `PpManager` (+ дубль `KognitManager/Kognit.css`, классы `.orientir__*`
+  остались в `OrientirovkaManager/Orientirovka.css`). Оставлены формы и
+  custom-блоки: `DiagnozManager`, `NachaloManager`, `OrientirovkaManager`,
+  `KritikaManager`.
+- Тест реестра — `src/sections/registry.test.ts` (11 тестов): ключи совпадают
+  со срезами `reducers/sections`, `schema === schemas[name]`, `form: "section"`
+  ⇒ layout, согласованность custom-блоков layout и карты `components`,
+  8 уникальных вкладок в прежнем порядке, посимвольные символы «ОC»/«АH»,
+  порядок заключения `anamnez, sostoyanie, zhaloby, kognit, affekt, rech,
+  kognit, pp, diagnoz` и наличие всех 8 разделов.
+- Проверки B.2: `typecheck` — 0 ошибок, 14 файлов / 153 теста, `lint` — 0,
+  сборка `dist/` (161 модуль). DOM меню и заключения сравнён с версией до
+  рефакторинга (`innerHTML` совпал для `kontakt = 0/2/7`), каждая вкладка
+  рендерит свою форму, неизвестная вкладка — пустой `.tab-render`.
 
 ## Обслуживание после этапа 6 (вариант A)
 
