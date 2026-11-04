@@ -4,6 +4,7 @@ import ListOfWords from "../ListOfWords";
 import OnePraseFromRadio from "../OnePraseFromRadio";
 import FreeText from "../FreeText";
 import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
+import type { Schema } from "../../types/schema";
 
 /*
 FieldView
@@ -16,7 +17,14 @@ as      - вид списка для группы чекбоксов: "sentences
 isAnd   - соединять последние пункты группы союзом «и»
 */
 
-export default function FieldView(props) {
+interface Props {
+  name: string;
+  dataObj?: Schema;
+  as?: string;
+  isAnd?: boolean;
+}
+
+export default function FieldView(props: Props) {
   const { name, dataObj, as, isAnd } = props;
   const field = dataObj ? dataObj[name] : undefined;
 

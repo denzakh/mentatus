@@ -1,4 +1,6 @@
-const store = {
+import type { StatusSection } from "../types/status";
+
+const store: StatusSection = {
   bredDepress: {
     isChecked: false
   },

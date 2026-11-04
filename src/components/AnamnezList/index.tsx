@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/anamnezData.js";
+import dataBase from "../../store/anamnezData";
 import { fieldOf } from "../../lib/redux";
 import FieldView from "../FieldView";
+import type { ListOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class AnamnezList extends Component {
+interface StateProps {
+  isHidden: boolean;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class AnamnezList extends Component<Props> {
   render() {
     return (
       <span data-id="anamnez" onClick={this.props.toggleTab}>
@@ -21,7 +29,7 @@ class AnamnezList extends Component {
 }
 
 // анамнез не выводится, если врач его не собрал
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const field = fieldOf(state, "anamnezOtkl");
 
   return {
@@ -29,4 +37,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AnamnezList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  AnamnezList
+);

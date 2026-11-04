@@ -20,7 +20,7 @@ export default class ConclusionPanel extends Component {
   };
 
   // резервный способ для браузеров без Clipboard API
-  copyTextFallback = node => {
+  copyTextFallback = (node: HTMLElement) => {
     const selection = window.getSelection();
     const range = document.createRange();
     range.selectNode(node);

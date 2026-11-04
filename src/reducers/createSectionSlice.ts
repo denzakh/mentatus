@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setSymptom, setText, setRadio } from "../actions/fieldActions";
+import type { StatusSection } from "../types/status";
 
 /*
 Фабрика среза раздела.
@@ -13,7 +14,18 @@ import { setSymptom, setText, setRadio } from "../actions/fieldActions";
 `createSectionReducer.js`): имя раздела, начальное состояние и три операции
 над полем.
 */
-export default function createSectionSlice(name, initialState) {
+
+// записываемая форма поля: у каждого поля есть только один из ключей
+interface MutableField {
+  isChecked?: boolean;
+  number?: number;
+  text?: string | false;
+}
+
+export default function createSectionSlice(
+  name: string,
+  initialState: StatusSection
+) {
   return createSlice({
     name,
     initialState,
@@ -21,19 +33,19 @@ export default function createSectionSlice(name, initialState) {
     extraReducers: builder => {
       builder
         .addCase(setSymptom, (state, action) => {
-          const field = state[action.payload.name];
+          const field = state[action.payload.name] as MutableField | undefined;
           if (field && field.isChecked !== undefined) {
             field.isChecked = !field.isChecked;
           }
         })
         .addCase(setText, (state, action) => {
-          const field = state[action.payload.name];
+          const field = state[action.payload.name] as MutableField | undefined;
           if (field && field.text !== undefined) {
             field.text = action.payload.text;
           }
         })
         .addCase(setRadio, (state, action) => {
-          const field = state[action.payload.name];
+          const field = state[action.payload.name] as MutableField | undefined;
           if (field && field.number !== undefined) {
             field.number = action.payload.number;
           }

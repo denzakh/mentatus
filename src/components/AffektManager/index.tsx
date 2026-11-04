@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import dataBase from "../../store/affektData.js";
-import { affektLayout } from "../../store/affektLayout.js";
+import dataBase from "../../store/affektData";
+import { affektLayout } from "../../store/affektLayout";
 import Section from "../Section";
 
 // форма раздела: поля и раскладка описаны в схеме и layout

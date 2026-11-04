@@ -1,4 +1,6 @@
-const data = {
+import type { Schema } from "../types/schema";
+
+const data: Schema = {
   bredDepress: {
     label: "депрессивного характера",
     phrase: "депрессивного характера",

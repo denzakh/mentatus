@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { cicleKeys } from "../../lib/text";
 import Checkbox from "../Checkbox";
+import type { Schema } from "../../types/schema";
 
 /*
 CheckboxGroup
@@ -16,7 +17,14 @@ autoKritika - значение критики, проставляемое при
 поэтому группа не перерисовывается при изменении выбора.
 */
 
-export default class CheckboxGroup extends Component {
+interface Props {
+  cicle?: string;
+  dataBase?: Schema;
+  itemClassName?: string;
+  autoKritika?: number;
+}
+
+export default class CheckboxGroup extends Component<Props> {
   render() {
     const { cicle, dataBase, itemClassName, autoKritika } = this.props;
 

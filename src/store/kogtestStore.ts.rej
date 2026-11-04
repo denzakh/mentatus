@@ -1,0 +1,8 @@
+diff a/src/store/kogtestStore.ts b/src/store/kogtestStore.ts	(rejected hunks)
+@@ -1,5 +1 @@
+-const store = {
+- 
+-
+-
+-};
++const store = {};

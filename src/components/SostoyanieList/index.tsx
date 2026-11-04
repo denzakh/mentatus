@@ -1,9 +1,10 @@
 import React, { Component } from "react";
-import dataBase from "../../store/sostoyanieData.js";
+import dataBase from "../../store/sostoyanieData";
 import ListOfWordsZatrud from "../ListOfWordsZatrud";
 import FieldView from "../FieldView";
+import type { ListOwnProps } from "../../types/components";
 
-export default class SostoyanieList extends Component {
+export default class SostoyanieList extends Component<ListOwnProps> {
   render() {
     return (
       <span data-id="sostoyanie" onClick={this.props.toggleTab}>
@@ -12,7 +13,7 @@ export default class SostoyanieList extends Component {
         <FieldView name="kontakt" dataObj={dataBase} />
 
         {/*затруднен*/}
-        <ListOfWordsZatrud name="zatrud" dataObj={dataBase} isAnd="true" />
+        <ListOfWordsZatrud name="zatrud" dataObj={dataBase} />
 
         {/*Отдельно*/}
         <FieldView name="vpech" dataObj={dataBase} as="sentences" />

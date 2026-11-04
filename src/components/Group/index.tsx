@@ -1,5 +1,6 @@
 import React from "react";
 import CheckboxGroup from "../CheckboxGroup";
+import type { Schema } from "../../types/schema";
 
 /*
 Group
@@ -10,7 +11,15 @@ cicle - имя цикла (поле `cicle` у полей схемы)
 dataBase - схема раздела
 itemClassName / autoKritika - пробрасываются в CheckboxGroup
 */
-export default function Group(props) {
+
+interface Props {
+  cicle?: string;
+  dataBase?: Schema;
+  itemClassName?: string;
+  autoKritika?: number;
+}
+
+export default function Group(props: Props) {
   const { cicle, dataBase, itemClassName, autoKritika } = props;
 
   return (

@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+import type { ComponentType } from "react";
 import { connect } from "react-redux";
 import { collectVisibility, blockKey } from "../../lib/layout";
 import { areStatePropsEqual } from "../../lib/redux";
 import Field from "../Field";
 import Group from "../Group";
+import type { Layout, LayoutBlock } from "../../types/layout";
+import type { Schema } from "../../types/schema";
+import type { SectionName, StatusState } from "../../types/status";
 
 /*
 Section
@@ -20,18 +24,31 @@ components - карта custom-блоков { имя: компонент }
 перерисовка происходит только при изменении самих условий.
 */
 
-class Section extends Component {
+interface OwnProps {
+  section: SectionName;
+  dataBase: Schema;
+  layout: Layout;
+  components?: Record<string, ComponentType<{ dataBase?: Schema }>>;
+}
+
+interface StateProps {
+  visible: Record<string, boolean>;
+}
+
+type Props = OwnProps & StateProps;
+
+class Section extends Component<Props> {
   render() {
     return <div>{this.renderBlocks(this.props.layout, [])}</div>;
   }
 
-  renderBlocks(blocks, path) {
+  renderBlocks(blocks: LayoutBlock[] | undefined, path: number[]) {
     return (blocks || []).map((block, index) =>
       this.renderBlock(block, path.concat(index))
     );
   }
 
-  renderBlock(block, path) {
+  renderBlock(block: LayoutBlock, path: number[]): React.ReactNode {
     const key = blockKey(path);
     const dataBase = block.dataBase || this.props.dataBase;
 
@@ -101,9 +118,9 @@ class Section extends Component {
   }
 
   // нестандартный блок раздела (NachaloManager, OrientirovkaManager, ...)
-  renderCustom(block, key, dataBase) {
+  renderCustom(block: LayoutBlock, key: string, dataBase: Schema | undefined) {
     const components = this.props.components || {};
-    const Custom = components[block.component];
+    const Custom = block.component ? components[block.component] : undefined;
 
     if (!Custom) {
       return null;
@@ -113,12 +130,18 @@ class Section extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: OwnProps
+): StateProps {
   return {
     visible: collectVisibility(ownProps.layout, state[ownProps.section] || {})
   };
 }
 
-export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
-  Section
-);
+export default connect<StateProps, unknown, OwnProps>(
+  mapStateToProps,
+  null,
+  null,
+  { areStatePropsEqual }
+)(Section);

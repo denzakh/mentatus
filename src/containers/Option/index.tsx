@@ -1,21 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 // import { bindActionCreators } from "redux";
+import type { OptionState, StatusState } from "../../types/status";
 
-class Option extends Component {
+interface StateProps {
+  psystatus: OptionState;
+}
+
+class Option extends Component<StateProps> {
   render() {
     return <div className="repository">Option</div>;
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   return {
     psystatus: state.option
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return {};
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Option);
+export default connect<StateProps>(mapStateToProps)(Option);

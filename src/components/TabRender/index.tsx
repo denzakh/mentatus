@@ -20,34 +20,38 @@ activeTab - имя активного раздела
 при вводе затрагивает только конкретное поле.
 */
 
-export default class TabRender extends Component {
+interface Props {
+  activeTab: string;
+}
+
+export default class TabRender extends Component<Props> {
   render() {
     const tabs = [
-      <div key="zhaloby" name="zhaloby">
+      <div key="zhaloby">
         <ZhalobyManager />
       </div>,
-      <div key="sostoyanie" name="sostoyanie">
+      <div key="sostoyanie">
         <SostoyanieManager />
       </div>,
-      <div key="anamnez" name="anamnez">
+      <div key="anamnez">
         <AnamnezManager />
       </div>,
-      <div key="affekt" name="affekt">
+      <div key="affekt">
         <AffektManager />
       </div>,
-      <div key="rech" name="rech">
+      <div key="rech">
         <RechManager />
       </div>,
-      <div key="kognit" name="kognit">
+      <div key="kognit">
         <KognitManager />
       </div>,
-      <div key="kogtest" name="kogtest">
+      <div key="kogtest">
         <KogtestManager />
       </div>,
-      <div key="pp" name="pp">
+      <div key="pp">
         <PpManager />
       </div>,
-      <div key="diagnoz" name="diagnoz">
+      <div key="diagnoz">
         <DiagnozManager />
       </div>
     ];

@@ -15,8 +15,20 @@ import PpList from "../PpList";
 import DiagnozList from "../DiagnozList";
 import NachaloList from "../NachaloList";
 import ConclusionPanel from "../ConclusionPanel";
+import type { ToggleTabHandler } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class Conclusion extends Component {
+interface OwnProps {
+  toggleTab: ToggleTabHandler;
+}
+
+interface StateProps {
+  isHidden: boolean;
+}
+
+type Props = OwnProps & StateProps;
+
+class Conclusion extends Component<Props> {
   render() {
     const { isHidden, toggleTab } = this.props;
 
@@ -53,7 +65,7 @@ class Conclusion extends Component {
 }
 
 // если контакт недоступен или помрачено сознание, описательная часть не выводится
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const kontakt = fieldOf(state, "kontakt");
   const soznanie = fieldOf(state, "soznanie");
 
@@ -64,4 +76,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(Conclusion);
+export default connect<StateProps, unknown, OwnProps>(mapStateToProps)(
+  Conclusion
+);

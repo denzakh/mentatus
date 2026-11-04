@@ -1,10 +1,16 @@
 import React, { Component } from "react";
 import "./TabMenu.css";
 import classNames from "classnames";
+import type { ToggleTabHandler } from "../../types/components";
 
-export default class TabMenu extends Component {
+interface Props {
+  activeTab: string;
+  toggleTab: ToggleTabHandler;
+}
+
+export default class TabMenu extends Component<Props> {
   render() {
-    let tabsMenu = [
+    const tabsMenu = [
       { name: "sostoyanie", symbol: "ОC", label: "Общее состояние" },
       { name: "anamnez", symbol: "АH", label: "Анамнез" },
       { name: "zhaloby", symbol: "ЖЛ", label: "Жалобы" },
@@ -18,8 +24,8 @@ export default class TabMenu extends Component {
       // { name: "lechenie", symbol: "ЛЧ", label: "Лечение" }
     ];
 
-    let tabMenuRender = tabsMenu.map(item => {
-      let tabClass = classNames({
+    const tabMenuRender = tabsMenu.map(item => {
+      const tabClass = classNames({
         "tab-menu__item": true,
         "is-active": item.name === this.props.activeTab
       });

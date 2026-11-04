@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/affektData.js";
+import dataBase from "../../store/affektData";
 import { fieldOf } from "../../lib/redux";
 import FieldView from "../FieldView";
+import type { ListOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class AffektList extends Component {
+interface StateProps {
+  isKolebaniaChecked: boolean;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class AffektList extends Component<Props> {
   render() {
     return (
       <span data-id="affekt" onClick={this.props.toggleTab}>
@@ -52,7 +60,7 @@ class AffektList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const field = fieldOf(state, "nastroyeniyeKolebania");
 
   return {
@@ -60,4 +68,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(AffektList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  AffektList
+);

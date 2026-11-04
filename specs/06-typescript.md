@@ -1,6 +1,6 @@
 # Этап 6 — Перевод проекта на TypeScript
 
-**Статус:** ⏳ запланировано.
+**Статус:** ✅ выполнено (см. «Итог выполнения» в конце).
 **Зависимости:** этапы 4–5.
 **Цель:** типизировать код постепенно, без «большого взрыва».
 
@@ -110,3 +110,73 @@ npm run build
 
 - Не менять поведение и разметку.
 - Не удалять `allowJs`, пока не переведены все файлы.
+
+## Итог выполнения
+
+- Зависимости: `typescript`, `@types/react`/`@types/react-dom` версии 18
+  (под React 18.3, а не 19), `@types/node`, `typescript-eslint`
+  (devDependencies).
+- `tsconfig.json` — по шагу 6.1, но `allowJs: false` (переведена вся `src`),
+  `types: ["vite/client", "vitest/globals"]` (тесты используют глобальные
+  `describe/it/expect/vi`), `include: ["src"]`. Добавлен `src/vite-env.d.ts`.
+- Переведены **все** файлы `src` (`.js`/`.jsx` → `.ts`/`.tsx`, через `git mv`,
+  чтобы сохранить историю): `lib`, `actions`, `reducers`, `store`, `components`,
+  `containers`, `index.tsx`, тесты и `setupTests.ts`. Импорты без `.js`-
+  расширений; `index.html` грузит `/src/index.tsx`.
+- Новые типы:
+  - `src/types/status.ts` — `FieldValue` (три формы поля), `SectionName`,
+    `StatusSection`, `OptionState`, `StatusState`;
+  - `src/types/schema.ts` — `FieldType`, `RadioOption`, `FieldSchema`,
+    `RadioGroupSchema`, `Schema`, `OrientirPhrases`;
+  - `src/types/layout.ts` — `LayoutBlock`/`Layout` (включая `visibleWhen`);
+  - `src/types/components.ts` — общие пропсы полей (`FieldOwnProps`),
+    представлений (`FieldViewOwnProps`) и списков (`ListOwnProps`),
+    `ToggleTabHandler`.
+- `FieldValue` объявлен как объединение трёх форм, но в каждой форме перечислены
+  все ключи (`number?: undefined` и т.п.), поэтому существующие чтения
+  `field.isChecked` / `field.text` / `field.number` остались без правок и при
+  этом типизированы.
+- `src/lib/**` — типизированы сигнатуры чистых функций (`cicleKeys`,
+  `buildListText`, `buildRadioPhrase`, `pickPhrase`, `fingerPhrase`,
+  `todayIso`, `formatDate`, `isKritikaEmpty`, `fieldOf`, `flagsOf`,
+  `areStatePropsEqual`, `collectVisibility`, `blockKey`).
+- Схемы и срезы: `*Data.ts` типизированы как `Schema`, `*Store.ts` — как
+  `StatusSection`, `*Layout.ts` — как `Layout`. `schemas.ts` —
+  `Record<SectionName, Schema>`.
+- Редьюсеры: `createSectionSlice(name, initialState: StatusSection)` с
+  внутренней записываемой формой поля; `reducers/index.ts` собирает
+  `Record<SectionName, Reducer<StatusSection>>` и экспортирует `RootState`.
+- Экшены: `createAction` с типизированными prepare-функциями
+  (`setSymptom(name)`, `setText(name, text)`, `setRadio(name, number)`).
+- Компоненты: у каждого объявлены `OwnProps`/`StateProps`/`DispatchProps`,
+  `connect<StateProps, DispatchProps, OwnProps>`, обработчики событий —
+  `React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>`,
+  `React.MouseEvent<HTMLElement>`; `Section` типизирован по `Layout`/`Schema`,
+  `Field`/`FieldView` — по `ComponentType<FieldOwnProps>` и типам схемы.
+- Тесты переведены на `.test.ts`/`.test.tsx`; `persist.test.ts` переписан с
+  `done`-колбэка на `async`/`await` (типы vitest не считают `done` вызываемым).
+- `vite.config.js`: `setupFiles: ["./src/setupTests.ts"]`,
+  `include: ["src/**/*.test.{js,jsx,ts,tsx}"]`.
+- `package.json`: добавлен скрипт `typecheck` (`tsc --noEmit`), глобы
+  `format`/`lint-staged` расширены на `ts/tsx`.
+- `eslint.config.mjs`: добавлен блок `typescript-eslint` для `*.ts/*.tsx`;
+  базовый `no-unused-vars` для TS выключен в пользу правила плагина,
+  `@typescript-eslint/no-explicit-any` — off.
+
+Итоговое состояние проверок:
+
+- `npx tsc --noEmit` — без ошибок;
+- `npm test` — 7 сьютов / 91 тест, зелёные;
+- `npm run build` — `dist/` (169 модулей);
+- `npm run lint` — 0 ошибок, 0 предупреждений.
+
+Намеренные отклонения (поведение и разметка не меняются):
+
+- `strict: false` — как в шаге 6.1; ужесточение по шагу 6.4 вынесено в следующий
+  шаг (сначала `src/lib` и `src/reducers`, затем `src/components`).
+- `allowJs: false` вместо «оставить для непереведённых» — непереведённых файлов
+  в `src` не осталось.
+- В `TabRender` убран невалидный для `div` атрибут `name` (фильтр вкладок и
+  раньше использовал `key`), в `SostoyanieList` — неиспользуемый `isAnd="true"`
+  у `ListOfWordsZatrud` (компонент всегда передаёт `isAnd={true}` сам).
+

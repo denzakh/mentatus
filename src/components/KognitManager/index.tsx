@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import dataBase from "../../store/kognitData.js";
-import { kognitLayout } from "../../store/kognitLayout.js";
+import dataBase from "../../store/kognitData";
+import { kognitLayout } from "../../store/kognitLayout";
 import OrientirovkaManager from "../OrientirovkaManager";
 import Section from "../Section";
 import "./Kognit.css";

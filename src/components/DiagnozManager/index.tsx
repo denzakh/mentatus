@@ -1,11 +1,28 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import type { Dispatch } from "redux";
 import { setText } from "../../actions/textAction";
 import { fieldOf } from "../../lib/redux";
+import type { StatusState } from "../../types/status";
 import "./Diagnoz.css";
 
-class DiagnozManager extends Component {
-  handleChange = e => {
+interface StateProps {
+  mkb10: string;
+  klin: string;
+  dopolnenie: string;
+  reqilech: string;
+}
+
+interface DispatchProps {
+  setText: (name: string, value: string) => void;
+}
+
+type Props = StateProps & DispatchProps;
+
+class DiagnozManager extends Component<Props> {
+  handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     this.props.setText(e.target.name, e.target.value);
   };
 
@@ -62,24 +79,27 @@ class DiagnozManager extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const mkb10 = fieldOf(state, "diagnozMkb10");
   const klin = fieldOf(state, "diagnozKlin");
   const dopolnenie = fieldOf(state, "diagnozDopolnenie");
   const reqilech = fieldOf(state, "reqilech");
 
   return {
-    mkb10: mkb10 && mkb10.text,
-    klin: klin && klin.text,
-    dopolnenie: dopolnenie && dopolnenie.text,
-    reqilech: reqilech && reqilech.text
+    mkb10: (mkb10 && mkb10.text) || "",
+    klin: (klin && klin.text) || "",
+    dopolnenie: (dopolnenie && dopolnenie.text) || "",
+    reqilech: (reqilech && reqilech.text) || ""
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   return {
     setText: (name, value) => dispatch(setText(name, value))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DiagnozManager);
+export default connect<StateProps, DispatchProps, unknown>(
+  mapStateToProps,
+  mapDispatchToProps
+)(DiagnozManager);

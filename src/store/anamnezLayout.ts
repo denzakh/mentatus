@@ -1,5 +1,7 @@
+import type { Layout } from "../types/layout";
+
 /* Раскладка формы раздела «Анамнез» (см. `src/components/Section`). */
-export const anamnezLayout = [
+export const anamnezLayout: Layout = [
   {
     type: "box",
     className: "manager",

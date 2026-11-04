@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import dataBase from "../../store/sostoyanieData.js";
+import dataBase from "../../store/sostoyanieData";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
 

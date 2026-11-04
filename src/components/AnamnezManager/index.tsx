@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import dataBase from "../../store/anamnezData.js";
-import { anamnezLayout } from "../../store/anamnezLayout.js";
+import dataBase from "../../store/anamnezData";
+import { anamnezLayout } from "../../store/anamnezLayout";
 import Section from "../Section";
 
 // форма раздела: поля и их раскладка описаны в схеме и layout

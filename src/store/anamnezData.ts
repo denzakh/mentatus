@@ -1,4 +1,6 @@
-let data = {
+import type { Schema } from "../types/schema";
+
+const data: Schema = {
   anamnezChmt: {
     label: "ЧМТ",
     phrase: "ЧМТ",

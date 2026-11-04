@@ -1,3 +1,5 @@
+import type { Layout } from "../types/layout";
+
 import { sliceFlag, sliceNumber } from "../lib/redux";
 
 /* подробности колебаний настроения нужны только при их наличии */
@@ -14,7 +16,7 @@ const hasTrevogaOptions = slice => sliceNumber(slice, "trevoga") !== 0;
 const hasAppetitOptions = slice => sliceNumber(slice, "appetit") !== 0;
 
 /* Раскладка формы раздела «Аффект» (см. `src/components/Section`). */
-export const affektLayout = [
+export const affektLayout: Layout = [
   {
     type: "row",
     className: "manager",

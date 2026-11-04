@@ -1,11 +1,13 @@
-import zhalobyData from "./zhalobyData.js";
-import anamnezData from "./anamnezData.js";
-import sostoyanieData from "./sostoyanieData.js";
-import affektData from "./affektData.js";
-import rechData from "./rechData.js";
-import kognitData from "./kognitData.js";
-import ppData from "./ppData.js";
-import diagnozData from "./diagnozData.js";
+import zhalobyData from "./zhalobyData";
+import anamnezData from "./anamnezData";
+import sostoyanieData from "./sostoyanieData";
+import affektData from "./affektData";
+import rechData from "./rechData";
+import kognitData from "./kognitData";
+import ppData from "./ppData";
+import diagnozData from "./diagnozData";
+import type { Schema } from "../types/schema";
+import type { SectionName } from "../types/status";
 
 /*
 Схемы разделов: имя среза -> описание его полей (*Data.js).
@@ -15,7 +17,7 @@ import diagnozData from "./diagnozData.js";
 `type` (boolean | radio | string | text | number) и подпись/фразы/цикл.
 Полноту схем проверяет `src/store/schema.test.js`.
 */
-const schemas = {
+const schemas: Record<SectionName, Schema> = {
   zhaloby: zhalobyData,
   anamnez: anamnezData,
   sostoyanie: sostoyanieData,

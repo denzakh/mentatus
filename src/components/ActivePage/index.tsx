@@ -1,8 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import pages from "../../containers/pages";
+import type { StatusState } from "../../types/status";
 
-class ActivePage extends Component {
+interface StateProps {
+  activePageName: string;
+}
+
+class ActivePage extends Component<StateProps> {
   render() {
     const activePage = pages.filter(
       item => item.name === this.props.activePageName
@@ -22,7 +27,7 @@ class ActivePage extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   return {
     activePageName: state.option.activePageName
   };

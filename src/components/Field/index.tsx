@@ -1,4 +1,5 @@
 import React from "react";
+import type { ComponentType } from "react";
 import Checkbox from "../Checkbox";
 import CheckboxOtkl from "../CheckboxOtkl";
 import CheckboxPol from "../CheckboxPol";
@@ -8,6 +9,8 @@ import RadioListKogn from "../RadioListKogn";
 import Textarea from "../Textarea";
 import TextareaInline from "../TextareaInline";
 import InputDate from "../InputDate";
+import type { FieldOwnProps } from "../../types/components";
+import type { Schema } from "../../types/schema";
 
 /*
 Field
@@ -22,7 +25,7 @@ style     - стили поля
 */
 
 // реализация поля по умолчанию для каждого типа схемы
-const byType = {
+const byType: Record<string, ComponentType<FieldOwnProps>> = {
   boolean: Checkbox,
   radio: RadioList,
   string: Textarea,
@@ -30,7 +33,7 @@ const byType = {
 };
 
 // нестандартные реализации, доступные из layout по имени
-const byName = {
+const byName: Record<string, ComponentType<FieldOwnProps>> = {
   Checkbox: Checkbox,
   CheckboxOtkl: CheckboxOtkl,
   CheckboxPol: CheckboxPol,
@@ -42,7 +45,12 @@ const byName = {
   InputDate: InputDate
 };
 
-export default function Field(props) {
+interface Props extends FieldOwnProps {
+  dataBase?: Schema;
+  component?: string;
+}
+
+export default function Field(props: Props) {
   const { name, dataBase, component, label, style } = props;
   const field = (dataBase && dataBase[name]) || {};
   const Component = component ? byName[component] : byType[field.type];

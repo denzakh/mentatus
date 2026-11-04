@@ -1,10 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/affektData.js";
+import dataBase from "../../store/affektData";
 import { fieldOf } from "../../lib/redux";
 import FieldView from "../FieldView";
+import type { StatusState } from "../../types/status";
 
-class SonAppetitList extends Component {
+interface StateProps {
+  hasPohudel: boolean;
+}
+
+class SonAppetitList extends Component<StateProps> {
   render() {
     return (
       <span>
@@ -29,7 +34,7 @@ class SonAppetitList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const field = fieldOf(state, "appetitPohudel");
 
   return {

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import dataBase from "../../store/rechData.js";
-import { rechLayout } from "../../store/rechLayout.js";
+import dataBase from "../../store/rechData";
+import { rechLayout } from "../../store/rechLayout";
 import Section from "../Section";
 
 // форма раздела: поля и раскладка описаны в схеме и layout

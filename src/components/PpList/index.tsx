@@ -1,12 +1,22 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/ppData.js";
+import dataBase from "../../store/ppData";
 import { fieldOf } from "../../lib/redux";
 import FieldView from "../FieldView";
 import SonAppetitList from "../SonAppetitList";
 import KritikaList from "../KritikaList";
+import type { ListOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class PpList extends Component {
+interface StateProps {
+  isBredHidden: boolean;
+  isGallHidden: boolean;
+  isOpasnyeHidden: boolean;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class PpList extends Component<Props> {
   render() {
     return (
       <span>
@@ -51,7 +61,7 @@ class PpList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const bredOtkl = fieldOf(state, "bredOtkl");
   const gallOtkl = fieldOf(state, "gallOtkl");
   const opasnyeOtkl = fieldOf(state, "opasnyeOtkl");
@@ -63,4 +73,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(PpList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  PpList
+);

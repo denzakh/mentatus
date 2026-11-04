@@ -1,10 +1,18 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/zhalobyData.js";
+import dataBase from "../../store/zhalobyData";
 import { fieldOf } from "../../lib/redux";
 import FieldView from "../FieldView";
+import type { ListOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class ZhalobyList extends Component {
+interface StateProps {
+  isHidden: boolean;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class ZhalobyList extends Component<Props> {
   render() {
     return (
       <span
@@ -24,7 +32,7 @@ class ZhalobyList extends Component {
 
 // жалобы не выводятся, если речь нарушена, контакт недоступен
 // или помрачено сознание
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const rechOtkl = fieldOf(state, "rechOtkl");
   const rechNeotvechaet = fieldOf(state, "rechNeotvechaet");
   const kontakt = fieldOf(state, "kontakt");
@@ -39,4 +47,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(ZhalobyList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  ZhalobyList
+);

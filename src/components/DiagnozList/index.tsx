@@ -1,8 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { fieldOf } from "../../lib/redux";
+import type { ListOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class DiagnozList extends Component {
+interface StateProps {
+  mkb10?: string | false;
+  klin?: string | false;
+  dopolnenie?: string | false;
+  reqilech?: string | false;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class DiagnozList extends Component<Props> {
   render() {
     const { mkb10, klin, dopolnenie, reqilech } = this.props;
 
@@ -48,7 +59,7 @@ class DiagnozList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const mkb10 = fieldOf(state, "diagnozMkb10");
   const klin = fieldOf(state, "diagnozKlin");
   const dopolnenie = fieldOf(state, "diagnozDopolnenie");
@@ -62,4 +73,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(DiagnozList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  DiagnozList
+);

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import dataBase from "../../store/ppData.js";
-import { ppLayout } from "../../store/ppLayout.js";
+import dataBase from "../../store/ppData";
+import { ppLayout } from "../../store/ppLayout";
 import KritikaManager from "../KritikaManager";
 import Section from "../Section";
 

@@ -136,7 +136,11 @@ describe("buildRadioPhrase", () => {
 
   it("работает без вступления и завершения", () => {
     expect(
-      buildRadioPhrase({ data: [{ id: 0, phrase: "ровное" }] }, 0, false)
+      buildRadioPhrase(
+        { data: [{ id: 0, label: "ровное", phrase: "ровное" }] },
+        0,
+        false
+      )
     ).toBe("ровное");
   });
 

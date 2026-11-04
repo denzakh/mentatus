@@ -8,8 +8,21 @@ import RadioList from "../RadioList";
 import Textarea from "../Textarea";
 import TextareaInline from "../TextareaInline";
 import InputDate from "../InputDate";
+import type { Schema } from "../../types/schema";
+import type { StatusState } from "../../types/status";
 
-class NachaloManager extends Component {
+interface OwnProps {
+  dataBase?: Schema;
+}
+
+interface StateProps {
+  isMestoText: boolean;
+  isNedobrovolno: boolean;
+}
+
+type Props = OwnProps & StateProps;
+
+class NachaloManager extends Component<Props> {
   render() {
     const { isMestoText, isNedobrovolno } = this.props;
 
@@ -68,7 +81,7 @@ class NachaloManager extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const mestoOsmotra = fieldOf(state, "mestoOsmotra");
   const nedobrovolno = fieldOf(state, "nedobrovolno");
 
@@ -79,4 +92,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(NachaloManager);
+export default connect<StateProps, unknown, OwnProps>(mapStateToProps)(
+  NachaloManager
+);

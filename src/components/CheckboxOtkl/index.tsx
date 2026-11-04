@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import type { Dispatch } from "redux";
 import { setSymptom } from "../../actions/symptomAction";
 import { fieldOf } from "../../lib/redux";
+import type { FieldOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 import "./CheckboxOtkl.css";
 
 /*
@@ -14,7 +17,18 @@ dataBase - объект БД для подписи
 label - своя подпись
 */
 
-class CheckboxOtkl extends Component {
+interface StateProps {
+  checked: boolean;
+  label?: string;
+}
+
+interface DispatchProps {
+  setSymptom: (name: string) => void;
+}
+
+type Props = FieldOwnProps & StateProps & DispatchProps;
+
+class CheckboxOtkl extends Component<Props> {
   handleChange = () => {
     this.props.setSymptom(this.props.name);
   };
@@ -41,7 +55,10 @@ class CheckboxOtkl extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: FieldOwnProps
+): StateProps {
   const field = fieldOf(state, ownProps.name);
   const dataBase = ownProps.dataBase;
 
@@ -53,10 +70,13 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   return {
     setSymptom: name => dispatch(setSymptom(name))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CheckboxOtkl);
+export default connect<StateProps, DispatchProps, FieldOwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(CheckboxOtkl);

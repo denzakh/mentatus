@@ -1,5 +1,7 @@
+import type { Layout } from "../types/layout";
+
 /* Раскладка формы раздела «Жалобы» (см. `src/components/Section`). */
-export const zhalobyLayout = [
+export const zhalobyLayout: Layout = [
   {
     type: "box",
     className: "manager",

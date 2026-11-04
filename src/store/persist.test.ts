@@ -90,9 +90,16 @@ describe("clearLegacyState", () => {
 describe("persistStore", () => {
   const storageKey = `persist:${persistConfig.key}`;
 
+  interface MemoryStorage {
+    data: Record<string, string>;
+    getItem: (key: string) => Promise<string | null>;
+    setItem: (key: string, value: string) => Promise<void>;
+    removeItem: (key: string) => Promise<void>;
+  }
+
   // хранилище с промис-API, как у адаптера localStorage из redux-persist
-  const createMemoryStorage = () => {
-    const data = {};
+  const createMemoryStorage = (): MemoryStorage => {
+    const data: Record<string, string> = {};
     return {
       data,
       getItem: key => Promise.resolve(key in data ? data[key] : null),
@@ -107,13 +114,13 @@ describe("persistStore", () => {
     };
   };
 
-  const createPersistedStore = storage =>
+  const createPersistedStore = (storage: MemoryStorage) =>
     createStore(persistReducer({ ...persistConfig, storage }, rootReducer));
 
-  const waitFor = predicate => {
+  const waitFor = (predicate: () => boolean) => {
     let attempts = 0;
 
-    return new Promise((resolve, reject) => {
+    return new Promise<void>((resolve, reject) => {
       const tick = () => {
         if (predicate()) {
           resolve();
@@ -131,53 +138,54 @@ describe("persistStore", () => {
     });
   };
 
-  const readSavedState = storage => {
+  const readSavedState = (
+    storage: MemoryStorage
+  ): Record<string, any> | null => {
     const raw = storage.data[storageKey];
     if (!raw) return null;
 
     // redux-persist сериализует каждый срез отдельной JSON-строкой
-    const serializedSlices = JSON.parse(raw);
-    return Object.keys(serializedSlices).reduce((state, slice) => {
-      state[slice] = JSON.parse(serializedSlices[slice]);
-      return state;
-    }, {});
+    const serializedSlices = JSON.parse(raw) as Record<string, string>;
+    return Object.keys(serializedSlices).reduce(
+      (state: Record<string, any>, slice) => {
+        state[slice] = JSON.parse(serializedSlices[slice]);
+        return state;
+      },
+      {}
+    );
   };
 
-  it("сохраняет изменённые срезы и восстанавливает их", done => {
+  const rehydrate = (store: ReturnType<typeof createPersistedStore>) =>
+    new Promise<void>(resolve => {
+      persistStore(store, null, () => resolve());
+    });
+
+  it("сохраняет изменённые срезы и восстанавливает их", async () => {
     const storage = createMemoryStorage();
     const store = createPersistedStore(storage);
 
-    persistStore(store, null, () => {
-      store.dispatch(setText("zhalobyText", "тревога"));
+    await rehydrate(store);
+    store.dispatch(setText("zhalobyText", "тревога"));
 
-      const isWritten = () => {
-        const saved = readSavedState(storage);
-        return Boolean(
-          saved && saved.zhaloby && saved.zhaloby.zhalobyText.text === "тревога"
-        );
-      };
+    const isWritten = () => {
+      const saved = readSavedState(storage);
+      return Boolean(
+        saved && saved.zhaloby && saved.zhaloby.zhalobyText.text === "тревога"
+      );
+    };
 
-      waitFor(isWritten)
-        .then(() => {
-          const saved = readSavedState(storage);
-          expect(saved.zhaloby.zhalobyText.text).toBe("тревога");
-          expect(saved.option).toBeUndefined();
+    await waitFor(isWritten);
 
-          // новый стор с тем же хранилищем должен подхватить значения
-          const nextStore = createPersistedStore(storage);
-          persistStore(nextStore, null, () => {
-            try {
-              expect(nextStore.getState().zhaloby.zhalobyText.text).toBe(
-                "тревога"
-              );
-              expect(nextStore.getState().option.activePageName).toBe("Status");
-              done();
-            } catch (e) {
-              done(e);
-            }
-          });
-        })
-        .catch(done);
-    });
+    const saved = readSavedState(storage);
+    expect(saved).not.toBeNull();
+    expect(saved!.zhaloby.zhalobyText.text).toBe("тревога");
+    expect(saved!.option).toBeUndefined();
+
+    // новый стор с тем же хранилищем должен подхватить значения
+    const nextStore = createPersistedStore(storage);
+    await rehydrate(nextStore);
+
+    expect(nextStore.getState().zhaloby.zhalobyText.text).toBe("тревога");
+    expect(nextStore.getState().option.activePageName).toBe("Status");
   });
 });

@@ -10,7 +10,7 @@ import Header from "./components/Header";
 
 const { store, persistor } = configureStore();
 
-createRoot(document.getElementById("root")).render(
+createRoot(document.getElementById("root")!).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <div className="wrapper">

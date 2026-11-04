@@ -1,9 +1,11 @@
-import rechData from "./rechData.js";
+import type { Layout } from "../types/layout";
+
+import rechData from "./rechData";
 import { sliceFlag } from "../lib/redux";
 
 /* Раскладка формы раздела «Общее состояние» (см. `src/components/Section`).
    Блоки речи берут схему раздела «Речь». */
-export const sostoyanieLayout = [
+export const sostoyanieLayout: Layout = [
   {
     type: "row",
     className: "manager",

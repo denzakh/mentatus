@@ -13,7 +13,7 @@
 | 3 | `redux-persist` вместо самописного localStorage | `03-redux-persist.md` | ✅ выполнено | 1 |
 | 4 | Обновление стека (Vite + React 18 + RTK + vitest) | `04-stack-upgrade.md` | ✅ выполнено | 1–3 |
 | 5 | Чистка мёртвых CSS-классов | `05-css-cleanup.md` | ⏳ | 4 |
-| 6 | Перевод на TypeScript | `06-typescript.md` | ⏳ | 4–5 |
+| 6 | Перевод на TypeScript | `06-typescript.md` | ✅ выполнено | 4–5 |
 
 Правило: этапы выполняются по порядку, каждый — отдельный PR/коммит с зелёными
 тестами и сборкой. Два этапа в одном изменении не смешивать.
@@ -54,6 +54,23 @@
   `eslint-plugin-react`, `react/prop-types` off, `no-unused-vars` warn).
   `npm run lint` — без ошибок.
 - `grep -rn "process.env" src` — пусто (service worker удалён).
+
+## Baseline после этапа 6 (TypeScript)
+
+- Вся `src` — TypeScript (`.ts`/`.tsx`), `allowJs: false`; конфиг — `tsconfig.json`
+  (`strict: false`, `moduleResolution: "Bundler"`, `jsx: "react-jsx"`),
+  `src/vite-env.d.ts`, проверка — `npm run typecheck` (`tsc --noEmit`).
+- Типы состояния — `src/types/status.ts` (`FieldValue`, `SectionName`,
+  `StatusSection`, `StatusState`), схем — `src/types/schema.ts`,
+  раскладок — `src/types/layout.ts`, общих пропсов — `src/types/components.ts`.
+- `RootState` — `ReturnType` корневого редьюсера (`src/reducers/index.ts`),
+  используется в `connect` и `persist`.
+- Линт TS — через `typescript-eslint` в том же плоском конфиге; vitest
+  подхватывает `*.test.{ts,tsx}`, `setupFiles` — `src/setupTests.ts`.
+- Проверки этапа: `tsc --noEmit` — чисто, 91 тест, сборка `dist/` (169 модулей),
+  `eslint src` — 0 ошибок. Следующий шаг по спеке 6.4 — поэтапное включение
+  `strict` (сначала `src/lib` и `src/reducers`).
+
 
 ## Общие соглашения
 

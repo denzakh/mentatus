@@ -1,10 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/sostoyanieData.js";
+import dataBase from "../../store/sostoyanieData";
 import { todayIso, formatDate } from "../../lib/text/date";
 import { fieldOf } from "../../lib/redux";
+import type { ListOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class NachaloList extends Component {
+interface StateProps {
+  date: string;
+  isMale: boolean;
+  mestoOsmotraNumber?: number;
+  poNapravleniu: boolean;
+  sIstorieiOznakomlen: boolean;
+  nedobrovolno: boolean;
+  nedobrovolnoPrichinyNumber?: number;
+  nedobrovolnoPunktNumber?: number;
+  nedobrovolnoText?: string | false;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class NachaloList extends Component<Props> {
   render() {
     const {
       date,
@@ -61,7 +77,7 @@ class NachaloList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const dataOsmotra = fieldOf(state, "dataOsmotra");
   const pol = fieldOf(state, "pol");
   const mestoOsmotra = fieldOf(state, "mestoOsmotra");
@@ -89,4 +105,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(NachaloList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  NachaloList
+);

@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { cicleKeys, pickPhrase } from "../../lib/text";
 import { flagsOf, areStatePropsEqual, fieldOf } from "../../lib/redux";
+import type { Flags } from "../../lib/redux";
+import type { FieldViewOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
 /*
 ListOfSentences
@@ -14,7 +17,14 @@ dataObj - объект БД
 из стора берёт: какие пункты цикла включены и пол пациента
 */
 
-class ListOfSentences extends Component {
+interface StateProps {
+  flags: Flags;
+  isMale: boolean;
+}
+
+type Props = FieldViewOwnProps & StateProps;
+
+class ListOfSentences extends Component<Props> {
   render() {
     const { dataObj, name, flags, isMale } = this.props;
 
@@ -31,7 +41,10 @@ class ListOfSentences extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: FieldViewOwnProps
+): StateProps {
   const pol = fieldOf(state, "pol");
 
   return {
@@ -40,6 +53,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
-  ListOfSentences
-);
+export default connect<StateProps, unknown, FieldViewOwnProps>(
+  mapStateToProps,
+  null,
+  null,
+  { areStatePropsEqual }
+)(ListOfSentences);

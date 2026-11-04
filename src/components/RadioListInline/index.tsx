@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import type { Dispatch } from "redux";
 import { setRadio } from "../../actions/radioAction";
 import { fieldOf } from "../../lib/redux";
+import type { RadioOption, Schema } from "../../types/schema";
+import type { StatusState } from "../../types/status";
 import "./RadioListInline.css";
 
 /*
@@ -13,8 +16,25 @@ name - имя поля в сторе
 dataBase - объект БД, в котором лежит группа (label + data)
 */
 
-class RadioListInline extends Component {
-  handleChange = e => {
+interface OwnProps {
+  name: string;
+  dataBase?: Schema;
+}
+
+interface StateProps {
+  options: RadioOption[];
+  label?: string;
+  selected?: number;
+}
+
+interface DispatchProps {
+  setRadio: (name: string, value: number) => void;
+}
+
+type Props = OwnProps & StateProps & DispatchProps;
+
+class RadioListInline extends Component<Props> {
+  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     this.props.setRadio(this.props.name, +e.target.value);
   };
 
@@ -47,21 +67,27 @@ class RadioListInline extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: OwnProps
+): StateProps {
   const field = fieldOf(state, ownProps.name);
-  const group = ownProps.dataBase[ownProps.name];
+  const group = ownProps.dataBase && ownProps.dataBase[ownProps.name];
 
   return {
-    options: group ? group.data : [],
+    options: (group && group.data) || [],
     label: group ? group.label : "",
     selected: field ? field.number : 0
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   return {
     setRadio: (name, value) => dispatch(setRadio(name, value))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RadioListInline);
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(RadioListInline);

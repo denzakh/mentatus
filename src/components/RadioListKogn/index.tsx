@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import type { Dispatch } from "redux";
 import { setRadio } from "../../actions/radioAction";
 import { isKritikaEmpty } from "../../lib/rules/kritika";
 import { fieldOf } from "../../lib/redux";
+import type { RadioOption, Schema } from "../../types/schema";
+import type { StatusState } from "../../types/status";
 import "./RadioListKogn.css";
 
 /*
@@ -15,8 +18,27 @@ name - имя поля в сторе
 dataBase - объект БД, в котором лежит группа (label + data)
 */
 
-class RadioListKogn extends Component {
-  handleChange = e => {
+interface OwnProps {
+  name: string;
+  dataBase?: Schema;
+}
+
+interface StateProps {
+  options: RadioOption[];
+  selected?: number;
+  isKritikaEmpty: boolean;
+}
+
+interface DispatchProps {
+  setRadio: (name: string, value: number) => void;
+}
+
+type Props = OwnProps & StateProps & DispatchProps;
+
+type ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
+
+class RadioListKogn extends Component<Props> {
+  handleChange: ChangeHandler = e => {
     this.props.setRadio(this.props.name, +e.target.value);
   };
 
@@ -25,7 +47,9 @@ class RadioListKogn extends Component {
 
     // функция снижения критики: часть ответов автоматически
     // выставляет критику, если она ещё не задана
-    const withKritika = (number, onChange) => e => {
+    const withKritika = (number: number, onChange: ChangeHandler) => (
+      e: React.ChangeEvent<HTMLInputElement>
+    ) => {
       if (isKritikaEmpty) {
         this.props.setRadio("kritika", number);
       }
@@ -33,7 +57,7 @@ class RadioListKogn extends Component {
       onChange(e);
     };
 
-    const toggleList = [
+    const toggleList: ChangeHandler[] = [
       this.handleChange, // 0
       withKritika(2, this.handleChange), // 1
       withKritika(3, this.handleChange), // 2
@@ -64,21 +88,27 @@ class RadioListKogn extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: OwnProps
+): StateProps {
   const field = fieldOf(state, ownProps.name);
-  const group = ownProps.dataBase[ownProps.name];
+  const group = ownProps.dataBase && ownProps.dataBase[ownProps.name];
 
   return {
-    options: group ? group.data : [],
+    options: (group && group.data) || [],
     selected: field ? field.number : 0,
     isKritikaEmpty: isKritikaEmpty(fieldOf(state, "kritika"))
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   return {
     setRadio: (name, value) => dispatch(setRadio(name, value))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(RadioListKogn);
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(RadioListKogn);

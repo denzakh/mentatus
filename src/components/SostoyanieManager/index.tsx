@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import dataBase from "../../store/sostoyanieData.js";
-import { sostoyanieLayout } from "../../store/sostoyanieLayout.js";
+import dataBase from "../../store/sostoyanieData";
+import { sostoyanieLayout } from "../../store/sostoyanieLayout";
 import Section from "../Section";
 import NachaloManager from "../NachaloManager";
 

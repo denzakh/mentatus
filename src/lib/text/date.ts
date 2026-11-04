@@ -1,7 +1,7 @@
 /* Чистые функции работы с датой. */
 
 // сегодняшняя дата в формате input[type="date"] (гггг-мм-дд)
-export function todayIso(now = new Date()) {
+export function todayIso(now: Date = new Date()): string {
   return (
     now.getFullYear() +
     "-" +
@@ -12,7 +12,7 @@ export function todayIso(now = new Date()) {
 }
 
 // перевод даты из гггг-мм-дд в дд.мм.гггг
-export function formatDate(isoDate) {
+export function formatDate(isoDate?: string | false): string {
   if (!isoDate) {
     return "";
   }

@@ -1,9 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import type { Dispatch } from "redux";
 import { setSymptom } from "../../actions/symptomAction";
 import { setRadio } from "../../actions/radioAction";
 import { isKritikaEmpty } from "../../lib/rules/kritika";
 import { fieldOf } from "../../lib/redux";
+import type { FieldOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 import "./Checkbox.css";
 
 /*
@@ -17,7 +20,20 @@ label - своя подпись
 autoKritika - значение критики, которое проставляется при выборе поля
 */
 
-class Checkbox extends Component {
+interface StateProps {
+  checked: boolean;
+  isKritikaEmpty: boolean;
+  label?: string;
+}
+
+interface DispatchProps {
+  setSymptom: (name: string) => void;
+  setRadio: (name: string, value: number) => void;
+}
+
+type Props = FieldOwnProps & StateProps & DispatchProps;
+
+class Checkbox extends Component<Props> {
   handleChange = () => {
     if (this.props.autoKritika !== undefined && this.props.isKritikaEmpty) {
       this.props.setRadio("kritika", this.props.autoKritika);
@@ -48,7 +64,10 @@ class Checkbox extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: FieldOwnProps
+): StateProps {
   const field = fieldOf(state, ownProps.name);
   const dataBase = ownProps.dataBase;
 
@@ -61,11 +80,14 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   return {
     setSymptom: name => dispatch(setSymptom(name)),
     setRadio: (name, value) => dispatch(setRadio(name, value))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Checkbox);
+export default connect<StateProps, DispatchProps, FieldOwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Checkbox);

@@ -1,3 +1,5 @@
+import type { Layout } from "../types/layout";
+
 import { sliceFlag } from "../lib/redux";
 
 /* списки бреда и галлюцинаций скрываются, если врач отметил их отсутствие */
@@ -5,7 +7,7 @@ const hasBred = slice => !sliceFlag(slice, "bredOtkl");
 const hasGall = slice => !sliceFlag(slice, "gallOtkl");
 
 /* Раскладка формы раздела «Психопродукция» (см. `src/components/Section`). */
-export const ppLayout = [
+export const ppLayout: Layout = [
   {
     type: "row",
     className: "manager",

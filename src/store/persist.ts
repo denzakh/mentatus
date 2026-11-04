@@ -1,6 +1,8 @@
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import sections from "../reducers/sections";
+import type { Reducer } from "redux";
+import type { RootState } from "../reducers";
 
 /*
 Персист состояния через redux-persist.
@@ -28,7 +30,7 @@ export const persistConfig = {
   migrate: undefined
 };
 
-export default function withPersist(rootReducer) {
+export default function withPersist(rootReducer: Reducer<RootState>) {
   return persistReducer(persistConfig, rootReducer);
 }
 
@@ -41,7 +43,7 @@ export function clearLegacyState() {
     if (typeof window !== "undefined" && window.localStorage) {
       window.localStorage.removeItem(LEGACY_STORAGE_KEY);
     }
-  } catch (e) {
+  } catch {
     // localStorage может быть недоступен (приватный режим, запрет хранилища)
   }
 }

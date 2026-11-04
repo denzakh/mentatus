@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/kognitData.js";
+import dataBase from "../../store/kognitData";
 import { fieldOf } from "../../lib/redux";
+import type { ListOwnProps } from "../../types/components";
+import type { OrientirSchemaEntry } from "../../types/schema";
+import type { StatusState } from "../../types/status";
 
-class OrientirovkaList extends Component {
+interface StateProps {
+  phrase?: string;
+  text?: string | false;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class OrientirovkaList extends Component<Props> {
   render() {
     return (
       <span data-id="kognit" onClick={this.props.toggleTab}>
@@ -14,7 +24,7 @@ class OrientirovkaList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const orientirNot = fieldOf(state, "orientirNot");
   const orientirVremia = fieldOf(state, "orientirVremia");
   const orientirMesto = fieldOf(state, "orientirMesto");
@@ -34,14 +44,17 @@ function mapStateToProps(state) {
         +((orientirLichnost && orientirLichnost.number) || 0);
 
   const polCode = pol && pol.isChecked ? "m" : "w";
+  const orientir = dataBase.orientir as OrientirSchemaEntry;
 
   return {
     phrase:
       rechOtkl && rechOtkl.isChecked
         ? ""
-        : dataBase.orientir[polCode][orientirNumber],
+        : orientir[polCode][orientirNumber],
     text: orientirText && orientirText.text
   };
 }
 
-export default connect(mapStateToProps)(OrientirovkaList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  OrientirovkaList
+);

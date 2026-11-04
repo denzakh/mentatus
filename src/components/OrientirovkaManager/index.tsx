@@ -2,9 +2,14 @@ import React, { Component } from "react";
 import Checkbox from "../Checkbox";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
+import type { Schema } from "../../types/schema";
 import "./Orientirovka.css";
 
-export default class OrientirovkaManager extends Component {
+interface Props {
+  dataBase?: Schema;
+}
+
+export default class OrientirovkaManager extends Component<Props> {
   render() {
     const dataBase = this.props.dataBase;
 

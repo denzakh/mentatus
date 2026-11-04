@@ -1,10 +1,20 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import dataBase from "../../store/rechData.js";
+import dataBase from "../../store/rechData";
 import { fieldOf } from "../../lib/redux";
 import FieldView from "../FieldView";
+import type { ListOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
-class RechList extends Component {
+interface StateProps {
+  isOdnoslojChecked: boolean;
+  isNeotvechaetChecked: boolean;
+  isMainHidden: boolean;
+}
+
+type Props = ListOwnProps & StateProps;
+
+class RechList extends Component<Props> {
   render() {
     const {
       isOdnoslojChecked,
@@ -91,7 +101,7 @@ class RechList extends Component {
   }
 }
 
-function mapStateToProps(state) {
+function mapStateToProps(state: StatusState): StateProps {
   const odnosloj = fieldOf(state, "rechOdnosloj");
   const neotvechaet = fieldOf(state, "rechNeotvechaet");
   const rechOtkl = fieldOf(state, "rechOtkl");
@@ -108,4 +118,6 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps)(RechList);
+export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
+  RechList
+);

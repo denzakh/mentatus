@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { cicleKeys, buildListText } from "../../lib/text";
 import { flagsOf, areStatePropsEqual } from "../../lib/redux";
+import type { Flags } from "../../lib/redux";
+import type { Schema } from "../../types/schema";
+import type { StatusState } from "../../types/status";
 
 /*
 ListOfWords
@@ -17,7 +20,27 @@ before / after / noList - переопределение ключей фраз �
 из стора берёт: какие пункты цикла включены
 */
 
-class ListOfWords extends Component {
+interface OwnProps {
+  name: string;
+  dataObj?: Schema;
+  isAnd?: boolean;
+  beforeText?: string;
+  before?: string;
+  after?: string;
+  noList?: string;
+}
+
+interface StateProps {
+  flags: Flags;
+  isAnd: boolean;
+  beforePhrase: string;
+  afterPhrase: string;
+  noListPhrase: string;
+}
+
+type Props = OwnProps & StateProps;
+
+class ListOfWords extends Component<Props> {
   render() {
     const {
       dataObj,
@@ -54,7 +77,10 @@ class ListOfWords extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: OwnProps
+): StateProps {
   const dataObj = ownProps.dataObj;
   const name = ownProps.name;
 
@@ -74,6 +100,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
-  ListOfWords
-);
+export default connect<StateProps, unknown, OwnProps>(
+  mapStateToProps,
+  null,
+  null,
+  { areStatePropsEqual }
+)(ListOfWords);

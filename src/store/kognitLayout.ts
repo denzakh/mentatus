@@ -1,5 +1,7 @@
+import type { Layout } from "../types/layout";
+
 /* Раскладка формы раздела «Интеллект и память» (см. `src/components/Section`). */
-export const kognitLayout = [
+export const kognitLayout: Layout = [
   {
     type: "row",
     className: "manager",

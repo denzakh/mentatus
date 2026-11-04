@@ -13,13 +13,17 @@ App
 локальное состояние активного раздела и не перерисовывается при вводе.
 */
 
-export default class App extends Component {
-  constructor(props) {
+interface State {
+  activeTab: string;
+}
+
+export default class App extends Component<unknown, State> {
+  constructor(props: unknown) {
     super(props);
     this.state = { activeTab: "sostoyanie" };
   }
 
-  toggleTab = e => {
+  toggleTab = (e: React.MouseEvent<HTMLElement>) => {
     const name = e.currentTarget.getAttribute("data-id");
     this.setState({ activeTab: name });
   };

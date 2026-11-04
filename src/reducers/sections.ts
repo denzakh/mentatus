@@ -1,11 +1,12 @@
-import zhalobyStore from "../store/zhalobyStore.js";
-import anamnezStore from "../store/anamnezStore.js";
-import sostoyanieStore from "../store/sostoyanieStore.js";
-import affektStore from "../store/affektStore.js";
-import rechStore from "../store/rechStore.js";
-import kognitStore from "../store/kognitStore.js";
-import ppStore from "../store/ppStore.js";
-import diagnozStore from "../store/diagnozStore.js";
+import zhalobyStore from "../store/zhalobyStore";
+import anamnezStore from "../store/anamnezStore";
+import sostoyanieStore from "../store/sostoyanieStore";
+import affektStore from "../store/affektStore";
+import rechStore from "../store/rechStore";
+import kognitStore from "../store/kognitStore";
+import ppStore from "../store/ppStore";
+import diagnozStore from "../store/diagnozStore";
+import type { SectionName, StatusSection } from "../types/status";
 
 /*
 Срезы статуса: имя раздела -> начальное состояние его полей.
@@ -14,7 +15,7 @@ import diagnozStore from "../store/diagnozStore.js";
 store-файлов. Теперь у каждого раздела свой срез, поэтому поле живёт в
 `state[section][field]`, а не в `state.psystatus[field]`.
 */
-const sections = {
+const sections: Record<SectionName, StatusSection> = {
   zhaloby: zhalobyStore,
   anamnez: anamnezStore,
   sostoyanie: sostoyanieStore,
@@ -32,9 +33,11 @@ export default sections;
 правды, а обратный указатель). Нужен хелперам чтения, чтобы по имени поля
 найти его срез без прокидывания раздела во все вызовы.
 */
-export const fieldSections = Object.keys(sections).reduce((map, section) => {
+export const fieldSections: Record<string, SectionName> = (
+  Object.keys(sections) as SectionName[]
+).reduce((map, section) => {
   Object.keys(sections[section]).forEach(field => {
     map[field] = section;
   });
   return map;
-}, {});
+}, {} as Record<string, SectionName>);

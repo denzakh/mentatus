@@ -1,3 +1,6 @@
+import type { LayoutBlock } from "../../types/layout";
+import type { StatusSection } from "../../types/status";
+
 /* Чистые функции декларативного layout раздела (см. `src/store/*Layout.js`).
 
    Блок layout — объект с полем `type`:
@@ -12,17 +15,20 @@
 */
 
 // ключ блока: путь индексов от корня layout
-export function blockKey(path) {
+export function blockKey(path: number[]): string {
   return path.join(".");
 }
 
 /* Собирает видимость блоков с `visibleWhen` в один плоский объект
    `{ ключ блока: true/false }`. Нужно, чтобы connect сравнивал только
    изменившиеся условия, а не перерисовывал раздел на каждый ввод. */
-export function collectVisibility(layout, slice) {
-  const visibility = {};
+export function collectVisibility(
+  layout: LayoutBlock[] | undefined,
+  slice: StatusSection
+): Record<string, boolean> {
+  const visibility: Record<string, boolean> = {};
 
-  const walk = (blocks, path) => {
+  const walk = (blocks: LayoutBlock[] | undefined, path: number[]) => {
     (blocks || []).forEach((block, index) => {
       const nextPath = path.concat(index);
       const key = blockKey(nextPath);

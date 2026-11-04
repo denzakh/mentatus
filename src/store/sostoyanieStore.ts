@@ -1,6 +1,8 @@
+import type { StatusSection } from "../types/status";
+
 import { todayIso } from "../lib/text/date";
 
-const store = {
+const store: StatusSection = {
   patientId: {
     number: 0
   },

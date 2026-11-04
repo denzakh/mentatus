@@ -10,7 +10,7 @@ describe("index", () => {
     document.body.innerHTML = '<div id="root"></div>';
 
     await act(async () => {
-      await import("./index.jsx");
+      await import("./index");
     });
 
     await waitFor(() => {

@@ -11,14 +11,20 @@ import { createAction } from "@reduxjs/toolkit";
 функций, чтобы не переписывать импорты в компонентах.
 */
 
-export const setSymptom = createAction("SET_SYMPTOM", name => ({
+export const setSymptom = createAction("SET_SYMPTOM", (name: string) => ({
   payload: { name }
 }));
 
-export const setText = createAction("SET_TEXT", (name, text) => ({
-  payload: { name, text }
-}));
+export const setText = createAction(
+  "SET_TEXT",
+  (name: string, text: string) => ({
+    payload: { name, text }
+  })
+);
 
-export const setRadio = createAction("SET_RADIO", (name, number) => ({
-  payload: { name, number }
-}));
+export const setRadio = createAction(
+  "SET_RADIO",
+  (name: string, number: number) => ({
+    payload: { name, number }
+  })
+);

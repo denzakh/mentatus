@@ -1,7 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import type { Dispatch } from "redux";
 import { setText } from "../../actions/textAction";
 import { fieldOf } from "../../lib/redux";
+import type { FieldOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 import "./TextareaInline.css";
 
 /*
@@ -13,8 +16,18 @@ name - имя поля в сторе
 label - подпись
 */
 
-class TextareaInline extends Component {
-  handleChange = e => {
+interface StateProps {
+  value: string;
+}
+
+interface DispatchProps {
+  setText: (name: string, value: string) => void;
+}
+
+type Props = FieldOwnProps & StateProps & DispatchProps;
+
+class TextareaInline extends Component<Props> {
+  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     this.props.setText(this.props.name, e.target.value);
   };
 
@@ -35,7 +48,10 @@ class TextareaInline extends Component {
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: FieldOwnProps
+): StateProps {
   const field = fieldOf(state, ownProps.name);
 
   return {
@@ -43,10 +59,13 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-function mapDispatchToProps(dispatch) {
+function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
   return {
     setText: (name, value) => dispatch(setText(name, value))
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextareaInline);
+export default connect<StateProps, DispatchProps, FieldOwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(TextareaInline);

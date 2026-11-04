@@ -1,8 +1,15 @@
+import type { ComponentType } from "react";
 import App from "../App";
 import Option from "../Option";
 import Repository from "../Repository";
 
-let pages = [
+export interface Page {
+  name: string;
+  title: string;
+  component: ComponentType;
+}
+
+const pages: Page[] = [
   {
     name: "Status",
     title: "Статус",

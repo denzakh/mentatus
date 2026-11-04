@@ -1,3 +1,5 @@
+import type { Layout } from "../types/layout";
+
 import { sliceFlag } from "../lib/redux";
 
 /* при грубых нарушениях речи основная часть не выводится */
@@ -7,7 +9,7 @@ const hasRechMain = slice => !sliceFlag(slice, "rechOtkl");
 const hasOtvety = slice => !sliceFlag(slice, "rechNeotvechaet");
 
 /* Раскладка формы раздела «Речь и мышление» (см. `src/components/Section`). */
-export const rechLayout = [
+export const rechLayout: Layout = [
   {
     type: "row",
     className: "manager",

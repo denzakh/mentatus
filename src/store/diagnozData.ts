@@ -1,4 +1,6 @@
-const data = {
+import type { Schema } from "../types/schema";
+
+const data: Schema = {
   diagnozMkb10: {
     label: "МКБ-10",
     phrase: "",

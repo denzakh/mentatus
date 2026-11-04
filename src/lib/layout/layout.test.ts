@@ -1,6 +1,7 @@
 import { collectVisibility, blockKey } from "./index";
+import type { Layout } from "../../types/layout";
 
-const layout = [
+const layout: Layout = [
   {
     type: "box",
     blocks: [

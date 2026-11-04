@@ -1,4 +1,6 @@
-let store = {
+import type { StatusSection } from "../types/status";
+
+const store: StatusSection = {
   anamnezChmt: {
     isChecked: false
   },

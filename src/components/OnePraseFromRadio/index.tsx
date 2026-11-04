@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { buildRadioPhrase } from "../../lib/text";
 import { areStatePropsEqual, fieldOf } from "../../lib/redux";
+import type { FieldViewOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
 /*
 OnePraseFromRadio
@@ -15,25 +17,37 @@ dataObj - объект БД для этой категории (например
 возвращает: название радиогруппы + значение выбранного пункта
 */
 
-class OnePraseFromRadio extends Component {
+interface StateProps {
+  phrase: string;
+}
+
+type Props = FieldViewOwnProps & StateProps;
+
+class OnePraseFromRadio extends Component<Props> {
   render() {
     return <span>{this.props.phrase}</span>;
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: FieldViewOwnProps
+): StateProps {
   const field = fieldOf(state, ownProps.name);
   const pol = fieldOf(state, "pol");
 
   return {
     phrase: buildRadioPhrase(
-      ownProps.dataObj[ownProps.name],
+      ownProps.dataObj && ownProps.dataObj[ownProps.name],
       field ? field.number : 0,
       !!(pol && pol.isChecked)
     )
   };
 }
 
-export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
-  OnePraseFromRadio
-);
+export default connect<StateProps, unknown, FieldViewOwnProps>(
+  mapStateToProps,
+  null,
+  null,
+  { areStatePropsEqual }
+)(OnePraseFromRadio);

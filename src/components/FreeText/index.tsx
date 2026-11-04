@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { areStatePropsEqual, fieldOf } from "../../lib/redux";
+import type { FieldViewOwnProps } from "../../types/components";
+import type { StatusState } from "../../types/status";
 
 /*
 FreeText
@@ -12,13 +14,22 @@ name - имя поля в сторе
 из стора берёт: значение поля
 */
 
-class FreeText extends Component {
+interface StateProps {
+  value: string;
+}
+
+type Props = FieldViewOwnProps & StateProps;
+
+class FreeText extends Component<Props> {
   render() {
     return <span> {this.props.value}</span>;
   }
 }
 
-function mapStateToProps(state, ownProps) {
+function mapStateToProps(
+  state: StatusState,
+  ownProps: FieldViewOwnProps
+): StateProps {
   const field = fieldOf(state, ownProps.name);
 
   return {
@@ -26,6 +37,9 @@ function mapStateToProps(state, ownProps) {
   };
 }
 
-export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
-  FreeText
-);
+export default connect<StateProps, unknown, FieldViewOwnProps>(
+  mapStateToProps,
+  null,
+  null,
+  { areStatePropsEqual }
+)(FreeText);
