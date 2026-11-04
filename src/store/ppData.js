@@ -62,7 +62,7 @@ const data = {
   },
   bredAfter: {
     phrase: ". ",
-    section: "affekt",
+    section: "pp",
     type: "string"
   },
   bredNot: {
@@ -74,10 +74,11 @@ const data = {
     label: "не показывать",
     phrase: "не показывать",
     section: "pp",
-    type: "string"
+    type: "boolean"
   },
   bredText: {
-    text: ""
+    section: "pp",
+    type: "text"
   },
   gallSluh: {
     label: "слуховых",
@@ -119,10 +120,11 @@ const data = {
     label: "не показывать",
     phrase: "не показывать",
     section: "pp",
-    type: "string"
+    type: "boolean"
   },
   gallText: {
-    text: false
+    section: "pp",
+    type: "text"
   },
 
   opasnye: {
@@ -184,11 +186,15 @@ const data = {
     before: "",
     after: " "
   },
+  opasnyeText: {
+    section: "pp",
+    type: "text"
+  },
   opasnyeOtkl: {
     label: "не показывать",
     phrase: "не показывать",
     section: "pp",
-    type: "string"
+    type: "boolean"
   }
 };
 

@@ -1,20 +1,13 @@
 import React, { Component } from "react";
-import zhalobyData from "../../store/zhalobyData.js";
-import CheckboxGroup from "../CheckboxGroup";
-import Textarea from "../Textarea";
+import dataBase from "../../store/zhalobyData.js";
+import { zhalobyLayout } from "../../store/zhalobyLayout.js";
+import Section from "../Section";
 
+// форма раздела: поля и их раскладка описаны в схеме и layout
 export default class ZhalobyManager extends Component {
   render() {
     return (
-      <div>
-        <div className="manager">
-          <div className="list__title list__title--no-top-margin">
-            Жалобы на:
-          </div>
-          <CheckboxGroup cicle="zhalobyCicle" dataBase={zhalobyData} />
-        </div>
-        <Textarea name="zhalobyText" label="Описание жалоб" />
-      </div>
+      <Section section="zhaloby" dataBase={dataBase} layout={zhalobyLayout} />
     );
   }
 }

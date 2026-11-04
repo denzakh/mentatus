@@ -116,21 +116,22 @@ const data = {
   },
   myshlenieBefore: {
     phrase: ", ",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   myshlenieAfter: {
     phrase: "",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   myshlenieNot: {
     phrase: "",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   myshlenieText: {
-    text: ""
+    section: "rech",
+    type: "text"
   },
 
   rechOtkl: {
@@ -187,17 +188,17 @@ const data = {
   },
   rechOsobBefore: {
     phrase: ", ",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   rechOsobAfter: {
     phrase: "",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   rechOsobNot: {
     phrase: "",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   rechOdnosloj: {
@@ -259,21 +260,22 @@ const data = {
   },
   rechOtmechBefore: {
     phrase: "Отмечаются ",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   rechOtmechAfter: {
     phrase: ". ",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   rechOtmechNot: {
     phrase: "",
-    section: "affekt",
+    section: "rech",
     type: "string"
   },
   rechText: {
-    text: ""
+    section: "rech",
+    type: "text"
   },
   rechNedoponimaet: {
     label: "речь недопонимает",

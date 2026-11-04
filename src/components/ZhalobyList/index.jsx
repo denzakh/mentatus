@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/zhalobyData.js";
 import { fieldOf } from "../../lib/redux";
-import ListOfWords from "../ListOfWords";
-import FreeText from "../FreeText";
+import FieldView from "../FieldView";
 
 class ZhalobyList extends Component {
   render() {
@@ -14,10 +13,10 @@ class ZhalobyList extends Component {
         onClick={this.props.toggleTab}
       >
         {this.props.isHidden ? null : (
-          <ListOfWords name="zhalobyCicle" dataObj={dataBase} />
+          <FieldView name="zhalobyCicle" dataObj={dataBase} />
         )}
 
-        <FreeText name="zhalobyText" />
+        <FieldView name="zhalobyText" dataObj={dataBase} />
       </span>
     );
   }

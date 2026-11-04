@@ -3,24 +3,22 @@ import { connect } from "react-redux";
 import dataBase from "../../store/kognitData.js";
 import { fingerPhrase } from "../../lib/text";
 import { fieldOf } from "../../lib/redux";
-import ListOfWords from "../ListOfWords";
-import ListOfSentences from "../ListOfSentences";
-import OnePraseFromRadio from "../OnePraseFromRadio";
+import FieldView from "../FieldView";
 
 class KognitList extends Component {
   render() {
     return (
       <span data-id="kognit" onClick={this.props.toggleTab}>
         {/*Интел-мнест функции*/}
-        <OnePraseFromRadio name="kognitOsnivnoi" dataObj={dataBase} />
+        <FieldView name="kognitOsnivnoi" dataObj={dataBase} />
         {/*Отмечается*/}
-        <ListOfWords name="otmech" dataObj={dataBase} />
+        <FieldView name="otmech" dataObj={dataBase} />
 
         {/*пальцы*/}
         <span> {this.props.fingerText}</span>
 
         {/*Отдельно*/}
-        <ListOfSentences name="otdel" dataObj={dataBase} />
+        <FieldView name="otdel" dataObj={dataBase} as="sentences" />
       </span>
     );
   }

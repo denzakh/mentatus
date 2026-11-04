@@ -2,32 +2,28 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/affektData.js";
 import { fieldOf } from "../../lib/redux";
-import ListOfWords from "../ListOfWords";
-import ListOfSentences from "../ListOfSentences";
-import FreeText from "../FreeText";
-import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
-import OnePraseFromRadio from "../OnePraseFromRadio";
+import FieldView from "../FieldView";
 
 class SonAppetitList extends Component {
   render() {
     return (
       <span>
         {/*Сон*/}
-        <ListOfWords name="son" dataObj={dataBase} />
+        <FieldView name="son" dataObj={dataBase} />
         <span>. </span>
 
-        <ListOfSentences name="sonSeparate" dataObj={dataBase} />
+        <FieldView name="sonSeparate" dataObj={dataBase} as="sentences" />
 
         {/*Аппетит*/}
-        <OnePraseFromRadio name="appetit" dataObj={dataBase} />
+        <FieldView name="appetit" dataObj={dataBase} />
         {this.props.hasPohudel ? (
           <span>
-            <FreeTextBeforeAndAfter name="appetitPohudel" dataObj={dataBase} />
+            <FieldView name="appetitPohudel" dataObj={dataBase} />
           </span>
         ) : null}
         <span>. </span>
 
-        <FreeText name="appetitText" />
+        <FieldView name="appetitText" dataObj={dataBase} />
       </span>
     );
   }

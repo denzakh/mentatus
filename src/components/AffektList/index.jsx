@@ -2,31 +2,27 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/affektData.js";
 import { fieldOf } from "../../lib/redux";
-import ListOfWords from "../ListOfWords";
-import ListOfSentences from "../ListOfSentences";
-import FreeText from "../FreeText";
-import OnePraseFromRadio from "../OnePraseFromRadio";
+import FieldView from "../FieldView";
 
 class AffektList extends Component {
   render() {
     return (
       <span data-id="affekt" onClick={this.props.toggleTab}>
         {/*Настроение*/}
-        <OnePraseFromRadio name="nastroyeniye" dataObj={dataBase} />
+        <FieldView name="nastroyeniye" dataObj={dataBase} />
 
-        <ListOfWords name="vSvyazi" dataObj={dataBase} isAnd="true" />
+        <FieldView name="vSvyazi" dataObj={dataBase} isAnd />
 
-        <ListOfWords name="s" dataObj={dataBase} />
+        <FieldView name="s" dataObj={dataBase} />
 
         {this.props.isKolebaniaChecked ? (
           <span>
             <span>
               {" "}
               (
-              <OnePraseFromRadio
+              <FieldView
                 name="nastroyeniyeKolebaniaPodrobno"
                 dataObj={dataBase}
-                before=""
               />
               )
             </span>
@@ -35,18 +31,22 @@ class AffektList extends Component {
 
         <span>. </span>
 
-        <ListOfSentences name="nastroyenieSeparate" dataObj={dataBase} />
+        <FieldView
+          name="nastroyenieSeparate"
+          dataObj={dataBase}
+          as="sentences"
+        />
 
-        <FreeText name="nastroyeniyeText" />
+        <FieldView name="nastroyeniyeText" dataObj={dataBase} />
 
         {/*Тревога*/}
-        <OnePraseFromRadio name="trevoga" dataObj={dataBase} />
+        <FieldView name="trevoga" dataObj={dataBase} />
 
         <span>. </span>
 
-        <ListOfSentences name="trevogaSeparate" dataObj={dataBase} />
+        <FieldView name="trevogaSeparate" dataObj={dataBase} as="sentences" />
 
-        <FreeText name="trevogaText" />
+        <FieldView name="trevogaText" dataObj={dataBase} />
       </span>
     );
   }

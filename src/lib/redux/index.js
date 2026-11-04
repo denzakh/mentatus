@@ -13,6 +13,18 @@ export function fieldOf(state, fieldName) {
   return section ? state[section][fieldName] : undefined;
 }
 
+// флаг чекбокса внутри среза (для условий видимости в layout раздела)
+export function sliceFlag(slice, fieldName) {
+  const field = slice && slice[fieldName];
+  return !!(field && field.isChecked);
+}
+
+// номер выбранного пункта радиогруппы внутри среза
+export function sliceNumber(slice, fieldName) {
+  const field = slice && slice[fieldName];
+  return +((field && field.number) || 0);
+}
+
 // набор флагов isChecked для перечисленных полей стора
 export function flagsOf(state, keys) {
   const flags = {};

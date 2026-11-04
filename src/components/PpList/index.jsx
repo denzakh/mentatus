@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/ppData.js";
 import { fieldOf } from "../../lib/redux";
-import ListOfWords from "../ListOfWords";
-import FreeText from "../FreeText";
-import OnePraseFromRadio from "../OnePraseFromRadio";
+import FieldView from "../FieldView";
 import SonAppetitList from "../SonAppetitList";
 import KritikaList from "../KritikaList";
 
@@ -15,30 +13,30 @@ class PpList extends Component {
         <span data-id="pp" onClick={this.props.toggleTab}>
           {this.props.isBredHidden ? null : (
             <span>
-              <ListOfWords name="bred" dataObj={dataBase} />
+              <FieldView name="bred" dataObj={dataBase} />
             </span>
           )}
 
-          <FreeText name="bredText" />
+          <FieldView name="bredText" dataObj={dataBase} />
 
           {this.props.isGallHidden ? null : (
             <span>
-              <ListOfWords name="gall" dataObj={dataBase} />
+              <FieldView name="gall" dataObj={dataBase} />
             </span>
           )}
 
-          <FreeText name="gallText" />
+          <FieldView name="gallText" dataObj={dataBase} />
 
           {/*Опасные*/}
           {this.props.isOpasnyeHidden ? null : (
             <span>
-              <OnePraseFromRadio name="opasnye" dataObj={dataBase} />
+              <FieldView name="opasnye" dataObj={dataBase} />
 
-              <OnePraseFromRadio name="opasnyeAgressia" dataObj={dataBase} />
+              <FieldView name="opasnyeAgressia" dataObj={dataBase} />
             </span>
           )}
 
-          <FreeText name="opasnyeText" />
+          <FieldView name="opasnyeText" dataObj={dataBase} />
         </span>
 
         <span data-id="affekt" onClick={this.props.toggleTab}>

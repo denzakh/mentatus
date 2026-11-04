@@ -2,10 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/rechData.js";
 import { fieldOf } from "../../lib/redux";
-import ListOfWords from "../ListOfWords";
-import ListOfSentences from "../ListOfSentences";
-import FreeText from "../FreeText";
-import OnePraseFromRadio from "../OnePraseFromRadio";
+import FieldView from "../FieldView";
 
 class RechList extends Component {
   render() {
@@ -38,7 +35,7 @@ class RechList extends Component {
       return (
         <span>
           <span> </span>
-          <OnePraseFromRadio name="rechSuschestvo" dataObj={dataBase} />
+          <FieldView name="rechSuschestvo" dataObj={dataBase} />
           {odnosloj()}
           <span>. </span>
         </span>
@@ -62,22 +59,22 @@ class RechList extends Component {
 
       return (
         <span>
-          <OnePraseFromRadio name="myshleniePosled" dataObj={dataBase} />
+          <FieldView name="myshleniePosled" dataObj={dataBase} />
 
-          <OnePraseFromRadio name="myshlenieTemp" dataObj={dataBase} />
+          <FieldView name="myshlenieTemp" dataObj={dataBase} />
 
-          <ListOfWords name="myshlenie" dataObj={dataBase} isAnd={true} />
+          <FieldView name="myshlenie" dataObj={dataBase} isAnd />
           <span>.</span>
 
-          <FreeText name="myshlenieText" />
+          <FieldView name="myshlenieText" dataObj={dataBase} />
 
           {/*речь*/}
 
-          <ListOfWords name="rechOsob" dataObj={dataBase} isAnd={false} />
+          <FieldView name="rechOsob" dataObj={dataBase} />
 
           {otvet()}
 
-          <ListOfWords name="rechOtmech" dataObj={dataBase} isAnd={false} />
+          <FieldView name="rechOtmech" dataObj={dataBase} />
         </span>
       );
     };
@@ -86,9 +83,9 @@ class RechList extends Component {
       <span data-id="rech" onClick={this.props.toggleTab}>
         {mainShow()}
 
-        <ListOfSentences name="rechGrub" dataObj={dataBase} />
+        <FieldView name="rechGrub" dataObj={dataBase} as="sentences" />
 
-        <FreeText name="rechText" />
+        <FieldView name="rechText" dataObj={dataBase} />
       </span>
     );
   }

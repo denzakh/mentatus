@@ -2,8 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/anamnezData.js";
 import { fieldOf } from "../../lib/redux";
-import ListOfWords from "../ListOfWords";
-import FreeText from "../FreeText";
+import FieldView from "../FieldView";
 
 class AnamnezList extends Component {
   render() {
@@ -11,11 +10,11 @@ class AnamnezList extends Component {
       <span data-id="anamnez" onClick={this.props.toggleTab}>
         {this.props.isHidden ? null : (
           <span>
-            <ListOfWords name="anamnezCicle" dataObj={dataBase} />
+            <FieldView name="anamnezCicle" dataObj={dataBase} />
           </span>
         )}
 
-        <FreeText name="anamnezText" />
+        <FieldView name="anamnezText" dataObj={dataBase} />
       </span>
     );
   }

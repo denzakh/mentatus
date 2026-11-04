@@ -1,0 +1,110 @@
+import sections from "../reducers/sections";
+import schemas from "./schemas";
+
+/*
+Полнота схем разделов: `*Data.js` — единственный источник правды о полях.
+Типы: boolean (чекбокс), radio (радиогруппа), string | text (свободный текст,
+в этой кодовой базе равнозначны), number (число без ввода, например patientId).
+*/
+
+const TYPES = ["boolean", "radio", "string", "text", "number"];
+
+// служебные фразы обрамления списков: не поля стора, а части заключения
+const SERVICE_SUFFIXES = ["Before", "After", "Not"];
+
+// не поле стора, а таблица фраз ориентировки (см. `OrientirovkaList`)
+const NON_FIELD_KEYS = ["orientir"];
+
+function isServicePhrase(key) {
+  return SERVICE_SUFFIXES.some(
+    suffix => key.slice(key.length - suffix.length) === suffix
+  );
+}
+
+// форма поля стора, ожидаемая для типа схемы
+function storeKeyByType(type) {
+  switch (type) {
+    case "boolean":
+      return "isChecked";
+    case "radio":
+    case "number":
+      return "number";
+    case "string":
+    case "text":
+      return "text";
+    default:
+      return null;
+  }
+}
+
+describe("схемы разделов", () => {
+  it("содержит схему для каждого среза", () => {
+    expect(Object.keys(schemas)).toEqual(Object.keys(sections));
+  });
+
+  Object.keys(sections).forEach(section => {
+    describe(section, () => {
+      const store = sections[section];
+      const schema = schemas[section];
+
+      it("описывает каждое поле стора разделом и типом", () => {
+        Object.keys(store).forEach(field => {
+          const description = schema[field];
+
+          expect(description).toBeDefined();
+          expect(description.section).toBe(section);
+          expect(TYPES.indexOf(description.type)).toBeGreaterThan(-1);
+        });
+      });
+
+      it("совпадает с формой поля в сторе", () => {
+        Object.keys(store).forEach(field => {
+          const storeKey = storeKeyByType(schema[field].type);
+
+          expect(Object.keys(store[field])).toEqual([storeKey]);
+        });
+      });
+
+      it("не содержит полей других разделов и лишних записей", () => {
+        Object.keys(schema).forEach(key => {
+          const isField = !!store[key];
+          const known = NON_FIELD_KEYS.indexOf(key) !== -1;
+
+          expect(isField || known || isServicePhrase(key)).toBe(true);
+
+          if (!known) {
+            expect(schema[key].section).toBe(section);
+            expect(TYPES.indexOf(schema[key].type)).toBeGreaterThan(-1);
+          }
+        });
+      });
+
+      it("описывает служебные фразы с текстом", () => {
+        Object.keys(schema).forEach(key => {
+          if (isServicePhrase(key)) {
+            expect(typeof schema[key].phrase).toBe("string");
+          }
+        });
+      });
+
+      it("описывает радиогруппы с непустым списком пунктов", () => {
+        Object.keys(store).forEach(field => {
+          const description = schema[field];
+
+          if (description.type !== "radio") {
+            return;
+          }
+
+          expect(Array.isArray(description.data)).toBe(true);
+          expect(description.data.length).toBeGreaterThan(0);
+
+          description.data.forEach(item => {
+            expect(typeof item.id).toBe("number");
+            expect(typeof item.label).toBe("string");
+            expect(typeof item.phrase).toBe("string");
+          });
+        });
+      });
+    });
+  });
+});

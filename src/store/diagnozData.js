@@ -19,6 +19,13 @@ const data = {
     section: "diagnoz",
     type: "text",
     cicle: ""
+  },
+  reqilech: {
+    label: "Рекомендации и лечение",
+    phrase: "",
+    section: "diagnoz",
+    type: "text",
+    cicle: ""
   }
 };
 

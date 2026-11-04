@@ -97,6 +97,10 @@ let data = {
   //   type: "boolean",
   //   cicle: "anamnezCicle"
   // },
+  anamnezText: {
+    section: "anamnez",
+    type: "text"
+  },
   anamnezCicleBefore: {
     phrase: "В анамнезе ",
     section: "anamnez",

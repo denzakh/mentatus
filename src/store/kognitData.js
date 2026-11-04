@@ -175,6 +175,13 @@ const data = {
     before: "",
     after: ""
   },
+  orientirNot: {
+    label: "ориентировку не определить",
+    phrase: "Степень ориентировки определить не удается.",
+    section: "kognit",
+    type: "boolean",
+    cicle: ""
+  },
   orientirText: {
     section: "kognit",
     type: "string"
@@ -267,19 +274,26 @@ const data = {
     cicle: "otmech",
     hint: ""
   },
+  kognitFinger: {
+    label: "нарушение фингерагнозии",
+    phrase: "Нарушение фингерагнозии",
+    section: "kognit",
+    type: "boolean",
+    cicle: ""
+  },
   otmechBefore: {
     phrase: "Отмечается ",
-    section: "affekt",
+    section: "kognit",
     type: "string"
   },
   otmechAfter: {
     phrase: ". ",
-    section: "affekt",
+    section: "kognit",
     type: "string"
   },
   otmechNot: {
     phrase: "",
-    section: "affekt",
+    section: "kognit",
     type: "string"
   },
   kognitOsnivnoi: {
@@ -358,17 +372,17 @@ const data = {
   },
   otdelBefore: {
     phrase: "",
-    section: "affekt",
+    section: "kognit",
     type: "string"
   },
   otdelAfter: {
     phrase: "",
-    section: "affekt",
+    section: "kognit",
     type: "string"
   },
   otdelNot: {
     phrase: "",
-    section: "affekt",
+    section: "kognit",
     type: "string"
   },
   kognitFingerN: {

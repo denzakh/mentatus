@@ -9,7 +9,7 @@
 | # | Этап | Файл | Статус | Зависит от |
 |---|------|------|--------|------------|
 | 1 | Разбиение `psystatus` на срезы по разделам | `01-slices.md` | ✅ выполнено | — |
-| 2 | Схемный рендеринг разделов из `store/*Data.js` | `02-schema-rendering.md` | ⏳ | 1 |
+| 2 | Схемный рендеринг разделов из `store/*Data.js` | `02-schema-rendering.md` | ✅ выполнено | 1 |
 | 3 | `redux-persist` вместо самописного localStorage | `03-redux-persist.md` | ⏳ | 1 |
 | 4 | Обновление стека (Vite + React 18 + RTK + vitest) | `04-stack-upgrade.md` | ⏳ | 1–3 |
 | 5 | Чистка мёртвых CSS-классов | `05-css-cleanup.md` | ⏳ | 4 |
@@ -29,8 +29,13 @@
 - Экшены: `SET_SYMPTOM` / `SET_TEXT` / `SET_RADIO` (`src/actions/*`), редьюсер раздела —
   `src/reducers/createSectionReducer.js` (guard по типу поля).
 - Схемы разделов: `src/store/*Data.js`; начальные значения: `src/store/*Store.js`.
-- Рендеринг: `*Manager` (форма) + `*List` (заключение) + generic-поля.
-- Тесты: 3 сьюта / 37 тестов (`src/lib/text`, `src/lib/rules`, `src/reducers`).
+  Полноту схем (поле → `section`/`type`) проверяет `src/store/schema.test.js`,
+  карта схем — `src/store/schemas.js`.
+- Рендеринг: `*Manager` → `<Section section dataBase layout />`
+  (раскладка — `src/store/*Layout.js`), `*List` → `<FieldView>` по типу поля,
+  примитивы — `src/components/{Field,Group,Section,FieldView}`.
+- Тесты: 5 сьютов / 82 теста (`src/lib/text`, `src/lib/rules`,
+  `src/lib/layout`, `src/reducers`, `src/store`).
 - `npm test` = `react-scripts test --env=jsdom` → на Windows уходит в watch.
   Прогон всех тестов: `CI=true npx react-scripts test --env=jsdom`.
 - Сборка: `npx react-scripts build` → `Compiled successfully` (папка `build/`).

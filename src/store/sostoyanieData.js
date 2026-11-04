@@ -1,4 +1,20 @@
 const data = {
+  patientId: {
+    section: "sostoyanie",
+    type: "number"
+  },
+  vozrast: {
+    section: "sostoyanie",
+    type: "text"
+  },
+  pol: {
+    section: "sostoyanie",
+    type: "boolean"
+  },
+  dataOsmotra: {
+    section: "sostoyanie",
+    type: "text"
+  },
   mestoOsmotra: {
     data: [
       {
@@ -28,16 +44,26 @@ const data = {
     before: "",
     after: ". "
   },
+  mestoText: {
+    section: "sostoyanie",
+    type: "text"
+  },
   poNapravleniu: {
     label: "по направлению",
-    phrase: "по направлению"
+    phrase: "по направлению",
+    section: "sostoyanie",
+    type: "boolean"
   },
   sIstorieiOznakomlen: {
     label: "c историей ознакомлен",
-    phrase: "С историей ознакомлен"
+    phrase: "С историей ознакомлен",
+    section: "sostoyanie",
+    type: "boolean"
   },
   nedobrovolno: {
-    label: "недобровольно"
+    label: "недобровольно",
+    section: "sostoyanie",
+    type: "boolean"
   },
   nedobrovolnoPrichiny: {
     data: [
@@ -104,6 +130,10 @@ const data = {
     section: "sostoyanie",
     before: "",
     after: ". "
+  },
+  nedobrovolnoText: {
+    section: "sostoyanie",
+    type: "text"
   },
   soznanie: {
     data: [
@@ -181,7 +211,9 @@ const data = {
     after: ""
   },
   kontaktZatrudnen: {
-    label: "затруднен"
+    label: "затруднен",
+    section: "sostoyanie",
+    type: "boolean"
   },
   kontaktSluh: {
     label: "снижения слуха",
@@ -314,6 +346,10 @@ const data = {
     type: "boolean",
     hint: ""
   },
+  sostoyanieText: {
+    section: "sostoyanie",
+    type: "text"
+  },
   kritika: {
     data: [
       {
@@ -347,6 +383,10 @@ const data = {
     section: "sostoyanie",
     before: "Критика ",
     after: ". "
+  },
+  kritikaText: {
+    section: "sostoyanie",
+    type: "text"
   }
 };
 
