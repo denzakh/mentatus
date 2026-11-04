@@ -1,6 +1,6 @@
 # Этап 5 — Чистка мёртвых CSS-классов
 
-**Статус:** ⏳ запланировано.
+**Статус:** ✅ выполнено (см. «Итог выполнения» в конце).
 **Зависимости:** этап 4 (стабильные build/test).
 **Цель:** удалить CSS-правила и классы, которые больше не используются в JSX,
 не меняя внешний вид.
@@ -79,3 +79,35 @@ node scripts/find-unused-css.js
 
 - Не менять разметку и логику; только CSS.
 - Не переходить на CSS-модули/препроцессоры (отдельная задача).
+
+## Итог выполнения
+
+- Добавлен dev-скрипт `scripts/find-unused-css.js` (без зависимостей):
+  разбирает JS/JSX с учётом комментариев и строк, относит использования к
+  «уверенным» (`className=`, `classNames(...)`, `className:` в layout) и
+  «прочим строкам», собирает классы из CSS и дополнительно выводит
+  пустые правила и дубли классов между файлами.
+- Итоговый отчёт: CSS-файлов 18, определено 61 класс,
+  `defined - used` — **0**, пустых правил — **0**.
+- Удалены неиспользуемые правила: `.app__table`, `.app__td--tab-menu`
+  (`containers/App/App.css`).
+- Удалены пустые правила: `.list__item:nth-child(4n + 1)` (`App.css`),
+  `.conclusion-panel`, `.conclusion-panel__row` (`ConclusionPanel.css`),
+  `.diagnoz` (`Diagnoz.css`), `.orientir__bottom` (`Kognit.css` и
+  `Orientirovka.css`), `.textarea__label` (`Textarea.css`).
+- Удалены мёртвые CSS-файлы: `AffektManager/Affekt.css` (не импортировался;
+  дублировал `.orientir__*` из `Kognit.css`/`Orientirovka.css`),
+  `Header/Header.css`, `PpManager/Pp.css`, `RechManager/Rech.css`,
+  `TabRender/TabRender.css` (пустые). Из `Header`, `PpManager`, `TabRender`
+  убраны соответствующие `import "./*.css"`.
+- «Используется, но не определено» — это служебные классы-маркеры без стилей
+  (`.list__item`, `.break`, `.manager__col--1/2`, `.app__status-box`,
+  `.header`, `.tab-render` и т.п.). CSS для них не удалялся: добавление
+  стилей изменило бы внешний вид, поэтому оставлено как есть.
+- Дубли `.radio__*` (`RadioList.css`/`RadioListKogn.css`) и `.orientir__*`
+  (`Kognit.css`/`Orientirovka.css`) сохранены: классы используются, правила
+  идентичны; объединение файлов — отдельная задача. Дубли `App.css`/`Print.css`
+  и `Conclusion.css`/`Print.css` — намеренные print-переопределения.
+- Проверка: `npm test` — 91 тест, 7 сьютов, зелёные; `npm run build` — успешно.
+  `npm run lint` — без новых замечаний; остаются предсуществующие ошибки
+  `process is not defined` в `src/serviceWorker.jsx` (вне этапа 5).

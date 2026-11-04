@@ -62,11 +62,6 @@
   margin-right: 0px;
 }
 
-.app__table {
-  height: 100%;
-  min-height: 100%;
-}
-
 .app__content-row {
   display: -webkit-flex;
   display: -moz-flex;
@@ -111,16 +106,6 @@
 
 .no-break {
   break-inside: avoid;
-}
-
-.app__td--tab-menu {
-  border-right: 1px solid #cccccc;
-  background-color: #f5f5f5;
-  padding: 0;
-}
-
-.list__item:nth-child(4n + 1) {
-  /*margin-bottom: 10px; */
 }
 
 .list__title {

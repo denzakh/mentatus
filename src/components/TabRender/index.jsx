@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "./TabRender.css";
 import ZhalobyManager from "../../components/ZhalobyManager";
 import AnamnezManager from "../../components/AnamnezManager";
 import SostoyanieManager from "../../components/SostoyanieManager";
