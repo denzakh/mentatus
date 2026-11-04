@@ -271,6 +271,29 @@ export default function configureStore() {
   как есть, CNAME/manifest/favicon на месте), `npm run preview` для проверки.
 - `grep -rn "process.env" src` — пусто.
 
+Повторная проверка критериев приёмки (этап 4) выявила остатки CRA, которые не были
+убраны в первом проходе; удалены:
+
+- `src/serviceWorker.jsx` — единственный оставшийся `process.env` в `src`; из-за
+  него `npm run lint` падал (`'process' is not defined`, `no-undef`), а сам файл
+  нигде не импортировался.
+- `src/reducers/createSectionReducer.js` — мёртвая фабрика редьюсера, всё ещё
+  импортировавшая удалённый `immutability-helper`.
+- `public/index.html` — шаблон CRA (`%PUBLIC_URL%`), Vite использует корневой
+  `index.html`; в `public/` остались только реальные ассеты.
+- локальный `build/` (артефакт CRA, в `.gitignore`).
+
+Дополнительно исправлены пути иконок в `public/manifest.json`,
+`public/browserconfig.xml`, `public/static/img/site.webmanifest`: они были
+абсолютными и указывали на несуществующую папку (`/static/img/favicons/...`) —
+при `base: "./"` и деплое в подпапку абсолютные пути тоже ломаются. Теперь пути
+относительные и ведут на существующие файлы: `static/img/...` от корня, а в
+`site.webmanifest` (он сам лежит в `static/img/`) — просто `android-chrome-*.png`.
+
+Итоговое состояние проверок: `npm test` — 7 сьютов / 91 тест, зелёные;
+`npm run build` — `dist/` (169 модулей); `npm run lint` — 0 ошибок
+(3 прежних warning `no-unused-vars`); `grep -rn "process.env" src` — пусто.
+
 ## Критерии приёмки
 
 - `npm run dev` — приложение открывается и работает как раньше.
