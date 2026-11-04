@@ -1,7 +1,5 @@
-export function setRadio(fieldName, number) {
-  return {
-    type: "SET_RADIO",
-    name: fieldName,
-    number: number
-  };
-}
+/*
+Совместимость импортов: компоненты берут креаторы из `actions/radioAction`,
+а сами экшены описаны в `actions/fieldActions` (RTK `createAction`).
+*/
+export { setRadio } from "../fieldActions";

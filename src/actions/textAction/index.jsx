@@ -1,7 +1,5 @@
-export function setText(fieldName, text) {
-  return {
-    type: "SET_TEXT",
-    name: fieldName,
-    text: text
-  };
-}
+/*
+Совместимость импортов: компоненты берут креаторы из `actions/textAction`,
+а сами экшены описаны в `actions/fieldActions` (RTK `createAction`).
+*/
+export { setText } from "../fieldActions";

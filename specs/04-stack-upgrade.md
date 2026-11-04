@@ -1,6 +1,6 @@
 # Этап 4 — Обновление стека: Vite + React 18 + RTK + vitest
 
-**Статус:** ⏳ запланировано.
+**Статус:** ✅ выполнено (см. «Итог выполнения» в конце).
 **Зависимости:** этапы 1–3 (срезы, persist).
 **Цель:** уйти с CRA 1 (`react-scripts` 1.1.4, webpack 3, jest 20) на современный
 стек, чтобы `npm test` работал как обычный прогон (без watch).
@@ -241,6 +241,35 @@ export default function configureStore() {
 ```
 
 Поставить `eslint`, `eslint-plugin-react` (и `eslint-plugin-vitest-globals`, если нужно).
+
+## Итог выполнения
+
+Фактически сделано (отличия от плана — ниже):
+
+- React 18.3.1, react-dom 18.3.1, react-redux 9.3.1, redux 5.0.1,
+  @reduxjs/toolkit 2.14.0, redux-persist 6.0.0, classnames 2.5.1.
+- Vite 6.4.5 + @vitejs/plugin-react 4.7.0, vitest 3.2.7 + jsdom 26.1.0,
+  @testing-library/{react,dom,jest-dom}.
+- `react-scripts`, `immutability-helper`, `src/serviceWorker.jsx`,
+  `public/index.html` и CRA-артефакты в корне удалены; service worker не
+  регистрируется (PWA — отдельная задача с `vite-plugin-pwa`).
+- Entry: корневой `index.html` + `src/index.jsx` (переименован из `index.js`,
+  чтобы JSX жил в `.jsx`-файле) с `createRoot`.
+- Срезы: `src/reducers/createSectionSlice.js` (RTK `createSlice` + Immer);
+  экшены — `src/actions/fieldActions.js` (`createAction`, данные в `payload`),
+  старые `actions/{symptom,text,radio}Action` — ре-экспорты.
+- Стор: `configureStore` из RTK + `persistStore`; hot-reload через
+  `module.hot` убран (Vite сам перезагружает модули).
+- Тесты: `npm test` = `vitest run` (91 тест, 7 сьютов, без watch),
+  `src/setupTests.js` подключает `@testing-library/jest-dom/vitest`;
+  добавлен smoke-тест `src/index.test.jsx` (монтирование приложения).
+- Линт: ESLint 9 перешёл на плоский конфиг, поэтому вместо `.eslintrc`
+  используется `eslint.config.mjs` (`@eslint/js` + `eslint-plugin-react`,
+  `react/prop-types` off, `no-unused-vars` warn, JSX-рантайм автоматический).
+  Это единственное намеренное отклонение от шагов 4.8.
+- Сборка: `npm run build` → `dist/` (ассеты `./assets/*`, `public/` копируется
+  как есть, CNAME/manifest/favicon на месте), `npm run preview` для проверки.
+- `grep -rn "process.env" src` — пусто.
 
 ## Критерии приёмки
 

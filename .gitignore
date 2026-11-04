@@ -9,17 +9,12 @@
 
 # production
 /build
+/dist
 
-# устаревшие артефакты сборки в корне репозитория (деплой идёт из /build)
-/index.html
-/static
-/service-worker.js
+# устаревшие артефакты сборки CRA в корне репозитория
 /asset-manifest.json
 /precache-manifest.*.js
-/favicon.ico
-/manifest.json
-/browserconfig.xml
-/CNAME
+/service-worker.js
 
 # misc
 .DS_Store

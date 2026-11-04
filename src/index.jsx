@@ -1,17 +1,16 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import "./index.css";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import configureStore from "./configureStore";
-import * as serviceWorker from "./serviceWorker";
 
 import ActivePage from "./components/ActivePage";
 import Header from "./components/Header";
 
 const { store, persistor } = configureStore();
 
-ReactDOM.render(
+createRoot(document.getElementById("root")).render(
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
       <div className="wrapper">
@@ -23,8 +22,5 @@ ReactDOM.render(
         </div>
       </div>
     </PersistGate>
-  </Provider>,
-  document.getElementById("root")
+  </Provider>
 );
-
-serviceWorker.register();

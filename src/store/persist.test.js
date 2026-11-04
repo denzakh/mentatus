@@ -7,6 +7,7 @@ import withPersist, {
 } from "./persist";
 import rootReducer from "../reducers";
 import sections from "../reducers/sections";
+import { setSymptom, setText } from "../actions/fieldActions";
 
 describe("persistConfig", () => {
   it("персистит только срезы разделов", () => {
@@ -37,7 +38,7 @@ describe("withPersist", () => {
 
   it("пропускает экшены разделов через обёртку", () => {
     const store = createStore(withPersist(rootReducer));
-    store.dispatch({ type: "SET_SYMPTOM", name: "zhalobyTrevoga" });
+    store.dispatch(setSymptom("zhalobyTrevoga"));
 
     expect(store.getState().zhaloby.zhalobyTrevoga.isChecked).toBe(true);
   });
@@ -66,7 +67,7 @@ describe("clearLegacyState", () => {
   });
 
   it("удаляет ключ старого самописного формата", () => {
-    const removeItem = jest.fn();
+    const removeItem = vi.fn();
     stubLocalStorage({ removeItem });
 
     clearLegacyState();
@@ -147,11 +148,7 @@ describe("persistStore", () => {
     const store = createPersistedStore(storage);
 
     persistStore(store, null, () => {
-      store.dispatch({
-        type: "SET_TEXT",
-        name: "zhalobyText",
-        text: "тревога"
-      });
+      store.dispatch(setText("zhalobyText", "тревога"));
 
       const isWritten = () => {
         const saved = readSavedState(storage);
