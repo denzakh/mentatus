@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./Diagnoz.css";
 
-export default class OrientirovkaManager extends Component {
+export default class DiagnozManager extends Component {
   render() {
     return (
       <div className="diagnoz">
@@ -23,7 +23,7 @@ export default class OrientirovkaManager extends Component {
             className="diagnoz__textarea"
             name="diagnozKlin"
             onChange={this.props.toggleText}
-            defaultValue={this.props.psystatus.diagnozKlin.text}
+            value={this.props.psystatus.diagnozKlin.text}
           />
         </div>
         <div className="diagnoz__row">
@@ -33,7 +33,7 @@ export default class OrientirovkaManager extends Component {
             className="diagnoz__textarea"
             name="diagnozDopolnenie"
             onChange={this.props.toggleText}
-            defaultValue={this.props.psystatus.diagnozDopolnenie.text}
+            value={this.props.psystatus.diagnozDopolnenie.text}
           />
         </div>
         <br />
@@ -45,7 +45,7 @@ export default class OrientirovkaManager extends Component {
             className="diagnoz__textarea diagnoz__textarea--req"
             name="reqilech"
             onChange={this.props.toggleText}
-            defaultValue={this.props.psystatus.reqilech.text}
+            value={this.props.psystatus.reqilech.text}
           />
         </div>
       </div>

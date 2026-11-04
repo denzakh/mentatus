@@ -1,138 +1,138 @@
 const store = {
-  "nastroyeniye": {
+  nastroyeniye: {
     number: 0
   },
-  "nastroyeniyePsikhotravma": {
+  nastroyeniyePsikhotravma: {
     isChecked: false
   },
-  "nastroyeniyeBoli": {
+  nastroyeniyeBoli: {
     isChecked: false
   },
-  "nastroyeniyeSomatika": {
+  nastroyeniyeSomatika: {
     isChecked: false
   },
-  "nastroyeniyeToska": {
+  nastroyeniyeToska: {
     isChecked: false
   },
-  "nastroyeniyeUgnetenie": {
+  nastroyeniyeUgnetenie: {
     isChecked: false
   },
-  "nastroyeniyeNejelanie": {
+  nastroyeniyeNejelanie: {
     isChecked: false
   },
-  "nastroyeniyeSlabost": {
+  nastroyeniyeSlabost: {
     isChecked: false
   },
-  "nastroyeniyeUtomlenie": {
+  nastroyeniyeUtomlenie: {
     isChecked: false
   },
-  "nastroyeniyeAngedonia": {
+  nastroyeniyeAngedonia: {
     isChecked: false
   },
-  "nastroyeniyeRazdrajit": {
+  nastroyeniyeRazdrajit: {
     isChecked: false
   },
-  "nastroyeniyeNaprajenie": {
+  nastroyeniyeNaprajenie: {
     isChecked: false
   },
-  "nastroyeniyeObidchivost": {
-    isChecked: false
-  },  "nastroyeniyeIpohondria": {
+  nastroyeniyeObidchivost: {
     isChecked: false
   },
-  "nastroyeniyeSenestopatia": {
+  nastroyeniyeIpohondria: {
     isChecked: false
   },
-  "nastroyeniyeVozbujdenie": {
+  nastroyeniyeSenestopatia: {
     isChecked: false
   },
-  "nastroyeniyBlagodushie": {
+  nastroyeniyeVozbujdenie: {
     isChecked: false
   },
-  "nastroyeniyeDurashlivost": {
+  nastroyeniyBlagodushie: {
     isChecked: false
   },
-  "nastroyeniyeRasteryannost": {
+  nastroyeniyeDurashlivost: {
     isChecked: false
   },
-  "nastroyeniyeKolebania": {
+  nastroyeniyeRasteryannost: {
     isChecked: false
   },
-  "nastroyeniyeKolebaniaPodrobno": {
+  nastroyeniyeKolebania: {
+    isChecked: false
+  },
+  nastroyeniyeKolebaniaPodrobno: {
     number: 0
   },
-  "nastroyeniyeOtricaet": {
+  nastroyeniyeOtricaet: {
     isChecked: false
   },
-  "nastroyeniyeOdinochestvo": {
+  nastroyeniyeOdinochestvo: {
     isChecked: false
   },
-  "nastroyeniyeLabilnost": {
+  nastroyeniyeLabilnost: {
     isChecked: false
   },
-  "nastroyeniyePlaksivost": {
+  nastroyeniyePlaksivost: {
     isChecked: false
   },
-  "nastroyeniyeText": { 
+  nastroyeniyeText: {
     text: ""
   },
-  "trevoga": {
+  trevoga: {
     number: 0
   },
-  "trevogaMysli": {
+  trevogaMysli: {
     isChecked: false
   },
-  "trevogaAtaki": {
+  trevogaAtaki: {
     isChecked: false
   },
-  "trevogaText": {
+  trevogaText: {
     text: ""
   },
 
-  "sonPoverh": {
+  sonPoverh: {
     isChecked: false
   },
-  "sonZasypanie": {
+  sonZasypanie: {
     isChecked: false
   },
-  "sonProbNoch": {
+  sonProbNoch: {
     isChecked: false
   },
-  "sonProbUtro": {
+  sonProbUtro: {
     isChecked: false
   },
-  "sonKoshmar": {
+  sonKoshmar: {
     isChecked: false
   },
-  "sonKrik": {
+  sonKrik: {
     isChecked: false
   },
-  "sonSonliv": {
+  sonSonliv: {
     isChecked: false
   },
-  "sonInversia": {
+  sonInversia: {
     isChecked: false
   },
-  "sonSnotvor": {
+  sonSnotvor: {
     isChecked: false
   },
-  "sonDizorientir": {
+  sonDizorientir: {
     isChecked: false
   },
-  "sonText": {
-    isChecked: false
-  },
-
-  "appetit": {
-    number: 0
-  },
-  "appetitPohudel": {
+  sonText: {
     text: ""
   },
-  "appetitText": {
+
+  appetit: {
+    number: 0
+  },
+  appetitPohudel: {
+    text: ""
+  },
+  appetitText: {
     text: ""
   }
-
 };
 
 export default store;

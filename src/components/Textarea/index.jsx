@@ -11,6 +11,7 @@ export default class Textarea extends Component {
           onChange={this.props.onChange}
           name={this.props.name}
           style={this.props.style}
+          value={this.props.value}
         />
       </div>
     );

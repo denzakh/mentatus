@@ -3,7 +3,7 @@ import cicleFn from "../../fn/cicleFn";
 
 export default class ListOfWords extends Component {
   render() {
-    const { name, dataObj, psystatus } = this.props;
+    const { name, dataObj, psystatus, beforeText } = this.props;
     const isAnd = !!this.props.isAnd;
 
     // получаем список элементов, относящихся к этому циклу
@@ -11,12 +11,7 @@ export default class ListOfWords extends Component {
 
     // получаем список активных элементов
     const filteredNameArr = arrayFromName.filter(item => {
-      try {
-        return psystatus[item].isChecked;
-      } catch (err) {
-        console.error(err.message + " in " + item);
-      }
-      return psystatus[item].isChecked;
+      return psystatus[item] && psystatus[item].isChecked;
     });
 
     // перебираем пункты, расставляем запятые
@@ -50,20 +45,22 @@ export default class ListOfWords extends Component {
     // получаем фразы для начала и конца цикла, фразу для отсутствия данных
     let before = this.props.before || name + "Before";
     let after = this.props.after || name + "After";
-    let noList = this.props.before || name + "Not";
+    let noList = this.props.noList || name + "Not";
+
+    // фраза-начало цикла: явный текст приоритетнее фразы из базы
+    let beforePhrase =
+      beforeText || (dataObj[before] ? dataObj[before].phrase : "");
 
     // добавляем начало и конец фразы, фразу для отсутствия данных
     if (filteredList.length) {
-      if (dataObj[before].phrase) {
-        filteredList.unshift(
-          <span key={before}>{dataObj[before].phrase}</span>
-        );
+      if (beforePhrase) {
+        filteredList.unshift(<span key={before}>{beforePhrase}</span>);
       }
-      if (dataObj[after].phrase) {
+      if (dataObj[after] && dataObj[after].phrase) {
         filteredList.push(<span key={after}>{dataObj[after].phrase}</span>);
       }
     } else {
-      if (dataObj[noList].phrase) {
+      if (dataObj[noList] && dataObj[noList].phrase) {
         filteredList = <span key={noList}>{dataObj[noList].phrase}</span>;
       }
     }

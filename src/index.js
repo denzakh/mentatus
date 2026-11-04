@@ -7,7 +7,6 @@ import * as serviceWorker from "./serviceWorker";
 
 import ActivePage from "./components/ActivePage";
 import Header from "./components/Header";
-import "./index.css";
 
 const store = configureStore(false); //использовать ли localStorage
 
@@ -18,7 +17,7 @@ ReactDOM.render(
         <Header />
       </div>
       <div className="wrapper__main">
-        <ActivePage store={store.getState()} />
+        <ActivePage />
       </div>
     </div>
   </Provider>,

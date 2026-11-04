@@ -11,7 +11,7 @@ export default class TextareaInline extends Component {
             className="textarea-inline__input"
             onChange={this.props.onChange}
             name={this.props.name}
-            defaultValue={this.props.value}
+            value={this.props.value}
           />
         </label>
       </div>

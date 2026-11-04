@@ -21,8 +21,6 @@ export default function configureStore(islocalStorage) {
       );
     }
 
-    localStorage.clear();
-
     store.subscribe(() => {
       localStorage["mentatus"] = JSON.stringify(store.getState());
     });
@@ -43,6 +41,5 @@ export default function configureStore(islocalStorage) {
       store.replaceReducer(nextRootReducer);
     });
   }
-  // console.log(store.getState())
   return store;
 }

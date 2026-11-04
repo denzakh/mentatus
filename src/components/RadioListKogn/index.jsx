@@ -9,27 +9,20 @@ export default class RadioListKogn extends Component {
     let arr = dataBase[name].data;
     let psystatus = this.props.psystatus;
 
-    // функция снижения критики
+    // функция снижения критики: часть ответов автоматически
+    // выставляет критику, если она ещё не задана
+    let withKritika = (number, onChange) => e => {
+      if (getToggleKritika(this.props.psystatus)) {
+        this.props.setRadio("kritika", number);
+      }
+      onChange(e);
+    };
+
     let toggleList = [
       this.props.toggleRadio, // 0
-      getToggleKritika(
-        this.props.psystatus,
-        this.props.toggleRadio,
-        this.props.toggleRadio,
-        "2"
-      ), // 1
-      getToggleKritika(
-        this.props.psystatus,
-        this.props.toggleRadio,
-        this.props.toggleRadio,
-        "3"
-      ), // 2
-      getToggleKritika(
-        this.props.psystatus,
-        this.props.toggleRadio,
-        this.props.toggleRadio,
-        "4"
-      ), // 3
+      withKritika(2, this.props.toggleRadio), // 1
+      withKritika(3, this.props.toggleRadio), // 2
+      withKritika(4, this.props.toggleRadio), // 3
       this.props.toggleRadio // 4
     ];
 

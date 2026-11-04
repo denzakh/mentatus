@@ -16,7 +16,7 @@ export default class ZhalobyManager extends Component {
             Жалобы на:
           </div>
           {zhalobyNameArr.map(item => (
-            <div key={item} className="list_item">
+            <div key={item} className="list__item">
               <Checkbox
                 checked={this.props.psystatus[item].isChecked}
                 onChange={this.props.toggleSymptom}

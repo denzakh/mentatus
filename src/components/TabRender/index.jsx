@@ -10,7 +10,7 @@ import KogtestManager from "../../components/KogtestManager";
 import PpManager from "../../components/PpManager";
 import DiagnozManager from "../../components/DiagnozManager";
 
-export default class TabMenu extends Component {
+export default class TabRender extends Component {
   render() {
     let psystatus = this.props.psystatus;
     let toggleSymptom = this.props.toggleSymptom;
@@ -63,6 +63,7 @@ export default class TabMenu extends Component {
           toggleSymptom={toggleSymptom}
           toggleText={toggleText}
           toggleRadio={toggleRadio}
+          setRadio={this.props.setRadio}
           psystatus={psystatus}
         />
       </div>,
@@ -79,6 +80,7 @@ export default class TabMenu extends Component {
           toggleSymptom={toggleSymptom}
           toggleText={toggleText}
           toggleRadio={toggleRadio}
+          setRadio={this.props.setRadio}
           psystatus={psystatus}
         />
       </div>,

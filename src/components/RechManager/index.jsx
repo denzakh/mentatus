@@ -163,7 +163,7 @@ export default class RechManager extends Component {
                 onChange={this.props.toggleText}
                 name="myshlenieText"
                 label="Описание мышления"
-                value={this.props.psystatus.myshlenieText}
+                value={this.props.psystatus.myshlenieText.text}
               />
             </div>
           </div>
@@ -190,7 +190,7 @@ export default class RechManager extends Component {
               onChange={this.props.toggleText}
               name="rechText"
               label="Описание речи"
-              value={this.props.psystatus.appetitText}
+              value={this.props.psystatus.rechText.text}
             />
           </div>
         </div>

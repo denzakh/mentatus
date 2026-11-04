@@ -6,7 +6,7 @@ import FreeText from "../FreeText";
 import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import OnePraseFromRadio from "../OnePraseFromRadio";
 
-export default class AffektList extends Component {
+export default class SonAppetitList extends Component {
   render() {
     let appetitPohudel = () => {
       if (this.props.psystatus.appetitPohudel.text) {

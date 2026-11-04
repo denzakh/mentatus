@@ -1,18 +1,31 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import pages from "../../containers/pages";
 
-export default class ActivePage extends Component {
+class ActivePage extends Component {
   render() {
-    let getActiveObj = store => {
-      let page = pages.filter(item => {
-        let option = store.option;
-        return item.name === option.activePageName;
-      });
-      return page[0].component;
-    };
+    const activePage = pages.filter(
+      item => item.name === this.props.activePageName
+    )[0];
 
-    let activeComponent = getActiveObj(this.props.store);
+    if (!activePage) {
+      return null;
+    }
 
-    return <div className="wrapper__active-page">{activeComponent}</div>;
+    const ActiveComponent = activePage.component;
+
+    return (
+      <div className="wrapper__active-page">
+        <ActiveComponent />
+      </div>
+    );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    activePageName: state.option.activePageName
+  };
+}
+
+export default connect(mapStateToProps)(ActivePage);

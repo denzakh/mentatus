@@ -11,13 +11,14 @@ import KritikaManager from "../KritikaManager";
 
 export default class PpManager extends Component {
   render() {
-    // функция снижения критики
-    let toggleKritika = getToggleKritika(
-      this.props.psystatus,
-      this.props.toggleRadio,
-      this.props.toggleSymptom,
-      "3"
-    );
+    // функция снижения критики: при выборе бреда/галлюцинаций
+    // автоматически выставляем критику, если она ещё не задана
+    let toggleKritika = e => {
+      if (getToggleKritika(this.props.psystatus)) {
+        this.props.setRadio("kritika", 3);
+      }
+      this.props.toggleSymptom(e);
+    };
 
     // показ списка бред
     let bredNameArr = cicleFn(dataBase, "bred");
@@ -104,7 +105,7 @@ export default class PpManager extends Component {
                 onChange={this.props.toggleText}
                 name="opasnyeText"
                 label="Описание опасных тенденций"
-                value={this.props.psystatus.gallText}
+                value={this.props.psystatus.opasnyeText.text}
               />
             </div>
           </div>
@@ -128,7 +129,7 @@ export default class PpManager extends Component {
                 onChange={this.props.toggleText}
                 name="bredText"
                 label="Описание бреда"
-                value={this.props.psystatus.bredText}
+                value={this.props.psystatus.bredText.text}
               />
             </div>
 
@@ -151,7 +152,7 @@ export default class PpManager extends Component {
                 onChange={this.props.toggleText}
                 name="gallText"
                 label="Описание галлюцинаций"
-                value={this.props.psystatus.gallText}
+                value={this.props.psystatus.gallText.text}
               />
             </div>
           </div>

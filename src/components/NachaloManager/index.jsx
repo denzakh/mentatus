@@ -26,7 +26,7 @@ export default class NachaloManager extends Component {
         onChange={this.props.toggleText}
         name="nedobrovolnoText"
         label=""
-        value=""
+        value={this.props.psystatus.nedobrovolnoText.text}
       />
     );
 

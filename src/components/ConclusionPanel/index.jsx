@@ -2,21 +2,46 @@ import React, { Component } from "react";
 import "./ConclusionPanel.css";
 
 export default class ConclusionPanel extends Component {
-  copyText = e => {
-    var ta = document.getElementById("conclusion");
-    var range = document.createRange();
-    range.selectNode(ta);
-    window.getSelection().addRange(range);
+  copyText = () => {
+    const conclusion = document.getElementById("conclusion");
+
+    if (!conclusion) {
+      return;
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(conclusion.innerText)
+        .catch(() => this.copyTextFallback(conclusion));
+      return;
+    }
+
+    this.copyTextFallback(conclusion);
+  };
+
+  // резервный способ для браузеров без Clipboard API
+  copyTextFallback = node => {
+    const selection = window.getSelection();
+    const range = document.createRange();
+    range.selectNode(node);
+    selection.removeAllRanges();
+
+    if (typeof selection.addRange === "function") {
+      selection.addRange(range);
+    } else if (typeof selection.selectAllChildren === "function") {
+      selection.selectAllChildren(node);
+    }
 
     try {
       document.execCommand("copy");
     } catch (err) {
-      console.log("Can`t copy, boss");
+      console.warn("Не удалось скопировать заключение:", err.message);
     }
-    window.getSelection().removeAllRanges();
+
+    selection.removeAllRanges();
   };
 
-  printText = e => {
+  printText = () => {
     window.print();
   };
 

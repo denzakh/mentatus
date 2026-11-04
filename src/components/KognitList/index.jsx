@@ -4,7 +4,7 @@ import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import OnePraseFromRadio from "../OnePraseFromRadio";
 
-export default class AffektList extends Component {
+export default class KognitList extends Component {
   render() {
     // пальцы
     let finger = () => {

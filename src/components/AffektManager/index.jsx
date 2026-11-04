@@ -114,7 +114,7 @@ export default class AffektManager extends Component {
               onChange={this.props.toggleText}
               name="trevogaText"
               label="Описание тревоги"
-              value={this.props.psystatus.trevogaText}
+              value={this.props.psystatus.trevogaText.text}
             />
           </div>
         );
@@ -129,13 +129,13 @@ export default class AffektManager extends Component {
               onChange={this.props.toggleText}
               name="appetitPohudel"
               label="Похудел на (кг)"
-              value={this.props.psystatus.pohudelText}
+              value={this.props.psystatus.appetitPohudel.text}
             />
             <Textarea
               onChange={this.props.toggleText}
               name="appetitText"
               label="Описание аппетита"
-              value={this.props.psystatus.appetitText}
+              value={this.props.psystatus.appetitText.text}
             />
           </div>
         );
@@ -163,7 +163,7 @@ export default class AffektManager extends Component {
                 onChange={this.props.toggleText}
                 name="nastroyeniyeText"
                 label="Описание настроения"
-                value={this.props.psystatus.nastroyeniyeText}
+                value={this.props.psystatus.nastroyeniyeText.text}
               />
             </div>
             <div className="no-break">
@@ -210,7 +210,7 @@ export default class AffektManager extends Component {
                 onChange={this.props.toggleText}
                 name="sonText"
                 label="Описание сна"
-                value={this.props.psystatus.sonText}
+                value={this.props.psystatus.sonText.text}
               />
             </div>
 

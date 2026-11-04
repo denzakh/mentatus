@@ -4,7 +4,7 @@ import Checkbox from "../Checkbox";
 import CheckboxOtkl from "../CheckboxOtkl";
 import Textarea from "../Textarea";
 
-export default class anamnezManager extends Component {
+export default class AnamnezManager extends Component {
   render() {
     let anamnezNameArr = Object.keys(dataBase).filter(
       item => dataBase[item].cicle === "anamnezCicle"
@@ -23,7 +23,7 @@ export default class anamnezManager extends Component {
             />
           </div>
           {anamnezNameArr.map(item => (
-            <div key={item} className="list_item">
+            <div key={item} className="list__item">
               <Checkbox
                 checked={this.props.psystatus[item].isChecked}
                 onChange={this.props.toggleSymptom}

@@ -11,9 +11,12 @@ export default class CheckboxPol extends Component {
           checked={this.props.checked}
           onChange={this.props.onChange}
           name={this.props.name}
-          id={this.props.name}
+          id={"checkbox-pol-" + this.props.name}
         />
-        <label className="checkbox__pol" htmlFor={this.props.name}>
+        <label
+          className="checkbox__pol"
+          htmlFor={"checkbox-pol-" + this.props.name}
+        >
           {this.props.label}
         </label>
       </span>

@@ -61,6 +61,7 @@ class App extends Component {
                   toggleSymptom={this.toggleSymptom}
                   toggleText={this.toggleText}
                   toggleRadio={this.toggleRadio}
+                  setRadio={this.props.setRadio}
                   psystatus={psystatus}
                 />
               </div>

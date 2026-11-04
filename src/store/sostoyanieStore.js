@@ -1,3 +1,15 @@
+// дата осмотра по умолчанию — сегодня, в формате input[type="date"]
+const getToday = () => {
+  const now = new Date();
+  return (
+    now.getFullYear() +
+    "-" +
+    ("0" + (now.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("0" + now.getDate()).slice(-2)
+  );
+};
+
 const store = {
   patientId: {
     number: 0
@@ -9,7 +21,7 @@ const store = {
     isChecked: false
   },
   dataOsmotra: {
-    text: ""
+    text: getToday()
   },
   mestoOsmotra: {
     number: 1

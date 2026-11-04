@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import dataBase from "../../store/kognitData.js";
 
-export default class AffektList extends Component {
+export default class OrientirovkaList extends Component {
   render() {
     let pol = this.props.psystatus["pol"].isChecked ? "m" : "w";
 

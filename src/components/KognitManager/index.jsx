@@ -7,7 +7,7 @@ import OrientirovkaManager from "../OrientirovkaManager";
 import cicleFn from "../../fn/cicleFn";
 import "./Kognit.css";
 
-export default class affektManager extends Component {
+export default class KognitManager extends Component {
   render() {
     let otmechNameArr = cicleFn(dataBase, "otmech");
     let otdelNameArr = cicleFn(dataBase, "otdel");
@@ -34,6 +34,7 @@ export default class affektManager extends Component {
                 name="kognitOsnivnoi"
                 dataBase={dataBase}
                 toggleRadio={this.props.toggleRadio}
+                setRadio={this.props.setRadio}
                 toggleSymptom={this.props.toggleSymptom}
                 psystatus={this.props.psystatus}
               />

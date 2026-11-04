@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./CheckboxOtkl.css";
 
-export default class Checkbox extends Component {
+export default class CheckboxOtkl extends Component {
   render() {
     const { name, onChange, psystatus, dataBase } = this.props;
     return (
@@ -12,9 +12,12 @@ export default class Checkbox extends Component {
           checked={psystatus[name].isChecked}
           onChange={onChange}
           name={name}
-          id={name}
+          id={"checkbox-otkl-" + name}
         />
-        <label className="checkbox-otkl__label" htmlFor={this.props.name}>
+        <label
+          className="checkbox-otkl__label"
+          htmlFor={"checkbox-otkl-" + name}
+        >
           {dataBase[name].label}
         </label>
       </span>

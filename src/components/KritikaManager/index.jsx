@@ -19,7 +19,7 @@ export default class KritikaManager extends Component {
           onChange={this.props.toggleText}
           name="kritikaText"
           label="Описание критики"
-          value={this.props.psystatus.kritikaText}
+          value={this.props.psystatus.kritikaText.text}
         />
       </div>
     );

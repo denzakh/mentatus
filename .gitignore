@@ -10,6 +10,17 @@
 # production
 /build
 
+# устаревшие артефакты сборки в корне репозитория (деплой идёт из /build)
+/index.html
+/static
+/service-worker.js
+/asset-manifest.json
+/precache-manifest.*.js
+/favicon.ico
+/manifest.json
+/browserconfig.xml
+/CNAME
+
 # misc
 .DS_Store
 .env.local
