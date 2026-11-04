@@ -1,85 +1,80 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import dataBase from "../../store/sostoyanieData.js";
+import { todayIso, formatDate } from "../../lib/text/date";
 
-export default class NachaloList extends Component {
+class NachaloList extends Component {
   render() {
-    let dataOsmotra = () => {
-      let currentDate = this.props.psystatus["dataOsmotra"].text;
-      if (!currentDate) {
-        let now = new Date();
-        currentDate =
-          ("0" + now.getDate()).slice(-2) +
-          "." +
-          ("0" + (now.getMonth() + 1)).slice(-2) +
-          "." +
-          now.getFullYear();
-      } else {
-        let arr = currentDate.split("-");
-        currentDate = arr[2] + "." + arr[1] + "." + arr[0];
-      }
-      return currentDate;
-    };
+    const {
+      date,
+      isMale,
+      mestoOsmotraNumber,
+      poNapravleniu,
+      sIstorieiOznakomlen,
+      nedobrovolno,
+      nedobrovolnoPrichinyNumber,
+      nedobrovolnoPunktNumber,
+      nedobrovolnoText
+    } = this.props;
 
-    let osmotr =
-      (this.props.psystatus["pol"].isChecked ? "Осмотрен " : "Осмотрена ") +
-      dataBase.mestoOsmotra.data[this.props.psystatus.mestoOsmotra.number]
-        .phrase +
-      (this.props.psystatus["poNapravleniu"].isChecked
-        ? " по направлению врача соматического профиля"
-        : "") +
+    const osmotr =
+      (isMale ? "Осмотрен " : "Осмотрена ") +
+      dataBase.mestoOsmotra.data[mestoOsmotraNumber].phrase +
+      (poNapravleniu ? " по направлению врача соматического профиля" : "") +
       ".";
 
-    let sIstorieiOznakomlen = this.props.psystatus["sIstorieiOznakomlen"]
-      .isChecked
+    const sIstorieiOznakomlenText = sIstorieiOznakomlen
       ? " С историей болезни врач ознакомлен. "
       : "";
 
-    let soglasie = "";
-    if (this.props.psystatus["nedobrovolno"].isChecked) {
-      soglasie =
-        dataBase.nedobrovolnoPrichiny.data[
-          this.props.psystatus.nedobrovolnoPrichiny.number
-        ].phrase;
-    } else {
-      soglasie =
-        "На беседу с врачом-психиатром " +
-        (this.props.psystatus["pol"].isChecked ? "согласен" : "согласна") +
+    const soglasie = nedobrovolno
+      ? dataBase.nedobrovolnoPrichiny.data[nedobrovolnoPrichinyNumber].phrase
+      : "На беседу с врачом-психиатром " +
+        (isMale ? "согласен" : "согласна") +
         ". ";
-    }
 
     let zakon = "";
-    if (this.props.psystatus["nedobrovolno"].isChecked) {
+    if (nedobrovolno) {
       zakon =
-        (this.props.psystatus["pol"].isChecked
-          ? "Освидетельствован"
-          : "Освидетельствована") +
+        (isMale ? "Освидетельствован" : "Освидетельствована") +
         " недобровольно на основании  ст. 23 ч.4 п «" +
-        dataBase.nedobrovolnoPunkt.data[
-          this.props.psystatus.nedobrovolnoPunkt.number
-        ].punkt +
+        dataBase.nedobrovolnoPunkt.data[nedobrovolnoPunktNumber].punkt +
         "» закона РФ «О психиатрической помощи и гарантиях прав граждан при ее оказании», т.к. совершает действия, дающие основания предполагать наличие у " +
-        (this.props.psystatus["pol"].isChecked ? "него " : "нее ") +
+        (isMale ? "него " : "нее ") +
         "тяжелого психического расстройства, которое обусловливает " +
-        (this.props.psystatus.nedobrovolnoPunkt.number === 2
-          ? ""
-          : this.props.psystatus["pol"].isChecked
-          ? "его "
-          : "ее ") +
-        dataBase.nedobrovolnoPunkt.data[
-          this.props.psystatus.nedobrovolnoPunkt.number
-        ].phrase +
+        (nedobrovolnoPunktNumber === 2 ? "" : isMale ? "его " : "ее ") +
+        dataBase.nedobrovolnoPunkt.data[nedobrovolnoPunktNumber].phrase +
         ".";
     }
 
     return (
       <span>
         <span>
-          {dataOsmotra()}. {osmotr} {sIstorieiOznakomlen}
+          {date}. {osmotr} {sIstorieiOznakomlenText}
         </span>
         <span>
-          {soglasie} {this.props.psystatus.nedobrovolnoText.text} {zakon}
+          {soglasie} {nedobrovolnoText} {zakon}
         </span>
       </span>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    // дата осмотра: из стора, а если её нет — сегодняшняя
+    date: formatDate(psystatus.dataOsmotra.text) || formatDate(todayIso()),
+    isMale: psystatus.pol.isChecked,
+    mestoOsmotraNumber: psystatus.mestoOsmotra.number,
+    poNapravleniu: psystatus.poNapravleniu.isChecked,
+    sIstorieiOznakomlen: psystatus.sIstorieiOznakomlen.isChecked,
+    nedobrovolno: psystatus.nedobrovolno.isChecked,
+    nedobrovolnoPrichinyNumber: psystatus.nedobrovolnoPrichiny.number,
+    nedobrovolnoPunktNumber: psystatus.nedobrovolnoPunkt.number,
+    nedobrovolnoText: psystatus.nedobrovolnoText.text
+  };
+}
+
+export default connect(mapStateToProps)(NachaloList);

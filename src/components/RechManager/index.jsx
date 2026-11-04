@@ -1,139 +1,43 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import dataBase from "../../store/rechData.js";
 import Checkbox from "../Checkbox";
+import CheckboxGroup from "../CheckboxGroup";
 import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
-import cicleFn from "../../fn/cicleFn";
-import "./Rech.css";
 
-export default class RechManager extends Component {
+class RechManager extends Component {
   render() {
-    // показ списка мышление
-    let myshlenieArr = cicleFn(dataBase, "myshlenie");
+    const { showOtvety, showRechMain } = this.props;
 
-    let myshlenieList = () => {
-      return (
-        <div className="list__box">
-          {myshlenieArr.map(item => (
-            <div key={item} className="list__item">
-              <Checkbox
-                checked={this.props.psystatus[item].isChecked}
-                onChange={this.props.toggleSymptom}
-                name={item}
-                label={dataBase[item].label}
-              />
-            </div>
-          ))}
-        </div>
-      );
-    };
-
-    let rechOsobArr = cicleFn(dataBase, "rechOsob");
-    let rechOsobList = () => {
-      return (
-        <div className="list__box">
-          {rechOsobArr.map(item => (
-            <div key={item} className="list__item">
-              <Checkbox
-                checked={this.props.psystatus[item].isChecked}
-                onChange={this.props.toggleSymptom}
-                name={item}
-                label={dataBase[item].label}
-              />
-            </div>
-          ))}
-        </div>
-      );
-    };
-
-    let rechOtmechArr = cicleFn(dataBase, "rechOtmech");
-    let rechOtmechList = () => {
-      return (
-        <div className="list__box">
-          {rechOtmechArr.map(item => (
-            <div key={item} className="list__item">
-              <Checkbox
-                checked={this.props.psystatus[item].isChecked}
-                onChange={this.props.toggleSymptom}
-                name={item}
-                label={dataBase[item].label}
-              />
-            </div>
-          ))}
-        </div>
-      );
-    };
-
-    let rechGrubArr = cicleFn(dataBase, "rechGrub");
-    let rechGrubList = () => {
-      return (
-        <div className="list__wrap">
-          {rechGrubArr.map(item => (
-            <div key={item} className="list__item">
-              <Checkbox
-                checked={this.props.psystatus[item].isChecked}
-                onChange={this.props.toggleSymptom}
-                name={item}
-                label={dataBase[item].label}
-              />
-            </div>
-          ))}
-        </div>
-      );
-    };
-
-    let otvety = () => {
-      if (!this.props.psystatus.rechNeotvechaet.isChecked) {
-        return (
-          <div>
-            <RadioList
-              name="rechSuschestvo"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
-            <div className="list__add">
-              <Checkbox
-                checked={this.props.psystatus["rechOdnosloj"].isChecked}
-                onChange={this.props.toggleSymptom}
-                name={"rechOdnosloj"}
-                label={dataBase["rechOdnosloj"].label}
-              />
-            </div>
+    const otvety = () =>
+      showOtvety ? (
+        <div>
+          <RadioList name="rechSuschestvo" dataBase={dataBase} />
+          <div className="list__add">
+            <Checkbox name="rechOdnosloj" dataBase={dataBase} />
           </div>
-        );
-      }
-    };
-
-    let rechMain = () => {
-      return (
-        <div className="list__box">
-          {rechOsobList()}
-
-          <div className="list__title">
-            ответы:
-            <CheckboxOtkl
-              name="rechNeotvechaet"
-              onChange={this.props.toggleSymptom}
-              psystatus={this.props.psystatus}
-              dataBase={dataBase}
-            />
-          </div>
-          {otvety()}
-
-          {rechOtmechList()}
         </div>
-      );
-    };
+      ) : null;
 
-    let rechShow = () => {
-      if (this.props.psystatus["rechOtkl"].isChecked) {
-        return "";
-      } else {
-        return rechMain();
-      }
-    };
+    const rechMain = () => (
+      <div className="list__box">
+        <div className="list__box">
+          <CheckboxGroup cicle="rechOsob" dataBase={dataBase} />
+        </div>
+
+        <div className="list__title">
+          ответы:
+          <CheckboxOtkl name="rechNeotvechaet" dataBase={dataBase} />
+        </div>
+        {otvety()}
+
+        <div className="list__box">
+          <CheckboxGroup cicle="rechOtmech" dataBase={dataBase} />
+        </div>
+      </div>
+    );
 
     return (
       <div>
@@ -142,59 +46,52 @@ export default class RechManager extends Component {
             <div className="list__title list__title--no-top-margin">
               Мышление:
             </div>
-            <RadioList
-              name="myshleniePosled"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
+            <RadioList name="myshleniePosled" dataBase={dataBase} />
             <div className="list__title">по темпу:</div>
-            <RadioList
-              name="myshlenieTemp"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
-
-            <div className="no-break">{myshlenieList()}</div>
+            <RadioList name="myshlenieTemp" dataBase={dataBase} />
 
             <div className="no-break">
-              <Textarea
-                onChange={this.props.toggleText}
-                name="myshlenieText"
-                label="Описание мышления"
-                value={this.props.psystatus.myshlenieText.text}
-              />
+              <div className="list__box">
+                <CheckboxGroup cicle="myshlenie" dataBase={dataBase} />
+              </div>
+            </div>
+
+            <div className="no-break">
+              <Textarea name="myshlenieText" label="Описание мышления" />
             </div>
           </div>
           <div className="manager__col manager__col--1">
             <div className="no-break">
               <div className="list__title">
                 <span className="list__title-lable">Речь:</span>
-                <CheckboxOtkl
-                  name="rechOtkl"
-                  onChange={this.props.toggleSymptom}
-                  psystatus={this.props.psystatus}
-                  dataBase={dataBase}
-                />
+                <CheckboxOtkl name="rechOtkl" dataBase={dataBase} />
               </div>
 
-              {rechShow()}
+              {showRechMain ? rechMain() : null}
             </div>
 
             <div className="list__title">грубые нарушения:</div>
 
-            {rechGrubList()}
+            <div className="list__wrap">
+              <CheckboxGroup cicle="rechGrub" dataBase={dataBase} />
+            </div>
 
-            <Textarea
-              onChange={this.props.toggleText}
-              name="rechText"
-              label="Описание речи"
-              value={this.props.psystatus.rechText.text}
-            />
+            <Textarea name="rechText" label="Описание речи" />
           </div>
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    showOtvety: !psystatus.rechNeotvechaet.isChecked,
+    // при грубых нарушениях речи основная часть не выводится
+    showRechMain: !psystatus.rechOtkl.isChecked
+  };
+}
+
+export default connect(mapStateToProps)(RechManager);

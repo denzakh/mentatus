@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import "./Conclusion.css";
 import "./Print.css";
 import ZhalobyList from "../ZhalobyList";
@@ -14,51 +15,9 @@ import DiagnozList from "../DiagnozList";
 import NachaloList from "../NachaloList";
 import ConclusionPanel from "../ConclusionPanel";
 
-export default class Conclusion extends Component {
+class Conclusion extends Component {
   render() {
-    let conclusionText = () => {
-      // если кома или контакту недоступен
-      if (
-        // this.props.psystatus.rechOtkl.isChecked ||
-        // this.props.psystatus.rechNeotvechaet.isChecked ||
-        this.props.psystatus.kontakt.number === 2 ||
-        this.props.psystatus.soznanie.number === 7
-      ) {
-      } else {
-        return (
-          <span>
-            <ZhalobyList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <OrientirovkaList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <AffektList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <RechList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <KognitList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <KogtestList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <PpList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-          </span>
-        );
-      }
-    };
+    const { isHidden, toggleTab } = this.props;
 
     return (
       <div className="conclusion__box">
@@ -68,28 +27,38 @@ export default class Conclusion extends Component {
         </div>
         <div className="conclusion__text app__status-box" id="conclusion">
           <p>
-            <NachaloList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
+            <NachaloList toggleTab={toggleTab} />
           </p>
           <p>
-            <AnamnezList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            <SostoyanieList
-              psystatus={this.props.psystatus}
-              toggleTab={this.props.toggleTab}
-            />
-            {conclusionText()}
+            <AnamnezList toggleTab={toggleTab} />
+            <SostoyanieList toggleTab={toggleTab} />
+            {isHidden ? null : (
+              <span>
+                <ZhalobyList toggleTab={toggleTab} />
+                <OrientirovkaList toggleTab={toggleTab} />
+                <AffektList toggleTab={toggleTab} />
+                <RechList toggleTab={toggleTab} />
+                <KognitList toggleTab={toggleTab} />
+                <KogtestList toggleTab={toggleTab} />
+                <PpList toggleTab={toggleTab} />
+              </span>
+            )}
           </p>
-          <DiagnozList
-            psystatus={this.props.psystatus}
-            toggleTab={this.props.toggleTab}
-          />
+          <DiagnozList toggleTab={toggleTab} />
         </div>
       </div>
     );
   }
 }
+
+// если контакт недоступен или помрачено сознание, описательная часть не выводится
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    isHidden:
+      +psystatus.kontakt.number === 2 || +psystatus.soznanie.number === 7
+  };
+}
+
+export default connect(mapStateToProps)(Conclusion);

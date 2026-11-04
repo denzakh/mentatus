@@ -1,110 +1,52 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Checkbox from "../Checkbox";
-import CheckboxPol from "../CheckboxPol";
 import CheckboxOtkl from "../CheckboxOtkl";
+import CheckboxPol from "../CheckboxPol";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
 import TextareaInline from "../TextareaInline";
 import InputDate from "../InputDate";
 
-export default class NachaloManager extends Component {
+class NachaloManager extends Component {
   render() {
-    let mestoText = "";
-    if (this.props.psystatus["mestoOsmotra"].number === 3) {
-      mestoText = (
-        <Textarea
-          onChange={this.props.toggleText}
-          name="mestoText"
-          label=""
-          value={this.props.psystatus.mestoText.text}
-        />
-      );
-    }
+    const { isMestoText, isNedobrovolno } = this.props;
 
-    let nedobrovolnoText = (
-      <Textarea
-        onChange={this.props.toggleText}
-        name="nedobrovolnoText"
-        label=""
-        value={this.props.psystatus.nedobrovolnoText.text}
-      />
-    );
-
-    let nedobrovolno = "";
-    if (this.props.psystatus["nedobrovolno"].isChecked) {
-      nedobrovolno = (
+    const nedobrovolno = () =>
+      isNedobrovolno ? (
         <div>
           <div className="list__title">причины:</div>
           <RadioList
             name="nedobrovolnoPrichiny"
             dataBase={this.props.dataBase}
-            onChange={this.props.toggleRadio}
-            psystatus={this.props.psystatus}
           />
-          {nedobrovolnoText}
+          <Textarea name="nedobrovolnoText" label="" />
           <div className="list__title">пункт закона:</div>
-          <RadioList
-            name="nedobrovolnoPunkt"
-            dataBase={this.props.dataBase}
-            onChange={this.props.toggleRadio}
-            psystatus={this.props.psystatus}
-          />
+          <RadioList name="nedobrovolnoPunkt" dataBase={this.props.dataBase} />
         </div>
-      );
-    }
+      ) : null;
 
     return (
       <div>
         <div className="no-break">
           <div className="list__title list__title--no-top-margin">Oбщее:</div>
 
-          <InputDate
-            onChange={this.props.toggleText}
-            name="dataOsmotra"
-            label="Дата осмотра"
-            value={this.props.psystatus.dataOsmotra.text}
-          />
+          <InputDate name="dataOsmotra" label="Дата осмотра" />
 
-          <CheckboxPol
-            checked={this.props.psystatus["pol"].isChecked}
-            onChange={this.props.toggleSymptom}
-            name="pol"
-            label={
-              this.props.psystatus["pol"].isChecked
-                ? "Пол: мужской  ⇄"
-                : "Пол: женский  ⇄"
-            }
-          />
+          <CheckboxPol />
 
-          <TextareaInline
-            onChange={this.props.toggleText}
-            name="vozrast"
-            label="Возраст"
-            value={this.props.psystatus.vozrast.text}
-          />
+          <TextareaInline name="vozrast" label="Возраст" />
 
           <div className="list__title">Oсмотр:</div>
-          <RadioList
-            name="mestoOsmotra"
-            dataBase={this.props.dataBase}
-            onChange={this.props.toggleRadio}
-            psystatus={this.props.psystatus}
-          />
-          {mestoText}
+          <RadioList name="mestoOsmotra" dataBase={this.props.dataBase} />
+          {isMestoText ? <Textarea name="mestoText" label="" /> : null}
           <div className="list__add">
-            <Checkbox
-              checked={this.props.psystatus["poNapravleniu"].isChecked}
-              onChange={this.props.toggleSymptom}
-              name="poNapravleniu"
-              label={this.props.dataBase["poNapravleniu"].label}
-            />
+            <Checkbox name="poNapravleniu" dataBase={this.props.dataBase} />
           </div>
           <div className="list__add">
             <Checkbox
-              checked={this.props.psystatus["sIstorieiOznakomlen"].isChecked}
-              onChange={this.props.toggleSymptom}
               name="sIstorieiOznakomlen"
-              label={this.props.dataBase["sIstorieiOznakomlen"].label}
+              dataBase={this.props.dataBase}
             />
           </div>
         </div>
@@ -112,23 +54,27 @@ export default class NachaloManager extends Component {
         <div className="no-break">
           <div className="list__title">
             {" "}
-            {this.props.psystatus["nedobrovolno"].isChecked
-              ? "Недобровольный осмотр:"
-              : "Согласие получено"}
+            {isNedobrovolno ? "Недобровольный осмотр:" : "Согласие получено"}
           </div>
           <div className="list__item">
-            <CheckboxOtkl
-              onChange={this.props.toggleSymptom}
-              name="nedobrovolno"
-              label="недобровольно"
-              psystatus={this.props.psystatus}
-              dataBase={this.props.dataBase}
-            />
+            <CheckboxOtkl name="nedobrovolno" dataBase={this.props.dataBase} />
           </div>
-          {nedobrovolno}
+          {nedobrovolno()}
           <br />
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    // своё место осмотра спрашиваем только для варианта «другое»
+    isMestoText: +psystatus.mestoOsmotra.number === 3,
+    isNedobrovolno: psystatus.nedobrovolno.isChecked
+  };
+}
+
+export default connect(mapStateToProps)(NachaloManager);

@@ -1,7 +1,22 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setText } from "../../actions/textAction";
 import "./InputDate.css";
 
-export default class InputDate extends Component {
+/*
+InputDate
+поле даты, привязанное к полю стора
+
+принимает:
+name - имя поля в сторе
+label - подпись
+*/
+
+class InputDate extends Component {
+  handleChange = e => {
+    this.props.setText(this.props.name, e.target.value);
+  };
+
   render() {
     return (
       <div className="date">
@@ -10,7 +25,7 @@ export default class InputDate extends Component {
           <input
             type="date"
             className="date__input"
-            onChange={this.props.onChange}
+            onChange={this.handleChange}
             name={this.props.name}
             value={this.props.value}
           />
@@ -19,3 +34,19 @@ export default class InputDate extends Component {
     );
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  const field = state.psystatus[ownProps.name];
+
+  return {
+    value: (field && field.text) || ""
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setText: (name, value) => dispatch(setText(name, value))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(InputDate);

@@ -1,40 +1,38 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import dataBase from "../../store/kognitData.js";
 
-export default class OrientirovkaList extends Component {
+class OrientirovkaList extends Component {
   render() {
-    let pol = this.props.psystatus["pol"].isChecked ? "m" : "w";
-
-    // запрашиваем из стора числовые значния каждой ориентировки
-    let orientirVremiaNumber = +this.props.psystatus.orientirVremia.number;
-    let orientirMestoNumber = +this.props.psystatus.orientirMesto.number;
-    let orientirLichnostNumber = +this.props.psystatus.orientirLichnost.number;
-
-    // склеиваем номера ориентировок для получения кода orientirXXX
-    let orientirNumber;
-    if (this.props.psystatus.orientirNot.isChecked) {
-      orientirNumber = "orientir000";
-    } else {
-      orientirNumber =
-        "orientir" +
-        orientirVremiaNumber +
-        orientirMestoNumber +
-        orientirLichnostNumber;
-    }
-    // по полученному коду выбираем фразу из файла с данными
-    let orientirPhrase = () => {
-      if (!this.props.psystatus.rechOtkl.isChecked) {
-        return dataBase.orientir[pol][orientirNumber];
-      }
-    };
-
-    let orientirText = this.props.psystatus.orientirText.text;
-
     return (
       <span data-id="kognit" onClick={this.props.toggleTab}>
-        {orientirPhrase()}
-        <span> {orientirText} </span>
+        {this.props.phrase}
+        <span> {this.props.text} </span>
       </span>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  // код ориентировки: время + место + личность либо 000,
+  // если ориентировку определить не удалось
+  const orientirNumber = psystatus.orientirNot.isChecked
+    ? "orientir000"
+    : "orientir" +
+      +psystatus.orientirVremia.number +
+      +psystatus.orientirMesto.number +
+      +psystatus.orientirLichnost.number;
+
+  const pol = psystatus.pol.isChecked ? "m" : "w";
+
+  return {
+    phrase: psystatus.rechOtkl.isChecked
+      ? ""
+      : dataBase.orientir[pol][orientirNumber],
+    text: psystatus.orientirText.text
+  };
+}
+
+export default connect(mapStateToProps)(OrientirovkaList);

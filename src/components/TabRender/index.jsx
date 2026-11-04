@@ -10,93 +10,50 @@ import KogtestManager from "../../components/KogtestManager";
 import PpManager from "../../components/PpManager";
 import DiagnozManager from "../../components/DiagnozManager";
 
+/*
+TabRender
+показывает форму активного раздела
+
+принимает:
+activeTab - имя активного раздела
+
+Данные разделы берут из стора сами, поэтому перерисовка
+при вводе затрагивает только конкретное поле.
+*/
+
 export default class TabRender extends Component {
   render() {
-    let psystatus = this.props.psystatus;
-    let toggleSymptom = this.props.toggleSymptom;
-    let toggleText = this.props.toggleText;
-    let toggleRadio = this.props.toggleRadio;
-
-    let tabs = [
+    const tabs = [
       <div key="zhaloby" name="zhaloby">
-        <ZhalobyManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          psystatus={psystatus}
-        />
+        <ZhalobyManager />
       </div>,
       <div key="sostoyanie" name="sostoyanie">
-        <SostoyanieManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          psystatus={psystatus}
-        />
+        <SostoyanieManager />
       </div>,
       <div key="anamnez" name="anamnez">
-        <AnamnezManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          psystatus={psystatus}
-        />
+        <AnamnezManager />
       </div>,
       <div key="affekt" name="affekt">
-        <AffektManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          psystatus={psystatus}
-        />
+        <AffektManager />
       </div>,
       <div key="rech" name="rech">
-        <RechManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          psystatus={psystatus}
-        />
+        <RechManager />
       </div>,
       <div key="kognit" name="kognit">
-        <KognitManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          setRadio={this.props.setRadio}
-          psystatus={psystatus}
-        />
+        <KognitManager />
       </div>,
       <div key="kogtest" name="kogtest">
-        <KogtestManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          psystatus={psystatus}
-        />
+        <KogtestManager />
       </div>,
       <div key="pp" name="pp">
-        <PpManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          setRadio={this.props.setRadio}
-          psystatus={psystatus}
-        />
+        <PpManager />
       </div>,
       <div key="diagnoz" name="diagnoz">
-        <DiagnozManager
-          toggleSymptom={toggleSymptom}
-          toggleText={toggleText}
-          toggleRadio={toggleRadio}
-          psystatus={psystatus}
-        />
+        <DiagnozManager />
       </div>
     ];
 
-    let tabRender = tabs.filter(item => {
-      return item.key === this.props.activeTab;
-    });
+    const tabRender = tabs.filter(item => item.key === this.props.activeTab);
 
     return <div className="tab-render">{tabRender}</div>;
   }

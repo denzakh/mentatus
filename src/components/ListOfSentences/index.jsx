@@ -1,30 +1,45 @@
 import React, { Component } from "react";
-import cicleFn from "../../fn/cicleFn";
+import { connect } from "react-redux";
+import { cicleKeys, pickPhrase } from "../../lib/text";
+import { flagsOf, areStatePropsEqual } from "../../lib/redux";
 
-export default class ListOfSentences extends Component {
+/*
+ListOfSentences
+компонент представления: каждый включённый пункт цикла — отдельным предложением
+
+принимает:
+name - имя цикла
+dataObj - объект БД
+
+из стора берёт: какие пункты цикла включены и пол пациента
+*/
+
+class ListOfSentences extends Component {
   render() {
-    const { name, dataObj, psystatus } = this.props;
+    const { dataObj, name, flags, isMale } = this.props;
 
-    // получаем список элементов, относящихся к этому циклу
-    let arrayFromName = cicleFn(dataObj, name);
+    // включённые пункты цикла
+    const items = cicleKeys(dataObj, name).filter(key => flags[key]);
 
-    // получаем список активных элементов
-    const filteredNameArr = arrayFromName.filter(
-      item => psystatus[item].isChecked
+    return (
+      <span>
+        {items.map(key => (
+          <span key={key}>{pickPhrase(dataObj[key], isMale)}. </span>
+        ))}
+      </span>
     );
-
-    // перебираем пункты, расставляем запятые
-    let filteredList = filteredNameArr.map((item, i) => {
-      return (
-        <span key={item}>
-          {dataObj[item].phraseM && this.props.psystatus["pol"].isChecked
-            ? dataObj[item].phraseM
-            : dataObj[item].phrase}
-          .{" "}
-        </span>
-      );
-    });
-
-    return <span>{filteredList}</span>;
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  const psystatus = state.psystatus;
+
+  return {
+    flags: flagsOf(psystatus, cicleKeys(ownProps.dataObj, ownProps.name)),
+    isMale: psystatus.pol.isChecked
+  };
+}
+
+export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
+  ListOfSentences
+);

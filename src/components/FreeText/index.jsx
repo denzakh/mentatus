@@ -1,11 +1,31 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { areStatePropsEqual } from "../../lib/redux";
 
-export default class FreeText extends Component {
+/*
+FreeText
+компонент представления: свободный текст поля
+
+принимает:
+name - имя поля в сторе
+
+из стора берёт: значение поля
+*/
+
+class FreeText extends Component {
   render() {
-    const { text } = this.props;
-    // принимает либо строку, либо объект вида { text: "..." }
-    const value = typeof text === "string" ? text : (text && text.text) || "";
-
-    return <span> {value}</span>;
+    return <span> {this.props.value}</span>;
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  const field = state.psystatus[ownProps.name];
+
+  return {
+    value: (field && field.text) || ""
+  };
+}
+
+export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
+  FreeText
+);

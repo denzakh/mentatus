@@ -1,70 +1,80 @@
 import React, { Component } from "react";
-import cicleFn from "../../fn/cicleFn";
+import { connect } from "react-redux";
+import { cicleKeys, buildListText } from "../../lib/text";
+import { flagsOf, areStatePropsEqual } from "../../lib/redux";
 
-export default class ListOfWords extends Component {
+/*
+ListOfWords
+компонент представления
+
+принимает:
+name - имя цикла
+dataObj - объект БД
+isAnd - соединять последние пункты союзом «и»
+beforeText - своя вступительная фраза (вместо name + "Before")
+before / after / noList - переопределение ключей фраз обрамления
+
+из стора берёт: какие пункты цикла включены
+*/
+
+class ListOfWords extends Component {
   render() {
-    const { name, dataObj, psystatus, beforeText } = this.props;
-    const isAnd = !!this.props.isAnd;
+    const {
+      dataObj,
+      name,
+      isAnd,
+      beforePhrase,
+      afterPhrase,
+      noListPhrase
+    } = this.props;
+    const flags = this.props.flags;
 
-    // получаем список элементов, относящихся к этому циклу
-    let arrayFromName = cicleFn(dataObj, name);
+    // включённые пункты цикла
+    const items = cicleKeys(dataObj, name)
+      .filter(key => flags[key])
+      .map(key => ({ key: key, phrase: dataObj[key].phrase }));
 
-    // получаем список активных элементов
-    const filteredNameArr = arrayFromName.filter(item => {
-      return psystatus[item] && psystatus[item].isChecked;
+    const parts = buildListText(items, {
+      isAnd: isAnd,
+      before: beforePhrase,
+      after: afterPhrase,
+      noList: noListPhrase
     });
 
-    // перебираем пункты, расставляем запятые
-    let filteredList = filteredNameArr.map((item, i) => {
-      let ifAnd = "";
-      if (i === filteredNameArr.length - 1) {
-        // последняя фраза
-        ifAnd = "";
-      } else {
-        // если включен "и"
-        // и фраза предпоследняя
-        // и массив более 1
-        if (
-          isAnd &&
-          i === filteredNameArr.length - 2 &&
-          filteredNameArr.length > 1
-        ) {
-          ifAnd = " и ";
-        } else {
-          ifAnd = ", ";
-        }
-      }
-      return (
-        <span key={item}>
-          {dataObj[item].phrase}
-          {ifAnd}
-        </span>
-      );
-    });
-
-    // получаем фразы для начала и конца цикла, фразу для отсутствия данных
-    let before = this.props.before || name + "Before";
-    let after = this.props.after || name + "After";
-    let noList = this.props.noList || name + "Not";
-
-    // фраза-начало цикла: явный текст приоритетнее фразы из базы
-    let beforePhrase =
-      beforeText || (dataObj[before] ? dataObj[before].phrase : "");
-
-    // добавляем начало и конец фразы, фразу для отсутствия данных
-    if (filteredList.length) {
-      if (beforePhrase) {
-        filteredList.unshift(<span key={before}>{beforePhrase}</span>);
-      }
-      if (dataObj[after] && dataObj[after].phrase) {
-        filteredList.push(<span key={after}>{dataObj[after].phrase}</span>);
-      }
-    } else {
-      if (dataObj[noList] && dataObj[noList].phrase) {
-        filteredList = <span key={noList}>{dataObj[noList].phrase}</span>;
-      }
-    }
-
-    return <span>{filteredList}</span>;
+    return (
+      <span>
+        {parts.map(part => (
+          <span key={part.key}>
+            {part.text}
+            {part.separator}
+          </span>
+        ))}
+      </span>
+    );
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  const psystatus = state.psystatus;
+  const dataObj = ownProps.dataObj;
+  const name = ownProps.name;
+
+  // ключи фраз обрамления и фразы «нет данных»
+  const beforeKey = ownProps.before || name + "Before";
+  const afterKey = ownProps.after || name + "After";
+  const noListKey = ownProps.noList || name + "Not";
+
+  return {
+    flags: flagsOf(psystatus, cicleKeys(dataObj, name)),
+    isAnd: !!ownProps.isAnd,
+    beforePhrase:
+      ownProps.beforeText ||
+      (dataObj[beforeKey] ? dataObj[beforeKey].phrase : ""),
+    afterPhrase: dataObj[afterKey] ? dataObj[afterKey].phrase : "",
+    noListPhrase: dataObj[noListKey] ? dataObj[noListKey].phrase : ""
+  };
+}
+
+export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
+  ListOfWords
+);

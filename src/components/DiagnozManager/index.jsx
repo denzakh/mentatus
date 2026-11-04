@@ -1,8 +1,16 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setText } from "../../actions/textAction";
 import "./Diagnoz.css";
 
-export default class DiagnozManager extends Component {
+class DiagnozManager extends Component {
+  handleChange = e => {
+    this.props.setText(e.target.name, e.target.value);
+  };
+
   render() {
+    const { mkb10, klin, dopolnenie, reqilech } = this.props;
+
     return (
       <div className="diagnoz">
         <div className="diagnoz__row diagnoz__row--mkb">
@@ -12,8 +20,8 @@ export default class DiagnozManager extends Component {
           <input
             className="diagnoz__mkb-input"
             name="diagnozMkb10"
-            onChange={this.props.toggleText}
-            value={this.props.psystatus.diagnozMkb10.text}
+            onChange={this.handleChange}
+            value={mkb10}
           />
         </div>
         <div className="diagnoz__row">
@@ -22,8 +30,8 @@ export default class DiagnozManager extends Component {
           <textarea
             className="diagnoz__textarea"
             name="diagnozKlin"
-            onChange={this.props.toggleText}
-            value={this.props.psystatus.diagnozKlin.text}
+            onChange={this.handleChange}
+            value={klin}
           />
         </div>
         <div className="diagnoz__row">
@@ -32,8 +40,8 @@ export default class DiagnozManager extends Component {
           <textarea
             className="diagnoz__textarea"
             name="diagnozDopolnenie"
-            onChange={this.props.toggleText}
-            value={this.props.psystatus.diagnozDopolnenie.text}
+            onChange={this.handleChange}
+            value={dopolnenie}
           />
         </div>
         <br />
@@ -44,11 +52,30 @@ export default class DiagnozManager extends Component {
           <textarea
             className="diagnoz__textarea diagnoz__textarea--req"
             name="reqilech"
-            onChange={this.props.toggleText}
-            value={this.props.psystatus.reqilech.text}
+            onChange={this.handleChange}
+            value={reqilech}
           />
         </div>
       </div>
     );
   }
 }
+
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    mkb10: psystatus.diagnozMkb10.text,
+    klin: psystatus.diagnozKlin.text,
+    dopolnenie: psystatus.diagnozDopolnenie.text,
+    reqilech: psystatus.reqilech.text
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setText: (name, value) => dispatch(setText(name, value))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(DiagnozManager);

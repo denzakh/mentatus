@@ -1,34 +1,48 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { setRadio } from "../../actions/radioAction";
+import { isKritikaEmpty } from "../../lib/rules/kritika";
 import "./RadioListKogn.css";
-import getToggleKritika from "../../fn/getToggleKritika";
 
-export default class RadioListKogn extends Component {
+/*
+RadioListKogn
+группа радиокнопок интеллектуально-мнестических функций:
+часть ответов дополнительно снижает критику
+
+принимает:
+name - имя поля в сторе
+dataBase - объект БД, в котором лежит группа (label + data)
+*/
+
+class RadioListKogn extends Component {
+  handleChange = e => {
+    this.props.setRadio(this.props.name, +e.target.value);
+  };
+
   render() {
-    let dataBase = this.props.dataBase;
-    let name = this.props.name;
-    let arr = dataBase[name].data;
-    let psystatus = this.props.psystatus;
+    const { name, options, selected, isKritikaEmpty } = this.props;
 
     // функция снижения критики: часть ответов автоматически
     // выставляет критику, если она ещё не задана
-    let withKritika = (number, onChange) => e => {
-      if (getToggleKritika(this.props.psystatus)) {
+    const withKritika = (number, onChange) => e => {
+      if (isKritikaEmpty) {
         this.props.setRadio("kritika", number);
       }
+
       onChange(e);
     };
 
-    let toggleList = [
-      this.props.toggleRadio, // 0
-      withKritika(2, this.props.toggleRadio), // 1
-      withKritika(3, this.props.toggleRadio), // 2
-      withKritika(4, this.props.toggleRadio), // 3
-      this.props.toggleRadio // 4
+    const toggleList = [
+      this.handleChange, // 0
+      withKritika(2, this.handleChange), // 1
+      withKritika(3, this.handleChange), // 2
+      withKritika(4, this.handleChange), // 3
+      this.handleChange // 4
     ];
 
     return (
       <div className="radio__list">
-        {arr.map(item => (
+        {options.map(item => (
           <div key={item.id} className="radio__item">
             <input
               type="radio"
@@ -37,7 +51,7 @@ export default class RadioListKogn extends Component {
               value={item.id}
               className="radio__input"
               onChange={toggleList[item.id]}
-              checked={+item.id === +psystatus[name].number}
+              checked={+item.id === +selected}
             />
             <label className="radio__label" htmlFor={name + item.id}>
               {item.label}
@@ -48,3 +62,23 @@ export default class RadioListKogn extends Component {
     );
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  const psystatus = state.psystatus;
+  const field = psystatus[ownProps.name];
+  const group = ownProps.dataBase[ownProps.name];
+
+  return {
+    options: group ? group.data : [],
+    selected: field ? field.number : 0,
+    isKritikaEmpty: isKritikaEmpty(psystatus)
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setRadio: (name, value) => dispatch(setRadio(name, value))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(RadioListKogn);

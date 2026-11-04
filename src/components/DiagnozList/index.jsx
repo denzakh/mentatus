@@ -1,62 +1,41 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class DiagnozList extends Component {
+class DiagnozList extends Component {
   render() {
-    let diagnozText = () => {
-      if (
-        this.props.psystatus.diagnozMkb10.text ||
-        this.props.psystatus.diagnozKlin.text ||
-        this.props.psystatus.diagnozDopolnenie.text
-      ) {
-        let diagnozMkb10 = () => {
-          if (this.props.psystatus.diagnozMkb10.text) {
-            return (
-              <span>F {this.props.psystatus.diagnozMkb10.text} &nbsp;</span>
-            );
-          } else {
-            return "";
-          }
-        };
+    const { mkb10, klin, dopolnenie, reqilech } = this.props;
 
-        let diagnozDopolnenie = () => {
-          if (this.props.psystatus.diagnozDopolnenie.text) {
-            return (
-              <span>
-                <br />
-                {this.props.psystatus.diagnozDopolnenie.text} &nbsp;
-              </span>
-            );
-          } else {
-            return "";
-          }
-        };
-
-        return (
-          <p>
-            <span> Диагноз: </span>
-            {diagnozMkb10()}
-            <span>{this.props.psystatus.diagnozKlin.text} &nbsp;</span>
-            {diagnozDopolnenie()}
-          </p>
-        );
-      } else {
-        return "";
+    const diagnozText = () => {
+      if (!mkb10 && !klin && !dopolnenie) {
+        return null;
       }
+
+      return (
+        <p>
+          <span> Диагноз: </span>
+          {mkb10 ? <span>F {mkb10} &nbsp;</span> : null}
+          <span>{klin} &nbsp;</span>
+          {dopolnenie ? (
+            <span>
+              <br />
+              {dopolnenie} &nbsp;
+            </span>
+          ) : null}
+        </p>
+      );
     };
 
-    let reqText = () => {
-      if (this.props.psystatus.reqilech.text) {
-        return (
-          <p>
-            <span> Рекомендовано: </span> <br />
-            <span className="pre">
-              {this.props.psystatus.reqilech.text} &nbsp;
-            </span>
-          </p>
-        );
-      } else {
-        return "";
+    const reqText = () => {
+      if (!reqilech) {
+        return null;
       }
+
+      return (
+        <p>
+          <span> Рекомендовано: </span> <br />
+          <span className="pre">{reqilech} &nbsp;</span>
+        </p>
+      );
     };
 
     return (
@@ -67,3 +46,16 @@ export default class DiagnozList extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    mkb10: psystatus.diagnozMkb10.text,
+    klin: psystatus.diagnozKlin.text,
+    dopolnenie: psystatus.diagnozDopolnenie.text,
+    reqilech: psystatus.reqilech.text
+  };
+}
+
+export default connect(mapStateToProps)(DiagnozList);

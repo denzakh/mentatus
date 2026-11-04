@@ -12,6 +12,15 @@
   color: #555555;
 }
 
+.checkbox__pol {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  cursor: pointer;
+  margin: 2px 0;
+  color: #555555;
+}
+
 .checkbox__label:hover {
   color: #222222;
 }
@@ -55,6 +64,3 @@
 .checkbox__input:checked + .checkbox__label:hover {
   opacity: 0.9;
 }
-
-
-

@@ -1,12 +1,32 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { areStatePropsEqual } from "../../lib/redux";
 
-export default class FreeTextBeforeAndAfter extends Component {
+/*
+FreeTextBeforeAndAfter
+компонент представления: свободный текст поля с фразами до и после
+
+принимает:
+name - имя поля в сторе
+dataObj - объект БД, в котором лежат фразы before / after
+*/
+
+class FreeTextBeforeAndAfter extends Component {
   render() {
-    const { name, dataObj, psystatus } = this.props;
-    let before = dataObj[name].before;
-    let after = dataObj[name].after;
-    let text = psystatus[name].text;
-    let allText = before + text + after;
-    return <span>{allText}</span>;
+    return <span>{this.props.value}</span>;
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  const group = ownProps.dataObj[ownProps.name] || {};
+  const field = state.psystatus[ownProps.name];
+
+  return {
+    value:
+      (group.before || "") + ((field && field.text) || "") + (group.after || "")
+  };
+}
+
+export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
+  FreeTextBeforeAndAfter
+);

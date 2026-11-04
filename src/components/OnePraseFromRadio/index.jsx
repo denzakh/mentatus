@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+import { buildRadioPhrase } from "../../lib/text";
+import { areStatePropsEqual } from "../../lib/redux";
 
 /*
 OnePraseFromRadio
@@ -6,40 +9,31 @@ OnePraseFromRadio
 
 принимает:
 name - имя радиогруппы
-dataObj - объект БД для этой категории (например, даные по настроению)
-psystatus - store
+dataObj - объект БД для этой категории (например, данные по настроению)
 
+из стора берёт: номер выбранного пункта группы и пол пациента
 возвращает: название радиогруппы + значение выбранного пункта
-
 */
 
-export default class OnePraseFromRadio extends Component {
+class OnePraseFromRadio extends Component {
   render() {
-    const { name, dataObj, psystatus } = this.props;
-
-    let index = psystatus[name].number;
-    let phrase = dataObj[name].data[index].phrase;
-
-    if (psystatus["pol"].isChecked && dataObj[name].data[index].phraseM) {
-      phrase = dataObj[name].data[index].phraseM;
-    }
-
-    let before;
-    if (dataObj[name].before === undefined) {
-      before = "";
-    } else {
-      before = dataObj[name].before;
-    }
-
-    let after;
-    if (dataObj[name].after === undefined) {
-      after = "";
-    } else {
-      after = dataObj[name].after;
-    }
-
-    let оnePrase = before + phrase + after;
-
-    return <span>{оnePrase}</span>;
+    return <span>{this.props.phrase}</span>;
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  const psystatus = state.psystatus;
+  const field = psystatus[ownProps.name];
+
+  return {
+    phrase: buildRadioPhrase(
+      ownProps.dataObj[ownProps.name],
+      field ? field.number : 0,
+      psystatus.pol.isChecked
+    )
+  };
+}
+
+export default connect(mapStateToProps, null, null, { areStatePropsEqual })(
+  OnePraseFromRadio
+);

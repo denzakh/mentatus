@@ -1,25 +1,54 @@
 import React, { Component } from "react";
-import "./Checkbox.css";
+import { connect } from "react-redux";
+import { setSymptom } from "../../actions/symptomAction";
+import "../Checkbox/Checkbox.css";
 
-export default class CheckboxPol extends Component {
+/*
+CheckboxPol
+переключатель пола пациента, привязанный к полю стора
+
+принимает:
+name - имя поля в сторе (по умолчанию pol)
+*/
+
+class CheckboxPol extends Component {
+  handleChange = () => {
+    this.props.setSymptom(this.props.name);
+  };
+
   render() {
+    const { name, isMale } = this.props;
+    const id = "checkbox-pol-" + name;
+
     return (
       <span>
         <input
           type="checkbox"
           className="checkbox__input"
-          checked={this.props.checked}
-          onChange={this.props.onChange}
-          name={this.props.name}
-          id={"checkbox-pol-" + this.props.name}
+          checked={isMale}
+          onChange={this.handleChange}
+          name={name}
+          id={id}
         />
-        <label
-          className="checkbox__pol"
-          htmlFor={"checkbox-pol-" + this.props.name}
-        >
-          {this.props.label}
+        <label className="checkbox__pol" htmlFor={id}>
+          {isMale ? "Пол: мужской  ⇄" : "Пол: женский  ⇄"}
         </label>
       </span>
     );
   }
 }
+
+function mapStateToProps(state, ownProps) {
+  return {
+    name: ownProps.name || "pol",
+    isMale: state.psystatus[ownProps.name || "pol"].isChecked
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    setSymptom: name => dispatch(setSymptom(name))
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(CheckboxPol);

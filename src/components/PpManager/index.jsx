@@ -1,112 +1,36 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import dataBase from "../../store/ppData.js";
-import Checkbox from "../Checkbox";
+import CheckboxGroup from "../CheckboxGroup";
 import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
-import cicleFn from "../../fn/cicleFn";
-import getToggleKritika from "../../fn/getToggleKritika";
 import "./Pp.css";
 import KritikaManager from "../KritikaManager";
 
-export default class PpManager extends Component {
+class PpManager extends Component {
   render() {
-    // функция снижения критики: при выборе бреда/галлюцинаций
-    // автоматически выставляем критику, если она ещё не задана
-    let toggleKritika = e => {
-      if (getToggleKritika(this.props.psystatus)) {
-        this.props.setRadio("kritika", 3);
-      }
-      this.props.toggleSymptom(e);
-    };
-
-    // показ списка бред
-    let bredNameArr = cicleFn(dataBase, "bred");
-
-    let bredList = bredNameArr.map(item => (
-      <div key={item} className="list__item">
-        <Checkbox
-          checked={this.props.psystatus[item].isChecked}
-          onChange={toggleKritika}
-          name={item}
-          label={dataBase[item].label}
-        />
-      </div>
-    ));
-
-    let bredListShow = () => {
-      if (this.props.psystatus["bredOtkl"].isChecked) {
-        return "";
-      } else {
-        return bredList;
-      }
-    };
-
-    // показ списка галлюцинации
-    let gallNameArr = cicleFn(dataBase, "gall");
-
-    let gallList = gallNameArr.map(item => (
-      <div key={item} className="list__item">
-        <Checkbox
-          checked={this.props.psystatus[item].isChecked}
-          onChange={toggleKritika}
-          name={item}
-          label={dataBase[item].label}
-        />
-      </div>
-    ));
-
-    let gallListShow = () => {
-      if (this.props.psystatus["gallOtkl"].isChecked) {
-        return "";
-      } else {
-        return gallList;
-      }
-    };
+    const { isBredHidden, isGallHidden } = this.props;
 
     return (
       <div>
         <div className="manager">
           <div className="manager__col manager__col--1">
-            <KritikaManager
-              toggleRadio={this.props.toggleRadio}
-              toggleText={this.props.toggleText}
-              psystatus={this.props.psystatus}
-            />
+            <KritikaManager />
 
             <div className="list__title">
               <span className="list__title-lable">Опасные тенденции:</span>
-              <CheckboxOtkl
-                name="opasnyeOtkl"
-                onChange={this.props.toggleSymptom}
-                psystatus={this.props.psystatus}
-                dataBase={dataBase}
-              />
+              <CheckboxOtkl name="opasnyeOtkl" dataBase={dataBase} />
             </div>
-            <RadioList
-              name="opasnye"
-              dataBase={dataBase}
-              onChange={this.props.toggleRadio}
-              psystatus={this.props.psystatus}
-            />
+            <RadioList name="opasnye" dataBase={dataBase} />
 
             <div className="no-break">
               <div className="list__title">Агрессия:</div>
-              <RadioList
-                name="opasnyeAgressia"
-                dataBase={dataBase}
-                onChange={this.props.toggleRadio}
-                psystatus={this.props.psystatus}
-              />
+              <RadioList name="opasnyeAgressia" dataBase={dataBase} />
             </div>
 
             <div className="no-break">
-              <Textarea
-                onChange={this.props.toggleText}
-                name="opasnyeText"
-                label="Описание опасных тенденций"
-                value={this.props.psystatus.opasnyeText.text}
-              />
+              <Textarea name="opasnyeText" label="Описание опасных тенденций" />
             </div>
           </div>
           <div className="manager__col manager__col--1">
@@ -114,46 +38,38 @@ export default class PpManager extends Component {
               {/*цикл "bred"*/}
               <div className="list__title">
                 <span className="list__title-lable">Бред:</span>
-                <CheckboxOtkl
-                  name="bredOtkl"
-                  onChange={this.props.toggleSymptom}
-                  psystatus={this.props.psystatus}
-                  dataBase={dataBase}
-                />
+                <CheckboxOtkl name="bredOtkl" dataBase={dataBase} />
               </div>
-              {bredListShow()}
+              {isBredHidden ? null : (
+                <CheckboxGroup
+                  cicle="bred"
+                  dataBase={dataBase}
+                  autoKritika={3}
+                />
+              )}
             </div>
 
             <div className="no-break">
-              <Textarea
-                onChange={this.props.toggleText}
-                name="bredText"
-                label="Описание бреда"
-                value={this.props.psystatus.bredText.text}
-              />
+              <Textarea name="bredText" label="Описание бреда" />
             </div>
 
             <div className="no-break">
               {/*цикл "gall"*/}
               <div className="list__title">
                 <span className="list__title-lable">Галлюцинации:</span>
-                <CheckboxOtkl
-                  name="gallOtkl"
-                  onChange={this.props.toggleSymptom}
-                  psystatus={this.props.psystatus}
-                  dataBase={dataBase}
-                />
+                <CheckboxOtkl name="gallOtkl" dataBase={dataBase} />
               </div>
-              {gallListShow()}
+              {isGallHidden ? null : (
+                <CheckboxGroup
+                  cicle="gall"
+                  dataBase={dataBase}
+                  autoKritika={3}
+                />
+              )}
             </div>
 
             <div className="no-break">
-              <Textarea
-                onChange={this.props.toggleText}
-                name="gallText"
-                label="Описание галлюцинаций"
-                value={this.props.psystatus.gallText.text}
-              />
+              <Textarea name="gallText" label="Описание галлюцинаций" />
             </div>
           </div>
         </div>
@@ -161,3 +77,15 @@ export default class PpManager extends Component {
     );
   }
 }
+
+// списки бреда и галлюцинаций скрываются, если врач отметил их отсутствие
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    isBredHidden: psystatus.bredOtkl.isChecked,
+    isGallHidden: psystatus.gallOtkl.isChecked
+  };
+}
+
+export default connect(mapStateToProps)(PpManager);

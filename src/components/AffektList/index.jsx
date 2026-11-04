@@ -1,16 +1,23 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import dataBase from "../../store/affektData.js";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
-
 import OnePraseFromRadio from "../OnePraseFromRadio";
 
-export default class AffektList extends Component {
+class AffektList extends Component {
   render() {
-    let nastroyeniyeKolebania = () => {
-      if (this.props.psystatus.nastroyeniyeKolebania.isChecked) {
-        return (
+    return (
+      <span data-id="affekt" onClick={this.props.toggleTab}>
+        {/*Настроение*/}
+        <OnePraseFromRadio name="nastroyeniye" dataObj={dataBase} />
+
+        <ListOfWords name="vSvyazi" dataObj={dataBase} isAnd="true" />
+
+        <ListOfWords name="s" dataObj={dataBase} />
+
+        {this.props.isKolebaniaChecked ? (
           <span>
             <span>
               {" "}
@@ -18,64 +25,36 @@ export default class AffektList extends Component {
               <OnePraseFromRadio
                 name="nastroyeniyeKolebaniaPodrobno"
                 dataObj={dataBase}
-                psystatus={this.props.psystatus}
                 before=""
               />
               )
             </span>
           </span>
-        );
-      }
-    };
+        ) : null}
 
-    return (
-      <span data-id="affekt" onClick={this.props.toggleTab}>
-        {/*Настроение*/}
-        <OnePraseFromRadio
-          name="nastroyeniye"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
-
-        <ListOfWords
-          name="vSvyazi"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-          isAnd="true"
-        />
-
-        <ListOfWords
-          name="s"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
-        {nastroyeniyeKolebania()}
         <span>. </span>
 
-        <ListOfSentences
-          name="nastroyenieSeparate"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
+        <ListOfSentences name="nastroyenieSeparate" dataObj={dataBase} />
 
-        <FreeText text={this.props.psystatus.nastroyeniyeText} />
+        <FreeText name="nastroyeniyeText" />
 
         {/*Тревога*/}
-        <OnePraseFromRadio
-          name="trevoga"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
+        <OnePraseFromRadio name="trevoga" dataObj={dataBase} />
+
         <span>. </span>
 
-        <ListOfSentences
-          name="trevogaSeparate"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
+        <ListOfSentences name="trevogaSeparate" dataObj={dataBase} />
 
-        <FreeText text={this.props.psystatus.trevogaText} />
+        <FreeText name="trevogaText" />
       </span>
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    isKolebaniaChecked: state.psystatus.nastroyeniyeKolebania.isChecked
+  };
+}
+
+export default connect(mapStateToProps)(AffektList);

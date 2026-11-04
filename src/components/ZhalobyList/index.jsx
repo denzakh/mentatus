@@ -1,39 +1,39 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import dataBase from "../../store/zhalobyData.js";
 import ListOfWords from "../ListOfWords";
 import FreeText from "../FreeText";
 
-export default class ZhalobyList extends Component {
+class ZhalobyList extends Component {
   render() {
-    let showZhaloby = () => {
-      if (
-        !(
-          this.props.psystatus.rechOtkl.isChecked ||
-          this.props.psystatus.rechNeotvechaet.isChecked ||
-          this.props.psystatus.kontakt.number === 2 ||
-          this.props.psystatus.soznanie.number === 7
-        )
-      ) {
-        return (
-          <ListOfWords
-            name="zhalobyCicle"
-            dataObj={dataBase}
-            psystatus={this.props.psystatus}
-          />
-        );
-      }
-    };
-
     return (
       <span
         className="list__section"
         data-id="zhaloby"
         onClick={this.props.toggleTab}
       >
-        {showZhaloby()}
+        {this.props.isHidden ? null : (
+          <ListOfWords name="zhalobyCicle" dataObj={dataBase} />
+        )}
 
-        <FreeText text={this.props.psystatus.zhalobyText} />
+        <FreeText name="zhalobyText" />
       </span>
     );
   }
 }
+
+// жалобы не выводятся, если речь нарушена, контакт недоступен
+// или помрачено сознание
+function mapStateToProps(state) {
+  const psystatus = state.psystatus;
+
+  return {
+    isHidden:
+      psystatus.rechOtkl.isChecked ||
+      psystatus.rechNeotvechaet.isChecked ||
+      +psystatus.kontakt.number === 2 ||
+      +psystatus.soznanie.number === 7
+  };
+}
+
+export default connect(mapStateToProps)(ZhalobyList);

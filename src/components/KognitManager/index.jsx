@@ -1,84 +1,48 @@
 import React, { Component } from "react";
 import dataBase from "../../store/kognitData.js";
-import Checkbox from "../Checkbox";
+import CheckboxGroup from "../CheckboxGroup";
 import RadioListKogn from "../RadioListKogn";
 import RadioListInline from "../RadioListInline";
 import OrientirovkaManager from "../OrientirovkaManager";
-import cicleFn from "../../fn/cicleFn";
 import "./Kognit.css";
 
 export default class KognitManager extends Component {
   render() {
-    let otmechNameArr = cicleFn(dataBase, "otmech");
-    let otdelNameArr = cicleFn(dataBase, "otdel");
-
     return (
       <div>
         <div className="manager">
           <div className="manager__orientir">
             {/*компонент ориентировки*/}
-            <OrientirovkaManager
-              dataBase={dataBase}
-              toggleRadio={this.props.toggleRadio}
-              toggleSymptom={this.props.toggleSymptom}
-              toggleText={this.props.toggleText}
-              psystatus={this.props.psystatus}
-            />
+            <OrientirovkaManager dataBase={dataBase} />
           </div>
           <div className="manager__col manager__col--1">
             <div className="no-break">
               <div className="list__title">
                 Интеллектуально-мнестические функции:
               </div>
-              <RadioListKogn
-                name="kognitOsnivnoi"
-                dataBase={dataBase}
-                toggleRadio={this.props.toggleRadio}
-                setRadio={this.props.setRadio}
-                toggleSymptom={this.props.toggleSymptom}
-                psystatus={this.props.psystatus}
-              />
+              <RadioListKogn name="kognitOsnivnoi" dataBase={dataBase} />
             </div>
           </div>
           <div className="manager__col manager__col--1">
             {/*цикл "отмечается"*/}
             <div className="no-break">
               <div className="list__title">отмечается: </div>
-              {otmechNameArr.map(item => (
-                <div key={item} className="list__item">
-                  <Checkbox
-                    checked={this.props.psystatus[item].isChecked}
-                    onChange={this.props.toggleSymptom}
-                    name={item}
-                    label={dataBase[item].label}
-                  />
-                </div>
-              ))}
+              <CheckboxGroup cicle="otmech" dataBase={dataBase} />
             </div>
 
             {/*цикл отдельных нарушений*/}
             <div className="no-break">
               <div className="list__title">отдельно: </div>
-              {otdelNameArr.map(item => (
-                <div key={item} className="list__item list__item--no-group">
-                  <Checkbox
-                    checked={this.props.psystatus[item].isChecked}
-                    onChange={this.props.toggleSymptom}
-                    name={item}
-                    label={dataBase[item].label}
-                  />
-                </div>
-              ))}
+              <CheckboxGroup
+                cicle="otdel"
+                dataBase={dataBase}
+                itemClassName="list__item list__item--no-group"
+              />
             </div>
 
             {/*поле для пальцев*/}
             <div className="list__box">
-              <RadioListInline
-                name="kognitFingerN"
-                dataBase={dataBase}
-                onChange={this.props.toggleRadio}
-                psystatus={this.props.psystatus}
-              />
+              <RadioListInline name="kognitFingerN" dataBase={dataBase} />
             </div>
           </div>
         </div>

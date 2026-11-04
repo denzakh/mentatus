@@ -6,10 +6,7 @@ import "./Orientirovka.css";
 
 export default class OrientirovkaManager extends Component {
   render() {
-    let dataBase = this.props.dataBase;
-    // let orientirVremiaNumber = +this.props.psystatus.orientirVremia.number;
-    // let orientirMestoNumber = +this.props.psystatus.orientirMesto.number;
-    // let orientirLichnostNumber = +this.props.psystatus.orientirLichnost.number;
+    const dataBase = this.props.dataBase;
 
     return (
       <div>
@@ -19,53 +16,32 @@ export default class OrientirovkaManager extends Component {
             <div className="orientir__col">
               <div className="orientir__top">Во времени</div>
               <div className="orientir__content">
-                <RadioList
-                  name="orientirVremia"
-                  dataBase={dataBase}
-                  onChange={this.props.toggleRadio}
-                  psystatus={this.props.psystatus}
-                />
+                <RadioList name="orientirVremia" dataBase={dataBase} />
               </div>
             </div>
             <div className="orientir__col">
               <div className="orientir__top">Месте</div>
               <div className="orientir__content">
-                <RadioList
-                  name="orientirMesto"
-                  dataBase={dataBase}
-                  onChange={this.props.toggleRadio}
-                  psystatus={this.props.psystatus}
-                />
+                <RadioList name="orientirMesto" dataBase={dataBase} />
               </div>
             </div>
             <div className="orientir__col">
               <div className="orientir__top">Личности</div>
               <div className="orientir__content">
-                <RadioList
-                  name="orientirLichnost"
-                  dataBase={dataBase}
-                  onChange={this.props.toggleRadio}
-                  psystatus={this.props.psystatus}
-                />
+                <RadioList name="orientirLichnost" dataBase={dataBase} />
               </div>
             </div>
           </div>
           <div className="orientir__bottom">
             <Checkbox
               name="orientirNot"
-              checked={this.props.psystatus.orientirNot.isChecked}
-              onChange={this.props.toggleSymptom}
               label="ориентировку не определить"
+              dataBase={dataBase}
             />
           </div>
         </div>
 
-        <Textarea
-          onChange={this.props.toggleText}
-          name="orientirText"
-          label="Описание ориентировки"
-          value={this.props.psystatus.orientirText.text}
-        />
+        <Textarea name="orientirText" label="Описание ориентировки" />
       </div>
     );
   }

@@ -9,7 +9,6 @@ export default class ListOfWordsZatrud extends Component {
       <ListOfWords
         name={this.props.name}
         dataObj={this.props.dataObj}
-        psystatus={this.props.psystatus}
         isAnd={true}
         beforeText=", но он затруднен из-за "
       />

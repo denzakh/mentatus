@@ -9,34 +9,17 @@ export default class SostoyanieList extends Component {
   render() {
     return (
       <span data-id="sostoyanie" onClick={this.props.toggleTab}>
-        <OnePraseFromRadio
-          name="soznanie"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
+        <OnePraseFromRadio name="soznanie" dataObj={dataBase} />
 
-        <OnePraseFromRadio
-          name="kontakt"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
+        <OnePraseFromRadio name="kontakt" dataObj={dataBase} />
 
         {/*затруднен*/}
-        <ListOfWordsZatrud
-          name="zatrud"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-          isAnd="true"
-        />
+        <ListOfWordsZatrud name="zatrud" dataObj={dataBase} isAnd="true" />
 
         {/*Отдельно*/}
-        <ListOfSentences
-          name="vpech"
-          dataObj={dataBase}
-          psystatus={this.props.psystatus}
-        />
+        <ListOfSentences name="vpech" dataObj={dataBase} />
 
-        <FreeText text={this.props.psystatus.sostoyanieText} />
+        <FreeText name="sostoyanieText" />
       </span>
     );
   }

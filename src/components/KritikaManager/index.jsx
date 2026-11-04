@@ -8,19 +8,9 @@ export default class KritikaManager extends Component {
     return (
       <div>
         <div className="list__title list__title--no-top-margin">Критика:</div>
-        <RadioList
-          name="kritika"
-          dataBase={dataBase}
-          onChange={this.props.toggleRadio}
-          psystatus={this.props.psystatus}
-        />
+        <RadioList name="kritika" dataBase={dataBase} />
 
-        <Textarea
-          onChange={this.props.toggleText}
-          name="kritikaText"
-          label="Описание критики"
-          value={this.props.psystatus.kritikaText.text}
-        />
+        <Textarea name="kritikaText" label="Описание критики" />
       </div>
     );
   }
