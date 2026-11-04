@@ -10,7 +10,7 @@
 |---|------|------|--------|------------|
 | 1 | Разбиение `psystatus` на срезы по разделам | `01-slices.md` | ✅ выполнено | — |
 | 2 | Схемный рендеринг разделов из `store/*Data.js` | `02-schema-rendering.md` | ✅ выполнено | 1 |
-| 3 | `redux-persist` вместо самописного localStorage | `03-redux-persist.md` | ⏳ | 1 |
+| 3 | `redux-persist` вместо самописного localStorage | `03-redux-persist.md` | ✅ выполнено | 1 |
 | 4 | Обновление стека (Vite + React 18 + RTK + vitest) | `04-stack-upgrade.md` | ⏳ | 1–3 |
 | 5 | Чистка мёртвых CSS-классов | `05-css-cleanup.md` | ⏳ | 4 |
 | 6 | Перевод на TypeScript | `06-typescript.md` | ⏳ | 4–5 |
@@ -25,6 +25,9 @@
 - Node v24.21.0, npm 11.19.0. `npm install` работает, сеть до npm есть.
 - Стор: `combineReducers({ option, zhaloby, anamnez, sostoyanie, affekt, rech, kognit, pp, diagnoz })`.
   Монолитный `psystatus` удалён, поля живут в `state[section][field]`.
+- Persist: `redux-persist@6`, конфиг — `src/store/persist.js` (whitelist срезов,
+  `key: "mentatus"`, `version: 2`, ключ в localStorage — `persist:mentatus`),
+  `PersistGate` в `src/index.js`; старый ключ `mentatus:v2` удаляется при старте.
 - Чтение поля: `fieldOf(state, name)` / `sectionOf(name)` из `src/lib/redux/index.js`.
 - Экшены: `SET_SYMPTOM` / `SET_TEXT` / `SET_RADIO` (`src/actions/*`), редьюсер раздела —
   `src/reducers/createSectionReducer.js` (guard по типу поля).
@@ -34,7 +37,7 @@
 - Рендеринг: `*Manager` → `<Section section dataBase layout />`
   (раскладка — `src/store/*Layout.js`), `*List` → `<FieldView>` по типу поля,
   примитивы — `src/components/{Field,Group,Section,FieldView}`.
-- Тесты: 5 сьютов / 82 теста (`src/lib/text`, `src/lib/rules`,
+- Тесты: 6 сьютов / 90 тестов (`src/lib/text`, `src/lib/rules`,
   `src/lib/layout`, `src/reducers`, `src/store`).
 - `npm test` = `react-scripts test --env=jsdom` → на Windows уходит в watch.
   Прогон всех тестов: `CI=true npx react-scripts test --env=jsdom`.
