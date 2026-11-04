@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/anamnezData.js";
+import { fieldOf } from "../../lib/redux";
 import ListOfWords from "../ListOfWords";
 import FreeText from "../FreeText";
 
@@ -22,8 +23,10 @@ class AnamnezList extends Component {
 
 // анамнез не выводится, если врач его не собрал
 function mapStateToProps(state) {
+  const field = fieldOf(state, "anamnezOtkl");
+
   return {
-    isHidden: state.psystatus.anamnezOtkl.isChecked
+    isHidden: !!(field && field.isChecked)
   };
 }
 

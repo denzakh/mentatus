@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { cicleKeys, pickPhrase } from "../../lib/text";
-import { flagsOf, areStatePropsEqual } from "../../lib/redux";
+import { flagsOf, areStatePropsEqual, fieldOf } from "../../lib/redux";
 
 /*
 ListOfSentences
@@ -32,11 +32,11 @@ class ListOfSentences extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const psystatus = state.psystatus;
+  const pol = fieldOf(state, "pol");
 
   return {
-    flags: flagsOf(psystatus, cicleKeys(ownProps.dataObj, ownProps.name)),
-    isMale: psystatus.pol.isChecked
+    flags: flagsOf(state, cicleKeys(ownProps.dataObj, ownProps.name)),
+    isMale: !!(pol && pol.isChecked)
   };
 }
 

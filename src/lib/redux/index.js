@@ -1,10 +1,24 @@
 /* Вспомогательные функции для connect. */
 
+import { fieldSections } from "../../reducers/sections";
+
+// имя среза, в котором лежит поле стора
+export function sectionOf(fieldName) {
+  return fieldSections[fieldName];
+}
+
+// значение поля стора из его среза (undefined, если поля нет)
+export function fieldOf(state, fieldName) {
+  const section = fieldSections[fieldName];
+  return section ? state[section][fieldName] : undefined;
+}
+
 // набор флагов isChecked для перечисленных полей стора
-export function flagsOf(psystatus, keys) {
+export function flagsOf(state, keys) {
   const flags = {};
   keys.forEach(key => {
-    flags[key] = !!(psystatus[key] && psystatus[key].isChecked);
+    const field = fieldOf(state, key);
+    flags[key] = !!(field && field.isChecked);
   });
   return flags;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fieldOf } from "../../lib/redux";
 import "./Conclusion.css";
 import "./Print.css";
 import ZhalobyList from "../ZhalobyList";
@@ -53,11 +54,13 @@ class Conclusion extends Component {
 
 // если контакт недоступен или помрачено сознание, описательная часть не выводится
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const kontakt = fieldOf(state, "kontakt");
+  const soznanie = fieldOf(state, "soznanie");
 
   return {
     isHidden:
-      +psystatus.kontakt.number === 2 || +psystatus.soznanie.number === 7
+      +((kontakt && kontakt.number) || 0) === 2 ||
+      +((soznanie && soznanie.number) || 0) === 7
   };
 }
 

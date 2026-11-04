@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fieldOf } from "../../lib/redux";
 
 class DiagnozList extends Component {
   render() {
@@ -48,13 +49,16 @@ class DiagnozList extends Component {
 }
 
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const mkb10 = fieldOf(state, "diagnozMkb10");
+  const klin = fieldOf(state, "diagnozKlin");
+  const dopolnenie = fieldOf(state, "diagnozDopolnenie");
+  const reqilech = fieldOf(state, "reqilech");
 
   return {
-    mkb10: psystatus.diagnozMkb10.text,
-    klin: psystatus.diagnozKlin.text,
-    dopolnenie: psystatus.diagnozDopolnenie.text,
-    reqilech: psystatus.reqilech.text
+    mkb10: mkb10 && mkb10.text,
+    klin: klin && klin.text,
+    dopolnenie: dopolnenie && dopolnenie.text,
+    reqilech: reqilech && reqilech.text
   };
 }
 

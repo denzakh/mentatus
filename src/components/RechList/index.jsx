@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/rechData.js";
+import { fieldOf } from "../../lib/redux";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
@@ -94,15 +95,19 @@ class RechList extends Component {
 }
 
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const odnosloj = fieldOf(state, "rechOdnosloj");
+  const neotvechaet = fieldOf(state, "rechNeotvechaet");
+  const rechOtkl = fieldOf(state, "rechOtkl");
+  const kontakt = fieldOf(state, "kontakt");
+  const soznanie = fieldOf(state, "soznanie");
 
   return {
-    isOdnoslojChecked: psystatus.rechOdnosloj.isChecked,
-    isNeotvechaetChecked: psystatus.rechNeotvechaet.isChecked,
+    isOdnoslojChecked: !!(odnosloj && odnosloj.isChecked),
+    isNeotvechaetChecked: !!(neotvechaet && neotvechaet.isChecked),
     isMainHidden:
-      psystatus.rechOtkl.isChecked ||
-      +psystatus.kontakt.number === 2 ||
-      +psystatus.soznanie.number === 7
+      !!(rechOtkl && rechOtkl.isChecked) ||
+      +((kontakt && kontakt.number) || 0) === 2 ||
+      +((soznanie && soznanie.number) || 0) === 7
   };
 }
 

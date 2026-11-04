@@ -1,15 +1,19 @@
 import { createStore } from "redux";
 import rootReducer from "./reducers";
 
+// ключ версии: форма state сменилась (срезы по разделам вместо монолита),
+// поэтому старые данные прошлой версии не читаем
+const STORAGE_KEY = "mentatus:v2";
+
 export default function configureStore(islocalStorage) {
   let store;
 
   // подключение сохранения в localStorage
   if (islocalStorage) {
-    if (localStorage["mentatus"]) {
+    if (localStorage[STORAGE_KEY]) {
       store = createStore(
         rootReducer,
-        JSON.parse(localStorage["mentatus"]),
+        JSON.parse(localStorage[STORAGE_KEY]),
         window.__REDUX_DEVTOOLS_EXTENSION__ &&
           window.__REDUX_DEVTOOLS_EXTENSION__()
       );
@@ -22,7 +26,7 @@ export default function configureStore(islocalStorage) {
     }
 
     store.subscribe(() => {
-      localStorage["mentatus"] = JSON.stringify(store.getState());
+      localStorage[STORAGE_KEY] = JSON.stringify(store.getState());
     });
 
     // без localStorage

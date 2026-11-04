@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/sostoyanieData.js";
 import { todayIso, formatDate } from "../../lib/text/date";
+import { fieldOf } from "../../lib/redux";
 
 class NachaloList extends Component {
   render() {
@@ -61,19 +62,30 @@ class NachaloList extends Component {
 }
 
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const dataOsmotra = fieldOf(state, "dataOsmotra");
+  const pol = fieldOf(state, "pol");
+  const mestoOsmotra = fieldOf(state, "mestoOsmotra");
+  const poNapravleniu = fieldOf(state, "poNapravleniu");
+  const sIstorieiOznakomlen = fieldOf(state, "sIstorieiOznakomlen");
+  const nedobrovolno = fieldOf(state, "nedobrovolno");
+  const nedobrovolnoPrichiny = fieldOf(state, "nedobrovolnoPrichiny");
+  const nedobrovolnoPunkt = fieldOf(state, "nedobrovolnoPunkt");
+  const nedobrovolnoText = fieldOf(state, "nedobrovolnoText");
 
   return {
     // дата осмотра: из стора, а если её нет — сегодняшняя
-    date: formatDate(psystatus.dataOsmotra.text) || formatDate(todayIso()),
-    isMale: psystatus.pol.isChecked,
-    mestoOsmotraNumber: psystatus.mestoOsmotra.number,
-    poNapravleniu: psystatus.poNapravleniu.isChecked,
-    sIstorieiOznakomlen: psystatus.sIstorieiOznakomlen.isChecked,
-    nedobrovolno: psystatus.nedobrovolno.isChecked,
-    nedobrovolnoPrichinyNumber: psystatus.nedobrovolnoPrichiny.number,
-    nedobrovolnoPunktNumber: psystatus.nedobrovolnoPunkt.number,
-    nedobrovolnoText: psystatus.nedobrovolnoText.text
+    date: formatDate(dataOsmotra && dataOsmotra.text) || formatDate(todayIso()),
+    isMale: !!(pol && pol.isChecked),
+    mestoOsmotraNumber: mestoOsmotra && mestoOsmotra.number,
+    poNapravleniu: !!(poNapravleniu && poNapravleniu.isChecked),
+    sIstorieiOznakomlen: !!(
+      sIstorieiOznakomlen && sIstorieiOznakomlen.isChecked
+    ),
+    nedobrovolno: !!(nedobrovolno && nedobrovolno.isChecked),
+    nedobrovolnoPrichinyNumber:
+      nedobrovolnoPrichiny && nedobrovolnoPrichiny.number,
+    nedobrovolnoPunktNumber: nedobrovolnoPunkt && nedobrovolnoPunkt.number,
+    nedobrovolnoText: nedobrovolnoText && nedobrovolnoText.text
   };
 }
 

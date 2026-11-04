@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { setSymptom } from "../../actions/symptomAction";
 import { setRadio } from "../../actions/radioAction";
 import { isKritikaEmpty } from "../../lib/rules/kritika";
+import { fieldOf } from "../../lib/redux";
 import "./Checkbox.css";
 
 /*
@@ -48,13 +49,12 @@ class Checkbox extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const psystatus = state.psystatus;
-  const field = psystatus[ownProps.name];
+  const field = fieldOf(state, ownProps.name);
   const dataBase = ownProps.dataBase;
 
   return {
     checked: !!(field && field.isChecked),
-    isKritikaEmpty: isKritikaEmpty(psystatus),
+    isKritikaEmpty: isKritikaEmpty(fieldOf(state, "kritika")),
     label:
       ownProps.label ||
       (dataBase && dataBase[ownProps.name] ? dataBase[ownProps.name].label : "")

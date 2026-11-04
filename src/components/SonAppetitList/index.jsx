@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/affektData.js";
+import { fieldOf } from "../../lib/redux";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
@@ -33,8 +34,10 @@ class SonAppetitList extends Component {
 }
 
 function mapStateToProps(state) {
+  const field = fieldOf(state, "appetitPohudel");
+
   return {
-    hasPohudel: !!state.psystatus.appetitPohudel.text
+    hasPohudel: !!(field && field.text)
   };
 }
 

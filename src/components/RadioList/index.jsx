@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setRadio } from "../../actions/radioAction";
+import { fieldOf } from "../../lib/redux";
 import "./RadioList.css";
 
 /*
@@ -44,7 +45,7 @@ class RadioList extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const field = state.psystatus[ownProps.name];
+  const field = fieldOf(state, ownProps.name);
   const group = ownProps.dataBase[ownProps.name];
 
   return {

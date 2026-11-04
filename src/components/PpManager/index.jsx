@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/ppData.js";
+import { fieldOf } from "../../lib/redux";
 import CheckboxGroup from "../CheckboxGroup";
 import CheckboxOtkl from "../CheckboxOtkl";
 import RadioList from "../RadioList";
@@ -80,11 +81,12 @@ class PpManager extends Component {
 
 // списки бреда и галлюцинаций скрываются, если врач отметил их отсутствие
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const bredOtkl = fieldOf(state, "bredOtkl");
+  const gallOtkl = fieldOf(state, "gallOtkl");
 
   return {
-    isBredHidden: psystatus.bredOtkl.isChecked,
-    isGallHidden: psystatus.gallOtkl.isChecked
+    isBredHidden: !!(bredOtkl && bredOtkl.isChecked),
+    isGallHidden: !!(gallOtkl && gallOtkl.isChecked)
   };
 }
 

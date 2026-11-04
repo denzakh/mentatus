@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/affektData.js";
+import { fieldOf } from "../../lib/redux";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import FreeText from "../FreeText";
@@ -52,8 +53,10 @@ class AffektList extends Component {
 }
 
 function mapStateToProps(state) {
+  const field = fieldOf(state, "nastroyeniyeKolebania");
+
   return {
-    isKolebaniaChecked: state.psystatus.nastroyeniyeKolebania.isChecked
+    isKolebaniaChecked: !!(field && field.isChecked)
   };
 }
 

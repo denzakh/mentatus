@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/ppData.js";
+import { fieldOf } from "../../lib/redux";
 import ListOfWords from "../ListOfWords";
 import FreeText from "../FreeText";
 import OnePraseFromRadio from "../OnePraseFromRadio";
@@ -53,12 +54,14 @@ class PpList extends Component {
 }
 
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const bredOtkl = fieldOf(state, "bredOtkl");
+  const gallOtkl = fieldOf(state, "gallOtkl");
+  const opasnyeOtkl = fieldOf(state, "opasnyeOtkl");
 
   return {
-    isBredHidden: psystatus.bredOtkl.isChecked,
-    isGallHidden: psystatus.gallOtkl.isChecked,
-    isOpasnyeHidden: psystatus.opasnyeOtkl.isChecked
+    isBredHidden: !!(bredOtkl && bredOtkl.isChecked),
+    isGallHidden: !!(gallOtkl && gallOtkl.isChecked),
+    isOpasnyeHidden: !!(opasnyeOtkl && opasnyeOtkl.isChecked)
   };
 }
 

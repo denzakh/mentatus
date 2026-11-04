@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { areStatePropsEqual } from "../../lib/redux";
+import { areStatePropsEqual, fieldOf } from "../../lib/redux";
 
 /*
 FreeText
@@ -19,7 +19,7 @@ class FreeText extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const field = state.psystatus[ownProps.name];
+  const field = fieldOf(state, ownProps.name);
 
   return {
     value: (field && field.text) || ""

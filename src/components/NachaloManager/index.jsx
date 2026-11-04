@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fieldOf } from "../../lib/redux";
 import Checkbox from "../Checkbox";
 import CheckboxOtkl from "../CheckboxOtkl";
 import CheckboxPol from "../CheckboxPol";
@@ -68,12 +69,13 @@ class NachaloManager extends Component {
 }
 
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const mestoOsmotra = fieldOf(state, "mestoOsmotra");
+  const nedobrovolno = fieldOf(state, "nedobrovolno");
 
   return {
     // своё место осмотра спрашиваем только для варианта «другое»
-    isMestoText: +psystatus.mestoOsmotra.number === 3,
-    isNedobrovolno: psystatus.nedobrovolno.isChecked
+    isMestoText: +((mestoOsmotra && mestoOsmotra.number) || 0) === 3,
+    isNedobrovolno: !!(nedobrovolno && nedobrovolno.isChecked)
   };
 }
 

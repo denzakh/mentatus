@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setSymptom } from "../../actions/symptomAction";
+import { fieldOf } from "../../lib/redux";
 import "./CheckboxOtkl.css";
 
 /*
@@ -41,7 +42,7 @@ class CheckboxOtkl extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const field = state.psystatus[ownProps.name];
+  const field = fieldOf(state, ownProps.name);
   const dataBase = ownProps.dataBase;
 
   return {

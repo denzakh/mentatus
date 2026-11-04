@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setRadio } from "../../actions/radioAction";
 import { isKritikaEmpty } from "../../lib/rules/kritika";
+import { fieldOf } from "../../lib/redux";
 import "./RadioListKogn.css";
 
 /*
@@ -64,14 +65,13 @@ class RadioListKogn extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const psystatus = state.psystatus;
-  const field = psystatus[ownProps.name];
+  const field = fieldOf(state, ownProps.name);
   const group = ownProps.dataBase[ownProps.name];
 
   return {
     options: group ? group.data : [],
     selected: field ? field.number : 0,
-    isKritikaEmpty: isKritikaEmpty(psystatus)
+    isKritikaEmpty: isKritikaEmpty(fieldOf(state, "kritika"))
   };
 }
 

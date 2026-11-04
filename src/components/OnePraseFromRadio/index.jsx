@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { buildRadioPhrase } from "../../lib/text";
-import { areStatePropsEqual } from "../../lib/redux";
+import { areStatePropsEqual, fieldOf } from "../../lib/redux";
 
 /*
 OnePraseFromRadio
@@ -22,14 +22,14 @@ class OnePraseFromRadio extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const psystatus = state.psystatus;
-  const field = psystatus[ownProps.name];
+  const field = fieldOf(state, ownProps.name);
+  const pol = fieldOf(state, "pol");
 
   return {
     phrase: buildRadioPhrase(
       ownProps.dataObj[ownProps.name],
       field ? field.number : 0,
-      psystatus.pol.isChecked
+      !!(pol && pol.isChecked)
     )
   };
 }

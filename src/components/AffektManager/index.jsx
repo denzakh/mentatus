@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/affektData.js";
+import { fieldOf } from "../../lib/redux";
 import CheckboxGroup from "../CheckboxGroup";
 import RadioList from "../RadioList";
 import Textarea from "../Textarea";
@@ -114,17 +115,20 @@ class AffektManager extends Component {
 }
 
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
-  const nastroyeniyeNumber = +psystatus.nastroyeniye.number;
+  const nastroyeniye = fieldOf(state, "nastroyeniye");
+  const nastroyeniyeNumber = +((nastroyeniye && nastroyeniye.number) || 0);
+  const trevoga = fieldOf(state, "trevoga");
+  const appetit = fieldOf(state, "appetit");
+  const kolebania = fieldOf(state, "nastroyeniyeKolebania");
 
   return {
     // подробности настроения не нужны для «ровного» и «не определить»
     showNastroyeniyeOptions: !(
       nastroyeniyeNumber === 0 || nastroyeniyeNumber === 7
     ),
-    showTrevogaOptions: +psystatus.trevoga.number !== 0,
-    showAppetitOptions: +psystatus.appetit.number !== 0,
-    isKolebaniaChecked: psystatus.nastroyeniyeKolebania.isChecked
+    showTrevogaOptions: +((trevoga && trevoga.number) || 0) !== 0,
+    showAppetitOptions: +((appetit && appetit.number) || 0) !== 0,
+    isKolebaniaChecked: !!(kolebania && kolebania.isChecked)
   };
 }
 

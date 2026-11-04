@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/rechData.js";
+import { fieldOf } from "../../lib/redux";
 import Checkbox from "../Checkbox";
 import CheckboxGroup from "../CheckboxGroup";
 import CheckboxOtkl from "../CheckboxOtkl";
@@ -85,12 +86,13 @@ class RechManager extends Component {
 }
 
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const neotvechaet = fieldOf(state, "rechNeotvechaet");
+  const rechOtkl = fieldOf(state, "rechOtkl");
 
   return {
-    showOtvety: !psystatus.rechNeotvechaet.isChecked,
+    showOtvety: !(neotvechaet && neotvechaet.isChecked),
     // при грубых нарушениях речи основная часть не выводится
-    showRechMain: !psystatus.rechOtkl.isChecked
+    showRechMain: !(rechOtkl && rechOtkl.isChecked)
   };
 }
 

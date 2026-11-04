@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/zhalobyData.js";
+import { fieldOf } from "../../lib/redux";
 import ListOfWords from "../ListOfWords";
 import FreeText from "../FreeText";
 
@@ -25,14 +26,17 @@ class ZhalobyList extends Component {
 // жалобы не выводятся, если речь нарушена, контакт недоступен
 // или помрачено сознание
 function mapStateToProps(state) {
-  const psystatus = state.psystatus;
+  const rechOtkl = fieldOf(state, "rechOtkl");
+  const rechNeotvechaet = fieldOf(state, "rechNeotvechaet");
+  const kontakt = fieldOf(state, "kontakt");
+  const soznanie = fieldOf(state, "soznanie");
 
   return {
     isHidden:
-      psystatus.rechOtkl.isChecked ||
-      psystatus.rechNeotvechaet.isChecked ||
-      +psystatus.kontakt.number === 2 ||
-      +psystatus.soznanie.number === 7
+      !!(rechOtkl && rechOtkl.isChecked) ||
+      !!(rechNeotvechaet && rechNeotvechaet.isChecked) ||
+      +((kontakt && kontakt.number) || 0) === 2 ||
+      +((soznanie && soznanie.number) || 0) === 7
   };
 }
 

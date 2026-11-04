@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/sostoyanieData.js";
 import dataBaseRech from "../../store/rechData.js";
+import { fieldOf } from "../../lib/redux";
 import Checkbox from "../Checkbox";
 import CheckboxGroup from "../CheckboxGroup";
 import CheckboxOtkl from "../CheckboxOtkl";
@@ -70,8 +71,10 @@ class SostoyanieManager extends Component {
 
 // причины затрудненного контакта спрашиваем только при самом затруднении
 function mapStateToProps(state) {
+  const field = fieldOf(state, "kontaktZatrudnen");
+
   return {
-    isZatrud: state.psystatus.kontaktZatrudnen.isChecked
+    isZatrud: !!(field && field.isChecked)
   };
 }
 

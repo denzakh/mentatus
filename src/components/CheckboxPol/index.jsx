@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { setSymptom } from "../../actions/symptomAction";
+import { fieldOf } from "../../lib/redux";
 import "../Checkbox/Checkbox.css";
 
 /*
@@ -39,9 +40,12 @@ class CheckboxPol extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
+  const name = ownProps.name || "pol";
+  const field = fieldOf(state, name);
+
   return {
-    name: ownProps.name || "pol",
-    isMale: state.psystatus[ownProps.name || "pol"].isChecked
+    name: name,
+    isMale: !!(field && field.isChecked)
   };
 }
 

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import dataBase from "../../store/kognitData.js";
 import { fingerPhrase } from "../../lib/text";
+import { fieldOf } from "../../lib/redux";
 import ListOfWords from "../ListOfWords";
 import ListOfSentences from "../ListOfSentences";
 import OnePraseFromRadio from "../OnePraseFromRadio";
@@ -26,8 +27,10 @@ class KognitList extends Component {
 }
 
 function mapStateToProps(state) {
+  const field = fieldOf(state, "kognitFingerN");
+
   return {
-    fingerText: fingerPhrase(state.psystatus.kognitFingerN.number)
+    fingerText: fingerPhrase(field && field.number)
   };
 }
 

@@ -55,7 +55,6 @@ class ListOfWords extends Component {
 }
 
 function mapStateToProps(state, ownProps) {
-  const psystatus = state.psystatus;
   const dataObj = ownProps.dataObj;
   const name = ownProps.name;
 
@@ -65,7 +64,7 @@ function mapStateToProps(state, ownProps) {
   const noListKey = ownProps.noList || name + "Not";
 
   return {
-    flags: flagsOf(psystatus, cicleKeys(dataObj, name)),
+    flags: flagsOf(state, cicleKeys(dataObj, name)),
     isAnd: !!ownProps.isAnd,
     beforePhrase:
       ownProps.beforeText ||
