@@ -32,7 +32,7 @@ npm run dev        # http://localhost:5173
 | `npm run typecheck` | `tsc --noEmit` |
 | `npm run lint` | ESLint 9 (плоский конфиг `eslint.config.mjs`) |
 | `npm run format` | Prettier 3 по `src/**` |
-| `npm run deploy` | `predeploy` (сборка) + публикация `dist/` на GitHub Pages |
+| `npm run css:audit` | отчёт «определено / используется» по CSS-классам |
 
 Перед коммитом: `npm run typecheck && npm run lint && npm test && npm run build`.
 

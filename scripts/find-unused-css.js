@@ -3,7 +3,7 @@
 Отчёт «определено / используется» для CSS-классов.
 
 Что делает:
-1. проходит JS/JSX-файлы в src, вытаскивает строковые литералы и токены,
+1. проходит TS/JS-файлы в src, вытаскивает строковые литералы и токены,
    похожие на CSS-классы (включая аргументы classNames(...));
 2. проходит CSS-файлы в src и собирает все селекторы классов (.foo);
 3. печатает `defined - used` и `used - defined`.
@@ -21,7 +21,7 @@ const path = require("path");
 const ROOT = path.resolve(__dirname, "..");
 const SRC = path.join(ROOT, "src");
 
-const JS_EXTENSIONS = [".js", ".jsx"];
+const JS_EXTENSIONS = [".js", ".jsx", ".ts", ".tsx"];
 const CSS_EXTENSION = ".css";
 
 // класс: буква, затем буквы/цифры/дефис/подчёркивание
