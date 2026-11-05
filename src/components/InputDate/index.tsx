@@ -1,5 +1,5 @@
-import React from "react";
-import { setText } from "../../actions/textAction";
+
+import { setText } from "../../actions/fieldActions";
 import { textOf, useAppDispatch, useAppSelector } from "../../lib/redux";
 import TextField from "../TextField";
 import type { FieldOwnProps } from "../../types/components";

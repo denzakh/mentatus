@@ -1,4 +1,4 @@
-import React from "react";
+
 import FreeText from "../FreeText";
 import FreeTextBeforeAndAfter from "../FreeTextBeforeAndAfter";
 import type { FieldViewOwnProps } from "../../types/components";

@@ -221,15 +221,15 @@ grep -rn "actions/symptomAction" src || echo "ре-экспортов нет"
 
 ## Итог выполнения
 
-- [ ] `src/store/schemas.ts` удалён; `schema.test.ts` собирает карту из
+- [x] `src/store/schemas.ts` удалён; `schema.test.ts` собирает карту из
       реестра; `registry.test.ts` обновлён.
-- [ ] `sectionOf` удалён.
-- [ ] `radioOptionsOf(fieldName, dataBase)` без `state`; 3 компонента и тест
+- [x] `sectionOf` удалён.
+- [x] `radioOptionsOf(fieldName, dataBase)` без `state`; 3 компонента и тест
       обновлены.
-- [ ] `import React` удалён из ___ файлов; `DiagnozManager` использует
+- [x] `import React` удалён из ___ файлов; `DiagnozManager` использует
       `ChangeEvent`; `varsIgnorePattern` убран.
-- [ ] Ре-экспорты экшенов удалены, 10 импортов переведены на `fieldActions`.
+- [x] Ре-экспорты экшенов удалены, 10 импортов переведены на `fieldActions`.
 - [ ] `npm test`: ___ тестов (не меньше 230); сборка: ___ модулей.
 - [ ] `typecheck` / `lint` / `build` — зелёные; `dist/` собирается.
-- [ ] Статус этапа обновлён в `specs/README.md`.
+- [x] Статус этапа обновлён в `specs/README.md`.
 

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { shallowEqual } from "react-redux";
 import dataBase from "../../store/sostoyanieData";
 import { todayIso, formatDate } from "../../lib/text/date";

@@ -1,4 +1,4 @@
-import React from "react";
+
 import dataBase from "../../store/zhalobyData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import { isZhalobyHidden } from "../../lib/rules/visibility";

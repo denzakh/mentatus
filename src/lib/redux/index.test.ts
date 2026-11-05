@@ -64,13 +64,13 @@ describe("radioSelectedOf", () => {
 
 describe("radioOptionsOf", () => {
   it("берёт пункты группы из схемы", () => {
-    const options = radioOptionsOf(state, "mestoOsmotra", dataBase);
+    const options = radioOptionsOf("mestoOsmotra", dataBase);
 
     expect(options.map(option => option.id)).toEqual([0, 3]);
   });
 
   it("возвращает пустой список, если группы в схеме нет", () => {
-    expect(radioOptionsOf(state, "kritika", dataBase)).toEqual([]);
-    expect(radioOptionsOf(state, "mestoOsmotra")).toEqual([]);
+    expect(radioOptionsOf("kritika", dataBase)).toEqual([]);
+    expect(radioOptionsOf("mestoOsmotra")).toEqual([]);
   });
 });

@@ -1,6 +1,7 @@
 import sections from "../reducers/sections";
-import schemas from "./schemas";
-import type { OrientirSchemaEntry } from "../types/schema";
+import { sectionsRegistry } from "../sections/registry";
+import type { Schema } from "../types/schema";
+import type { SectionName } from "../types/status";
 
 /*
 Полнота схем разделов: `*Data.js` — единственный источник правды о полях.
@@ -37,6 +38,12 @@ function storeKeyByType(type) {
       return null;
   }
 }
+
+/* Схемы берутся из реестра разделов — единственного места, где они
+   перечислены (`src/sections/registry.ts`). */
+const schemas = Object.fromEntries(
+  Object.entries(sectionsRegistry).map(([name, entry]) => [name, entry.schema])
+) as Record<SectionName, Schema>;
 
 describe("схемы разделов", () => {
   it("содержит схему для каждого среза", () => {

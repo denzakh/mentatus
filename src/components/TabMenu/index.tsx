@@ -1,4 +1,4 @@
-import React from "react";
+
 import "./TabMenu.css";
 import classNames from "classnames";
 import { sectionsRegistry, tabOrder } from "../../sections/registry";

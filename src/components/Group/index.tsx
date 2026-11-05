@@ -1,4 +1,4 @@
-import React from "react";
+
 import CheckboxGroup from "../CheckboxGroup";
 import type { Schema } from "../../types/schema";
 

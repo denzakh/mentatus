@@ -1,6 +1,5 @@
 import sections from "../reducers/sections";
-import schemas from "../store/schemas";
-import { conclusionOrder, sectionsRegistry, tabOrder } from "./registry";
+import { sectionsRegistry, tabOrder } from "./registry";
 import type { Layout, LayoutBlock } from "../types/layout";
 import type { SectionName } from "../types/status";
 
@@ -9,7 +8,7 @@ import type { SectionName } from "../types/status";
 где перечислены разделы.
 
 Проверяют, что реестр не разошёлся с тем, что реально лежит в сторе
-(`reducers/sections`), со схемами (`store/schemas`) и с порядком, который был
+(`reducers/sections`) и с порядком, который был
 в UI до рефакторинга: вкладки в `TabMenu` и абзацы в `Conclusion`.
 */
 
@@ -88,12 +87,6 @@ describe("sectionsRegistry", () => {
       expect(entry.name).toBe(name);
       expect(entry.tab.symbol.length).toBeGreaterThan(0);
       expect(entry.tab.title.length).toBeGreaterThan(0);
-    });
-  });
-
-  it("ссылается на схемы из store/schemas", () => {
-    registryNames.forEach(name => {
-      expect(sectionsRegistry[name].schema).toBe(schemas[name]);
     });
   });
 

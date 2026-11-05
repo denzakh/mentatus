@@ -1,4 +1,4 @@
-import React from "react";
+
 import { formByName, formForField } from "../fields/registry";
 import type { FieldOwnProps } from "../../types/components";
 import type { Schema } from "../../types/schema";

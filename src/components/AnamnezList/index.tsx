@@ -1,4 +1,4 @@
-import React from "react";
+
 import dataBase from "../../store/anamnezData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import FieldView from "../FieldView";

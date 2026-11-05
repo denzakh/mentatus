@@ -1,4 +1,4 @@
-import React from "react";
+
 import { cicleKeys } from "../../lib/text";
 import Checkbox from "../Checkbox";
 import type { Schema } from "../../types/schema";

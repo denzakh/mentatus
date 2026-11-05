@@ -1,4 +1,4 @@
-import React from "react";
+
 import ListOfWords from "../ListOfWords";
 import type { Schema } from "../../types/schema";
 

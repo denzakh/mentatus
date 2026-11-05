@@ -1,5 +1,5 @@
-import React from "react";
-import { setSymptom } from "../../actions/symptomAction";
+
+import { setSymptom } from "../../actions/fieldActions";
 import { fieldOf, useAppDispatch, useAppSelector } from "../../lib/redux";
 import CheckboxView from "../Checkbox/CheckboxView";
 import "../Checkbox/Checkbox.css";

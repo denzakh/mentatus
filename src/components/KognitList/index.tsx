@@ -1,4 +1,4 @@
-import React from "react";
+
 import dataBase from "../../store/kognitData";
 import { fingerPhrase } from "../../lib/text";
 import { fieldOf, useAppSelector } from "../../lib/redux";

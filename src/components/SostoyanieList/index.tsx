@@ -1,4 +1,4 @@
-import React from "react";
+
 import dataBase from "../../store/sostoyanieData";
 import ListOfWordsZatrud from "../ListOfWordsZatrud";
 import FieldView from "../FieldView";

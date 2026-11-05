@@ -1,5 +1,4 @@
-import React from "react";
-import { setRadio } from "../../actions/radioAction";
+import { setRadio } from "../../actions/fieldActions";
 import {
   radioOptionsOf,
   radioSelectedOf,
@@ -32,7 +31,7 @@ export default function RadioList(props: OwnProps) {
 
   // пункты группы лежат в схеме, поэтому ссылка на массив не меняется
   const options = useAppSelector(state =>
-    radioOptionsOf(state, name, dataBase)
+    radioOptionsOf(name, dataBase)
   );
   const selected = useAppSelector(state => radioSelectedOf(state, name));
 

@@ -1,4 +1,4 @@
-import React from "react";
+
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import { isDescriptiveHidden } from "../../lib/rules/visibility";
 import "./Conclusion.css";

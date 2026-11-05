@@ -1,4 +1,4 @@
-import React from "react";
+
 import { buildRadioPhrase } from "../../lib/text";
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import type { FieldViewOwnProps } from "../../types/components";

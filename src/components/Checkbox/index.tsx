@@ -1,6 +1,5 @@
-import React from "react";
-import { setSymptom } from "../../actions/symptomAction";
-import { setRadio } from "../../actions/radioAction";
+
+import { setSymptom, setRadio } from "../../actions/fieldActions";
 import { isKritikaEmpty } from "../../lib/rules/kritika";
 import { fieldOf, useAppDispatch, useAppSelector } from "../../lib/redux";
 import CheckboxView from "./CheckboxView";

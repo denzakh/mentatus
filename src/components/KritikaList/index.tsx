@@ -1,4 +1,4 @@
-import React from "react";
+
 import dataBase from "../../store/sostoyanieData";
 import FieldView from "../FieldView";
 import type { ListOwnProps } from "../../types/components";

@@ -41,7 +41,7 @@ import DiagnozList from "../components/DiagnozList";
 
 До рефакторинга список разделов был размазан по пяти файлам: `TabMenu`
 (вкладки), `TabRender` (формы), `Conclusion` (абзацы заключения),
-`store/schemas.ts` (схемы) и `reducers/sections.ts` (срезы). Теперь порядок
+и `reducers/sections.ts` (срезы). Теперь порядок
 вкладок задаёт `tabOrder`, порядок абзацев заключения — `conclusionOrder`,
 а схема, layout, custom-блоки и форма раздела лежат в одной записи.
 

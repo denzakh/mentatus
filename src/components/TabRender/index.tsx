@@ -1,4 +1,4 @@
-import React from "react";
+
 import Section from "../../components/Section";
 import { sectionsRegistry } from "../../sections/registry";
 import type { SectionEntry } from "../../sections/registry";

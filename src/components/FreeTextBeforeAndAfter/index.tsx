@@ -1,4 +1,4 @@
-import React from "react";
+
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import type { FieldViewOwnProps } from "../../types/components";
 

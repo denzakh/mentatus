@@ -1,5 +1,5 @@
-import React from "react";
-import { setRadio } from "../../actions/radioAction";
+
+import { setRadio } from "../../actions/fieldActions";
 import { isKritikaEmpty, autoKritikaForOption } from "../../lib/rules/kritika";
 import {
   fieldOf,
@@ -35,7 +35,7 @@ export default function RadioListKogn(props: OwnProps) {
   const dispatch = useAppDispatch();
 
   const options = useAppSelector(state =>
-    radioOptionsOf(state, name, dataBase)
+    radioOptionsOf(name, dataBase)
   );
   const selected = useAppSelector(state => radioSelectedOf(state, name));
 

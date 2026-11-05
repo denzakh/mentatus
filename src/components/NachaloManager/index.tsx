@@ -1,4 +1,4 @@
-import React from "react";
+
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import Checkbox from "../Checkbox";
 import CheckboxOtkl from "../CheckboxOtkl";

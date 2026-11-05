@@ -18,9 +18,7 @@ export { useAppDispatch, useAppSelector } from "./hooks";
 export type Flags = Record<string, boolean>;
 
 // имя среза, в котором лежит поле стора
-export function sectionOf(fieldName: string): SectionName | undefined {
-  return fieldSections[fieldName];
-}
+
 
 // значение поля стора из его среза (undefined, если поля нет)
 export function fieldOf(
@@ -59,16 +57,11 @@ export function textOf(state: StatusState, fieldName: string): string {
   return (field && field.text) || "";
 }
 
-// пункты радиогруппы из схемы раздела
+// пункты радиогруппы из схемы раздела (состояние стора не нужно)
 export function radioOptionsOf(
-  state: StatusState,
   fieldName: string,
   dataBase?: Schema
 ): RadioOption[] {
-  // состояние не нужно: пункты группы лежат в схеме; параметр оставлен
-  // для единообразия с radioSelectedOf
-  void state;
-
   const group = dataBase && dataBase[fieldName];
   return (group && group.data) || [];
 }

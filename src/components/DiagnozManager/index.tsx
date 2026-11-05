@@ -1,5 +1,5 @@
-import React from "react";
-import { setText } from "../../actions/textAction";
+import type { ChangeEvent } from "react";
+import { setText } from "../../actions/fieldActions";
 import { fieldOf, useAppDispatch, useAppSelector } from "../../lib/redux";
 import type { StatusState } from "../../types/status";
 import "./Diagnoz.css";
@@ -21,7 +21,7 @@ export default function DiagnozManager() {
   const reqilech = useAppSelector(state => textValueOf(state, "reqilech"));
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     dispatch(setText(e.target.name, e.target.value));
   };

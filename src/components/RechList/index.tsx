@@ -1,4 +1,4 @@
-import React from "react";
+
 import dataBase from "../../store/rechData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import { isRechMainHidden } from "../../lib/rules/visibility";

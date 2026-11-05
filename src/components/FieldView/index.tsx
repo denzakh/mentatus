@@ -1,4 +1,4 @@
-import React from "react";
+
 import ListOfSentences from "../ListOfSentences";
 import ListOfWords from "../ListOfWords";
 import { viewForField } from "../fields/registry";

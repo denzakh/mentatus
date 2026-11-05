@@ -1,4 +1,4 @@
-import React from "react";
+
 import dataBase from "../../store/kognitData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import { orientationPhrase } from "../../lib/text/orientation";
