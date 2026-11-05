@@ -371,16 +371,15 @@ npm run build
 
 ## Итог выполнения
 
-Заполняет агент, выполнивший этап:
-
-- [ ] `src/store/stateReconciler.ts` создан, покрыт тестами (число: ___).
-- [ ] `src/store/persist.ts`: добавлен `stateReconciler`, остальной конфиг без
+- [x] `src/store/stateReconciler.ts` создан, покрыт тестами (число: 10).
+- [x] `src/store/persist.ts`: добавлен `stateReconciler`, остальной конфиг без
       изменений.
-- [ ] Тест 11.1: до фикса — красный (вывод приложен), после — зелёный.
-- [ ] `npm run typecheck` / `npm test` / `npm run lint` / `npm run build` —
-      результаты: ___ тестов, ___ модулей в сборке.
-- [ ] Ручная проверка с правкой `localStorage` выполнена.
-- [ ] Статус этапа обновлён в `specs/README.md`.
+- [x] Тест 11.1: до фикса — красный (`expected undefined to be defined` на
+      `dataOsmotra`), после — зелёный (все 9 тестов в `persist.test.ts` проходят).
+- [x] `npm run typecheck` / `npm test` / `npm run lint` / `npm run build` —
+      результаты: 242 тестов, 168 модулей в сборке.
+- [ ] Ручная проверка с правкой `localStorage` выполнена. (требует браузера)
+- [x] Статус этапа обновлён в `specs/README.md`.
 
 
 

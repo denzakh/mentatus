@@ -3,6 +3,7 @@ import storage from "redux-persist/lib/storage";
 import sections from "../reducers/sections";
 import type { Reducer } from "redux";
 import type { RootState } from "../reducers";
+import { mergeSections } from "./stateReconciler";
 
 /*
 Персист состояния через redux-persist.
@@ -20,6 +21,12 @@ export const PERSIST_KEY = "mentatus";
 // ключ старого самописного формата: сырой JSON всего getState()
 export const LEGACY_STORAGE_KEY = "mentatus:v2";
 
+/*
+stateReconciler накладывает сохранённые значения на поля актуальной схемы:
+поле, добавленное в *Store.ts после первого сохранения, не пропадает у
+вернувшегося пользователя (этап 11). Без него autoMergeLevel1 заменяет срез
+целиком и новые поля теряются.
+*/
 export const persistConfig = {
   key: PERSIST_KEY,
   version: PERSIST_VERSION,
@@ -29,6 +36,9 @@ export const persistConfig = {
   // без throttle состояние сериализуется в localStorage на каждый экшен,
   // то есть на каждый символ при вводе в поле
   throttle: 300,
+  // сохранённые значения накладываются на поля актуальной схемы: поле,
+  // добавленное в *Store.ts, не пропадает у вернувшегося пользователя
+  stateReconciler: mergeSections,
   // при несовместимом изменении формы состояния поднять version и добавить migrate
   migrate: undefined
 };

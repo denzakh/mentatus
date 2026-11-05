@@ -196,4 +196,26 @@ describe("persistStore", () => {
 
     expect(nextStore.getState().zhaloby.zhalobyText.text).toBe("тревога");
   });
+
+  it("дополняет сохранённый срез полями из *Store.ts", async () => {
+    const storage = createMemoryStorage();
+
+    // «старый» снапшот: срез есть, но в нём только одно поле
+    storage.data[storageKey] = JSON.stringify({
+      sostoyanie: JSON.stringify({ pol: { isChecked: true } })
+    });
+
+    const store = createPersistedStore(storage);
+    await rehydrate(store);
+
+    // новые поля среза на месте и имеют стартовые значения
+    expect(store.getState().sostoyanie.dataOsmotra).toBeDefined();
+    expect(store.getState().sostoyanie.sIstorieiOznakomlen.isChecked).toBe(false);
+    // сохранённое значение не потеряно
+    expect(store.getState().sostoyanie.pol.isChecked).toBe(true);
+
+    // и экшены по новому полю работают (до фикса здесь тихий no-op)
+    store.dispatch(setSymptom("sIstorieiOznakomlen"));
+    expect(store.getState().sostoyanie.sIstorieiOznakomlen.isChecked).toBe(true);
+  });
 });
