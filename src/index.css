@@ -16,6 +16,13 @@ body {
   min-height: 100%;
 }
 
+/* Фокус для кнопок меню и узлов заключения */
+[data-id][role="button"]:focus-visible,
+.tab-menu__item:focus-visible {
+  outline: 2px dashed #666666;
+  outline-offset: 2px;
+}
+
 .wrapper {
   min-height: 100%;
   display: -webkit-flex;

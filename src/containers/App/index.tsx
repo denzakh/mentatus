@@ -43,7 +43,7 @@ export default function App() {
             </div>
           </main>
           <footer className="app__footer">
-            Copyright 2021 Denis Zakharchenko
+            Copyright 2021–{new Date().getFullYear()} Denis Zakharchenko
             <br />
             Licensed under the Apache License, Version 2.0
           </footer>
