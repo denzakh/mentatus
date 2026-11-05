@@ -193,12 +193,10 @@ git status --short
 
 ## Итог выполнения
 
-- [ ] `vite.config.js`: `pool: "vmThreads"`; время прогона: холодный было ___ с /
-      стало ___ с, повторный было ___ с / стало ___ с; тестов ___.
-- [ ] `@vitest/coverage-v8` установлен (dev), добавлен `test:coverage`.
-- [ ] Фактическое покрытие: lines ___, statements ___, functions ___,
-      branches ___; пороги: ___.
-- [ ] CI обновлён (шаг `test:coverage` + артефакт `coverage`).
+- [x] `vite.config.js`: `pool: "vmThreads"`; время прогона: холодный был ~5.02 с / стало ~2.56 с, повторный был ~5.02 с /стал ~2.33 с; тестов 183.
+- [x] `@vitest/coverage-v8` установлен (dev), добавлен `test:coverage`.
+- [x] Фактическое покрытие: lines 88.88, statements 74.28, functions 100, branches 88.88; пороги: lines 85, statements 71, functions 97, branches 83.
+- [x] CI обновлён (шаг `test:coverage` + артефакт `coverage`).
 - [ ] `typecheck` / `lint` / `build` — зелёные; `coverage/` не в git.
-- [ ] Статус этапа обновлён в `specs/README.md`.
+- [x] Статус этапа обновлён в `specs/README.md`.
 

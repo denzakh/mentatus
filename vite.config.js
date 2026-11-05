@@ -19,6 +19,12 @@ export default defineConfig({
     environment: "jsdom",
     globals: true,
     setupFiles: ["./src/setupTests.ts"],
-    include: ["src/**/*.test.{js,jsx,ts,tsx}"]
+    include: ["src/**/*.test.{js,jsx,ts,tsx}"],
+    pool: "vmThreads",
+    coverage: {
+      provider: "v8",
+      reporter: ["text", "html"],
+      reportOnFailure: true
+    }
   }
 });
