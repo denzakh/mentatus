@@ -1,11 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import type { Dispatch } from "redux";
+import React from "react";
 import { setRadio } from "../../actions/radioAction";
-import { radioOptionsOf, radioSelectedOf } from "../../lib/redux";
+import {
+  radioOptionsOf,
+  radioSelectedOf,
+  useAppDispatch,
+  useAppSelector
+} from "../../lib/redux";
 import RadioOptions from "../RadioOptions";
-import type { RadioOption, Schema } from "../../types/schema";
-import type { StatusState } from "../../types/status";
+import type { Schema } from "../../types/schema";
 import "./RadioListInline.css";
 
 /*
@@ -24,54 +26,29 @@ interface OwnProps {
   dataBase?: Schema;
 }
 
-interface StateProps {
-  options: RadioOption[];
-  label?: string;
-  selected?: number;
-}
+export default function RadioListInline(props: OwnProps) {
+  const { name, dataBase } = props;
+  const dispatch = useAppDispatch();
 
-interface DispatchProps {
-  setRadio: (name: string, value: number) => void;
-}
+  const options = useAppSelector(state =>
+    radioOptionsOf(state, name, dataBase)
+  );
+  const selected = useAppSelector(state => radioSelectedOf(state, name));
+  const group = dataBase && dataBase[name];
+  const label = group ? group.label : "";
 
-type Props = OwnProps & StateProps & DispatchProps;
-
-class RadioListInline extends Component<Props> {
-  handleChange = (value: number) => {
-    this.props.setRadio(this.props.name, value);
+  const handleChange = (value: number) => {
+    dispatch(setRadio(name, value));
   };
 
-  render() {
-    return (
-      <RadioOptions
-        name={this.props.name}
-        options={this.props.options}
-        label={this.props.label}
-        selected={this.props.selected}
-        variant="inline"
-        onChange={this.handleChange}
-      />
-    );
-  }
+  return (
+    <RadioOptions
+      name={name}
+      options={options}
+      label={label}
+      selected={selected}
+      variant="inline"
+      onChange={handleChange}
+    />
+  );
 }
-
-function mapStateToProps(state: StatusState, ownProps: OwnProps): StateProps {
-  const group = ownProps.dataBase && ownProps.dataBase[ownProps.name];
-
-  return {
-    options: radioOptionsOf(state, ownProps.name, ownProps.dataBase),
-    label: group ? group.label : "",
-    selected: radioSelectedOf(state, ownProps.name)
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
-  return {
-    setRadio: (name, value) => dispatch(setRadio(name, value))
-  };
-}
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(RadioListInline);

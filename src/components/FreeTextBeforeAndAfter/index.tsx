@@ -1,8 +1,6 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { areStatePropsEqual, fieldOf } from "../../lib/redux";
+import React from "react";
+import { fieldOf, useAppSelector } from "../../lib/redux";
 import type { FieldViewOwnProps } from "../../types/components";
-import type { StatusState } from "../../types/status";
 
 /*
 FreeTextBeforeAndAfter
@@ -13,34 +11,17 @@ name - имя поля в сторе
 dataObj - объект БД, в котором лежат фразы before / after
 */
 
-interface StateProps {
-  value: string;
-}
+export default function FreeTextBeforeAndAfter(props: FieldViewOwnProps) {
+  const { name, dataObj } = props;
 
-type Props = FieldViewOwnProps & StateProps;
+  const value = useAppSelector(state => {
+    const group = (dataObj && dataObj[name]) || {};
+    const field = fieldOf(state, name);
 
-class FreeTextBeforeAndAfter extends Component<Props> {
-  render() {
-    return <span>{this.props.value}</span>;
-  }
-}
-
-function mapStateToProps(
-  state: StatusState,
-  ownProps: FieldViewOwnProps
-): StateProps {
-  const group = (ownProps.dataObj && ownProps.dataObj[ownProps.name]) || {};
-  const field = fieldOf(state, ownProps.name);
-
-  return {
-    value:
+    return (
       (group.before || "") + ((field && field.text) || "") + (group.after || "")
-  };
-}
+    );
+  });
 
-export default connect<StateProps, unknown, FieldViewOwnProps>(
-  mapStateToProps,
-  null,
-  null,
-  { areStatePropsEqual }
-)(FreeTextBeforeAndAfter);
+  return <span>{value}</span>;
+}

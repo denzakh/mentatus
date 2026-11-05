@@ -1,11 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import type { Dispatch } from "redux";
+import React from "react";
 import { setRadio } from "../../actions/radioAction";
-import { radioOptionsOf, radioSelectedOf } from "../../lib/redux";
+import {
+  radioOptionsOf,
+  radioSelectedOf,
+  useAppDispatch,
+  useAppSelector
+} from "../../lib/redux";
 import RadioOptions from "../RadioOptions";
-import type { RadioOption, Schema } from "../../types/schema";
-import type { StatusState } from "../../types/status";
+import type { Schema } from "../../types/schema";
 import "./RadioList.css";
 
 /*
@@ -24,48 +26,26 @@ interface OwnProps {
   dataBase?: Schema;
 }
 
-interface StateProps {
-  options: RadioOption[];
-  selected?: number;
-}
+export default function RadioList(props: OwnProps) {
+  const { name, dataBase } = props;
+  const dispatch = useAppDispatch();
 
-interface DispatchProps {
-  setRadio: (name: string, value: number) => void;
-}
+  // пункты группы лежат в схеме, поэтому ссылка на массив не меняется
+  const options = useAppSelector(state =>
+    radioOptionsOf(state, name, dataBase)
+  );
+  const selected = useAppSelector(state => radioSelectedOf(state, name));
 
-type Props = OwnProps & StateProps & DispatchProps;
-
-class RadioList extends Component<Props> {
-  handleChange = (value: number) => {
-    this.props.setRadio(this.props.name, value);
+  const handleChange = (value: number) => {
+    dispatch(setRadio(name, value));
   };
 
-  render() {
-    return (
-      <RadioOptions
-        name={this.props.name}
-        options={this.props.options}
-        selected={this.props.selected}
-        onChange={this.handleChange}
-      />
-    );
-  }
+  return (
+    <RadioOptions
+      name={name}
+      options={options}
+      selected={selected}
+      onChange={handleChange}
+    />
+  );
 }
-
-function mapStateToProps(state: StatusState, ownProps: OwnProps): StateProps {
-  return {
-    options: radioOptionsOf(state, ownProps.name, ownProps.dataBase),
-    selected: radioSelectedOf(state, ownProps.name)
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
-  return {
-    setRadio: (name, value) => dispatch(setRadio(name, value))
-  };
-}
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(RadioList);

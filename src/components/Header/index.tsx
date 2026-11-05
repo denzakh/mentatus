@@ -1,12 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import type { ReactNode } from "react";
 
 interface Props {
   children?: ReactNode;
 }
 
-export default class Header extends Component<Props> {
-  render() {
-    return <header className="header">{this.props.children}</header>;
-  }
+export default function Header(props: Props) {
+  return <header className="header">{props.children}</header>;
 }

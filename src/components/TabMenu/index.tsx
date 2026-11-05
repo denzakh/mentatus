@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import "./TabMenu.css";
 import classNames from "classnames";
 import { sectionsRegistry, tabOrder } from "../../sections/registry";
@@ -20,29 +20,29 @@ interface Props {
   toggleTab: ToggleTabHandler;
 }
 
-export default class TabMenu extends Component<Props> {
-  render() {
-    const tabMenuRender = tabOrder.map(name => {
-      const { tab } = sectionsRegistry[name];
-      const tabClass = classNames({
-        "tab-menu__item": true,
-        "is-active": name === this.props.activeTab
-      });
+export default function TabMenu(props: Props) {
+  const { activeTab, toggleTab } = props;
 
-      return (
-        <div
-          onClick={this.props.toggleTab}
-          title={tab.title}
-          key={name}
-          data-id={name}
-          className={tabClass}
-        >
-          <div className="app__tab-symbol">{tab.symbol}</div>
-          <div className="app__tab-label">{tab.title}</div>
-        </div>
-      );
+  const tabMenuRender = tabOrder.map(name => {
+    const { tab } = sectionsRegistry[name];
+    const tabClass = classNames({
+      "tab-menu__item": true,
+      "is-active": name === activeTab
     });
 
-    return <div className="tab-menu">{tabMenuRender}</div>;
-  }
+    return (
+      <div
+        onClick={toggleTab}
+        title={tab.title}
+        key={name}
+        data-id={name}
+        className={tabClass}
+      >
+        <div className="app__tab-symbol">{tab.symbol}</div>
+        <div className="app__tab-label">{tab.title}</div>
+      </div>
+    );
+  });
+
+  return <div className="tab-menu">{tabMenuRender}</div>;
 }

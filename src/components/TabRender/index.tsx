@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Section from "../../components/Section";
 import { sectionsRegistry } from "../../sections/registry";
 import type { SectionEntry } from "../../sections/registry";
@@ -23,37 +23,31 @@ interface Props {
   activeTab: string;
 }
 
-export default class TabRender extends Component<Props> {
-  render() {
-    const entry = sectionsRegistry[this.props.activeTab as SectionName];
+export default function TabRender(props: Props) {
+  const entry = sectionsRegistry[props.activeTab as SectionName];
 
-    return (
-      <div className="tab-render">
-        {entry ? this.renderForm(entry) : null}
-      </div>
-    );
-  }
+  return <div className="tab-render">{entry ? renderForm(entry) : null}</div>;
+}
 
-  renderForm(entry: SectionEntry) {
-    if (entry.form === "section") {
-      return (
-        <div key={entry.name}>
-          <Section
-            section={entry.name}
-            dataBase={entry.schema}
-            layout={entry.layout}
-            components={entry.custom}
-          />
-        </div>
-      );
-    }
-
-    const Form = entry.form;
-
+function renderForm(entry: SectionEntry) {
+  if (entry.form === "section") {
     return (
       <div key={entry.name}>
-        <Form />
+        <Section
+          section={entry.name}
+          dataBase={entry.schema}
+          layout={entry.layout}
+          components={entry.custom}
+        />
       </div>
     );
   }
+
+  const Form = entry.form;
+
+  return (
+    <div key={entry.name}>
+      <Form />
+    </div>
+  );
 }

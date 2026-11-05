@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import ListOfWords from "../ListOfWords";
 import type { Schema } from "../../types/schema";
 
@@ -10,15 +10,13 @@ interface Props {
   isAnd?: boolean;
 }
 
-export default class ListOfWordsZatrud extends Component<Props> {
-  render() {
-    return (
-      <ListOfWords
-        name={this.props.name}
-        dataObj={this.props.dataObj}
-        isAnd={true}
-        beforeText=", но он затруднен из-за "
-      />
-    );
-  }
+export default function ListOfWordsZatrud(props: Props) {
+  return (
+    <ListOfWords
+      name={props.name}
+      dataObj={props.dataObj}
+      isAnd={true}
+      beforeText=", но он затруднен из-за "
+    />
+  );
 }

@@ -1,11 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import type { Dispatch } from "redux";
+import React from "react";
 import { setSymptom } from "../../actions/symptomAction";
-import { fieldOf } from "../../lib/redux";
+import { fieldOf, useAppDispatch, useAppSelector } from "../../lib/redux";
 import CheckboxView from "../Checkbox/CheckboxView";
 import type { FieldOwnProps } from "../../types/components";
-import type { StatusState } from "../../types/status";
 import "./CheckboxOtkl.css";
 
 /*
@@ -20,57 +17,29 @@ label - своя подпись
 Разметку рисует общий `CheckboxView` (variant="otkl").
 */
 
-interface StateProps {
-  checked: boolean;
-  label?: string;
-}
+export default function CheckboxOtkl(props: FieldOwnProps) {
+  const { name, dataBase, label } = props;
+  const dispatch = useAppDispatch();
 
-interface DispatchProps {
-  setSymptom: (name: string) => void;
-}
+  const checked = useAppSelector(state => {
+    const field = fieldOf(state, name);
+    return !!(field && field.isChecked);
+  });
 
-type Props = FieldOwnProps & StateProps & DispatchProps;
+  const caption =
+    label || (dataBase && dataBase[name] ? dataBase[name].label : "");
 
-class CheckboxOtkl extends Component<Props> {
-  handleChange = () => {
-    this.props.setSymptom(this.props.name);
+  const handleChange = () => {
+    dispatch(setSymptom(name));
   };
 
-  render() {
-    return (
-      <CheckboxView
-        name={this.props.name}
-        label={this.props.label}
-        checked={this.props.checked}
-        variant="otkl"
-        onChange={this.handleChange}
-      />
-    );
-  }
+  return (
+    <CheckboxView
+      name={name}
+      label={caption}
+      checked={checked}
+      variant="otkl"
+      onChange={handleChange}
+    />
+  );
 }
-
-function mapStateToProps(
-  state: StatusState,
-  ownProps: FieldOwnProps
-): StateProps {
-  const field = fieldOf(state, ownProps.name);
-  const dataBase = ownProps.dataBase;
-
-  return {
-    checked: !!(field && field.isChecked),
-    label:
-      ownProps.label ||
-      (dataBase && dataBase[ownProps.name] ? dataBase[ownProps.name].label : "")
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
-  return {
-    setSymptom: name => dispatch(setSymptom(name))
-  };
-}
-
-export default connect<StateProps, DispatchProps, FieldOwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(CheckboxOtkl);

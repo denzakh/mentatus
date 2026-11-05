@@ -39,3 +39,7 @@ export default function configureStore() {
 
   return { store, persistor: persistStore(store) };
 }
+
+// тип стора приложения и его dispatch — для типизированных хуков (lib/redux/hooks)
+export type AppStore = ReturnType<typeof configureStore>["store"];
+export type AppDispatch = AppStore["dispatch"];

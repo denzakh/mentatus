@@ -1,10 +1,7 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import type { Dispatch } from "redux";
+import React from "react";
 import { setSymptom } from "../../actions/symptomAction";
-import { fieldOf } from "../../lib/redux";
+import { fieldOf, useAppDispatch, useAppSelector } from "../../lib/redux";
 import CheckboxView from "../Checkbox/CheckboxView";
-import type { StatusState } from "../../types/status";
 import "../Checkbox/Checkbox.css";
 
 /*
@@ -22,51 +19,25 @@ interface OwnProps {
   name?: string;
 }
 
-interface StateProps {
-  name: string;
-  isMale: boolean;
-}
+export default function CheckboxPol(props: OwnProps) {
+  const name = props.name || "pol";
+  const dispatch = useAppDispatch();
 
-interface DispatchProps {
-  setSymptom: (name: string) => void;
-}
+  const isMale = useAppSelector(state => {
+    const field = fieldOf(state, name);
+    return !!(field && field.isChecked);
+  });
 
-type Props = StateProps & DispatchProps;
-
-class CheckboxPol extends Component<Props> {
-  handleChange = () => {
-    this.props.setSymptom(this.props.name);
+  const handleChange = () => {
+    dispatch(setSymptom(name));
   };
 
-  render() {
-    return (
-      <CheckboxView
-        name={this.props.name}
-        checked={this.props.isMale}
-        variant="pol"
-        onChange={this.handleChange}
-      />
-    );
-  }
+  return (
+    <CheckboxView
+      name={name}
+      checked={isMale}
+      variant="pol"
+      onChange={handleChange}
+    />
+  );
 }
-
-function mapStateToProps(state: StatusState, ownProps: OwnProps): StateProps {
-  const name = ownProps.name || "pol";
-  const field = fieldOf(state, name);
-
-  return {
-    name: name,
-    isMale: !!(field && field.isChecked)
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
-  return {
-    setSymptom: name => dispatch(setSymptom(name))
-  };
-}
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(CheckboxPol);

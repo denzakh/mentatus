@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import type { ComponentType } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import type { ComponentType, ReactNode } from "react";
+import { shallowEqual } from "react-redux";
 import { collectVisibility, blockKey } from "../../lib/layout";
-import { areStatePropsEqual } from "../../lib/redux";
+import { useAppSelector } from "../../lib/redux";
 import Field from "../Field";
 import Group from "../Group";
 import type { Layout, LayoutBlock } from "../../types/layout";
 import type { Schema } from "../../types/schema";
-import type { SectionName, StatusState } from "../../types/status";
+import type { SectionName } from "../../types/status";
 
 /*
 Section
@@ -20,8 +20,9 @@ layout     - массив блоков раскладки
 components - карта custom-блоков { имя: компонент }
 
 Новые поля в layout добавляются без правки компонентов: тип берётся из схемы.
-Условия видимости (`visibleWhen`) считаются в mapStateToProps, поэтому
-перерисовка происходит только при изменении самих условий.
+Условия видимости (`visibleWhen`) собираются в один объект и сравниваются
+поверхностно (`shallowEqual`), поэтому раздел перерисовывается только при
+изменении самих условий, а не на каждый ввод в поле.
 */
 
 interface OwnProps {
@@ -31,118 +32,140 @@ interface OwnProps {
   components?: Record<string, ComponentType<{ dataBase?: Schema }>>;
 }
 
-interface StateProps {
+// то, что нужно каждому блоку уровня: схема раздела, custom-блоки и видимость
+interface BlocksContext {
+  dataBase: Schema;
+  components?: Record<string, ComponentType<{ dataBase?: Schema }>>;
   visible: Record<string, boolean>;
 }
 
-type Props = OwnProps & StateProps;
+interface BlockProps extends BlocksContext {
+  block: LayoutBlock;
+  path: number[];
+}
 
-class Section extends Component<Props> {
-  render() {
-    return <div>{this.renderBlocks(this.props.layout, [])}</div>;
-  }
+export default function Section(props: OwnProps) {
+  const { section, dataBase, layout, components } = props;
 
-  renderBlocks(blocks: LayoutBlock[] | undefined, path: number[]) {
-    return (blocks || []).map((block, index) =>
-      this.renderBlock(block, path.concat(index))
+  const visible = useAppSelector(
+    state => collectVisibility(layout, state[section] || {}),
+    shallowEqual
+  );
+
+  return (
+    <div>{renderBlocks(layout, [], { dataBase, components, visible })}</div>
+  );
+}
+
+// блоки одного уровня; ключ — путь индексов от корня layout
+function renderBlocks(
+  blocks: LayoutBlock[] | undefined,
+  path: number[],
+  context: BlocksContext
+): ReactNode {
+  return (blocks || []).map((block, index) => {
+    const blockPath = path.concat(index);
+
+    return (
+      <SectionBlock
+        key={blockKey(blockPath)}
+        block={block}
+        path={blockPath}
+        {...context}
+      />
     );
+  });
+}
+
+function SectionBlock(props: BlockProps) {
+  const { block, path, dataBase, components, visible } = props;
+  const key = blockKey(path);
+  const blockDataBase = block.dataBase || dataBase;
+
+  if (block.visibleWhen && !visible[key]) {
+    return null;
   }
 
-  renderBlock(block: LayoutBlock, path: number[]): React.ReactNode {
-    const key = blockKey(path);
-    const dataBase = block.dataBase || this.props.dataBase;
+  switch (block.type) {
+    case "row":
+    case "col":
+    case "box":
+      return (
+        <div className={block.className}>
+          {block.title ? (
+            <div className="list__title">{block.title}</div>
+          ) : null}
+          {renderBlocks(block.blocks, path, { dataBase, components, visible })}
+        </div>
+      );
 
-    if (block.visibleWhen && !this.props.visible[key]) {
+    case "title":
+      return (
+        <div className={block.className || "list__title"}>
+          {block.label ? (
+            <span className={block.labelClassName || "list__title-lable"}>
+              {block.label}
+            </span>
+          ) : (
+            block.text
+          )}
+          {renderBlocks(block.blocks, path, { dataBase, components, visible })}
+        </div>
+      );
+
+    case "field":
+      return (
+        <Field
+          name={block.name}
+          dataBase={blockDataBase}
+          component={block.component}
+          label={block.label}
+          style={block.style}
+          autoKritika={block.autoKritika}
+        />
+      );
+
+    case "group":
+      return (
+        <Group
+          cicle={block.cicle}
+          dataBase={blockDataBase}
+          itemClassName={block.itemClassName}
+          autoKritika={block.autoKritika}
+        />
+      );
+
+    case "custom":
+      return (
+        <SectionCustom
+          block={block}
+          dataBase={blockDataBase}
+          components={components}
+        />
+      );
+
+    case "br":
+      return <br />;
+
+    default:
       return null;
-    }
-
-    switch (block.type) {
-      case "row":
-      case "col":
-      case "box":
-        return (
-          <div key={key} className={block.className}>
-            {block.title ? (
-              <div className="list__title">{block.title}</div>
-            ) : null}
-            {this.renderBlocks(block.blocks, path)}
-          </div>
-        );
-
-      case "title":
-        return (
-          <div key={key} className={block.className || "list__title"}>
-            {block.label ? (
-              <span className={block.labelClassName || "list__title-lable"}>
-                {block.label}
-              </span>
-            ) : (
-              block.text
-            )}
-            {this.renderBlocks(block.blocks, path)}
-          </div>
-        );
-
-      case "field":
-        return (
-          <Field
-            key={key}
-            name={block.name}
-            dataBase={dataBase}
-            component={block.component}
-            label={block.label}
-            style={block.style}
-            autoKritika={block.autoKritika}
-          />
-        );
-
-      case "group":
-        return (
-          <Group
-            key={key}
-            cicle={block.cicle}
-            dataBase={dataBase}
-            itemClassName={block.itemClassName}
-            autoKritika={block.autoKritika}
-          />
-        );
-
-      case "custom":
-        return this.renderCustom(block, key, dataBase);
-
-      case "br":
-        return <br key={key} />;
-
-      default:
-        return null;
-    }
-  }
-
-  // нестандартный блок раздела (NachaloManager, OrientirovkaManager, ...)
-  renderCustom(block: LayoutBlock, key: string, dataBase: Schema | undefined) {
-    const components = this.props.components || {};
-    const Custom = block.component ? components[block.component] : undefined;
-
-    if (!Custom) {
-      return null;
-    }
-
-    return <Custom key={key} dataBase={dataBase} />;
   }
 }
 
-function mapStateToProps(
-  state: StatusState,
-  ownProps: OwnProps
-): StateProps {
-  return {
-    visible: collectVisibility(ownProps.layout, state[ownProps.section] || {})
-  };
-}
+// нестандартный блок раздела (NachaloManager, OrientirovkaManager, ...)
+function SectionCustom(props: {
+  block: LayoutBlock;
+  dataBase: Schema;
+  components?: Record<string, ComponentType<{ dataBase?: Schema }>>;
+}) {
+  const { block, dataBase, components } = props;
+  const Custom = block.component
+    ? (components || {})[block.component]
+    : undefined;
 
-export default connect<StateProps, unknown, OwnProps>(
-  mapStateToProps,
-  null,
-  null,
-  { areStatePropsEqual }
-)(Section);
+  if (!Custom) {
+    return null;
+  }
+
+  return <Custom dataBase={dataBase} />;
+}

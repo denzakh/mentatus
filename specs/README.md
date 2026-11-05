@@ -17,7 +17,7 @@
 | 7 | B.1 — Бизнес-правила и тексты заключения → `lib` + тесты | `07-render-unification.md` (B.1) | ✅ выполнено | 6 |
 | 8 | B.2 — Единый реестр разделов | `07-render-unification.md` (B.2) | ✅ выполнено | 7 |
 | 9 | B.3 — Унификация полей | `07-render-unification.md` (B.3) | ✅ выполнено | 8 |
-| 10 | B.4 — Функциональные компоненты + hooks | `07-render-unification.md` (B.4) | ⏳ | 9 |
+| 10 | B.4 — Функциональные компоненты + hooks | `07-render-unification.md` (B.4) | ✅ выполнено | 9 |
 
 Подэтапы 7–10 описаны в одном файле `07-render-unification.md`: каждый — отдельный
 PR и отдельная сессия, порядок обязателен (B.1 → B.2 → B.3 → B.4). Внутри файла у
@@ -158,6 +158,43 @@ PR и отдельная сессия, порядок обязателен (B.1 
   сравнён с версией до унификации (`innerHTML` совпал посимвольно для всех
   вариантов: list/inline радиогруппы, три текстовых поля, три чекбокса,
   все типы схемы и `component` из layout).
+
+## Baseline после B.4 (функциональные компоненты + hooks)
+
+- `src/lib/redux/hooks.ts` — типизированные `useAppDispatch` / `useAppSelector`
+  (`RootState` из `src/reducers`, `AppDispatch` из `src/configureStore`);
+  ре-экспорт — из `src/lib/redux`.
+- `connect`, `mapStateToProps`, `mapDispatchToProps`, `areStatePropsEqual`
+  и классовых компонентов в `src` больше нет: все 39 файлов — функции
+  с хуками. `areFlagsEqual` / `areStatePropsEqual` удалены из `src/lib/redux`:
+  объекты (`flagsOf`, `collectVisibility`, «Начало осмотра») сравниваются
+  `shallowEqual` вторым аргументом `useAppSelector`, примитивы — по `===`.
+- `Section` — функция: `visibleWhen` собирается в один объект
+  (`collectVisibility` + `shallowEqual`), рекурсия вынесена в `SectionBlock`
+  (+ `renderBlocks`), ключи по-прежнему `blockKey(path)`. Ввод в поле не
+  перерисовывает ни раздел, ни списки заключения.
+- `Conclusion`, `ConclusionPanel`, `TabMenu`, `TabRender`, `Header`,
+  `ActivePage`, `App` — функции; `App` держит активную вкладку в `useState`,
+  `data-id` читается из `event.currentTarget`, как раньше. Копирование
+  и `window.print()` в `ConclusionPanel` перенесены без изменения поведения.
+- `NachaloList` собирает текст в селекторе `nachaloOf` (+ `shallowEqual`:
+  дата + пять строк), `DiagnozManager` читает четыре текста отдельными
+  селекторами; `Radio*`/`Text*`/`Checkbox*` — тонкие обёртки над
+  презентационными компонентами.
+- Тесты: `src/components/Section/Section.test.tsx` (разметка layout,
+  отсутствие перерисовки при вводе, перерисовка при смене `visibleWhen`,
+  custom-блок без компонента), `src/components/Conclusion/Conclusion.test.tsx`
+  (Profiler: ввод не перерисовывает заключение; `kontakt = 2` скрывает
+  описательную часть), `src/containers/App/App.test.tsx` (все 8 вкладок
+  и переход из заключения).
+- Проверки B.4: `typecheck` — 0 ошибок, 32 файла / 231 тест, `lint` — 0,
+  сборка `dist/` (167 модулей). DOM всех 8 вкладок и заключения (обычного
+  и при `kontakt = 2`) сравнён с версией до перевода на хуки — `innerHTML`
+  совпал посимвольно. Предупреждений React в консоли нет (keys,
+  controlled inputs, `act`).
+- `grep -rn "connect(" src`, `grep -rn "mapStateToProps" src`,
+  `grep -rn "mapDispatchToProps" src`, `grep -rn "extends Component" src`,
+  `grep -rn "areStatePropsEqual" src` — пусто.
 
 ## Обслуживание после этапа 6 (вариант A)
 

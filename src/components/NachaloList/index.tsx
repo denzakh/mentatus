@@ -1,74 +1,14 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
+import { shallowEqual } from "react-redux";
 import dataBase from "../../store/sostoyanieData";
 import { todayIso, formatDate } from "../../lib/text/date";
 import { buildNachaloText } from "../../lib/text/nachalo";
-import { fieldOf } from "../../lib/redux";
+import { fieldOf, useAppSelector } from "../../lib/redux";
 import { optionById } from "../../lib/schema";
-import type { ListOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
 
-interface StateProps {
-  date: string;
-  isMale: boolean;
-  mestoOsmotraNumber?: number;
-  poNapravleniu: boolean;
-  sIstorieiOznakomlen: boolean;
-  nedobrovolno: boolean;
-  nedobrovolnoPrichinyNumber?: number;
-  nedobrovolnoPunktNumber?: number;
-  nedobrovolnoText?: string | false;
-}
-
-type Props = ListOwnProps & StateProps;
-
-class NachaloList extends Component<Props> {
-  render() {
-    const {
-      date,
-      isMale,
-      mestoOsmotraNumber,
-      poNapravleniu,
-      sIstorieiOznakomlen,
-      nedobrovolno,
-      nedobrovolnoPrichinyNumber,
-      nedobrovolnoPunktNumber,
-      nedobrovolnoText
-    } = this.props;
-
-    // пункты радиогрупп ищем по id, а не по позиции в массиве схемы
-    const nachalo = buildNachaloText({
-      date,
-      isMale,
-      mestoOsmotra: optionById(dataBase.mestoOsmotra, mestoOsmotraNumber),
-      poNapravleniu,
-      sIstorieiOznakomlen,
-      nedobrovolno,
-      nedobrovolnoPrichina: optionById(
-        dataBase.nedobrovolnoPrichiny,
-        nedobrovolnoPrichinyNumber
-      ),
-      nedobrovolnoPunkt: optionById(
-        dataBase.nedobrovolnoPunkt,
-        nedobrovolnoPunktNumber
-      ),
-      nedobrovolnoText
-    });
-
-    return (
-      <span>
-        <span>
-          {date}. {nachalo.osmotr} {nachalo.sIstorieiOznakomlenText}
-        </span>
-        <span>
-          {nachalo.soglasie} {nachalo.nedobrovolnoText} {nachalo.zakon}
-        </span>
-      </span>
-    );
-  }
-}
-
-function mapStateToProps(state: StatusState): StateProps {
+// текст «Начала осмотра» по текущему состоянию стора
+function nachaloOf(state: StatusState) {
   const dataOsmotra = fieldOf(state, "dataOsmotra");
   const pol = fieldOf(state, "pol");
   const mestoOsmotra = fieldOf(state, "mestoOsmotra");
@@ -79,23 +19,50 @@ function mapStateToProps(state: StatusState): StateProps {
   const nedobrovolnoPunkt = fieldOf(state, "nedobrovolnoPunkt");
   const nedobrovolnoText = fieldOf(state, "nedobrovolnoText");
 
-  return {
-    // дата осмотра: из стора, а если её нет — сегодняшняя
-    date: formatDate(dataOsmotra && dataOsmotra.text) || formatDate(todayIso()),
+  // дата осмотра: из стора, а если её нет — сегодняшняя
+  const date =
+    formatDate(dataOsmotra && dataOsmotra.text) || formatDate(todayIso());
+
+  // пункты радиогрупп ищем по id, а не по позиции в массиве схемы
+  const text = buildNachaloText({
+    date,
     isMale: !!(pol && pol.isChecked),
-    mestoOsmotraNumber: mestoOsmotra && mestoOsmotra.number,
+    mestoOsmotra: optionById(
+      dataBase.mestoOsmotra,
+      mestoOsmotra && mestoOsmotra.number
+    ),
     poNapravleniu: !!(poNapravleniu && poNapravleniu.isChecked),
     sIstorieiOznakomlen: !!(
       sIstorieiOznakomlen && sIstorieiOznakomlen.isChecked
     ),
     nedobrovolno: !!(nedobrovolno && nedobrovolno.isChecked),
-    nedobrovolnoPrichinyNumber:
-      nedobrovolnoPrichiny && nedobrovolnoPrichiny.number,
-    nedobrovolnoPunktNumber: nedobrovolnoPunkt && nedobrovolnoPunkt.number,
+    nedobrovolnoPrichina: optionById(
+      dataBase.nedobrovolnoPrichiny,
+      nedobrovolnoPrichiny && nedobrovolnoPrichiny.number
+    ),
+    nedobrovolnoPunkt: optionById(
+      dataBase.nedobrovolnoPunkt,
+      nedobrovolnoPunkt && nedobrovolnoPunkt.number
+    ),
     nedobrovolnoText: nedobrovolnoText && nedobrovolnoText.text
-  };
+  });
+
+  // дата выводится перед текстом осмотра, поэтому она тоже в наборе
+  return { ...text, date };
 }
 
-export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
-  NachaloList
-);
+export default function NachaloList() {
+  // «Начало осмотра» — объект из пяти строк: сравниваем поверхностно
+  const nachalo = useAppSelector(nachaloOf, shallowEqual);
+
+  return (
+    <span>
+      <span>
+        {nachalo.date}. {nachalo.osmotr} {nachalo.sIstorieiOznakomlenText}
+      </span>
+      <span>
+        {nachalo.soglasie} {nachalo.nedobrovolnoText} {nachalo.zakon}
+      </span>
+    </span>
+  );
+}

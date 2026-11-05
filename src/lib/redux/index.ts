@@ -1,4 +1,8 @@
-/* Вспомогательные функции для connect. */
+/* Хелперы чтения стора и типизированные хуки.
+
+   `flagsOf` собирает объект `{ поле: флаг }`, поэтому в компонентах его
+   сравнивают через `shallowEqual` вторым аргументом `useAppSelector` —
+   кастомный компаратор `connect` больше не нужен. */
 
 import { fieldSections } from "../../reducers/sections";
 import type { RadioOption, Schema } from "../../types/schema";
@@ -8,6 +12,8 @@ import type {
   StatusSection,
   StatusState
 } from "../../types/status";
+
+export { useAppDispatch, useAppSelector } from "./hooks";
 
 export type Flags = Record<string, boolean>;
 
@@ -80,57 +86,4 @@ export function flagsOf(state: StatusState, keys: string[]): Flags {
     flags[key] = !!(field && field.isChecked);
   });
   return flags;
-}
-
-// поэлементное сравнение наборов флагов
-export function areFlagsEqual(prev?: Flags, next?: Flags): boolean {
-  if (prev === next) {
-    return true;
-  }
-  if (!prev || !next) {
-    return false;
-  }
-
-  const prevKeys = Object.keys(prev);
-  const nextKeys = Object.keys(next);
-
-  if (prevKeys.length !== nextKeys.length) {
-    return false;
-  }
-
-  return prevKeys.every(key => prev[key] === next[key]);
-}
-
-export type StateProps = Record<string, unknown>;
-
-/* Сравнение stateProps: примитивы — по значению, наборы флагов — поэлементно.
-   Нужно, чтобы connect не перерисовывал список, если выбор пользователя не менялся. */
-export function areStatePropsEqual(next: object, prev: object): boolean {
-  const nextProps = next as StateProps;
-  const prevProps = prev as StateProps;
-  const nextKeys = Object.keys(nextProps);
-
-  if (nextKeys.length !== Object.keys(prevProps).length) {
-    return false;
-  }
-
-  return nextKeys.every(key => {
-    const nextValue = nextProps[key];
-    const prevValue = prevProps[key];
-
-    if (nextValue === prevValue) {
-      return true;
-    }
-
-    if (
-      nextValue &&
-      prevValue &&
-      typeof nextValue === "object" &&
-      typeof prevValue === "object"
-    ) {
-      return areFlagsEqual(prevValue as Flags, nextValue as Flags);
-    }
-
-    return false;
-  });
 }

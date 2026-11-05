@@ -1,13 +1,10 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import type { Dispatch } from "redux";
+import React from "react";
 import { setSymptom } from "../../actions/symptomAction";
 import { setRadio } from "../../actions/radioAction";
 import { isKritikaEmpty } from "../../lib/rules/kritika";
-import { fieldOf } from "../../lib/redux";
+import { fieldOf, useAppDispatch, useAppSelector } from "../../lib/redux";
 import CheckboxView from "./CheckboxView";
 import type { FieldOwnProps } from "../../types/components";
-import type { StatusState } from "../../types/status";
 import "./Checkbox.css";
 
 /*
@@ -20,68 +17,42 @@ dataBase - объект БД для подписи (не нужен, если з
 label - своя подпись
 autoKritika - значение критики, которое проставляется при выборе поля
 
-Разметку рисует общий `CheckboxView` (variant="default").
+Разметку рисует общий `CheckboxView` (variant="default"); значение поля,
+подпись и признак пустой критики читаются хуками из `lib/redux`.
 */
 
-interface StateProps {
-  checked: boolean;
-  isKritikaEmpty: boolean;
-  label?: string;
-}
+export default function Checkbox(props: FieldOwnProps) {
+  const { name, dataBase, label, autoKritika } = props;
+  const dispatch = useAppDispatch();
 
-interface DispatchProps {
-  setSymptom: (name: string) => void;
-  setRadio: (name: string, value: number) => void;
-}
+  const checked = useAppSelector(state => {
+    const field = fieldOf(state, name);
+    return !!(field && field.isChecked);
+  });
 
-type Props = FieldOwnProps & StateProps & DispatchProps;
+  // авто-критика выставляется только пока она пустая
+  const isKritikaEmptyValue = useAppSelector(state =>
+    isKritikaEmpty(fieldOf(state, "kritika"))
+  );
 
-class Checkbox extends Component<Props> {
-  handleChange = () => {
-    if (this.props.autoKritika !== undefined && this.props.isKritikaEmpty) {
-      this.props.setRadio("kritika", this.props.autoKritika);
+  const caption =
+    label || (dataBase && dataBase[name] ? dataBase[name].label : "");
+
+  const handleChange = () => {
+    if (autoKritika !== undefined && isKritikaEmptyValue) {
+      dispatch(setRadio("kritika", autoKritika));
     }
 
-    this.props.setSymptom(this.props.name);
+    dispatch(setSymptom(name));
   };
 
-  render() {
-    return (
-      <CheckboxView
-        name={this.props.name}
-        label={this.props.label}
-        checked={this.props.checked}
-        variant="default"
-        onChange={this.handleChange}
-      />
-    );
-  }
+  return (
+    <CheckboxView
+      name={name}
+      label={caption}
+      checked={checked}
+      variant="default"
+      onChange={handleChange}
+    />
+  );
 }
-
-function mapStateToProps(
-  state: StatusState,
-  ownProps: FieldOwnProps
-): StateProps {
-  const field = fieldOf(state, ownProps.name);
-  const dataBase = ownProps.dataBase;
-
-  return {
-    checked: !!(field && field.isChecked),
-    isKritikaEmpty: isKritikaEmpty(fieldOf(state, "kritika")),
-    label:
-      ownProps.label ||
-      (dataBase && dataBase[ownProps.name] ? dataBase[ownProps.name].label : "")
-  };
-}
-
-function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
-  return {
-    setSymptom: name => dispatch(setSymptom(name)),
-    setRadio: (name, value) => dispatch(setRadio(name, value))
-  };
-}
-
-export default connect<StateProps, DispatchProps, FieldOwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(Checkbox);

@@ -1,45 +1,28 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import React from "react";
 import dataBase from "../../store/kognitData";
 import { fingerPhrase } from "../../lib/text";
-import { fieldOf } from "../../lib/redux";
+import { fieldOf, useAppSelector } from "../../lib/redux";
 import FieldView from "../FieldView";
 import type { ListOwnProps } from "../../types/components";
-import type { StatusState } from "../../types/status";
 
-interface StateProps {
-  fingerText: string;
+export default function KognitList(props: ListOwnProps) {
+  const fingerText = useAppSelector(state => {
+    const field = fieldOf(state, "kognitFingerN");
+    return fingerPhrase(field && field.number);
+  });
+
+  return (
+    <span data-id="kognit" onClick={props.toggleTab}>
+      {/*Интел-мнест функции*/}
+      <FieldView name="kognitOsnivnoi" dataObj={dataBase} />
+      {/*Отмечается*/}
+      <FieldView name="otmech" dataObj={dataBase} />
+
+      {/*пальцы*/}
+      <span> {fingerText}</span>
+
+      {/*Отдельно*/}
+      <FieldView name="otdel" dataObj={dataBase} as="sentences" />
+    </span>
+  );
 }
-
-type Props = ListOwnProps & StateProps;
-
-class KognitList extends Component<Props> {
-  render() {
-    return (
-      <span data-id="kognit" onClick={this.props.toggleTab}>
-        {/*Интел-мнест функции*/}
-        <FieldView name="kognitOsnivnoi" dataObj={dataBase} />
-        {/*Отмечается*/}
-        <FieldView name="otmech" dataObj={dataBase} />
-
-        {/*пальцы*/}
-        <span> {this.props.fingerText}</span>
-
-        {/*Отдельно*/}
-        <FieldView name="otdel" dataObj={dataBase} as="sentences" />
-      </span>
-    );
-  }
-}
-
-function mapStateToProps(state: StatusState): StateProps {
-  const field = fieldOf(state, "kognitFingerN");
-
-  return {
-    fingerText: fingerPhrase(field && field.number)
-  };
-}
-
-export default connect<StateProps, unknown, ListOwnProps>(mapStateToProps)(
-  KognitList
-);

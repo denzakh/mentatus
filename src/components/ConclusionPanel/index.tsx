@@ -1,26 +1,18 @@
-import React, { Component } from "react";
+import React from "react";
 import "./ConclusionPanel.css";
 
-export default class ConclusionPanel extends Component {
-  copyText = () => {
-    const conclusion = document.getElementById("conclusion");
+/*
+ConclusionPanel
+кнопки «Копировать» и «Печать»
 
-    if (!conclusion) {
-      return;
-    }
+Копирование берёт текст узла `#conclusion`; если Clipboard API нет или
+он не сработал, используется выделение узла и `document.execCommand`.
+Поведение и разметка прежние.
+*/
 
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-      navigator.clipboard
-        .writeText(conclusion.innerText)
-        .catch(() => this.copyTextFallback(conclusion));
-      return;
-    }
-
-    this.copyTextFallback(conclusion);
-  };
-
+export default function ConclusionPanel() {
   // резервный способ для браузеров без Clipboard API
-  copyTextFallback = (node: HTMLElement) => {
+  const copyTextFallback = (node: HTMLElement) => {
     const selection = window.getSelection();
     const range = document.createRange();
     range.selectNode(node);
@@ -41,32 +33,47 @@ export default class ConclusionPanel extends Component {
     selection.removeAllRanges();
   };
 
-  printText = () => {
+  const copyText = () => {
+    const conclusion = document.getElementById("conclusion");
+
+    if (!conclusion) {
+      return;
+    }
+
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard
+        .writeText(conclusion.innerText)
+        .catch(() => copyTextFallback(conclusion));
+      return;
+    }
+
+    copyTextFallback(conclusion);
+  };
+
+  const printText = () => {
     window.print();
   };
 
-  render() {
-    return (
-      <div>
-        <div className="conclusion-panel">
-          <div className="conclusion-panel__row">
-            <button
-              type="button"
-              className="conclusion-panel__btn"
-              onClick={this.copyText}
-            >
-              Копировать
-            </button>
-            <button
-              type="button"
-              className="conclusion-panel__btn"
-              onClick={this.printText}
-            >
-              Печать
-            </button>
-          </div>
+  return (
+    <div>
+      <div className="conclusion-panel">
+        <div className="conclusion-panel__row">
+          <button
+            type="button"
+            className="conclusion-panel__btn"
+            onClick={copyText}
+          >
+            Копировать
+          </button>
+          <button
+            type="button"
+            className="conclusion-panel__btn"
+            onClick={printText}
+          >
+            Печать
+          </button>
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 }

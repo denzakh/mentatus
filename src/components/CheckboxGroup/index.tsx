@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { cicleKeys } from "../../lib/text";
 import Checkbox from "../Checkbox";
 import type { Schema } from "../../types/schema";
@@ -24,14 +24,12 @@ interface Props {
   autoKritika?: number;
 }
 
-export default class CheckboxGroup extends Component<Props> {
-  render() {
-    const { cicle, dataBase, itemClassName, autoKritika } = this.props;
+export default function CheckboxGroup(props: Props) {
+  const { cicle, dataBase, itemClassName, autoKritika } = props;
 
-    return cicleKeys(dataBase, cicle).map(key => (
-      <div key={key} className={itemClassName || "list__item"}>
-        <Checkbox name={key} dataBase={dataBase} autoKritika={autoKritika} />
-      </div>
-    ));
-  }
+  return cicleKeys(dataBase, cicle).map(key => (
+    <div key={key} className={itemClassName || "list__item"}>
+      <Checkbox name={key} dataBase={dataBase} autoKritika={autoKritika} />
+    </div>
+  ));
 }
