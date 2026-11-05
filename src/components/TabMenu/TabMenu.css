@@ -1,4 +1,9 @@
 .tab-menu__item {
+  /* кнопка иначе берёт системный шрифт и свойство text-align */
+  font: inherit;
+  color: inherit;
+  text-align: inherit;
+}
   position: relative;
   padding: 5px;
   min-width: 80px;

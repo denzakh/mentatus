@@ -1,8 +1,12 @@
-import type { CSSProperties, MouseEvent } from "react";
+import type { CSSProperties, MouseEvent, KeyboardEvent } from "react";
 import type { Schema } from "./schema";
 
-// обработчик перехода на вкладку раздела (клик по меню или заключению)
-export type ToggleTabHandler = (event: MouseEvent<HTMLElement>) => void;
+// цель клика/нажатия: нужен только data-id узла
+export interface ToggleTabTarget {
+  currentTarget: Element;
+}
+
+export type ToggleTabHandler = (event: ToggleTabTarget) => void;
 
 // общие пропсы поля формы (name — имя поля в сторе)
 export interface FieldOwnProps {

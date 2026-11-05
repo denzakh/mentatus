@@ -1,3 +1,4 @@
+import { SectionLink } from "../../SectionLink";
 
 import dataBase from "../../store/affektData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
@@ -11,7 +12,7 @@ export default function AffektList(props: ListOwnProps) {
   });
 
   return (
-    <span data-id="affekt" onClick={props.toggleTab}>
+    <SectionLink section="affekt" onToggle={props.toggleTab}>
       {/*Настроение*/}
       <FieldView name="nastroyeniye" dataObj={dataBase} />
 
@@ -47,6 +48,6 @@ export default function AffektList(props: ListOwnProps) {
       <FieldView name="trevogaSeparate" dataObj={dataBase} as="sentences" />
 
       <FieldView name="trevogaText" dataObj={dataBase} />
-    </span>
+    </SectionLink>
   );
 }

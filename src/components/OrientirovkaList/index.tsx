@@ -1,3 +1,4 @@
+import { SectionLink } from "../../SectionLink";
 
 import dataBase from "../../store/kognitData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
@@ -33,9 +34,9 @@ export default function OrientirovkaList(props: ListOwnProps) {
   });
 
   return (
-    <span data-id="kognit" onClick={props.toggleTab}>
+    <SectionLink section="kognit" onToggle={props.toggleTab}>
       {phrase}
       <span> {text} </span>
-    </span>
+    </SectionLink>
   );
 }

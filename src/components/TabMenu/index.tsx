@@ -31,16 +31,18 @@ export default function TabMenu(props: Props) {
     });
 
     return (
-      <div
+      <button
+        type="button"
         onClick={toggleTab}
         title={tab.title}
         key={name}
         data-id={name}
         className={tabClass}
+        aria-current={name === activeTab ? "page" : undefined}
       >
         <div className="app__tab-symbol">{tab.symbol}</div>
         <div className="app__tab-label">{tab.title}</div>
-      </div>
+      </button>
     );
   });
 

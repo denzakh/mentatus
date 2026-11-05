@@ -1,3 +1,4 @@
+import { SectionLink } from "../../SectionLink";
 
 import dataBase from "../../store/rechData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
@@ -92,12 +93,12 @@ export default function RechList(props: ListOwnProps) {
   };
 
   return (
-    <span data-id="rech" onClick={props.toggleTab}>
+    <SectionLink section="rech" onToggle={props.toggleTab}>
       {mainShow()}
 
       <FieldView name="rechGrub" dataObj={dataBase} as="sentences" />
 
       <FieldView name="rechText" dataObj={dataBase} />
-    </span>
+    </SectionLink>
   );
 }

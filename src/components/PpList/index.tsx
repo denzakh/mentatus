@@ -1,3 +1,4 @@
+import { SectionLink } from "../../SectionLink";
 
 import dataBase from "../../store/ppData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
@@ -22,7 +23,7 @@ export default function PpList(props: ListOwnProps) {
 
   return (
     <span>
-      <span data-id="pp" onClick={props.toggleTab}>
+      <SectionLink section="pp" onToggle={props.toggleTab}>
         {isBredHidden ? null : (
           <span>
             <FieldView name="bred" dataObj={dataBase} />
@@ -51,13 +52,13 @@ export default function PpList(props: ListOwnProps) {
         <FieldView name="opasnyeText" dataObj={dataBase} />
       </span>
 
-      <span data-id="affekt" onClick={props.toggleTab}>
+      <SectionLink section="affekt" onToggle={props.toggleTab}>
         <SonAppetitList />
-      </span>
+      </SectionLink>
 
-      <span data-id="pp" onClick={props.toggleTab}>
+      <SectionLink section="pp" onToggle={props.toggleTab}>
         <KritikaList />
-      </span>
+      </SectionLink>
     </span>
   );
 }

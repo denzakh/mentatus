@@ -1,3 +1,4 @@
+import { SectionLink } from "../../SectionLink";
 
 import dataBase from "../../store/kognitData";
 import { fingerPhrase } from "../../lib/text";
@@ -12,7 +13,7 @@ export default function KognitList(props: ListOwnProps) {
   });
 
   return (
-    <span data-id="kognit" onClick={props.toggleTab}>
+    <SectionLink section="kognit" onToggle={props.toggleTab}>
       {/*Интел-мнест функции*/}
       <FieldView name="kognitOsnivnoi" dataObj={dataBase} />
       {/*Отмечается*/}
@@ -23,6 +24,6 @@ export default function KognitList(props: ListOwnProps) {
 
       {/*Отдельно*/}
       <FieldView name="otdel" dataObj={dataBase} as="sentences" />
-    </span>
+    </SectionLink>
   );
 }

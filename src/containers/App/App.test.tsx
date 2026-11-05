@@ -54,3 +54,20 @@ describe("App", () => {
     );
   });
 });
+
+it("пункты меню — кнопки с aria-current у активной вкладки", () => {
+  const store = createStatusStore();
+  const { container } = renderWithStatus(<App />, store);
+
+  const tab = container.querySelector(
+    '.tab-menu [data-id="zhaloby"]'
+  ) as HTMLElement;
+
+  expect(tab.tagName).toBe("BUTTON");
+  expect(tab.getAttribute("type")).toBe("button");
+  expect(
+    container
+      .querySelector('.tab-menu [data-id="sostoyanie"]')
+      ?.getAttribute("aria-current")
+  ).toBe("page");
+});

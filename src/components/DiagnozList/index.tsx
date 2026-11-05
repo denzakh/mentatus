@@ -1,3 +1,4 @@
+import { SectionLink } from "../../SectionLink";
 
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import type { ListOwnProps } from "../../types/components";
@@ -54,9 +55,9 @@ export default function DiagnozList(props: ListOwnProps) {
   };
 
   return (
-    <div data-id="diagnoz" onClick={props.toggleTab}>
+    <SectionLink section="diagnoz" as="div" onToggle={props.toggleTab}>
       {diagnozText()}
       {reqText()}
-    </div>
+    </SectionLink>
   );
 }

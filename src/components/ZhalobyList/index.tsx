@@ -1,3 +1,4 @@
+import { SectionLink } from "../../SectionLink";
 
 import dataBase from "../../store/zhalobyData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
@@ -23,10 +24,10 @@ export default function ZhalobyList(props: ListOwnProps) {
   });
 
   return (
-    <span className="list__section" data-id="zhaloby" onClick={props.toggleTab}>
+    <SectionLink section="zhaloby" className="list__section" onToggle={props.toggleTab}>
       {isHidden ? null : <FieldView name="zhalobyCicle" dataObj={dataBase} />}
 
       <FieldView name="zhalobyText" dataObj={dataBase} />
-    </span>
+    </SectionLink>
   );
 }
