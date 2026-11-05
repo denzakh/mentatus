@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import type { Dispatch } from "redux";
 import { setText } from "../../actions/textAction";
-import { fieldOf } from "../../lib/redux";
+import { textOf } from "../../lib/redux";
+import TextField from "../TextField";
 import type { FieldOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
 import "./TextareaInline.css";
@@ -14,6 +15,8 @@ TextareaInline
 принимает:
 name - имя поля в сторе
 label - подпись
+
+Разметку рисует общий `TextField` (variant="inline").
 */
 
 interface StateProps {
@@ -27,23 +30,19 @@ interface DispatchProps {
 type Props = FieldOwnProps & StateProps & DispatchProps;
 
 class TextareaInline extends Component<Props> {
-  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    this.props.setText(this.props.name, e.target.value);
+  handleChange = (value: string) => {
+    this.props.setText(this.props.name, value);
   };
 
   render() {
     return (
-      <div className="textarea-inline">
-        <label>
-          <div className="textarea-inline__label">{this.props.label}</div>
-          <textarea
-            className="textarea-inline__input"
-            onChange={this.handleChange}
-            name={this.props.name}
-            value={this.props.value}
-          />
-        </label>
-      </div>
+      <TextField
+        name={this.props.name}
+        label={this.props.label}
+        value={this.props.value}
+        variant="inline"
+        onChange={this.handleChange}
+      />
     );
   }
 }
@@ -52,10 +51,8 @@ function mapStateToProps(
   state: StatusState,
   ownProps: FieldOwnProps
 ): StateProps {
-  const field = fieldOf(state, ownProps.name);
-
   return {
-    value: (field && field.text) || ""
+    value: textOf(state, ownProps.name)
   };
 }
 

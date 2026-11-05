@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import type { Dispatch } from "redux";
 import { setText } from "../../actions/textAction";
-import { fieldOf } from "../../lib/redux";
+import { textOf } from "../../lib/redux";
+import TextField from "../TextField";
 import type { FieldOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
 import "./Textarea.css";
@@ -15,6 +16,8 @@ Textarea
 name - имя поля в сторе
 label - подпись
 style - свои стили поля
+
+Разметку рисует общий `TextField` (variant="textarea").
 */
 
 interface StateProps {
@@ -28,22 +31,19 @@ interface DispatchProps {
 type Props = FieldOwnProps & StateProps & DispatchProps;
 
 class Textarea extends Component<Props> {
-  handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    this.props.setText(this.props.name, e.target.value);
+  handleChange = (value: string) => {
+    this.props.setText(this.props.name, value);
   };
 
   render() {
     return (
-      <div className="textarea">
-        <div className="textarea__label">{this.props.label}</div>
-        <textarea
-          className="textarea__input"
-          onChange={this.handleChange}
-          name={this.props.name}
-          style={this.props.style}
-          value={this.props.value}
-        />
-      </div>
+      <TextField
+        name={this.props.name}
+        label={this.props.label}
+        value={this.props.value}
+        style={this.props.style}
+        onChange={this.handleChange}
+      />
     );
   }
 }
@@ -52,10 +52,8 @@ function mapStateToProps(
   state: StatusState,
   ownProps: FieldOwnProps
 ): StateProps {
-  const field = fieldOf(state, ownProps.name);
-
   return {
-    value: (field && field.text) || ""
+    value: textOf(state, ownProps.name)
   };
 }
 

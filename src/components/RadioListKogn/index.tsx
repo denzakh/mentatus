@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import type { Dispatch } from "redux";
 import { setRadio } from "../../actions/radioAction";
-import { isKritikaEmpty } from "../../lib/rules/kritika";
-import { fieldOf } from "../../lib/redux";
+import { isKritikaEmpty, autoKritikaForOption } from "../../lib/rules/kritika";
+import { fieldOf, radioOptionsOf, radioSelectedOf } from "../../lib/redux";
+import RadioOptions from "../RadioOptions";
 import type { RadioOption, Schema } from "../../types/schema";
 import type { StatusState } from "../../types/status";
 import "./RadioListKogn.css";
@@ -16,6 +17,9 @@ RadioListKogn
 принимает:
 name - имя поля в сторе
 dataBase - объект БД, в котором лежит группа (label + data)
+
+Разметку рисует общий `RadioOptions`, авто-критику задаёт
+`lib/rules/kritika` (AUTO_KRITIKA_BY_OPTION).
 */
 
 interface OwnProps {
@@ -35,60 +39,34 @@ interface DispatchProps {
 
 type Props = OwnProps & StateProps & DispatchProps;
 
-type ChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => void;
-
-// ответы, которые дополнительно снижают критику: id пункта -> номер критики
-const kritikaByOption: Record<number, number> = { 1: 2, 2: 3, 3: 4 };
-
 class RadioListKogn extends Component<Props> {
-  handleChange: ChangeHandler = e => {
-    const optionId = +e.target.value;
-    const kritika = kritikaByOption[optionId];
+  handleChange = (value: number) => {
+    const kritika = autoKritikaForOption(value);
 
     // часть ответов автоматически выставляет критику, если она ещё не задана
     if (this.props.isKritikaEmpty && kritika !== undefined) {
       this.props.setRadio("kritika", kritika);
     }
 
-    this.props.setRadio(this.props.name, optionId);
+    this.props.setRadio(this.props.name, value);
   };
 
   render() {
-    const { name, options, selected } = this.props;
-
     return (
-      <div className="radio__list">
-        {options.map(item => (
-          <div key={item.id} className="radio__item">
-            <input
-              type="radio"
-              name={name}
-              id={name + item.id}
-              value={item.id}
-              className="radio__input"
-              onChange={this.handleChange}
-              checked={+item.id === +selected}
-            />
-            <label className="radio__label" htmlFor={name + item.id}>
-              {item.label}
-            </label>
-          </div>
-        ))}
-      </div>
+      <RadioOptions
+        name={this.props.name}
+        options={this.props.options}
+        selected={this.props.selected}
+        onChange={this.handleChange}
+      />
     );
   }
 }
 
-function mapStateToProps(
-  state: StatusState,
-  ownProps: OwnProps
-): StateProps {
-  const field = fieldOf(state, ownProps.name);
-  const group = ownProps.dataBase && ownProps.dataBase[ownProps.name];
-
+function mapStateToProps(state: StatusState, ownProps: OwnProps): StateProps {
   return {
-    options: (group && group.data) || [],
-    selected: field ? field.number : 0,
+    options: radioOptionsOf(state, ownProps.name, ownProps.dataBase),
+    selected: radioSelectedOf(state, ownProps.name),
     isKritikaEmpty: isKritikaEmpty(fieldOf(state, "kritika"))
   };
 }

@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import type { Dispatch } from "redux";
 import { setSymptom } from "../../actions/symptomAction";
 import { fieldOf } from "../../lib/redux";
+import CheckboxView from "../Checkbox/CheckboxView";
 import type { FieldOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
 import "./CheckboxOtkl.css";
@@ -15,6 +16,8 @@ CheckboxOtkl
 name - имя поля в сторе
 dataBase - объект БД для подписи
 label - своя подпись
+
+Разметку рисует общий `CheckboxView` (variant="otkl").
 */
 
 interface StateProps {
@@ -34,23 +37,14 @@ class CheckboxOtkl extends Component<Props> {
   };
 
   render() {
-    const { name, label, checked } = this.props;
-    const id = "checkbox-otkl-" + name;
-
     return (
-      <span className="checkbox-otkl">
-        <input
-          type="checkbox"
-          className="checkbox-otkl__input"
-          checked={checked}
-          onChange={this.handleChange}
-          name={name}
-          id={id}
-        />
-        <label className="checkbox-otkl__label" htmlFor={id}>
-          {label}
-        </label>
-      </span>
+      <CheckboxView
+        name={this.props.name}
+        label={this.props.label}
+        checked={this.props.checked}
+        variant="otkl"
+        onChange={this.handleChange}
+      />
     );
   }
 }

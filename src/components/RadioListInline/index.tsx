@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import type { Dispatch } from "redux";
 import { setRadio } from "../../actions/radioAction";
-import { fieldOf } from "../../lib/redux";
+import { radioOptionsOf, radioSelectedOf } from "../../lib/redux";
+import RadioOptions from "../RadioOptions";
 import type { RadioOption, Schema } from "../../types/schema";
 import type { StatusState } from "../../types/status";
 import "./RadioListInline.css";
@@ -14,6 +15,8 @@ RadioListInline
 принимает:
 name - имя поля в сторе
 dataBase - объект БД, в котором лежит группа (label + data)
+
+Разметку рисует общий `RadioOptions` (variant="inline").
 */
 
 interface OwnProps {
@@ -34,50 +37,31 @@ interface DispatchProps {
 type Props = OwnProps & StateProps & DispatchProps;
 
 class RadioListInline extends Component<Props> {
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.setRadio(this.props.name, +e.target.value);
+  handleChange = (value: number) => {
+    this.props.setRadio(this.props.name, value);
   };
 
   render() {
-    const { name, label, options, selected } = this.props;
-
     return (
-      <div className="radio__inline">
-        <div className="radio__inline-label">{label} </div>
-        <div className="radio__inline-list">
-          {options.map(item => (
-            <div key={item.id} className="radio__inline-item">
-              <input
-                type="radio"
-                name={name}
-                id={name + item.id}
-                value={item.id}
-                className="radio__input"
-                onChange={this.handleChange}
-                checked={+item.id === +selected}
-              />
-              <label className="radio__label" htmlFor={name + item.id}>
-                {item.label}
-              </label>
-            </div>
-          ))}
-        </div>
-      </div>
+      <RadioOptions
+        name={this.props.name}
+        options={this.props.options}
+        label={this.props.label}
+        selected={this.props.selected}
+        variant="inline"
+        onChange={this.handleChange}
+      />
     );
   }
 }
 
-function mapStateToProps(
-  state: StatusState,
-  ownProps: OwnProps
-): StateProps {
-  const field = fieldOf(state, ownProps.name);
+function mapStateToProps(state: StatusState, ownProps: OwnProps): StateProps {
   const group = ownProps.dataBase && ownProps.dataBase[ownProps.name];
 
   return {
-    options: (group && group.data) || [],
+    options: radioOptionsOf(state, ownProps.name, ownProps.dataBase),
     label: group ? group.label : "",
-    selected: field ? field.number : 0
+    selected: radioSelectedOf(state, ownProps.name)
   };
 }
 

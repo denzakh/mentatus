@@ -1,6 +1,7 @@
 /* Вспомогательные функции для connect. */
 
 import { fieldSections } from "../../reducers/sections";
+import type { RadioOption, Schema } from "../../types/schema";
 import type {
   FieldValue,
   SectionName,
@@ -40,6 +41,35 @@ export function sliceNumber(
 ): number {
   const field = slice && slice[fieldName];
   return +((field && field.number) || 0);
+}
+
+// текст поля стора (пустая строка, если текст не задан)
+export function textOf(state: StatusState, fieldName: string): string {
+  const field = fieldOf(state, fieldName);
+  return (field && field.text) || "";
+}
+
+// пункты радиогруппы из схемы раздела
+export function radioOptionsOf(
+  state: StatusState,
+  fieldName: string,
+  dataBase?: Schema
+): RadioOption[] {
+  // состояние не нужно: пункты группы лежат в схеме; параметр оставлен
+  // для единообразия с radioSelectedOf
+  void state;
+
+  const group = dataBase && dataBase[fieldName];
+  return (group && group.data) || [];
+}
+
+// номер выбранного пункта радиогруппы (0 — поле ещё не заполнено)
+export function radioSelectedOf(
+  state: StatusState,
+  fieldName: string
+): number | undefined {
+  const field = fieldOf(state, fieldName);
+  return field ? field.number : 0;
 }
 
 // набор флагов isChecked для перечисленных полей стора
@@ -98,10 +128,7 @@ export function areStatePropsEqual(next: object, prev: object): boolean {
       typeof nextValue === "object" &&
       typeof prevValue === "object"
     ) {
-      return areFlagsEqual(
-        prevValue as Flags,
-        nextValue as Flags
-      );
+      return areFlagsEqual(prevValue as Flags, nextValue as Flags);
     }
 
     return false;

@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import type { Dispatch } from "redux";
 import { setText } from "../../actions/textAction";
-import { fieldOf } from "../../lib/redux";
+import { textOf } from "../../lib/redux";
+import TextField from "../TextField";
 import type { FieldOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
 import "./InputDate.css";
@@ -14,6 +15,9 @@ InputDate
 принимает:
 name - имя поля в сторе
 label - подпись
+style - не используется (в отличие от Textarea), как и раньше
+
+Разметку рисует общий `TextField` (variant="date").
 */
 
 interface StateProps {
@@ -27,24 +31,19 @@ interface DispatchProps {
 type Props = FieldOwnProps & StateProps & DispatchProps;
 
 class InputDate extends Component<Props> {
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.props.setText(this.props.name, e.target.value);
+  handleChange = (value: string) => {
+    this.props.setText(this.props.name, value);
   };
 
   render() {
     return (
-      <div className="date">
-        <label>
-          <span className="date__label">{this.props.label}</span>
-          <input
-            type="date"
-            className="date__input"
-            onChange={this.handleChange}
-            name={this.props.name}
-            value={this.props.value}
-          />
-        </label>
-      </div>
+      <TextField
+        name={this.props.name}
+        label={this.props.label}
+        value={this.props.value}
+        variant="date"
+        onChange={this.handleChange}
+      />
     );
   }
 }
@@ -53,10 +52,8 @@ function mapStateToProps(
   state: StatusState,
   ownProps: FieldOwnProps
 ): StateProps {
-  const field = fieldOf(state, ownProps.name);
-
   return {
-    value: (field && field.text) || ""
+    value: textOf(state, ownProps.name)
   };
 }
 

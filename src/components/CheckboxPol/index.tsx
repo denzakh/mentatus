@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import type { Dispatch } from "redux";
 import { setSymptom } from "../../actions/symptomAction";
 import { fieldOf } from "../../lib/redux";
+import CheckboxView from "../Checkbox/CheckboxView";
 import type { StatusState } from "../../types/status";
 import "../Checkbox/Checkbox.css";
 
@@ -12,6 +13,9 @@ CheckboxPol
 
 принимает:
 name - имя поля в сторе (по умолчанию pol)
+
+Разметку рисует общий `CheckboxView` (variant="pol"), подпись пола
+выводится там же.
 */
 
 interface OwnProps {
@@ -35,31 +39,18 @@ class CheckboxPol extends Component<Props> {
   };
 
   render() {
-    const { name, isMale } = this.props;
-    const id = "checkbox-pol-" + name;
-
     return (
-      <span>
-        <input
-          type="checkbox"
-          className="checkbox__input"
-          checked={isMale}
-          onChange={this.handleChange}
-          name={name}
-          id={id}
-        />
-        <label className="checkbox__pol" htmlFor={id}>
-          {isMale ? "Пол: мужской  ⇄" : "Пол: женский  ⇄"}
-        </label>
-      </span>
+      <CheckboxView
+        name={this.props.name}
+        checked={this.props.isMale}
+        variant="pol"
+        onChange={this.handleChange}
+      />
     );
   }
 }
 
-function mapStateToProps(
-  state: StatusState,
-  ownProps: OwnProps
-): StateProps {
+function mapStateToProps(state: StatusState, ownProps: OwnProps): StateProps {
   const name = ownProps.name || "pol";
   const field = fieldOf(state, name);
 

@@ -16,7 +16,7 @@
 | 6 | Перевод на TypeScript | `06-typescript.md` | ✅ выполнено | 4–5 |
 | 7 | B.1 — Бизнес-правила и тексты заключения → `lib` + тесты | `07-render-unification.md` (B.1) | ✅ выполнено | 6 |
 | 8 | B.2 — Единый реестр разделов | `07-render-unification.md` (B.2) | ✅ выполнено | 7 |
-| 9 | B.3 — Унификация полей | `07-render-unification.md` (B.3) | ⏳ | 8 |
+| 9 | B.3 — Унификация полей | `07-render-unification.md` (B.3) | ✅ выполнено | 8 |
 | 10 | B.4 — Функциональные компоненты + hooks | `07-render-unification.md` (B.4) | ⏳ | 9 |
 
 Подэтапы 7–10 описаны в одном файле `07-render-unification.md`: каждый — отдельный
@@ -127,6 +127,37 @@ PR и отдельная сессия, порядок обязателен (B.1 
   сборка `dist/` (161 модуль). DOM меню и заключения сравнён с версией до
   рефакторинга (`innerHTML` совпал для `kontakt = 0/2/7`), каждая вкладка
   рендерит свою форму, неизвестная вкладка — пустой `.tab-render`.
+
+## Baseline после B.3 (унификация полей)
+
+- `src/components/RadioOptions/index.tsx` — общая презентационная радиогруппа
+  (`variant: "list" | "inline"`, `itemClassName`, `onChange(value)`); `RadioList`,
+  `RadioListInline`, `RadioListKogn` — тонкие обёртки с `connect`.
+- `src/components/TextField/index.tsx` — общее поле текста
+  (`variant: "textarea" | "inline" | "date"`); `Textarea`, `TextareaInline`,
+  `InputDate` передают вариант, `style` по-прежнему только у `Textarea`.
+- `src/components/Checkbox/CheckboxView.tsx` — общий чекбокс
+  (`variant: "default" | "otkl" | "pol"`); `Checkbox`, `CheckboxOtkl`,
+  `CheckboxPol` — тонкие обёртки, подписи пола (`"Пол: мужской  ⇄"` /
+  `"Пол: женский  ⇄"`) вынесены в `CheckboxView`.
+- `src/components/fields/registry.ts` — единственное место соответствий
+  «тип/имя поля → компонент»: `formByType`, `formByName`, `viewByType`,
+  `formForField`, `viewForField`; `Field`/`FieldView` собственных карт больше
+  не содержат. Выбор `FreeText` / `FreeTextBeforeAndAfter` — в
+  `src/components/FreeTextView`.
+- `src/lib/redux` — общие хелперы чтения `textOf`, `radioOptionsOf`,
+  `radioSelectedOf`; `src/lib/rules/kritika` — `AUTO_KRITIKA_BY_OPTION`
+  и `autoKritikaForOption` (локальной константы в `RadioListKogn` нет).
+- Тесты полей (12 новых файлов): `RadioOptions`, `RadioList`, `RadioListInline`,
+  `RadioListKogn`, `TextField`, `Textarea`, `TextareaInline`, `InputDate`,
+  `Checkbox`, `CheckboxOtkl`, `CheckboxPol`, `Field`, `FieldView`
+  + `fields/registry.test.ts`, `lib/redux/index.test.ts`,
+  дополненный `lib/rules/kritika.test.ts`.
+- Проверки B.3: `typecheck` — 0 ошибок, 29 файлов / 223 теста, `lint` — 0,
+  сборка `dist/` (166 модулей). DOM каждого поля, `Field` и `FieldView`
+  сравнён с версией до унификации (`innerHTML` совпал посимвольно для всех
+  вариантов: list/inline радиогруппы, три текстовых поля, три чекбокса,
+  все типы схемы и `component` из layout).
 
 ## Обслуживание после этапа 6 (вариант A)
 

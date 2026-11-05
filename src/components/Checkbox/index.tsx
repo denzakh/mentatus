@@ -5,6 +5,7 @@ import { setSymptom } from "../../actions/symptomAction";
 import { setRadio } from "../../actions/radioAction";
 import { isKritikaEmpty } from "../../lib/rules/kritika";
 import { fieldOf } from "../../lib/redux";
+import CheckboxView from "./CheckboxView";
 import type { FieldOwnProps } from "../../types/components";
 import type { StatusState } from "../../types/status";
 import "./Checkbox.css";
@@ -18,6 +19,8 @@ name - имя поля в сторе
 dataBase - объект БД для подписи (не нужен, если задан label)
 label - своя подпись
 autoKritika - значение критики, которое проставляется при выборе поля
+
+Разметку рисует общий `CheckboxView` (variant="default").
 */
 
 interface StateProps {
@@ -43,23 +46,14 @@ class Checkbox extends Component<Props> {
   };
 
   render() {
-    const { name, label, checked } = this.props;
-    const id = "checkbox-" + name;
-
     return (
-      <span>
-        <input
-          type="checkbox"
-          className="checkbox__input"
-          checked={checked}
-          onChange={this.handleChange}
-          name={name}
-          id={id}
-        />
-        <label className="checkbox__label" htmlFor={id}>
-          {label}
-        </label>
-      </span>
+      <CheckboxView
+        name={this.props.name}
+        label={this.props.label}
+        checked={this.props.checked}
+        variant="default"
+        onChange={this.handleChange}
+      />
     );
   }
 }
