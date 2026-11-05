@@ -18,14 +18,18 @@ autoKritika - значение критики, проставляемое при
 */
 
 interface Props {
-  cicle?: string;
-  dataBase?: Schema;
+  cicle: string;
+  dataBase: Schema;
   itemClassName?: string;
   autoKritika?: number;
 }
 
 export default function CheckboxGroup(props: Props) {
   const { cicle, dataBase, itemClassName, autoKritika } = props;
+
+  if (!cicle) {
+    return null;
+  }
 
   return cicleKeys(dataBase, cicle).map(key => (
     <div key={key} className={itemClassName || "list__item"}>

@@ -20,7 +20,7 @@ before / after / noList - переопределение ключей фраз �
 
 interface OwnProps {
   name: string;
-  dataObj?: Schema;
+  dataObj: Schema;
   isAnd?: boolean;
   beforeText?: string;
   before?: string;
@@ -48,7 +48,7 @@ export default function ListOfWords(props: OwnProps) {
   // включённые пункты цикла
   const items = keys
     .filter(key => flags[key])
-    .map(key => ({ key: key, phrase: dataObj[key].phrase }));
+    .map(key => ({ key: key, phrase: dataObj[key].phrase || "" }));
 
   const parts = buildListText(items, {
     isAnd: !!isAnd,

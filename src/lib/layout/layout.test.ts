@@ -6,7 +6,7 @@ const layout: Layout = [
     type: "box",
     blocks: [
       { type: "field", name: "a" },
-      { type: "group", cicle: "b", visibleWhen: slice => slice.b.isChecked }
+      { type: "group", cicle: "b", visibleWhen: slice => !!slice.b?.isChecked }
     ]
   },
   {

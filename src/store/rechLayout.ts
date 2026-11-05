@@ -1,12 +1,15 @@
 import type { Layout } from "../types/layout";
+import type { StatusSection } from "../types/status";
 
 import { sliceFlag } from "../lib/redux";
 
 /* при грубых нарушениях речи основная часть не выводится */
-const hasRechMain = slice => !sliceFlag(slice, "rechOtkl");
+const hasRechMain = (slice: StatusSection): boolean =>
+  !sliceFlag(slice, "rechOtkl");
 
 /* варианты ответов не нужны, если пациент не отвечает */
-const hasOtvety = slice => !sliceFlag(slice, "rechNeotvechaet");
+const hasOtvety = (slice: StatusSection): boolean =>
+  !sliceFlag(slice, "rechNeotvechaet");
 
 /* Раскладка формы раздела «Речь и мышление» (см. `src/components/Section`). */
 export const rechLayout: Layout = [

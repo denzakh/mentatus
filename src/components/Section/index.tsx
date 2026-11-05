@@ -114,6 +114,9 @@ function SectionBlock(props: BlockProps) {
       );
 
     case "field":
+      if (!block.name) {
+        return null;
+      }
       return (
         <Field
           name={block.name}

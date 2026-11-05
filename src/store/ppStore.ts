@@ -1,6 +1,6 @@
 import type { StatusSection } from "../types/status";
 
-const store: StatusSection = {
+const store = {
   bredDepress: {
     isChecked: false
   },
@@ -59,6 +59,6 @@ const store: StatusSection = {
   opasnyeOtkl: {
     isChecked: false
   }
-};
+} satisfies StatusSection;
 
 export default store;

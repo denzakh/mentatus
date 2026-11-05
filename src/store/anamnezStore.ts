@@ -1,6 +1,6 @@
 import type { StatusSection } from "../types/status";
 
-const store: StatusSection = {
+const store = {
   anamnezChmt: {
     isChecked: false
   },
@@ -49,6 +49,6 @@ const store: StatusSection = {
   anamnezOtkl: {
     isChecked: true
   }
-};
+} satisfies StatusSection;
 
 export default store;

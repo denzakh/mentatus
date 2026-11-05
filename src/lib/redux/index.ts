@@ -28,7 +28,11 @@ export function fieldOf(
   fieldName: string
 ): FieldValue | undefined {
   const section = fieldSections[fieldName];
-  return section ? state[section][fieldName] : undefined;
+  if (!section) {
+    return undefined;
+  }
+  // конкретный срез Literal-типа индексируется через общий тип среза
+  return (state[section] as StatusSection)[fieldName];
 }
 
 // флаг чекбокса внутри среза (для условий видимости в layout раздела)

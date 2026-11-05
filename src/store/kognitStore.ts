@@ -1,6 +1,6 @@
 import type { StatusSection } from "../types/status";
 
-const store: StatusSection = {
+const store = {
   orientirVremia: {
     number: 1
   },
@@ -78,6 +78,6 @@ const store: StatusSection = {
   kognitText: {
     text: ""
   }
-};
+} satisfies StatusSection;
 
 export default store;

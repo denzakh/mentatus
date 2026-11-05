@@ -6,7 +6,7 @@ import rechStore from "../store/rechStore";
 import kognitStore from "../store/kognitStore";
 import ppStore from "../store/ppStore";
 import diagnozStore from "../store/diagnozStore";
-import type { SectionName, StatusSection } from "../types/status";
+import type { StatusSection } from "../types/status";
 
 /*
 Срезы статуса: имя раздела -> начальное состояние его полей.
@@ -15,7 +15,7 @@ import type { SectionName, StatusSection } from "../types/status";
 store-файлов. Теперь у каждого раздела свой срез, поэтому поле живёт в
 `state[section][field]`, а не в `state.psystatus[field]`.
 */
-const sections: Record<SectionName, StatusSection> = {
+const sections = {
   zhaloby: zhalobyStore,
   anamnez: anamnezStore,
   sostoyanie: sostoyanieStore,
@@ -24,7 +24,15 @@ const sections: Record<SectionName, StatusSection> = {
   kognit: kognitStore,
   pp: ppStore,
   diagnoz: diagnozStore
-};
+} satisfies Record<string, StatusSection>;
+
+export type SectionStateMap = typeof sections;
+export type SectionName = keyof SectionStateMap;
+export type StatusState = SectionStateMap;
+export type SectionState<K extends SectionName> = SectionStateMap[K];
+export type FieldName = {
+  [K in SectionName]: keyof SectionStateMap[K] & string;
+}[SectionName];
 
 export default sections;
 

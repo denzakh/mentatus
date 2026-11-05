@@ -34,7 +34,7 @@ export function separatorAt(
   return ", ";
 }
 
-// фраза пункта с учётом пола пациента
+// phrase может отсутствовать в служебных записях схемы
 export function pickPhrase(
   item?: Pick<SchemaEntry, "phrase" | "phraseM">,
   isMale?: boolean
@@ -42,7 +42,7 @@ export function pickPhrase(
   if (!item) {
     return "";
   }
-  return item.phraseM && isMale ? item.phraseM : item.phrase;
+  return (item.phraseM && isMale ? item.phraseM : item.phrase) || "";
 }
 
 export interface ListItem {
@@ -100,9 +100,9 @@ export function buildListText(
   return parts;
 }
 
-// фраза про фингерагнозию по числу правильно названных пальцев
+// undefined и нечисло дают 0, как и раньше (ветка default → "")
 export function fingerPhrase(fingerNumber?: number | string): string {
-  switch (+fingerNumber) {
+  switch (Number(fingerNumber) || 0) {
     case 1:
       return "Фингерагнозия, называет правильно только один палец. ";
     case 2:
@@ -118,19 +118,20 @@ export function fingerPhrase(fingerNumber?: number | string): string {
   }
 }
 
-// фраза радиогруппы: вступление + выбранный пункт + завершение
+// без номера пункта фразы нет (индекс undefined раньше давал undefined)
 export function buildRadioPhrase(
   group?: Pick<RadioGroupSchema, "data" | "before" | "after">,
   index?: number,
   isMale?: boolean
 ): string {
-  if (!group || !group.data || !group.data[index]) {
+  if (!group || !group.data || index === undefined) {
     return "";
   }
 
-  return (
-    (group.before || "") +
-    pickPhrase(group.data[index], isMale) +
-    (group.after || "")
-  );
+  const option = group.data[index];
+  if (!option) {
+    return "";
+  }
+
+  return (group.before || "") + pickPhrase(option, isMale) + (group.after || "");
 }

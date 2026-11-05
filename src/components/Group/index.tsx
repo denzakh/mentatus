@@ -14,13 +14,17 @@ itemClassName / autoKritika - пробрасываются в CheckboxGroup
 
 interface Props {
   cicle?: string;
-  dataBase?: Schema;
+  dataBase: Schema;
   itemClassName?: string;
   autoKritika?: number;
 }
 
 export default function Group(props: Props) {
   const { cicle, dataBase, itemClassName, autoKritika } = props;
+
+  if (!cicle) {
+    return null;
+  }
 
   return (
     <CheckboxGroup

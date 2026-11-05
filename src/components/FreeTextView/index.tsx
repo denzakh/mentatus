@@ -20,6 +20,6 @@ export default function FreeTextView(props: FieldViewOwnProps) {
   return group && (group.before || group.after) ? (
     <FreeTextBeforeAndAfter name={name} dataObj={dataObj} />
   ) : (
-    <FreeText name={name} />
+    <FreeText name={name} dataObj={dataObj} />
   );
 }

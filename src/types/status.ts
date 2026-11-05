@@ -27,21 +27,34 @@ export type TextField = {
 
 export type FieldValue = CheckboxField | RadioField | TextField;
 
-export type SectionName =
-  | "zhaloby"
-  | "anamnez"
-  | "sostoyanie"
-  | "affekt"
-  | "rech"
-  | "kognit"
-  | "pp"
-  | "diagnoz";
-
 export type StatusSection = Record<string, FieldValue>;
 
 /*
-Состояние стора: только срезы разделов. Служебный срез `option`
-(имя пользователя и активная страница) удалён — навигация по страницам
-не реализована, настройки UI нигде не читались.
+Имена разделов, форма состояния и тип отдельного поля выводятся из
+самого `reducers/sections` (срезы собраны через `satisfies StatusSection`),
+чтобы `typeof store` сохранил конкретные имена полей.
+Цикл `types/status ↔ reducers/sections` состоит только из `import type` /
+`export type` и стирается при сборке.
 */
-export type StatusState = Record<SectionName, StatusSection>;
+export type {
+  SectionName,
+  StatusState,
+  SectionState,
+  FieldName,
+  SectionStateMap
+} from "../reducers/sections";
+
+// reconnue атрибут формы поля: чекбокс / радиогруппа / свободный текст
+export function isCheckboxField(
+  value: FieldValue | undefined
+): value is CheckboxField {
+  return !!value && value.isChecked !== undefined;
+}
+
+export function isRadioField(value: FieldValue | undefined): value is RadioField {
+  return !!value && value.number !== undefined;
+}
+
+export function isTextField(value: FieldValue | undefined): value is TextField {
+  return !!value && value.text !== undefined;
+}

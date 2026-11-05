@@ -1,6 +1,6 @@
 import type { StatusSection } from "../types/status";
 
-const store: StatusSection = {
+const store = {
   zhalobyTrevoga: {
     isChecked: false
   },
@@ -52,6 +52,6 @@ const store: StatusSection = {
   zhalobyText: {
     text: ""
   }
-};
+} satisfies StatusSection;
 
 export default store;

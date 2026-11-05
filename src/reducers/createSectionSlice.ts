@@ -1,6 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setSymptom, setText, setRadio } from "../actions/fieldActions";
 import type { StatusSection } from "../types/status";
+import {
+  isCheckboxField,
+  isRadioField,
+  isTextField
+} from "../types/status";
 
 /*
 Фабрика среза раздела.
@@ -15,16 +20,9 @@ import type { StatusSection } from "../types/status";
 над полем.
 */
 
-// записываемая форма поля: у каждого поля есть только один из ключей
-interface MutableField {
-  isChecked?: boolean;
-  number?: number;
-  text?: string | false;
-}
-
-export default function createSectionSlice(
+export default function createSectionSlice<S extends StatusSection>(
   name: string,
-  initialState: StatusSection
+  initialState: S
 ) {
   return createSlice({
     name,
@@ -33,20 +31,21 @@ export default function createSectionSlice(
     extraReducers: builder => {
       builder
         .addCase(setSymptom, (state, action) => {
-          const field = state[action.payload.name] as MutableField | undefined;
-          if (field && field.isChecked !== undefined) {
+          // индексация по имени поля: драфт сужается до общего типа среза
+          const field = (state as StatusSection)[action.payload.name];
+          if (isCheckboxField(field)) {
             field.isChecked = !field.isChecked;
           }
         })
         .addCase(setText, (state, action) => {
-          const field = state[action.payload.name] as MutableField | undefined;
-          if (field && field.text !== undefined) {
+          const field = (state as StatusSection)[action.payload.name];
+          if (isTextField(field)) {
             field.text = action.payload.text;
           }
         })
         .addCase(setRadio, (state, action) => {
-          const field = state[action.payload.name] as MutableField | undefined;
-          if (field && field.number !== undefined) {
+          const field = (state as StatusSection)[action.payload.name];
+          if (isRadioField(field)) {
             field.number = action.payload.number;
           }
         });

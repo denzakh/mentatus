@@ -1,5 +1,6 @@
 import type { StateReconciler } from "redux-persist";
 import type { RootState } from "../reducers";
+import type { SectionStateMap } from "../reducers/sections";
 import type { FieldValue, SectionName, StatusSection } from "../types/status";
 
 /*
@@ -57,11 +58,25 @@ export const mergeSections: StateReconciler<RootState> = (
   void _config;
 
   const saved = (inboundState || {}) as Record<string, unknown>;
-  const merged = {} as RootState;
+  // инициализируем merged как полный RootState (все срезы)
+  const merged: RootState = {
+    zhaloby: {} as StatusSection,
+    anamnez: {} as StatusSection,
+    sostoyanie: {} as StatusSection,
+    affekt: {} as StatusSection,
+    rech: {} as StatusSection,
+    kognit: {} as StatusSection,
+    pp: {} as StatusSection,
+    diagnoz: {} as StatusSection,
+  };
 
-  (Object.keys(reducedState) as SectionName[]).forEach(section => {
-    merged[section] = mergeSectionState(saved[section], reducedState[section]);
-  });
+  // перебираем разделы из reducedState (стартовые значения)
+  for (const section of Object.keys(reducedState) as SectionName[]) {
+    merged[section] = mergeSectionState(
+      saved[section],
+      reducedState[section]
+    );
+  }
 
   return merged;
 };

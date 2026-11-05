@@ -33,7 +33,7 @@ export default function RadioOptions(props: Props) {
   const {
     name,
     options,
-    selected,
+    selected = 0,
     label,
     variant = "list",
     itemClassName,

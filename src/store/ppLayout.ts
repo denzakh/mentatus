@@ -1,10 +1,13 @@
 import type { Layout } from "../types/layout";
+import type { StatusSection } from "../types/status";
 
 import { sliceFlag } from "../lib/redux";
 
 /* списки бреда и галлюцинаций скрываются, если врач отметил их отсутствие */
-const hasBred = slice => !sliceFlag(slice, "bredOtkl");
-const hasGall = slice => !sliceFlag(slice, "gallOtkl");
+const hasBred = (slice: StatusSection): boolean =>
+  !sliceFlag(slice, "bredOtkl");
+const hasGall = (slice: StatusSection): boolean =>
+  !sliceFlag(slice, "gallOtkl");
 
 /* Раскладка формы раздела «Психопродукция» (см. `src/components/Section`). */
 export const ppLayout: Layout = [

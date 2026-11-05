@@ -1,6 +1,6 @@
 import type { StatusSection } from "../types/status";
 
-const store: StatusSection = {
+const store = {
   diagnozMkb10: {
     text: ""
   },
@@ -13,6 +13,6 @@ const store: StatusSection = {
   reqilech: {
     text: ""
   }
-};
+} satisfies StatusSection;
 
 export default store;

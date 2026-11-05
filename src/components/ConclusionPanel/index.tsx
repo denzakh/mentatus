@@ -14,6 +14,9 @@ export default function ConclusionPanel() {
   // резервный способ для браузеров без Clipboard API
   const copyTextFallback = (node: HTMLElement) => {
     const selection = window.getSelection();
+    if (!selection) {
+      return;
+    }
     const range = document.createRange();
     range.selectNode(node);
     selection.removeAllRanges();
@@ -27,7 +30,10 @@ export default function ConclusionPanel() {
     try {
       document.execCommand("copy");
     } catch (err) {
-      console.warn("Не удалось скопировать заключение:", err.message);
+      console.warn(
+        "Не удалось скопировать заключение:",
+        err instanceof Error ? err.message : err
+      );
     }
 
     selection.removeAllRanges();

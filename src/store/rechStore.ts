@@ -1,6 +1,6 @@
 import type { StatusSection } from "../types/status";
 
-const store: StatusSection = {
+const store = {
   myshleniePosled: {
     number: 0
   },
@@ -74,6 +74,6 @@ const store: StatusSection = {
   rechBormochet: {
     isChecked: false
   }
-};
+} satisfies StatusSection;
 
 export default store;

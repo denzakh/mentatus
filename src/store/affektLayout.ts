@@ -1,19 +1,23 @@
 import type { Layout } from "../types/layout";
+import type { StatusSection } from "../types/status";
 
 import { sliceFlag, sliceNumber } from "../lib/redux";
 
 /* подробности колебаний настроения нужны только при их наличии */
-const hasKolebania = slice => sliceFlag(slice, "nastroyeniyeKolebania");
+const hasKolebania = (slice: StatusSection): boolean =>
+  sliceFlag(slice, "nastroyeniyeKolebania");
 
 /* блок «в связи с / с проявлениями / дополнительно» не нужен
    для «ровного» и «не определить» */
-const hasNastroyeniyeOptions = slice =>
+const hasNastroyeniyeOptions = (slice: StatusSection): boolean =>
   sliceNumber(slice, "nastroyeniye") !== 0 &&
   sliceNumber(slice, "nastroyeniye") !== 7;
 
-const hasTrevogaOptions = slice => sliceNumber(slice, "trevoga") !== 0;
+const hasTrevogaOptions = (slice: StatusSection): boolean =>
+  sliceNumber(slice, "trevoga") !== 0;
 
-const hasAppetitOptions = slice => sliceNumber(slice, "appetit") !== 0;
+const hasAppetitOptions = (slice: StatusSection): boolean =>
+  sliceNumber(slice, "appetit") !== 0;
 
 /* Раскладка формы раздела «Аффект» (см. `src/components/Section`). */
 export const affektLayout: Layout = [

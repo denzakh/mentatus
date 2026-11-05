@@ -19,7 +19,7 @@ isAnd   - соединять последние пункты группы сою
 
 interface Props {
   name: string;
-  dataObj?: Schema;
+  dataObj: Schema;
   as?: string;
   isAnd?: boolean;
 }

@@ -21,7 +21,9 @@ export default function App() {
   // раздел берётся из `data-id` пункта меню или заключения
   const toggleTab: ToggleTabHandler = e => {
     const name = e.currentTarget.getAttribute("data-id");
-    setActiveTab(name);
+    if (name) {
+      setActiveTab(name);
+    }
   };
 
   return (

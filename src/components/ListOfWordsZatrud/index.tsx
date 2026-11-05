@@ -6,7 +6,7 @@ import type { Schema } from "../../types/schema";
 // только вступительной фразой
 interface Props {
   name: string;
-  dataObj?: Schema;
+  dataObj: Schema;
   isAnd?: boolean;
 }
 

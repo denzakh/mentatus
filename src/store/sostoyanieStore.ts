@@ -2,7 +2,7 @@ import type { StatusSection } from "../types/status";
 
 import { todayIso } from "../lib/text/date";
 
-const store: StatusSection = {
+const store = {
   patientId: {
     number: 0
   },
@@ -99,6 +99,6 @@ const store: StatusSection = {
   kritikaText: {
     text: ""
   }
-};
+} satisfies StatusSection;
 
 export default store;

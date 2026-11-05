@@ -16,7 +16,7 @@ export interface FieldOwnProps {
 // пропсы представления поля в заключении
 export interface FieldViewOwnProps {
   name: string;
-  dataObj?: Schema;
+  dataObj: Schema;
 }
 
 // пропсы списка заключения: клик по разделу открывает его вкладку

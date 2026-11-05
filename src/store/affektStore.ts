@@ -1,6 +1,6 @@
 import type { StatusSection } from "../types/status";
 
-const store: StatusSection = {
+const store = {
   nastroyeniye: {
     number: 0
   },
@@ -135,6 +135,6 @@ const store: StatusSection = {
   appetitText: {
     text: ""
   }
-};
+} satisfies StatusSection;
 
 export default store;

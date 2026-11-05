@@ -31,12 +31,16 @@ export default function TabRender(props: Props) {
 
 function renderForm(entry: SectionEntry) {
   if (entry.form === "section") {
+    const layout = entry.layout;
+    if (!layout) {
+      return null;
+    }
     return (
       <div key={entry.name}>
         <Section
           section={entry.name}
           dataBase={entry.schema}
-          layout={entry.layout}
+          layout={layout}
           components={entry.custom}
         />
       </div>
