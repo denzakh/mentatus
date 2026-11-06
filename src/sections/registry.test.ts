@@ -1,5 +1,5 @@
 import sections from "../reducers/sections";
-import { sectionsRegistry, tabOrder } from "./registry";
+import { sectionsRegistry, tabOrder, conclusionOrder } from "./registry";
 import type { Layout, LayoutBlock } from "../types/layout";
 import type { SectionName } from "../types/status";
 

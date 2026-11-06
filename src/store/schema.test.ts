@@ -47,7 +47,7 @@ const schemas = Object.fromEntries(
 
 describe("схемы разделов", () => {
   it("содержит схему для каждого среза", () => {
-    expect(Object.keys(schemas)).toEqual(Object.keys(sections));
+    expect(Object.keys(schemas).sort()).toEqual(Object.keys(sections).sort());
   });
 
   Object.keys(sections).forEach(section => {
