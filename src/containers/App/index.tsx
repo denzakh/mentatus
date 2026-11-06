@@ -59,14 +59,39 @@ export default function App() {
         </nav>
 
         {/* Кнопка переключения между вводом и заключением (видна только на мобильных через CSS) */}
-        <button className="app__toggle-btn" type="button" onClick={toggleContent} aria-label={showConclusion ? "К вводу" : "К заключению"}>
+        <button
+          className="app__toggle-btn"
+          type="button"
+          onClick={toggleContent}
+          aria-label={showConclusion ? "К вводу" : "К заключению"}
+        >
           {showConclusion ? (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34" />
               <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5a2.12 2.12 0 0 1 3-3" />
             </svg>
           ) : (
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
               <polyline points="14 2 14 8 20 8" />
               <line x1="16" y1="13" x2="8" y2="13" />
@@ -76,28 +101,35 @@ export default function App() {
           )}
         </button>
 
-        <div className={`app__content${isMobile ? " app__content-mobile" : ""}`}>
+        <div className={`app__content`}>
+          <div className="app__header">
+            <h1 className="app__title">Ментатус</h1>
+            <div className="app__header-menu">
+              <div className="app__header-menu-item">О проекте</div>
+              <div className="app__header-menu-item">Помощь</div>
+            </div>
+          </div>
           <main className="app__content-row">
-            {isMobile
-              ? showConclusion ? (
-                  <div className="app__conclusion">
-                    <Conclusion toggleTab={toggleTab} />
-                  </div>
-                ) : (
-                  <div className="app__manager">
-                    <TabRender activeTab={activeTab} />
-                  </div>
-                )
-              : (
-                <>
-                  <div className="app__manager">
-                    <TabRender activeTab={activeTab} />
-                  </div>
-                  <div className="app__conclusion">
-                    <Conclusion toggleTab={toggleTab} />
-                  </div>
-                </>
-              )}
+            {isMobile ? (
+              showConclusion ? (
+                <div className="app__conclusion">
+                  <Conclusion toggleTab={toggleTab} />
+                </div>
+              ) : (
+                <div className="app__manager">
+                  <TabRender activeTab={activeTab} />
+                </div>
+              )
+            ) : (
+              <>
+                <div className="app__manager">
+                  <TabRender activeTab={activeTab} />
+                </div>
+                <div className="app__conclusion">
+                  <Conclusion toggleTab={toggleTab} />
+                </div>
+              </>
+            )}
           </main>
           <footer className="app__footer">
             Copyright 2021–{new Date().getFullYear()} Denis Zakharchenko
