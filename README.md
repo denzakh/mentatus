@@ -1,101 +1,89 @@
 # Mentatus
 
-Приложение для автоматизированного написания психиатрического статуса: слева —
-разделы осмотра, в центре — форма раздела, справа собирается текст заключения
-(его можно скопировать или распечатать).
+Application for automated psychiatric status writing: left — examination sections, center — section form, right — conclusion text is assembled (can be copied or printed).
 
-## Стек
+## Stack
 
 - React 18, react-redux 9, Redux Toolkit 2, `redux-persist` 6
 - TypeScript (Vite, `moduleResolution: "Bundler"`)
-- Vite 6 (сборка и dev-сервер), Vitest 5 + jsdom 30 (тесты)
-- CSS без препроцессоров, иконки и манифест — в `public/`
+- Vite 6 (build and dev server), Vitest 5 + jsdom 30 (tests)
+- CSS without preprocessors, icons and manifest — in `public/`
 
-## Быстрый старт
+## Quick start
 
-Нужен Node.js 24+ (проект проверен на Node 24.21 и npm 11.19).
+Node.js 24+ required (project tested on Node 24.21 and npm 11.19).
 
 ```bash
 npm ci
 npm run dev        # http://localhost:5173
 ```
 
-## Скрипты
+## Scripts
 
-| Скрипт | Что делает |
+| Script | What it does |
 |---|---|
-| `npm run dev` / `npm start` | dev-сервер Vite |
-| `npm run build` | production-сборка в `dist/` |
-| `npm run preview` | локальный просмотр собранного `dist/` |
-| `npm test` | один прогон всех тестов (`vitest run`) |
-| `npm run test:watch` | тесты в watch-режиме |
+| `npm run dev` / `npm start` | Vite dev server |
+| `npm run build` | production build to `dist/` |
+| `npm run preview` | local preview of built `dist/` |
+| `npm test` | single run of all tests (`vitest run`) |
+| `npm run test:watch` | tests in watch mode |
 | `npm run typecheck` | `tsc --noEmit` |
-| `npm run lint` | ESLint 9 (плоский конфиг `eslint.config.mjs`) |
-| `npm run format` | Prettier 3 по `src/**` |
-| `npm run css:audit` | отчёт «определено / используется» по CSS-классам |
+| `npm run lint` | ESLint 9 (flat config `eslint.config.mjs`) |
+| `npm run format` | Prettier 3 for `src/**` |
+| `npm run css:audit` | report "defined / used" for CSS classes |
 
-Перед коммитом: `npm run typecheck && npm run lint && npm test && npm run build`.
+Before commit: `npm run typecheck && npm run lint && npm test && npm run build`.
 
-## Структура `src`
+## `src` structure
 
 ```
-index.tsx                 вход: Provider + PersistGate + каркас страницы
-configureStore.ts         RTK store + persistor (throttle 300 мс)
+index.tsx                 entry: Provider + PersistGate + page skeleton
+configureStore.ts         RTK store + persistor (throttle 300 ms)
 reducers/
-  index.ts                корневой редьюсер (только срезы разделов)
-  sections.ts             карта «раздел → начальные значения» + индекс fieldSections
-  createSectionSlice.ts   фабрика среза раздела (RTK + Immer)
+  index.ts                root reducer (section slices only)
+  sections.ts             "section → initial values" map + fieldSections index
+  createSectionSlice.ts   section slice factory (RTK + Immer)
 actions/fieldActions.ts   SET_SYMPTOM / SET_TEXT / SET_RADIO
 store/
-  *Data.ts                схема раздела: подписи, фразы, типы, группы (cicle)
-  *Store.ts               начальные значения полей среза
-  *Layout.ts              декларативная раскладка формы раздела
-  schemas.ts              карта «срез → схема»
-  persist.ts              конфиг redux-persist и очистка старого ключа
+  *Data.ts                section schema: labels, phrases, types, groups (cicle)
+  *Store.ts               initial section field values
+  *Layout.ts              declarative section form layout
+  schemas.ts              "slice → schema" map
+  persist.ts              redux-persist config and old key cleanup
 lib/
-  text/                   сборка фраз заключения, работа с датами
-  rules/                  бизнес-правила (например, пустая критика)
-  layout/                 обход layout и условия видимости
-  redux/                  чтение полей стора и сравнение props для connect
-  schema/                 работа со схемами (поиск пункта радиогруппы по id)
+  text/                   conclusion phrase building, date handling
+  rules/                  business rules (e.g. empty critique)
+  layout/                 layout traversal and visibility conditions
+  redux/                  reading store fields and prop comparison for connect
+  schema/                 schema work (finding radio group item by id)
 components/
-  <Раздел>Manager         форма раздела (обёртка над <Section>)
-  <Раздел>List            часть заключения (через <FieldView>)
-  Section/Field/Group/FieldView — примитивы схемного рендеринга
-containers/App            раскладка рабочего экрана
-types/                    типы состояния, схем, layout и пропсов
+  <Section>Manager        section form (wrapper over <Section>)
+  <Section>List           conclusion part (via <FieldView>)
+  Section/Field/Group/FieldView — schematic rendering primitives
+containers/App            work screen layout
+types/                    state, schema, layout and props types
 ```
 
-## Как это работает
+## How it works
 
-- Поле стора живёт в срезе своего раздела: `state[section][field]` и имеет форму
-  `{ isChecked }` (чекбокс), `{ number }` (радиогруппа) или `{ text }` (текст/дата).
-- Схема раздела (`store/*Data.ts`) — единственный источник правды о полях; её
-  полноту проверяет `src/store/schema.test.ts`.
-- Форма раздела описывается раскладкой (`store/*Layout.ts`) и рендерится
-  компонентом `Section`; нестандартные блоки подключаются как `custom`.
-- Заключение собирается из `*List` и чистых функций `lib/text`, поэтому логику
-  текста можно тестировать без React.
-- В `localStorage` сохраняются только срезы разделов (`persist:mentatus`);
-  запись троттлится, чтобы не сериализовать состояние на каждый символ.
+- Store field lives in its section's slice: `state[section][field]` and has shape `{ isChecked }` (checkbox), `{ number }` (radio group) or `{ text }` (text/date).
+- Section schema (`store/*Data.ts`) — single source of truth about fields; its completeness is checked by `src/store/schema.test.ts`.
+- Section form is described by layout (`store/*Layout.ts`) and rendered by `Section` component; non-standard blocks are connected as `custom`.
+- Conclusion is assembled from `*List` and pure functions from `lib/text`, so text logic can be tested without React.
+- Only section slices are saved to `localStorage` (`persist:mentatus`); writes are throttled so state is not serialized on every character.
 
-## Тесты
+## Tests
 
 ```bash
 npm test
 ```
 
-Покрыты чистые функции (`lib/text`, `lib/rules`, `lib/layout`, `lib/schema`),
-редьюсеры, persist, полнота схем и smoke-монтирование приложения. Окружение —
-jsdom, глобальные `describe/it/expect/vi`, `src/setupTests.ts` подключает
-`@testing-library/jest-dom`.
+Covers pure functions (`lib/text`, `lib/rules`, `lib/layout`, `lib/schema`), reducers, persist, schema completeness and app smoke mount. Environment — jsdom, global `describe/it/expect/vi`, `src/setupTests.ts` connects `@testing-library/jest-dom`.
 
-## Документация по рефакторингу
+## Refactoring documentation
 
-История этапов рефакторинга и критерии приёмки — в `specs/` (начните с
-`specs/README.md`).
+Refactoring stage history and acceptance criteria — in `specs/` (start with `specs/README.md`).
 
-## Лицензия
+## License
 
-Apache License 2.0, см. `LICENSE`.
-
+Apache License 2.0, see `LICENSE`.

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { setSymptom, setText, setRadio } from "../actions/fieldActions";
+import { resetState } from "../actions/resetAction";
 import type { StatusSection } from "../types/status";
 import {
   isCheckboxField,
@@ -48,7 +49,8 @@ export default function createSectionSlice<S extends StatusSection>(
           if (isRadioField(field)) {
             field.number = action.payload.number;
           }
-        });
+        })
+        .addCase(resetState, () => initialState);
     }
   });
 }

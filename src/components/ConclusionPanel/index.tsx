@@ -1,5 +1,6 @@
-
 import "./ConclusionPanel.css";
+import { resetState } from "../../actions/resetAction";
+import { useAppDispatch } from "../../lib/redux";
 
 /*
 ConclusionPanel
@@ -11,6 +12,8 @@ ConclusionPanel
 */
 
 export default function ConclusionPanel() {
+  const dispatch = useAppDispatch();
+
   // резервный способ для браузеров без Clipboard API
   const copyTextFallback = (node: HTMLElement) => {
     const selection = window.getSelection();
@@ -60,6 +63,12 @@ export default function ConclusionPanel() {
     window.print();
   };
 
+  const resetForm = () => {
+    if (window.confirm("Очистить все поля? Данные не сохранятся.")) {
+      dispatch(resetState());
+    }
+  };
+
   return (
     <div>
       <div className="conclusion-panel">
@@ -77,6 +86,13 @@ export default function ConclusionPanel() {
             onClick={printText}
           >
             Печать
+          </button>
+          <button
+            type="button"
+            className="conclusion-panel__btn conclusion-panel__btn--reset"
+            onClick={resetForm}
+          >
+            Сбросить
           </button>
         </div>
       </div>
