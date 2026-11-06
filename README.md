@@ -90,11 +90,6 @@ npm test
 jsdom, глобальные `describe/it/expect/vi`, `src/setupTests.ts` подключает
 `@testing-library/jest-dom`.
 
-## Деплой
-
-Сборка использует `base: "./"`, поэтому работает и из корня домена, и из
-подпапки GitHub Pages. Публикация: `npm run deploy` (`gh-pages`).
-
 ## Документация по рефакторингу
 
 История этапов рефакторинга и критерии приёмки — в `specs/` (начните с

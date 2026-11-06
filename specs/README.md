@@ -220,7 +220,7 @@ PR и отдельная сессия, порядок обязателен (B.1 
   (`orientir231/331/332`), полнота таблицы проверяется тестом.
 - `Field` пробрасывает `autoKritika`; `RadioListKogn` не зависит от того, что
   `id` пунктов идут подряд; `persistStore` пишет в localStorage с `throttle: 300`.
-- Обновлены dev-зависимости: `vitest` 5, `jsdom` 30, `prettier` 3, `gh-pages` 6;
+- Обновлены dev-зависимости: `vitest` 5, `jsdom` 30, `prettier` 3;
   удалены неиспользуемые `husky` и `lint-staged`.
 - Добавлены `README.md` и CI (`.github/workflows/ci.yml`).
 

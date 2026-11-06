@@ -16,7 +16,7 @@
 - Стор: redux 4, самописные экшены (`src/actions/*`), фабрика редьюсеров
   (`src/reducers/createSectionReducer.js`), срезы (`src/reducers/sections.js`).
 - Тесты: `*.test.js`, используют глобальные `describe/it/expect` (jest).
-- Сборка: `npx react-scripts build` → `build/`; деплой `gh-pages -d build`.
+- Сборка: `npx react-scripts build` → `build/`.
 - `homepage: ""` → приложение хостится в корне.
 
 ## Целевой стек (рекомендация)
@@ -109,8 +109,7 @@ export default defineConfig({
   "test:watch": "vitest",
   "lint": "eslint src --ext .js,.jsx",
   "format": "prettier --write \"src/**/*.{js,jsx,json,css}\"",
-  "predeploy": "npm run build",
-  "deploy": "gh-pages -d dist"
+  "css:audit": "node scripts/find-unused-css.js"
 }
 ```
 
