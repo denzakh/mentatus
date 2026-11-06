@@ -1,19 +1,15 @@
 .tab-menu__item {
-  /* кнопка иначе берёт системный шрифт и свойство text-align */
-  font: inherit;
-  color: inherit;
-  text-align: inherit;
-}
-  position: relative;
-  padding: 5px;
-  min-width: 80px;
-  max-width: 105px;
+  width: 100%;
+  padding: 10px 15px;
   border-radius: 10px 0 0 10px;
   border: 1px solid #cccccc;
+  border-left: 3px solid #bbbbbb;
   background-color: #f5f5f5;
   cursor: pointer;
   margin-bottom: -1px;
   background-image: linear-gradient(to top, #f2f2f2 0, #fefefe 50%);
+  min-height: 80px;
+  box-shadow: inset -2px 0 4px rgba(161, 159, 159, 0.1);
 }
 
 .tab-menu__item:hover {
@@ -21,29 +17,26 @@
 }
 
 .tab-menu__item.is-active {
+  border-left: 3px solid #00cc00;
   border-right: 1px solid #ffffff;
   background: #ffffff;
+  box-shadow: none;
   z-index: 1;
 }
 
 .app__tab-symbol {
   text-align: center;
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 700;
-  text-shadow: -1px -1px 0 #ffffff;
-  opacity: 0.6;
-  line-height: 1;
-}
-
-.tab-menu__item.is-active .app__tab-symbol {
-  text-align: center;
-  font-size: 30px;
-  font-weight: 700;
-  opacity: 1;
+  text-shadow: none;
+  opacity: 0.8;
+  margin-bottom: 5px;
+  display: block;
 }
 
 .app__tab-label {
   font-size: 12px;
   line-height: 1;
   text-align: center;
+  width: 100%;
 }
