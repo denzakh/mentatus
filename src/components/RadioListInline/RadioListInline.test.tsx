@@ -45,4 +45,17 @@ describe("RadioListInline", () => {
 
     expect(store.getState().kognit.kognitFingerN.number).toBe(3);
   });
+
+  it("рисует пустую подпись, если группы нет в схеме", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(
+      <RadioListInline name="unknownRadio" dataBase={{}} />,
+      store
+    );
+
+    expect(container.querySelector(".radio__inline-label")?.textContent).toBe(
+      " "
+    );
+    expect(container.querySelectorAll(".radio__inline-item").length).toBe(0);
+  });
 });

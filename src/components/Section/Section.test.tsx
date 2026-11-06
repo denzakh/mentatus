@@ -1,4 +1,3 @@
-
 import { fireEvent } from "@testing-library/react";
 import sostoyanieData from "../../store/sostoyanieData";
 import {
@@ -126,6 +125,26 @@ describe("Section", () => {
 
   it("не рисует custom-блок без компонента", () => {
     const layout: Layout = [{ type: "custom", component: "Nope" }];
+
+    const store = createStatusStore();
+    const { container } = renderWithStatus(
+      <Section
+        section="sostoyanie"
+        dataBase={sostoyanieData}
+        layout={layout}
+      />,
+      store
+    );
+
+    expect(container.innerHTML).toBe("<div></div>");
+  });
+
+  it("пропускает блок поля без имени и неизвестный блок", () => {
+    // защитные ветки: такие блоки не должны ломать раздел
+    const layout = [
+      { type: "field" },
+      { type: "unknown" }
+    ] as unknown as Layout;
 
     const store = createStatusStore();
     const { container } = renderWithStatus(

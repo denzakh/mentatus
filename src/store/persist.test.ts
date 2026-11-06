@@ -7,6 +7,7 @@ import withPersist, {
 } from "./persist";
 import rootReducer from "../reducers";
 import sections from "../reducers/sections";
+import type { SectionName } from "../types/status";
 import { setSymptom, setText } from "../actions/fieldActions";
 
 describe("persistConfig", () => {
@@ -30,7 +31,7 @@ describe("withPersist", () => {
     const store = createStore(withPersist(rootReducer));
     const state = store.getState();
 
-    Object.keys(sections).forEach(section => {
+    (Object.keys(sections) as SectionName[]).forEach(section => {
       expect(state[section]).toBeDefined();
     });
     expect(Object.keys(state).sort()).toEqual(Object.keys(sections).sort());
@@ -50,7 +51,7 @@ describe("clearLegacyState", () => {
     "localStorage"
   );
 
-  const stubLocalStorage = value => {
+  const stubLocalStorage = (value: Partial<Storage> | undefined) => {
     Object.defineProperty(window, "localStorage", {
       value,
       configurable: true,
@@ -62,7 +63,9 @@ describe("clearLegacyState", () => {
     if (originalStorage) {
       Object.defineProperty(window, "localStorage", originalStorage);
     } else {
-      delete window.localStorage;
+      // localStorage объявлен в lib.dom как readonly-свойство Window,
+      // поэтому удаляем его через собственный тип без readonly
+      delete (window as { localStorage?: Storage }).localStorage;
     }
   });
 
@@ -82,6 +85,12 @@ describe("clearLegacyState", () => {
         throw new Error("denied");
       }
     });
+
+    expect(() => clearLegacyState()).not.toThrow();
+  });
+
+  it("не падает, если localStorage отсутствует", () => {
+    stubLocalStorage(undefined);
 
     expect(() => clearLegacyState()).not.toThrow();
   });
@@ -210,12 +219,16 @@ describe("persistStore", () => {
 
     // новые поля среза на месте и имеют стартовые значения
     expect(store.getState().sostoyanie.dataOsmotra).toBeDefined();
-    expect(store.getState().sostoyanie.sIstorieiOznakomlen.isChecked).toBe(false);
+    expect(store.getState().sostoyanie.sIstorieiOznakomlen.isChecked).toBe(
+      false
+    );
     // сохранённое значение не потеряно
     expect(store.getState().sostoyanie.pol.isChecked).toBe(true);
 
     // и экшены по новому полю работают (до фикса здесь тихий no-op)
     store.dispatch(setSymptom("sIstorieiOznakomlen"));
-    expect(store.getState().sostoyanie.sIstorieiOznakomlen.isChecked).toBe(true);
+    expect(store.getState().sostoyanie.sIstorieiOznakomlen.isChecked).toBe(
+      true
+    );
   });
 });

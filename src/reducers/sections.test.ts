@@ -1,6 +1,8 @@
 import sections, { fieldSections } from "./sections";
 import createSectionSlice from "./createSectionSlice";
 import { setSymptom, setText, setRadio } from "../actions/fieldActions";
+import { resetState } from "../actions/resetAction";
+import type { SectionName, StatusSection } from "../types/status";
 
 describe("sections", () => {
   it("содержит только живые разделы", () => {
@@ -17,9 +19,9 @@ describe("sections", () => {
   });
 
   it("каждое поле принадлежит ровно одному срезу", () => {
-    const seen = {};
+    const seen: Record<string, SectionName> = {};
 
-    Object.keys(sections).forEach(section => {
+    (Object.keys(sections) as SectionName[]).forEach(section => {
       Object.keys(sections[section]).forEach(field => {
         expect(seen[field]).toBeUndefined();
         seen[field] = section;
@@ -31,7 +33,9 @@ describe("sections", () => {
 
   it("индекс fieldSections указывает на срез, где поле реально лежит", () => {
     Object.keys(fieldSections).forEach(field => {
-      expect(sections[fieldSections[field]][field]).toBeDefined();
+      const slice = sections[fieldSections[field]] as StatusSection;
+
+      expect(slice[field]).toBeDefined();
     });
   });
 });
@@ -42,6 +46,9 @@ describe("createSectionSlice", () => {
     text: { text: "" },
     radio: { number: 0 }
   }).reducer;
+
+  // форма состояния среза: значения полей сужены до стартовых
+  type TestState = Parameters<typeof reducer>[0];
 
   it("переключает флаг своего поля", () => {
     const next = reducer(undefined, setSymptom("flag"));
@@ -58,7 +65,7 @@ describe("createSectionSlice", () => {
   });
 
   it("игнорирует экшены для чужих полей и других разделов", () => {
-    const state = {
+    const state: TestState = {
       flag: { isChecked: false },
       text: { text: "" },
       radio: { number: 0 }
@@ -70,7 +77,20 @@ describe("createSectionSlice", () => {
   });
 
   it("возвращает тот же state при неизвестном экшене", () => {
-    const state = { flag: { isChecked: false } };
+    const state = { flag: { isChecked: false } } as TestState;
     expect(reducer(state, { type: "UNKNOWN" })).toBe(state);
+  });
+
+  it("сбрасывает срез к стартовым значениям", () => {
+    const state = reducer(undefined, setSymptom("flag"));
+    expect(state.flag.isChecked).toBe(true);
+
+    const reset = reducer(state, resetState());
+
+    expect(reset).toEqual({
+      flag: { isChecked: false },
+      text: { text: "" },
+      radio: { number: 0 }
+    });
   });
 });

@@ -1,10 +1,11 @@
 import { setRadio, setSymptom, setText } from "../../actions/fieldActions";
+import { formatDate, todayIso } from "../../lib/text/date";
 import {
   createStatusStore,
   renderWithStatus,
+  type StatusOverrides,
   type StatusStore
 } from "../../testUtils/statusStore";
-import type { StatusState } from "../../types/status";
 import NachaloList from "./index";
 
 /*
@@ -19,7 +20,7 @@ import NachaloList from "./index";
 // вывод компонента при заданных значениях полей стора
 function nachaloText(
   configure?: (store: StatusStore) => void,
-  overrides?: Partial<StatusState>
+  overrides?: StatusOverrides
 ): string {
   const store = createStatusStore(overrides);
   // фиксированная дата, чтобы текст не зависел от дня запуска
@@ -34,9 +35,7 @@ function nachaloText(
 }
 
 // срез «Общее состояние» с незаполненными радиогруппами
-function emptyRadioOverrides(
-  nedobrovolno = false
-): Partial<StatusState> {
+function emptyRadioOverrides(nedobrovolno = false): StatusOverrides {
   const store = createStatusStore();
   const sostoyanie = store.getState().sostoyanie;
 
@@ -78,14 +77,13 @@ describe("NachaloList — характеризация текста", () => {
     });
 
     [0, 1, 2].forEach(punkt => {
-      outputs[`недобровольно, причина 0, пункт ${punkt}, мужчина`] = nachaloText(
-        store => {
+      outputs[`недобровольно, причина 0, пункт ${punkt}, мужчина`] =
+        nachaloText(store => {
           store.dispatch(setSymptom("nedobrovolno"));
           store.dispatch(setSymptom("pol"));
           store.dispatch(setRadio("nedobrovolnoPrichiny", 0));
           store.dispatch(setRadio("nedobrovolnoPunkt", punkt));
-        }
-      );
+        });
     });
 
     outputs["недобровольно, пункт «в», женщина"] = nachaloText(store => {
@@ -114,9 +112,9 @@ describe("NachaloList — характеризация текста", () => {
     );
 
     // двойной пробел в тексте ст. 23 ч.4 — часть текущего вывода
-    expect(
-      outputs["недобровольно, причина 0, пункт 0, мужчина"]
-    ).toContain("на основании  ст. 23 ч.4 п «а»");
+    expect(outputs["недобровольно, причина 0, пункт 0, мужчина"]).toContain(
+      "на основании  ст. 23 ч.4 п «а»"
+    );
 
     // для пункта «в» местоимение «его/ее» не выводится
     expect(outputs["недобровольно, пункт «в», женщина"]).toContain(
@@ -130,7 +128,6 @@ describe("NachaloList — характеризация текста", () => {
     expect(outputs["недобровольно, пустые причина/пункт и место"]).toContain(
       "п «»"
     );
-
 
     expect(outputs).toMatchInlineSnapshot(`
       {
@@ -151,5 +148,12 @@ describe("NachaloList — характеризация текста", () => {
         "пустое место осмотра": "05.05.2020. Осмотрена . На беседу с врачом-психиатром согласна.   ",
       }
     `);
+  });
+
+  it("подставляет сегодняшнюю дату, если дата осмотра не задана", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(<NachaloList />, store);
+
+    expect(container.textContent || "").toContain(`${formatDate(todayIso())}.`);
   });
 });

@@ -1,7 +1,7 @@
 import sections from "../reducers/sections";
 import { sectionsRegistry } from "../sections/registry";
-import type { Schema } from "../types/schema";
-import type { SectionName } from "../types/status";
+import type { FieldType, OrientirSchemaEntry, Schema } from "../types/schema";
+import type { SectionName, StatusSection } from "../types/status";
 
 /*
 Полнота схем разделов: `*Data.js` — единственный источник правды о полях.
@@ -9,7 +9,12 @@ import type { SectionName } from "../types/status";
 в этой кодовой базе равнозначны), number (число без ввода, например patientId).
 */
 
-const TYPES = ["boolean", "radio", "string", "text", "number"];
+const TYPES = ["boolean", "radio", "string", "text", "number"] as const;
+
+// тип поля может отсутствовать у служебных записей схемы
+function isKnownType(type?: FieldType): boolean {
+  return !!type && TYPES.some(item => item === type);
+}
 
 // служебные фразы обрамления списков: не поля стора, а части заключения
 const SERVICE_SUFFIXES = ["Before", "After", "Not"];
@@ -17,14 +22,14 @@ const SERVICE_SUFFIXES = ["Before", "After", "Not"];
 // не поле стора, а таблица фраз ориентировки (см. `OrientirovkaList`)
 const NON_FIELD_KEYS = ["orientir"];
 
-function isServicePhrase(key) {
+function isServicePhrase(key: string) {
   return SERVICE_SUFFIXES.some(
     suffix => key.slice(key.length - suffix.length) === suffix
   );
 }
 
 // форма поля стора, ожидаемая для типа схемы
-function storeKeyByType(type) {
+function storeKeyByType(type?: FieldType) {
   switch (type) {
     case "boolean":
       return "isChecked";
@@ -50,9 +55,9 @@ describe("схемы разделов", () => {
     expect(Object.keys(schemas).sort()).toEqual(Object.keys(sections).sort());
   });
 
-  Object.keys(sections).forEach(section => {
+  (Object.keys(sections) as SectionName[]).forEach(section => {
     describe(section, () => {
-      const store = sections[section];
+      const store = sections[section] as StatusSection;
       const schema = schemas[section];
 
       it("описывает каждое поле стора разделом и типом", () => {
@@ -61,7 +66,7 @@ describe("схемы разделов", () => {
 
           expect(description).toBeDefined();
           expect(description.section).toBe(section);
-          expect(TYPES.indexOf(description.type)).toBeGreaterThan(-1);
+          expect(isKnownType(description.type)).toBe(true);
         });
       });
 
@@ -82,7 +87,7 @@ describe("схемы разделов", () => {
 
           if (!known) {
             expect(schema[key].section).toBe(section);
-            expect(TYPES.indexOf(schema[key].type)).toBeGreaterThan(-1);
+            expect(isKnownType(schema[key].type)).toBe(true);
           }
         });
       });
@@ -103,10 +108,12 @@ describe("схемы разделов", () => {
             return;
           }
 
-          expect(Array.isArray(description.data)).toBe(true);
-          expect(description.data.length).toBeGreaterThan(0);
+          const options = description.data || [];
 
-          description.data.forEach(item => {
+          expect(Array.isArray(description.data)).toBe(true);
+          expect(options.length).toBeGreaterThan(0);
+
+          options.forEach(item => {
             expect(typeof item.id).toBe("number");
             expect(typeof item.label).toBe("string");
             expect(typeof item.phrase).toBe("string");
@@ -119,7 +126,7 @@ describe("схемы разделов", () => {
   it("описывает все комбинации фраз ориентировки", () => {
     const orientir = schemas.kognit.orientir as OrientirSchemaEntry;
 
-    ["w", "m"].forEach(gender => {
+    (["w", "m"] as const).forEach(gender => {
       expect(typeof orientir[gender].orientir000).toBe("string");
 
       for (let time = 1; time <= 3; time += 1) {

@@ -52,4 +52,34 @@ describe("CheckboxOtkl", () => {
 
     expect(store.getState().sostoyanie.nedobrovolno.isChecked).toBe(true);
   });
+
+  it("берёт свою подпись вместо схемы", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(
+      <CheckboxOtkl
+        name="nedobrovolno"
+        label="Своя подпись"
+        dataBase={dataBase}
+      />,
+      store
+    );
+
+    expect(
+      container.querySelector('label[for="checkbox-otkl-nedobrovolno"]')
+        ?.textContent
+    ).toBe("Своя подпись");
+  });
+
+  it("рисует пустую подпись, если поля нет в схеме", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(
+      <CheckboxOtkl name="unknownField" dataBase={{}} />,
+      store
+    );
+
+    expect(
+      container.querySelector('label[for="checkbox-otkl-unknownField"]')
+        ?.textContent
+    ).toBe("");
+  });
 });

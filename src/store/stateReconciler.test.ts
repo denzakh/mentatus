@@ -1,5 +1,9 @@
 import rootReducer from "../reducers";
-import { hasSameForm, mergeSectionState, mergeSections } from "./stateReconciler";
+import {
+  hasSameForm,
+  mergeSectionState,
+  mergeSections
+} from "./stateReconciler";
 import type { StatusSection } from "../types/status";
 
 const initial: StatusSection = {
@@ -76,5 +80,11 @@ describe("mergeSections", () => {
 
     expect(merged.sostoyanie.pol.isChecked).toBe(true);
     expect(Object.keys(merged).sort()).toEqual(Object.keys(state).sort());
+  });
+
+  it("берёт стартовые значения, если сохранённого состояния нет", () => {
+    const merged = mergeSections(null, state, state, {} as any);
+
+    expect(merged).toEqual(state);
   });
 });

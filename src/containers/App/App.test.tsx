@@ -122,6 +122,44 @@ describe("App", () => {
     expect(about.getAttribute("type")).toBe("button");
     expect(about.getAttribute("aria-current")).toBeNull();
   });
+
+  it("переключает мобильный экран между вводом и заключением", () => {
+    // в jsdom окно десктопное: сужаем его до мобильного
+    const originalWidth = Object.getOwnPropertyDescriptor(window, "innerWidth");
+    Object.defineProperty(window, "innerWidth", {
+      value: 375,
+      configurable: true,
+      writable: true
+    });
+
+    try {
+      const store = createStatusStore();
+      const { container } = renderWithStatus(<App />, store);
+
+      // на мобильном видна одна колонка — форма активного раздела
+      expect(container.querySelector(".app__manager")).not.toBeNull();
+      expect(container.querySelector(".app__conclusion")).toBeNull();
+
+      const toggle = container.querySelector(".app__toggle-btn") as HTMLElement;
+
+      expect(toggle.getAttribute("aria-label")).toBe("К заключению");
+
+      fireEvent.click(toggle);
+
+      expect(container.querySelector(".app__manager")).toBeNull();
+      expect(container.querySelector(".app__conclusion")).not.toBeNull();
+      expect(toggle.getAttribute("aria-label")).toBe("К вводу");
+
+      fireEvent.click(toggle);
+
+      expect(container.querySelector(".app__manager")).not.toBeNull();
+      expect(container.querySelector(".app__conclusion")).toBeNull();
+    } finally {
+      if (originalWidth) {
+        Object.defineProperty(window, "innerWidth", originalWidth);
+      }
+    }
+  });
 });
 
 it("пункты меню — кнопки с aria-current у активной вкладки", () => {

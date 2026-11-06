@@ -1,9 +1,8 @@
-
 import { shallowEqual } from "react-redux";
 import dataBase from "../../store/sostoyanieData";
 import { todayIso, formatDate } from "../../lib/text/date";
 import { buildNachaloText } from "../../lib/text/nachalo";
-import { fieldOf, useAppSelector } from "../../lib/redux";
+import { fieldOf, textOf, useAppSelector } from "../../lib/redux";
 import { optionById } from "../../lib/schema";
 import type { StatusState } from "../../types/status";
 
@@ -12,7 +11,6 @@ function nachaloOf(state: StatusState) {
   const dataOsmotra = fieldOf(state, "dataOsmotra");
   const pol = fieldOf(state, "pol");
   const mestoOsmotra = fieldOf(state, "mestoOsmotra");
-  const mestoText = fieldOf(state, "mestoText");
   const poNapravleniu = fieldOf(state, "poNapravleniu");
   const sIstorieiOznakomlen = fieldOf(state, "sIstorieiOznakomlen");
   const nedobrovolno = fieldOf(state, "nedobrovolno");
@@ -32,7 +30,8 @@ function nachaloOf(state: StatusState) {
       dataBase.mestoOsmotra,
       mestoOsmotra && mestoOsmotra.number
     ),
-    mestoText: mestoText && mestoText.text,
+    // текст поля берём строкой: `text` у поля может быть `false`
+    mestoText: textOf(state, "mestoText"),
     poNapravleniu: !!(poNapravleniu && poNapravleniu.isChecked),
     sIstorieiOznakomlen: !!(
       sIstorieiOznakomlen && sIstorieiOznakomlen.isChecked

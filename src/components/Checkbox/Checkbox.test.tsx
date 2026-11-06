@@ -105,4 +105,33 @@ describe("Checkbox", () => {
 
     expect(store.getState().sostoyanie.kritika.number).toBe(4);
   });
+
+  it("берёт свою подпись вместо схемы", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(
+      <Checkbox
+        name="poNapravleniu"
+        label="Своя подпись"
+        dataBase={dataBase}
+      />,
+      store
+    );
+
+    expect(
+      container.querySelector('label[for="checkbox-poNapravleniu"]')
+        ?.textContent
+    ).toBe("Своя подпись");
+  });
+
+  it("рисует пустую подпись, если поля нет в схеме", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(
+      <Checkbox name="unknownField" dataBase={{}} />,
+      store
+    );
+
+    expect(
+      container.querySelector('label[for="checkbox-unknownField"]')?.textContent
+    ).toBe("");
+  });
 });

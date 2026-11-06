@@ -172,6 +172,12 @@ describe("fingerPhrase", () => {
     expect(fingerPhrase(1)).toBe(
       "Фингерагнозия, называет правильно только один палец. "
     );
+    expect(fingerPhrase(2)).toBe(
+      "Фингерагнозия, называет правильно только 2 пальца. "
+    );
+    expect(fingerPhrase("3")).toBe(
+      "Фингерагнозия, правильно называет 3 пальца. "
+    );
     expect(fingerPhrase(4)).toBe(
       "Фингерагнозия, правильно называет 4 пальца. "
     );

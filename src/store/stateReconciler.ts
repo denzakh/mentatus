@@ -58,25 +58,17 @@ export const mergeSections: StateReconciler<RootState> = (
   void _config;
 
   const saved = (inboundState || {}) as Record<string, unknown>;
-  // инициализируем merged как полный RootState (все срезы)
-  const merged: RootState = {
-    zhaloby: {} as StatusSection,
-    anamnez: {} as StatusSection,
-    sostoyanie: {} as StatusSection,
-    affekt: {} as StatusSection,
-    rech: {} as StatusSection,
-    kognit: {} as StatusSection,
-    pp: {} as StatusSection,
-    diagnoz: {} as StatusSection,
-  };
+  /* Стартовые значения всех срезов в общем виде: поля срезов сужены до
+     литеральных типов (`{ isChecked: false }`), и записывать в них
+     объединение форм полей напрямую нельзя. */
+  const merged: Record<SectionName, StatusSection> = { ...reducedState };
 
   // перебираем разделы из reducedState (стартовые значения)
-  for (const section of Object.keys(reducedState) as SectionName[]) {
-    merged[section] = mergeSectionState(
-      saved[section],
-      reducedState[section]
-    );
-  }
+  (Object.keys(reducedState) as SectionName[]).forEach(section => {
+    merged[section] = mergeSectionState(saved[section], merged[section]);
+  });
 
-  return merged;
+  // формы полей сохранены (mergeSectionState проверяет их), поэтому набор
+  // срезов совпадает с RootState
+  return merged as RootState;
 };

@@ -4,18 +4,24 @@ import { Provider } from "react-redux";
 import { render } from "@testing-library/react";
 import rootReducer from "../reducers";
 import type { RootState } from "../reducers";
-import type { StatusState } from "../types/status";
+import type { SectionName } from "../types/status";
 
 /*
 Тестовые утилиты для проверок разметки: настоящий стор без персиста и
 обёртка `Provider`.
 
-Стор собирается тем же корневым редьюсером, что и приложение, поэтому
+Стор собирается тем же корневным редьюсером, что и приложение, поэтому
 компоненты видят реальную форму полей. `overrides` заменяет срез целиком —
-так задаются «пустые» значения, которые экшены выставить не могут.
+так задаются «пустые» значения, которые экшены выставить не могут
+(например, радиогруппа `{ number: undefined }`). Поэтому значения полей
+в надстройке не сужаются до стартовых типов среза.
 */
 
-export function createStatusStore(overrides: Partial<StatusState> = {}) {
+export type StatusOverrides = Partial<
+  Record<SectionName, Record<string, unknown>>
+>;
+
+export function createStatusStore(overrides: StatusOverrides = {}) {
   const initial = rootReducer(undefined, { type: "@@INIT" });
 
   return configureStore({
