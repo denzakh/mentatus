@@ -1,4 +1,3 @@
-
 .radio__inline-list {
   display: flex;
   flex-wrap: wrap;
@@ -14,3 +13,17 @@
   margin-right: 10px;
 }
 
+@media (max-width: 768px) {
+  .radio__inline-label {
+    display: inline-block;
+    margin-top: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .radio__inline-item {
+    display: inline-block;
+    margin-right: 30px;
+    margin-bottom: 10px;
+  }
+}

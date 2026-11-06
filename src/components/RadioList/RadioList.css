@@ -44,17 +44,32 @@
   z-index: 2;
 }
 
-.radio__input:checked + .radio__label::after {
+.radio__input:checked+.radio__label::after {
   background-color: #00ff00;
 }
 
-.radio__input:checked + .radio__label {
+.radio__input:checked+.radio__label {
   color: #000000;
 }
 
-.radio__input:checked + .radio__label:hover {
+.radio__input:checked+.radio__label:hover {
   opacity: 0.9;
 }
 
+@media (max-width: 768px) {
+  .radio__list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
+  .radio__label::before,
+  .radio__input:checked+.radio__label::before {
+    top: 7px;
+  }
 
+  .radio__label::after,
+  .radio__input:checked+.radio__label::after {
+    top: 8px;
+  }
+}

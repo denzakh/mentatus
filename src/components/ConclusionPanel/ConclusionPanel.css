@@ -17,3 +17,16 @@
 .conclusion-panel__btn:active {
   background-color: #cccccc;
 }
+
+@media (max-width: 768px) {
+  .conclusion-panel__row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .conclusion-panel__btn {
+    border: 1px solid #cccccc;
+  }
+}

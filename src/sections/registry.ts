@@ -98,14 +98,14 @@ export const sectionsRegistry: Record<SectionName, SectionEntry> = {
   },
   rech: {
     name: "rech",
-    tab: { symbol: "РМ", title: "Речь и мышление" },
+    tab: { symbol: "МР", title: "Мышление и речь" },
     schema: rechData,
     layout: rechLayout,
     form: "section"
   },
   kognit: {
     name: "kognit",
-    tab: { symbol: "ИП", title: "Интеллект и память" },
+    tab: { symbol: "КГ", title: "Когнитивная сфера" },
     schema: kognitData,
     layout: kognitLayout,
     custom: { Orientirovka: OrientirovkaManager },

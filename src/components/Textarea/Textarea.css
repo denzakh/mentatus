@@ -17,3 +17,15 @@
   font-size: 14px;
   line-height: 1;
 }
+
+@media (max-width: 768px) {
+  .textarea {
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+
+  .textarea__input {
+    font-size: 17px;
+    width: 100%;
+  }
+}

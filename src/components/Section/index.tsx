@@ -1,4 +1,3 @@
-
 import type { ComponentType, ReactNode } from "react";
 import { shallowEqual } from "react-redux";
 import { collectVisibility, blockKey } from "../../lib/layout";

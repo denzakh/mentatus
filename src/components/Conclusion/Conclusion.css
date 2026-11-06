@@ -26,3 +26,26 @@
   padding-left: 30px;
   padding-top: 15px;
 }
+
+@media (max-width: 768px) {
+  .conclusion__box {
+    border: none;
+  }
+
+  .conclusion__text {
+    font-size: 16pt;
+    padding: 0px 15px;
+  }
+
+  .conclusion__panel {
+    padding: 0px 15px;
+  }
+
+  .conclusion__title {
+    font-weight: 700;
+    color: #555555;
+    flex-grow: 2;
+    padding-left: 0;
+    padding-top: 6px;
+  }
+}

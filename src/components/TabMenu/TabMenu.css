@@ -29,9 +29,13 @@
   font-size: 24px;
   font-weight: 700;
   text-shadow: none;
-  opacity: 0.8;
+  opacity: 0.6;
   margin-bottom: 5px;
   display: block;
+}
+
+.tab-menu__item.is-active .app__tab-symbol {
+  opacity: 1;
 }
 
 .app__tab-label {

@@ -23,3 +23,15 @@
 .orientir__content {
   margin: 5px 0;
 }
+
+
+@media (max-width: 768px) {
+  .orientir__table {
+    display: block;
+  }
+
+  .orientir__col {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
