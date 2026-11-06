@@ -1,4 +1,4 @@
-import { SectionLink } from "../../SectionLink";
+import SectionLink from "../SectionLink";
 
 import dataBase from "../../store/ppData";
 import { fieldOf, useAppSelector } from "../../lib/redux";
@@ -50,7 +50,7 @@ export default function PpList(props: ListOwnProps) {
         )}
 
         <FieldView name="opasnyeText" dataObj={dataBase} />
-      </span>
+      </SectionLink>
 
       <SectionLink section="affekt" onToggle={props.toggleTab}>
         <SonAppetitList />

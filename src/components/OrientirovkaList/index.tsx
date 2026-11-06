@@ -1,4 +1,4 @@
-import { SectionLink } from "../../SectionLink";
+import SectionLink from "../SectionLink";
 
 import dataBase from "../../store/kognitData";
 import { fieldOf, useAppSelector } from "../../lib/redux";

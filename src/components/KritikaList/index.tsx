@@ -1,4 +1,4 @@
-import { SectionLink } from "../../SectionLink";
+import SectionLink from "../SectionLink";
 
 import dataBase from "../../store/sostoyanieData";
 import FieldView from "../FieldView";

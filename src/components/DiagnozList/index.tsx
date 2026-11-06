@@ -1,4 +1,4 @@
-import { SectionLink } from "../../SectionLink";
+import SectionLink from "../SectionLink";
 
 import { fieldOf, useAppSelector } from "../../lib/redux";
 import type { ListOwnProps } from "../../types/components";
