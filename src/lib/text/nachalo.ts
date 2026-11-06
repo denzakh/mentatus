@@ -17,6 +17,7 @@ export interface NachaloInput {
   date: string; // уже дд.мм.гггг
   isMale: boolean;
   mestoOsmotra?: RadioOption;
+  mestoText?: string;
   poNapravleniu: boolean;
   sIstorieiOznakomlen: boolean;
   nedobrovolno: boolean;
@@ -37,6 +38,7 @@ export function buildNachaloText(input: NachaloInput): NachaloText {
   const {
     isMale,
     mestoOsmotra,
+    mestoText,
     poNapravleniu,
     sIstorieiOznakomlen,
     nedobrovolno,
@@ -45,9 +47,13 @@ export function buildNachaloText(input: NachaloInput): NachaloText {
     nedobrovolnoText
   } = input;
 
+  // пункт «другое» (id 3) не имеет фразы в схеме — выводим введённый текст
+  const mestoPhrase =
+    mestoOsmotra && mestoOsmotra.id === 3 ? mestoText || "" : mestoOsmotra ? mestoOsmotra.phrase : "";
+
   const osmotr =
     (isMale ? "Осмотрен " : "Осмотрена ") +
-    (mestoOsmotra ? mestoOsmotra.phrase : "") +
+    mestoPhrase +
     (poNapravleniu ? " по направлению врача соматического профиля" : "") +
     ".";
 

@@ -12,6 +12,7 @@ function nachaloOf(state: StatusState) {
   const dataOsmotra = fieldOf(state, "dataOsmotra");
   const pol = fieldOf(state, "pol");
   const mestoOsmotra = fieldOf(state, "mestoOsmotra");
+  const mestoText = fieldOf(state, "mestoText");
   const poNapravleniu = fieldOf(state, "poNapravleniu");
   const sIstorieiOznakomlen = fieldOf(state, "sIstorieiOznakomlen");
   const nedobrovolno = fieldOf(state, "nedobrovolno");
@@ -31,6 +32,7 @@ function nachaloOf(state: StatusState) {
       dataBase.mestoOsmotra,
       mestoOsmotra && mestoOsmotra.number
     ),
+    mestoText: mestoText && mestoText.text,
     poNapravleniu: !!(poNapravleniu && poNapravleniu.isChecked),
     sIstorieiOznakomlen: !!(
       sIstorieiOznakomlen && sIstorieiOznakomlen.isChecked

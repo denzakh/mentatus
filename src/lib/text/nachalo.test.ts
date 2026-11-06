@@ -44,6 +44,17 @@ describe("buildNachaloText", () => {
     ).toBe("Осмотрена в ПНД по направлению врача соматического профиля.");
   });
 
+  it("для пункта «другое» выводит mestoText вместо пустой фразы из схемы", () => {
+    expect(
+      build({ mestoOsmotra: mestoOsmotra(3), mestoText: "в кабинете врача" }).osmotr
+    ).toBe("Осмотрена в кабинете врача.");
+    expect(build({ mestoOsmotra: mestoOsmotra(3) }).osmotr).toBe("Осмотрена .");
+    // для остальных пунктов mestoText не подставляется
+    expect(
+      build({ mestoOsmotra: mestoOsmotra(1), mestoText: "в кабинете врача" }).osmotr
+    ).toBe("Осмотрена в ПНД.");
+  });
+
   it("не падает на пустом месте осмотра", () => {
     expect(
       build({ mestoOsmotra: undefined, poNapravleniu: false }).osmotr
