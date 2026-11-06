@@ -1,6 +1,10 @@
 # Mentatus
 
+**English** | [Русский](README.ru.md)
+
 Application for automated psychiatric status writing: left — examination sections, center — section form, right — conclusion text is assembled (can be copied or printed).
+
+![Mentatus screen: sections on the left, section form in the center, conclusion on the right](public/static/img/cover.jpg)
 
 ## Stack
 
