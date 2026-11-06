@@ -13,20 +13,10 @@
 }
 
 .conclusion__panel {
-  display: -webkit-flex;
-  display: -moz-flex;
-  display: -ms-flex;
-  display: -o-flex;
   display: flex;
-  -webkit-flex-wrap: wrap;
-  -moz-flex-wrap: wrap;
-  -ms-flex-wrap: wrap;
-  -o-flex-wrap: wrap;
   flex-wrap: wrap;
-  -ms-align-items: center;
   align-items: center;
-  margin-top: -1px;
-  margin-right: -1px;
+
 }
 
 .conclusion__title {
