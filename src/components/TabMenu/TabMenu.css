@@ -40,3 +40,45 @@
   text-align: center;
   width: 100%;
 }
+
+
+/* Мобильная раскладка */
+@media (max-width: 768px) {
+  .tab-menu__item {
+    width: 40px;
+    flex-grow: 1;
+    margin: 0;
+    padding: 10px 5px;
+    border-radius: 0;
+    border: none;
+    border-top: 3px solid #ffffff;
+    border-right: 1px solid #cccccc;
+
+    background-color: #ffffff;
+    background-image: none;
+    min-height: 0;
+    box-shadow: none;
+  }
+
+  .tab-menu__item.is-active {
+    border: none;
+    border-right: 1px solid #cccccc;
+    border-top: 3px solid #00cc00;
+    background: #ffffff;
+    box-shadow: none;
+    z-index: 1;
+  }
+
+  .tab-menu__item:last-child,
+  .tab-menu__item.is-active:last-child {
+    border-right: none;
+  }
+
+  .app__tab-symbol {
+    font-size: 20px;
+  }
+
+  .app__tab-label {
+    display: none;
+  }
+}

@@ -143,3 +143,104 @@
   color: #555555;
   text-align: right;
 }
+
+
+/* Кнопка переключения между manager и conclusion */
+.app__toggle-btn {
+  position: fixed;
+  right: 20px;
+  bottom: 100px;
+  padding: 8px 16px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 20px;
+  font-size: 12px;
+  cursor: pointer;
+  align-self: center;
+  display: none;
+}
+
+.app__toggle-btn:hover,
+.app__toggle-btn:focus {
+  background: #b0b0b0;
+}
+
+/* Мобильная раскладка */
+@media (max-width: 768px) {
+  .app {
+    padding-bottom: 80px;
+  }
+
+  .app__row {
+    flex-direction: column;
+    height: auto;
+    min-height: initial;
+  }
+
+  .app__menu {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    height: 80px;
+    max-height: 80px;
+    min-height: 80px;
+    background-color: #f5f5f5;
+    z-index: 100;
+    padding: 0;
+    flex-direction: row;
+    overflow-x: auto;
+    box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.1);
+    border-top: 1px solid #cccccc;
+  }
+
+  .app__menu-title {
+    display: none;
+  }
+
+  .tab-menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  .app__toggle-btn {
+    display: inline-flex;
+  }
+
+  .app__content {
+    padding: 15px;
+    margin-bottom: 80px;
+  }
+
+  .app__content-mobile {
+    margin-bottom: 80px;
+  }
+
+  .app__content-row {
+    flex-wrap: wrap;
+  }
+
+  .app__manager,
+  .app__conclusion {
+    flex-grow: 1;
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+  }
+
+  .app__manager {
+    order: 1;
+  }
+
+  .app__conclusion {
+    order: 2;
+  }
+
+  .app__footer {
+    display: none;
+  }
+}
