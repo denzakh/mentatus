@@ -1,9 +1,24 @@
 @media print {
+  @page {
+    /* Обнуляем отступы страницы, что заставляет браузер скрыть URL, дату и заголовки */
+    margin: 0;
+  }
+
+  body {
+    /* Возвращаем отступы для самого контента, чтобы текст не прилипал к краям листа */
+    padding: 2cm;
+    padding-top: 1.5cm;
+  }
+
   .conclusion__box {
     border: none;
   }
 
   .conclusion__panel {
+    display: none;
+  }
+
+  .app__toggle-btn {
     display: none;
   }
 

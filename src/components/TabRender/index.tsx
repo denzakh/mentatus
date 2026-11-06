@@ -1,4 +1,3 @@
-
 import Section from "../../components/Section";
 import { sectionsRegistry } from "../../sections/registry";
 import type { SectionEntry } from "../../sections/registry";
@@ -30,6 +29,8 @@ export default function TabRender(props: Props) {
 }
 
 function renderForm(entry: SectionEntry) {
+  const Header = () => <div className="app__tab-title">{entry.tab.title}</div>;
+
   if (entry.form === "section") {
     const layout = entry.layout;
     if (!layout) {
@@ -37,6 +38,7 @@ function renderForm(entry: SectionEntry) {
     }
     return (
       <div key={entry.name}>
+        <Header />
         <Section
           section={entry.name}
           dataBase={entry.schema}
@@ -51,6 +53,7 @@ function renderForm(entry: SectionEntry) {
 
   return (
     <div key={entry.name}>
+      <Header />
       <Form />
     </div>
   );

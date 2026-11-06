@@ -23,10 +23,11 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
   }
 
   .conclusion-panel__btn {
     border: 1px solid #cccccc;
+    padding: 10px;
   }
 }

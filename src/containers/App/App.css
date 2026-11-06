@@ -93,6 +93,10 @@
   margin-bottom: 40px;
 }
 
+.app__tab-title {
+  display: none;
+}
+
 .manager {
   columns: 280px auto;
 }
@@ -219,6 +223,7 @@
     max-width: 100%;
     margin-bottom: 0;
     font-size: 20px;
+    order: 1;
   }
 
   .app__conclusion {
@@ -227,11 +232,15 @@
     max-width: 100%;
     margin-bottom: 0;
     margin: 0;
-
   }
 
-  .app__manager {
-    order: 1;
+  .app__tab-title {
+    display: block;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    text-align: center;
+    color: #999999;
   }
 
   .app__conclusion {
