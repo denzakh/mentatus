@@ -14,7 +14,6 @@
   -o-flex-direction: column;
   flex-direction: column;
   background-color: #cccccc;
-
 }
 
 .app__row {
@@ -107,12 +106,58 @@
   color: #5c5c5c;
 }
 
+/* заголовок-кнопка: возвращает с информационных страниц на рабочий экран */
+.app__title-btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.app__title-btn:hover {
+  color: #333333;
+}
+
 .app__header-menu {
   display: flex;
   align-items: center;
   gap: 25px;
 }
 
+/* пункты шапки «О проекте» и «Помощь» */
+.app__header-menu-item {
+  margin: 0;
+  padding: 2px 0;
+  border: none;
+  border-bottom: 2px solid transparent;
+  background: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: #555555;
+  cursor: pointer;
+}
+
+.app__header-menu-item:hover {
+  color: #000000;
+}
+
+.app__header-menu-item.is-active {
+  border-bottom-color: #00cc00;
+  color: #333333;
+  font-weight: 600;
+}
+
+/* информационная страница: «О проекте» или «Помощь» */
+.app__page {
+  flex-grow: 2;
+  flex-basis: 600px;
+  min-width: 200px;
+  max-width: 800px;
+  margin-bottom: 30px;
+}
 
 .app__tab-title {
   display: none;
@@ -164,8 +209,6 @@
   text-align: right;
   padding: 15px 30px;
 }
-
-
 
 /* Кнопка переключения между manager и conclusion */
 .app__toggle-btn {
@@ -259,9 +302,7 @@
   }
 
   .app__header {
-
     padding: 10px 15px;
-
   }
 
   .app__title {
@@ -273,6 +314,17 @@
     display: flex;
     align-items: center;
     gap: 20px;
+  }
+
+  .app__header-menu-item {
+    font-size: 13px;
+  }
+
+  .app__page {
+    flex-grow: 1;
+    flex-basis: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
   }
 
   .app__tab-title {
@@ -305,6 +357,4 @@
     flex-direction: column;
     gap: 5px;
   }
-
-
 }

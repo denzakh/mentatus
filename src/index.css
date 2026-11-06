@@ -16,9 +16,11 @@ body {
   min-height: 100%;
 }
 
-/* Фокус для кнопок меню и узлов заключения */
+/* Фокус для кнопок меню, шапки и узлов заключения */
 [data-id][role="button"]:focus-visible,
-.tab-menu__item:focus-visible {
+.tab-menu__item:focus-visible,
+.app__title-btn:focus-visible,
+.app__header-menu-item:focus-visible {
   outline: 2px dashed #666666;
   outline-offset: 2px;
 }

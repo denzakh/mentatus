@@ -60,7 +60,8 @@ components/
   <Section>Manager        section form (wrapper over <Section>)
   <Section>List           conclusion part (via <FieldView>)
   Section/Field/Group/FieldView — schematic rendering primitives
-containers/App            work screen layout
+  StaticPage/AboutPage/HelpPage — info pages («О проекте», «Помощь»)
+containers/App            work screen layout, header and page switching
 types/                    state, schema, layout and props types
 ```
 

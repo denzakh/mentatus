@@ -53,6 +53,75 @@ describe("App", () => {
       null
     );
   });
+
+  it("открывает «О проекте» и возвращается на рабочий экран по заголовку", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(<App />, store);
+
+    fireEvent.click(
+      container.querySelector('.app__header-menu [data-id="about"]') as Element
+    );
+
+    // рабочий экран заменён информационной страницей
+    expect(container.querySelector(".tab-render")).toBeNull();
+    expect(container.querySelector(".static-page__title")?.textContent).toBe(
+      "О проекте"
+    );
+    expect(
+      container
+        .querySelector('.app__header-menu [data-id="about"]')
+        ?.getAttribute("aria-current")
+    ).toBe("page");
+
+    // заголовок app__title ведёт на главную
+    fireEvent.click(
+      container.querySelector('.app__title [data-id="home"]') as Element
+    );
+
+    expect(container.querySelector(".static-page")).toBeNull();
+    expect(container.querySelector(".tab-render")).not.toBeNull();
+    expect(
+      container
+        .querySelector('.app__header-menu [data-id="about"]')
+        ?.getAttribute("aria-current")
+    ).toBeNull();
+  });
+
+  it("открывает «Помощь» и возвращает раздел по клику в меню", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(<App />, store);
+
+    fireEvent.click(
+      container.querySelector('.app__header-menu [data-id="help"]') as Element
+    );
+
+    expect(container.querySelector(".static-page__title")?.textContent).toBe(
+      "Помощь"
+    );
+
+    // меню разделов остаётся доступным и возвращает на рабочий экран
+    fireEvent.click(
+      container.querySelector('.tab-menu [data-id="zhaloby"]') as Element
+    );
+
+    expect(container.querySelector(".static-page")).toBeNull();
+    expect(container.querySelector('[data-id="zhaloby"].is-active')).not.toBe(
+      null
+    );
+  });
+
+  it("пункты шапки — кнопки, активная помечена aria-current", () => {
+    const store = createStatusStore();
+    const { container } = renderWithStatus(<App />, store);
+
+    const about = container.querySelector(
+      '.app__header-menu [data-id="about"]'
+    ) as HTMLElement;
+
+    expect(about.tagName).toBe("BUTTON");
+    expect(about.getAttribute("type")).toBe("button");
+    expect(about.getAttribute("aria-current")).toBeNull();
+  });
 });
 
 it("пункты меню — кнопки с aria-current у активной вкладки", () => {

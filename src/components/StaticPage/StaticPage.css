@@ -1,0 +1,50 @@
+/*
+Информационная страница («О проекте», «Помощь»).
+Размер блока в раскладке задаёт обёртка `.app__page` (см. `App.css`).
+*/
+.static-page {
+  font-size: 15px;
+  line-height: 1.55;
+  color: #333333;
+}
+
+.static-page__title {
+  margin: 0 0 20px;
+  font-size: 22px;
+  font-weight: 600;
+  color: #5c5c5c;
+}
+
+.static-page h3 {
+  margin: 22px 0 8px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #444444;
+}
+
+.static-page p {
+  margin: 0 0 12px;
+}
+
+.static-page ul {
+  margin: 0 0 12px;
+  padding-left: 22px;
+}
+
+.static-page li {
+  margin-bottom: 4px;
+}
+
+.static-page a {
+  color: #006699;
+}
+
+@media (max-width: 768px) {
+  .static-page {
+    font-size: 17px;
+  }
+
+  .static-page__title {
+    font-size: 20px;
+  }
+}
